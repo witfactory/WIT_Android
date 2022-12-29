@@ -21,6 +21,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.cb.witfactory.R;
+import com.cb.witfactory.data.classModel.Utils;
 import com.cb.witfactory.databinding.RegisterFragmentBinding;
 import com.cb.witfactory.model.PreferencesHelper;
 
@@ -146,6 +147,10 @@ public class RegisterFragment extends Fragment {
 
                 if (!txtUser.isEmpty() && !txtEmail.isEmpty() && !txtPin.isEmpty() && !txtComfirmPin.isEmpty()) {
 
+                    if (!Utils.isValidPassword(txtPin)){
+                        Toast.makeText(getContext(), "Contraseña muy debil", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     if (txtPin.toString().equals(txtComfirmPin.toString())) {
                         PreferencesHelper.setUser("user", txtEmail.toString());
                         PreferencesHelper.setEmail("email", txtEmail.toString());
