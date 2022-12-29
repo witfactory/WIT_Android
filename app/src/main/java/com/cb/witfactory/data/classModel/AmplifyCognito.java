@@ -5,6 +5,7 @@ import android.content.Context;
 import com.amplifyframework.auth.AuthUserAttribute;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
+import com.amplifyframework.core.Action;
 import com.amplifyframework.core.Amplify;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.EnumVaribles;
@@ -26,22 +27,23 @@ public class AmplifyCognito {
 
 
     //registro
-    public Boolean sinUp() {
+    public Boolean sinUp(String first_name, String user, String last_name, String country, String city,
+                         String zip_code, String address, String account_type, String telephone, String user_principal, String password) {
         AuthSignUpOptions options = AuthSignUpOptions.builder()
-                .userAttribute(AuthUserAttributeKey.custom("custom:first_name"), "Adri ")
-                .userAttribute(AuthUserAttributeKey.custom("custom:user"), "tapia2390@gmail.com")
-                .userAttribute(AuthUserAttributeKey.custom("custom:last_name"), "Tapias G")
-                .userAttribute(AuthUserAttributeKey.custom("custom:country"), "Colombia")
-                .userAttribute(AuthUserAttributeKey.custom("custom:city"), "Manizales")
-                .userAttribute(AuthUserAttributeKey.custom("custom:zip_code"), "170001")
-                .userAttribute(AuthUserAttributeKey.custom("custom:address"), "Cr 14 # 25-28")
+                .userAttribute(AuthUserAttributeKey.custom("custom:first_name"), first_name)
+                .userAttribute(AuthUserAttributeKey.custom("custom:user"), user)
+                .userAttribute(AuthUserAttributeKey.custom("custom:last_name"), last_name)
+                .userAttribute(AuthUserAttributeKey.custom("custom:country"), country)
+                .userAttribute(AuthUserAttributeKey.custom("custom:city"), city)
+                .userAttribute(AuthUserAttributeKey.custom("custom:zip_code"), zip_code)
+                .userAttribute(AuthUserAttributeKey.custom("custom:address"), address)
                 .userAttribute(AuthUserAttributeKey.custom("custom:account_type"), "P")
-                .userAttribute(AuthUserAttributeKey.custom("custom:telephone"), "3146381721")
+                .userAttribute(AuthUserAttributeKey.custom("custom:telephone"), "telephone")
                 .userAttribute(AuthUserAttributeKey.custom("custom:user_principal"), "")
                 .build();
         Amplify.Auth.signUp(
-                "tapia2390@gmail.com",
-                "Tapia231290.",
+                user,
+                password,
                 options,
                 result ->
                 {
@@ -61,10 +63,9 @@ public class AmplifyCognito {
         return authSignUpResult;
     }
 
+    public Boolean resendCodeEmail(String emailUserName) {
 
-    public Boolean resendCodeEmail() {
-
-        Amplify.Auth.resendSignUpCode("tapia2390@gmail.com",
+        Amplify.Auth.resendSignUpCode(emailUserName,
                 result ->
                 {
                     Log.v("AuthQuickstart", result + "");
@@ -99,9 +100,9 @@ public class AmplifyCognito {
         return comfirm;
     }
 
-    public Boolean confirmCode(String code) {
+    public Boolean confirmCode(String code, String emailUserName) {
         Amplify.Auth.confirmSignUp(
-                "tapia2390@gmail.com",
+                emailUserName,
                 code,
 
                 result ->
@@ -124,12 +125,13 @@ public class AmplifyCognito {
 
 
     //Inicia sesión
-    public Boolean signIn() {
+    public Boolean signIn(String email, String password) {
         Amplify.Auth.signIn(
-                "tapia2390@gmail.com",
-                "Tapia231290.",
+                email,
+                password,
                 result -> {
                     Log.i("AuthQuickstart", result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
+                    String token = result.getClass().getName();
                     String sinUp = EnumVaribles.signIn.toString();
                     listener.onSuccess(sinUp);
                 },
@@ -143,6 +145,36 @@ public class AmplifyCognito {
         return false;
     }
 
+    public void validarAuth() {
+        Amplify.Auth.fetchAuthSession(
+                result -> {
+                    Log.i("AmplifyQuickstart", result.toString());
+                    String sinUp = EnumVaribles.signAuth.toString();
+                    Boolean estateSession = result.isSignedIn();
+
+
+                    listener.onSuccess(estateSession.toString());
+                },
+                error -> {
+                    Log.e("AmplifyQuickstart", error.toString());
+                    listener.onSuccess("fetchAuthSessionError");
+                }
+        );
+    }
+
+
+    public void logOut(Context context) {
+
+        Amplify.Auth.signOut(new Action() {
+                                 @Override
+                                 public void call() {
+                                   Utils.goToLoginRegister(context);
+                                 }
+                             },
+                error -> {
+                    Log.e("", "Error");
+                });
+    }
 
     //https://www.youtube.com/watch?v=B4HjPRA4A8k&list=PLrAF24Xspn3WsVBl4AwmpdMl5g-kHw2Zu
 
