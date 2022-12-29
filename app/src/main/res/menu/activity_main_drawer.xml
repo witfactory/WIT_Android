@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+
+        <item
+            android:id="@+id/menu_home"
+            android:icon="@drawable/ic_menu_home"
+            android:title="@string/menu_home"/>
+
+        <item
+
+            android:id="@+id/menu_profile"
+            android:icon="@drawable/ic_profile"
+            android:title="@string/menu_perfil"
+            />
+
+        <item
+
+            android:id="@+id/menu_activity"
+            android:icon="@drawable/ic_activity"
+            android:title="@string/menu_activity"
+            />
+
+        <item
+
+            android:id="@+id/menu_soporte"
+            android:icon="@drawable/ic_help_sport"
+            android:title="@string/text_soporte"
+            />
+        <item
+            android:id="@+id/menu_glosario"
+            android:icon="@drawable/ic_glosario"
+            android:title="@string/text_glossary" />
+        <item
+            android:id="@+id/menu_politicas"
+            android:icon="@drawable/ic_politic"
+            android:title="@string/menu_politica" />
+
+        <item
+            android:id="@+id/menu_servicios"
+            android:icon="@drawable/ic_services"
+            android:title="@string/menu_services" />
+
+        <item
+            android:id="@+id/menu_add_user"
+            android:icon="@drawable/ic_add_user"
+            android:title="@string/menu_add_user" />
+
+        <item
+            android:id="@+id/menu_logoff"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/menu_log_off" />
+
+
+    </group>
+</menu>

@@ -1,0 +1,212 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Wit</string>
+    <string name="title_activity_login_menu">LoginMenu</string>
+
+    <!--mrnu login-->
+    <string name="menu_soporte">Soporte</string>
+    <string name="menu_ayuda">Ayuda</string>
+    <string name="menu_glosario">Glosario</string>
+    <string name="menu_politica">Polírtica</string>
+    <string name="menu_services">Servicios</string>
+    <string name="menu_add_user">Añadir Usuario</string>
+    <string name="menu_log_off">cerrar sesión</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Configuración</string>
+    <string name="sinInternet">Sin Internet</string>
+    <string name="sinInternetDescripcion">Sin Conexión a Internet</string>
+    <string name="ingresoFallido"><b>Ingreso fallido</b></string>
+    <string name="ingresoFallidoDescrip">Tus datos no parecen estar correctos. Revisa tus datos y/o
+        tu acceso a Internet</string>
+    <string name="registrarse">Registarse</string>
+    <string name="recuperear_contraseña">Recuperar Contraseña</string>
+    <string name="silenciar">Silenciar</string>
+    <string name="valvula">Valvula</string>
+    <string name="direccion">Dirección</string>
+    <string name="codigo">Código</string>
+    <string name="pais">País</string>
+    <string name="ciudad">Ciudad</string>
+    <string name="title_activity_menu">MenuActivity</string>
+
+    <string name="text_validating_information">Validando la información...</string>
+    <string name="text_without_internet">Sin internet</string>
+    <string name="text_retry">Reintentar</string>
+
+    <string name="register">REGISTRO</string>
+    <string name="login_email_hint">CORREO</string>
+    <string name="login_password_hint">CONTRASEÑA</string>
+    <string name="signup_login_hint">¿Ya tienes una cuenta? Registrarse</string>
+    <string name="login_signup_hint">¿No tienes una cuenta? Inscribirse</string>
+
+
+    <string name="menu_login">Acceso</string>
+    <string name="menu_home">Inicio</string>
+    <string name="menu_perfil">Perfil</string>
+    <string name="menu_activity">Activivdad</string>
+    <string name="menu_gallery">Datos</string>
+    <string name="menu_slideshow">Grafica</string>
+    <string name="text_umbrales">Umbrales</string>
+    <string name="text_alarm">Alarmas</string>
+    <string name="text_soporte">Ayuda y Soporte</string>
+    <string name="text_glossary">Glosario</string>
+    <string name="text_register">Registro</string>
+    <string name="text_logout">Cerrar Sessión</string>
+
+    <!--http://104.156.229.154:3085/api/v1/dat-->
+
+    <string name="txt_to_start">Para comenzar, por favor \n ingresa <b>tu número celular.</b></string>
+    <string name="cell_phone_number">NÚMERO CELULAR</string>
+    <string name="account_data">DATOS DE CUENTA</string>
+    <string name="what_are_your_data"><b>¿CUÁLES SON TUS DATOS?</b></string>
+    <string name="now_we_need_to_know">Ahora necesitamos saber algunos datos tuyos</string>
+    <string name="identification_document">Documento de identidad</string>
+    <string name="document_type">Tipo de documento</string>
+    <string name="document_number">Número de documento</string>
+    <string name="document_issue_date">Fecha de expedición del documento</string>
+    <string name="date_birth">Fecha de nacimiento</string>
+    <string name="gender">Genero</string>
+    <string name="set_up_your_account"><b>Configura tu cuenta</b></string>
+    <string name="email">Correo electrónico</string>
+    <string name="confirm_email">Confirmar correo electrónico</string>
+    <string name="security_pin">Contraseña</string>
+    <string name="confirm_security_pin">Confirmar Contraseña</string>
+    <string name="next">SIGUIENTE</string>
+    <string name="hint_cell_phone_number">( X X X - X X X X X X )</string>
+    <string name="txt_Welcome">Bienvenidos</string>
+    <string name="txt_Wit">WIT</string>
+    <string name="txt_Log_in">Iniciar sesión</string>
+    <string name="txt_name_user">Nombre de  usuario</string>
+    <string name="save_session_data">Guardar datos de sesión</string>
+    <string name="set_face_id">Establezca Face ID</string>
+    <string name="i_forgot_my_data">Olvidé mis datos</string>
+    <string name="text_register_user">Registro de Usuario</string>
+    <string name="text_spanish">Español</string>
+    <string name="text_english">Ingles</string>
+    <string name="text_name_and_last_name">Nobres y apellidos</string>
+    <string name="text_code_postcard">Cod. Postal</string>
+    <string name="text_to_return">Regresar</string>
+    <string name="text_set_the_language">Configurar el idioma</string>
+    <string name="text_activate_child_safety">Activar seguro \n infantil</string>
+    <string name="text_asterisks">****</string>
+    <string name="txt_child_insurance">NOTA: Si tiene niños en casa, puede activar el Seguro Infantil y crear un pin de seguridad de 4 dígitos para su aplicación WIT.</string>
+    <string name="txt_terms_and_conditions">Acepto los términos y condiciones de uso de la aplicación WIT.</string>
+    <string name="txt_privacy_policies">Acepto la Política de Privacidad de los datos establecida por WIT.</string>
+    <string name="txtto_finalize">Finalizar</string>
+    <string name="phone_number">Númer telefónico</string>
+    <string name="txt_validation_mail" translatable="false">Hemosenviado un código a tu correo \n electrónico, <b>verifica tu cuenta</b> y disfruta de las bondades de WIT</string>
+    <string name="send_information">Enviar Información</string>
+    <string name="write_your_email_correctly">Asegúrese de <b>escribir correctamente</b> su correo. Enviaremos la información que necesita para recuperar su cuenta.</string>
+
+    <string name="connect_dispositive">Conectar</string>
+    <string name="txt_dispositive">Dispositivo</string>
+
+
+    <string name="txt_connect_device">Conectar dispositivo</string>
+    <string name="txt_be_sure_to_keep_your_wi_fi_network_connected">Asegúrese de mantener conectada su red Wi-fi y siga cuidadosamente las <font color="#23ADC6"> instrucciones de conexión.</font></string>
+    <string name="txt_Product">Producto</string>
+    <string name="txt_solenoid_valve">Electroválvula</string>
+    <string name="txt_device_name">Nombre del dispositivo</string>
+    <string name="wifi">wifi</string>
+    <string name="txt_wifi_password">Contraseña Wifi</string>
+
+
+    <!--esptouch-->
+    <string name="menu_item_about">About App</string>
+    <string name="about_app_version">App Version: %s</string>
+
+    <string name="main_title">Home</string>
+
+    <string name="esptouch_message_permission">APP require Location permission to get Wi-Fi information. \nClick to request permission</string>
+    <string name="esptouch_message_location">Please turn on GPS to get Wi-Fi information.</string>
+    <string name="esptouch_message_wifi_connection">Please connect Wi-Fi first.</string>
+    <string name="esptouch_message_wifi_frequency">Current Wi-Fi connection is 5G, but the device just support 2.4G.</string>
+
+    <string name="esptouch1_title">EspTouch</string>
+    <string name="esptouch1_about_version">EspTouch Version: %s</string>
+    <string name="esptouch1_ssid_title">SSID: </string>
+    <string name="esptouch1_bssid_title">BSSID: </string>
+    <string name="esptouch1_password_title">Password: </string>
+    <string name="esptouch1_device_count_title">Device count: </string>
+    <string name="esptouch1_package_broadcast">Broadcast</string>
+    <string name="esptouch1_package_multicast">Multicast</string>
+    <string name="esptouch1_confirm">Confirm</string>
+    <string name="esptouch1_wifi_5g_message">Device don\'t support 5G Wi-Fi, please make sure the currently connected Wi-Fi is 2.4G, or you can try multicast</string>
+    <string name="esptouch1_location_permission_title">⚠️Warning</string>
+    <string name="esptouch1_location_permission_message">On Android M or higher version, App can\'t get Wi-Fi connection information if you forbid Location permission.</string>
+    <string name="esptouch1_configuring_message">Esptouch is configuring, please wait for a moment…</string>
+    <string name="esptouch1_configure_wifi_change_message">Wi-Fi disconnected or changed</string>
+    <string name="esptouch1_configure_result_failed">EspTouch failed</string>
+    <string name="esptouch1_configure_result_failed_port">Create EspTouch task failed, the EspTouch port could be used by other thread</string>
+    <string name="esptouch1_configure_result_success">EspTouch 完成</string>
+    <string name="esptouch1_configure_result_success_item">BSSID = %1$s, InetAddress = %2$s</string>
+
+    <string name="esptouch2_title">EspTouch V2</string>
+    <string name="esptouch2_about_version">EspTouch V2 Version: %s</string>
+    <string name="esptouch2_ssid_label">SSID: </string>
+    <string name="esptouch2_bssid_label">BSSID: </string>
+    <string name="esptouch2_ip_label">IP: </string>
+    <string name="esptouch2_password_label">Password</string>
+    <string name="esptouch2_aes_key">AES Key</string>
+    <string name="esptouch2_aes_key_error">AES Key must be null or 16 bytes data</string>
+    <string name="esptouch2_custom_data">Custom Data</string>
+    <string name="esptouch2_custom_data_error">Custom data can\'t be more than %d bytes</string>
+    <string name="esptouch2_device_count">Device Count for Provisioning</string>
+
+    <string name="esptouch2_provisioning_title">Provision</string>
+    <string name="esptouch2_provisioning_stop">Stop</string>
+    <string name="esptouch2_provisioning_result_exception">Catch exception: %s</string>
+    <string name="esptouch2_provisioning_result_none">Not found any devices</string>
+    <string name="esptouch2_provisioning_wifi_disconnect">Wi-Fi connection is disconnected</string>
+    <string name="esptouch2_provisioning_result_bssid">BSSID: %1$s</string>
+    <string name="esptouch2_provisioning_result_address">Address: %1$s</string>
+    <!---->
+    <string name="text_welcome_user"><b><font color="#C4C4C4">Bienvenido,\nRosbel</font></b></string>
+    <string name="text_welcome_uno">Una vez que conecte sus dispositivos WIT, podrá controlarlos dondequiera que se encuentre.</string>
+    <string name="text_welcome_dos"><b><font color="#4D6677">PASO 1. </font></b>Encienda su red Wi-Fi.</string>
+    <string name="text_welcome_tres"><b><font color="#4D6677">PASO 2. </font></b>Seleccione el botón  que aparece en la parte superior de la pantalla.</string>
+    <string name="text_welcome_cuatro"><b><font color="#4D6677">PASO 3. </font></b>Etiquete sus dispositivos en el proceso de registro.</string>
+    <string name="text_how_to_connect_it" tools:ignore="ExtraTranslation"><b><font color="#4D6677">¿cómo conectarlo?</font></b></string>
+    <string name="text_my_devices" tools:ignore="ExtraTranslation"><font color="#4D6677">Mis dispositivos</font></string>
+
+
+
+    <string name="text_perfil_config">Configurar perfil</string>
+    <string name="text_name_lastname"><b><font color="#4D6677">Nombre Apellido</font></b></string>
+    <string name="text_hint_name_user"> Nombre de usuario</string>
+    <string name="text_name_user"> UserName001</string>
+    <string name="text_mail_user"> Correo Electrónico</string>
+    <string name="text_mail_example"> example@gmail.com</string>
+    <string name="text_addres_example"> País, Ciudad, Dirección</string>
+    <string name="text_number_phone"> Número de teléfono</string>
+    <string name="text_number_phone_example"> +00 000 00 00</string>
+    <string name="text_pin_example"> ***********</string>
+    <string name="text_language"> Idioma</string>
+    <string name="text_language_example"> Ingles</string>
+    <string name="text_edit">Editar</string>
+    <string name="text_divice">Dispositivo</string>
+    <string name="text_divice_example">Garaje</string>
+    <string name="text_divice_adapter"><b><font color="#4D6677">Air Quality is good</font></b></string>
+    <string name="text_humidity_relative">Humedad relativa</string>
+    <string name="text_percentage"><b><font color="#4D6677">47%</font></b></string>
+    <string name="text_search_device">Buscar dispositivos</string>
+
+
+
+    <string name="txt_invalide_email_password" tools:ignore="ExtraTranslation">Incorrect email or password</string>
+    <string name="btn_acept" tools:ignore="ExtraTranslation">Acept</string>
+    <string name="btn_cancel" tools:ignore="ExtraTranslation">Cancel</string>
+    <string name="txt_code_verificaction" tools:ignore="ExtraTranslation">Enter verification code</string>
+    <string name="text_invalid_code">código no válido</string>
+    <string name="phone_verification">Verificación de teléfono</string>
+    <string name="txt_phone_verification">Hemos enviado un código a su teléfono vía SMS. Por favor, ingrese los 6 dígitos recibidos.</string>
+    <string name="btn_verify">Verificar</string>
+    <string name="txt_forward_code">reenviar código</string>
+    <string name="all_fields_are_required">Todos los campos son obligatorios</string>
+    <string name="passwords_not_mismatch">las contraseñas no coinciden</string>
+    <string name="forward_code">Reenviar Código</string>
+    <string name="enter_code">Ingresar código </string>
+    <string name="something_went">Algo salió mal intento de nuevo</string>
+</resources>

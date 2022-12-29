@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/sp30">
+
+            <TextView
+                android:id="@+id/txt_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_welcome_user"
+                android:textColor="@color/black"
+                android:clickable="true"
+                android:textSize="20sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_welcome_uno"
+                android:textColor="@color/txt_color"
+                android:textSize="15sp" />
+
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_how_to_connect_it"
+                android:textColor="@color/txt_color"
+                android:textSize="20sp" />
+
+
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+               android:paddingLeft="20sp">
+
+               <Space
+                   android:layout_width="match_parent"
+                   android:layout_height="10sp"/>
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="@string/text_welcome_dos"
+                   android:textColor="@color/txt_color"
+                   android:textSize="16sp" />
+
+               <Space
+                   android:layout_width="match_parent"
+                   android:layout_height="10sp"/>
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="@string/text_welcome_tres"
+                   android:textColor="@color/txt_color"
+                   android:textSize="16sp" />
+
+               <Space
+                   android:layout_width="match_parent"
+                   android:layout_height="10sp"/>
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="@string/text_welcome_cuatro"
+                   android:textColor="@color/txt_color"
+                   android:textSize="16sp" />
+           </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/ic_backgraund_footer" />
+
+
+    </RelativeLayout>
+</layout>

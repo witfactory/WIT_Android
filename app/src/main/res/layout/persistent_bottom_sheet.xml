@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/ic_fondo_oscuro_degradado"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints"
+                android:paddingTop="70sp">
+
+
+
+                <LinearLayout
+                    android:id="@+id/layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_fondo_blanco_redondeado"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0">
+
+
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:gravity="center"
+                        android:text="@string/phone_verification"
+                        android:textColor="@color/background"
+                        android:textSize="@dimen/sp20" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_regular"
+                        android:gravity="center"
+                        android:padding="20sp"
+                        android:text="@string/txt_phone_verification"
+                        android:textColor="@color/background"
+                        android:textSize="@dimen/sp16" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="20sp"
+                        android:paddingRight="20sp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:gravity="center|left"
+                            android:text="@string/enter_code"
+                            android:textColor="@color/txt_color"
+                            android:textSize="@dimen/sp16" />
+
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/custom_text_otplong_description">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="6dp"
+                                app:cardCornerRadius="11dp"
+                                app:cardElevation="5dp">
+
+                                <EditText
+                                    android:id="@+id/custom_long_otp_1"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:autofillHints="AUTOFILL_HINT_SMS_OTP"
+                                    android:background="@drawable/ic_caja_cuadrada"
+                                    android:gravity="center"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:importantForAutofill="yes"
+                                    android:maxLength="1"
+                                    android:textColor="@color/btn_color"/>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="6dp"
+                                app:cardCornerRadius="11dp"
+                                app:cardElevation="5dp">
+
+                                <EditText
+                                    android:id="@+id/custom_long_otp_2"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:autofillHints="AUTOFILL_HINT_SMS_OTP"
+                                    android:background="@drawable/ic_caja_cuadrada"
+                                    android:gravity="center"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:importantForAutofill="yes"
+                                    android:maxLength="1"
+                                    android:textColor="@color/btn_color"/>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="6dp"
+                                app:cardCornerRadius="11dp"
+                                app:cardElevation="5dp">
+
+                                <EditText
+                                    android:id="@+id/custom_long_otp_3"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:autofillHints="AUTOFILL_HINT_SMS_OTP"
+                                    android:background="@drawable/ic_caja_cuadrada"
+                                    android:gravity="center"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:importantForAutofill="yes"
+                                    android:maxLength="1"
+                                    android:textColor="@color/btn_color"/>
+
+                            </androidx.cardview.widget.CardView>
+
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="6dp"
+                                app:cardCornerRadius="11dp"
+                                app:cardElevation="5dp">
+
+                                <EditText
+                                    android:id="@+id/custom_long_otp_4"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:autofillHints="AUTOFILL_HINT_SMS_OTP"
+                                    android:background="@drawable/ic_caja_cuadrada"
+                                    android:gravity="center"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:importantForAutofill="yes"
+                                    android:maxLength="1"
+                                    android:textColor="@color/btn_color"/>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="6dp"
+                                app:cardCornerRadius="11dp"
+                                app:cardElevation="5dp">
+
+                                <EditText
+                                    android:id="@+id/custom_long_otp_5"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:autofillHints="AUTOFILL_HINT_SMS_OTP"
+                                    android:background="@drawable/ic_caja_cuadrada"
+                                    android:gravity="center"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:importantForAutofill="yes"
+                                    android:maxLength="1"
+                                    android:textColor="@color/btn_color"/>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="6dp"
+                                app:cardCornerRadius="11dp"
+                                app:cardElevation="5dp">
+
+                                <EditText
+                                    android:id="@+id/custom_long_otp_6"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/ic_caja_cuadrada"
+                                    android:gravity="center"
+                                    android:inputType="number"
+                                    android:imeOptions="actionGo"
+                                    android:maxLength="1"
+                                    android:textColor="@color/btn_color"/>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/txt_resend_code"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_regular"
+                            android:gravity="center|right"
+                            android:padding="5sp"
+                            android:text="@string/txt_forward_code"
+                            android:textColor="@color/background"
+                            android:textSize="@dimen/sp16"
+                            android:clickable="true"/>
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_sign_up"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="@dimen/sp10"
+                            android:background="@drawable/ic_btn_inactivo"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="@string/btn_verify"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_logo_movil_circular"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+
+
+</layout>

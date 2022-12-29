@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/menu_home">
+
+    <fragment
+        android:id="@+id/menu_home"
+        android:name="com.cb.witfactory.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+
+    <fragment
+        android:id="@+id/menu_device"
+        android:name="com.cb.witfactory.ui.device.DeviceFragment"
+        android:label="@string/txt_dispositive"
+        tools:layout="@layout/fragment_device" />
+
+    <fragment
+        android:id="@+id/menu_profile"
+        android:name="com.cb.witfactory.ui.perfil.PerfilFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_perfil" />
+
+    <fragment
+        android:id="@+id/menu_connect_dispositive"
+        android:name="com.cb.witfactory.ui.connectDispositive.ConnectDispositiveFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_connect_dispositive" />
+
+    <fragment
+        android:id="@+id/menu_glosario"
+        android:name="com.cb.witfactory.ui.glosario.GlosarioFragment"
+        android:label="@string/menu_glosario"
+        tools:layout="@layout/fragment_glosario" />
+
+    <fragment
+        android:id="@+id/menu_ayuda"
+        android:name="com.cb.witfactory.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nenu_login"
+        android:name="com.cb.witfactory.ui.login.LoginFragment"
+        android:label="@string/menu_login"
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/nenu_register"
+        android:name="com.cb.witfactory.ui.register.RegisterFragment"
+        android:label="@string/register"
+        tools:layout="@layout/register_fragment" />
+
+
+    <fragment
+        android:id="@+id/nenu_register2"
+        android:name="com.cb.witfactory.ui.register.Register2Fragment"
+        android:label="@string/register"
+        tools:layout="@layout/register2_fragment" />
+
+
+    <fragment
+        android:id="@+id/nenu_register3"
+        android:name="com.cb.witfactory.ui.register.Register3Fragment"
+        android:label="@string/register"
+        tools:layout="@layout/register3_fragment" />
+</navigation>

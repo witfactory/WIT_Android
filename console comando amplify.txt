@@ -1,0 +1,4 @@
+1-en consola android colocar
+amplify pull --appId d2rpv8pz9nwju0 --envName dev
+
+esto crea la carpeta y configuración de amplify

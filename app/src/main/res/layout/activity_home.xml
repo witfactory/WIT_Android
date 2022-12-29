@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_bagraunapp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/sp30">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/sp130"
+                    android:layout_height="@dimen/sp100"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_logo_wit" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/sp10"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/sp10"
+                    android:text="@string/txt_Welcome"
+                    android:textColor="@color/text_home"
+                    android:textSize="@dimen/sp30"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/sp10"
+                    android:gravity="center"
+                    android:text="@string/txt_Wit"
+                    android:textColor="@color/text_home"
+                    android:textSize="@dimen/sp30" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/sp10"
+                    android:background="@drawable/ic_btn_activo"
+                    android:text="@string/registrarse"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/sp10"
+                    android:background="@drawable/ic_btn_activo"
+                    android:text="@string/txt_Log_in"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>
