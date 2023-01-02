@@ -73,8 +73,8 @@ public class WitMenu extends AppCompatActivity implements Callfun {
 
                 int id = item.getItemId();
 
-
                 if (id == R.id.menu_home) {
+                    binding.appBarLoginMenu.fab.setVisibility(View.VISIBLE);
                     NavController navController = Navigation.findNavController(WitMenu.this, R.id.nav_host_fragment_content_login_menu);
                     navController.navigateUp();
                     navController.navigate(R.id.menu_home);
@@ -82,7 +82,17 @@ public class WitMenu extends AppCompatActivity implements Callfun {
                     return true;
                 }
 
+                if (id == R.id.menu_profile) {
+                    binding.appBarLoginMenu.fab.setVisibility(View.VISIBLE);
+                    NavController navController = Navigation.findNavController(WitMenu.this, R.id.nav_host_fragment_content_login_menu);
+                    navController.navigateUp();
+                    navController.navigate(R.id.menu_profile);
+                    drawer.close();
+                    return true;
+                }
+
                 if (id == R.id.menu_soporte) {
+                    binding.appBarLoginMenu.fab.setVisibility(View.GONE);
                     NavController navController = Navigation.findNavController(WitMenu.this, R.id.nav_host_fragment_content_login_menu);
                     navController.navigateUp();
                     navController.navigate(R.id.menu_soporte);
@@ -94,7 +104,8 @@ public class WitMenu extends AppCompatActivity implements Callfun {
                     amplifyCognito.logOut(getApplicationContext());
                     return true;
                 }
-                
+
+
                 return false;
             }
         });
