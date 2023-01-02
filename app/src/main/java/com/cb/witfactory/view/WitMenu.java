@@ -27,7 +27,7 @@ public class WitMenu extends AppCompatActivity implements Callfun {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityWitMenuBinding binding;
     DrawerLayout drawer;
-    private NavigationView  navigationView;
+    private NavigationView navigationView;
     AmplifyCognito amplifyCognito = null;
 
     @Override
@@ -39,7 +39,6 @@ public class WitMenu extends AppCompatActivity implements Callfun {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarLoginMenu.toolbar);
-
 
 
         amplifyCognito = new AmplifyCognito(getApplicationContext());
@@ -55,12 +54,12 @@ public class WitMenu extends AppCompatActivity implements Callfun {
         });
 
         drawer = binding.drawerLayout;
-       navigationView = binding.navView;
+        navigationView = binding.navView;
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.menu_home,R.id.menu_profile,R.id.menu_glosario)
+                R.id.menu_home, R.id.menu_profile, R.id.menu_activity, R.id.menu_soporte, R.id.menu_politicas, R.id.menu_add_user)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_login_menu);
@@ -74,11 +73,28 @@ public class WitMenu extends AppCompatActivity implements Callfun {
 
                 int id = item.getItemId();
 
+
+                if (id == R.id.menu_home) {
+                    NavController navController = Navigation.findNavController(WitMenu.this, R.id.nav_host_fragment_content_login_menu);
+                    navController.navigateUp();
+                    navController.navigate(R.id.menu_home);
+                    drawer.close();
+                    return true;
+                }
+
+                if (id == R.id.menu_soporte) {
+                    NavController navController = Navigation.findNavController(WitMenu.this, R.id.nav_host_fragment_content_login_menu);
+                    navController.navigateUp();
+                    navController.navigate(R.id.menu_soporte);
+                    drawer.close();
+                    return true;
+                }
                 if (id == R.id.menu_logoff) {
                     Toast.makeText(getApplicationContext(), getString(R.string.text_logout), Toast.LENGTH_LONG).show();
                     amplifyCognito.logOut(getApplicationContext());
                     return true;
                 }
+                
                 return false;
             }
         });

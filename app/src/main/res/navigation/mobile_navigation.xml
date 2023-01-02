@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/menu_profile"
         android:name="com.cb.witfactory.ui.perfil.PerfilFragment"
-        android:label="@string/menu_home"
+        android:label="@string/menu_perfil"
         tools:layout="@layout/fragment_perfil" />
 
     <fragment
@@ -67,4 +67,11 @@
         android:name="com.cb.witfactory.ui.register.Register3Fragment"
         android:label="@string/register"
         tools:layout="@layout/register3_fragment" />
+
+
+    <fragment
+        android:id="@+id/menu_soporte"
+        android:name="com.cb.witfactory.ui.support.SupportFragment"
+        android:label="@string/text_soporte"
+        tools:layout="@layout/fragment_support" />
 </navigation>

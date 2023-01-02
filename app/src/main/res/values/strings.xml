@@ -209,4 +209,7 @@
     <string name="forward_code">Reenviar Código</string>
     <string name="enter_code">Ingresar código </string>
     <string name="something_went">Algo salió mal intento de nuevo</string>
+    <string name="invalid_email_or_password">Correo o contraseña inválidos</string>
+    <string name="the_password_must">La contraseña debe tener mínimo nueve  dígitos, una mayúscula, minúscula, números y un carácter.</string>
+    <string name="write_message">Escribe un mensaje</string>
 </resources>

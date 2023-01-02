@@ -31,19 +31,19 @@
             android:icon="@drawable/ic_help_sport"
             android:title="@string/text_soporte"
             />
-        <item
+        <!--item
             android:id="@+id/menu_glosario"
             android:icon="@drawable/ic_glosario"
-            android:title="@string/text_glossary" />
+            android:title="@string/text_glossary" /-->
         <item
             android:id="@+id/menu_politicas"
             android:icon="@drawable/ic_politic"
             android:title="@string/menu_politica" />
 
-        <item
+        <!--item
             android:id="@+id/menu_servicios"
             android:icon="@drawable/ic_services"
-            android:title="@string/menu_services" />
+            android:title="@string/menu_services" /-->
 
         <item
             android:id="@+id/menu_add_user"

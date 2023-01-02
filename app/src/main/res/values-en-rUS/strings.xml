@@ -49,7 +49,7 @@
     <string name="menu_slideshow">Graph</string>
     <string name="text_umbrales">thresholds</string>
     <string name="text_alarm">alarms</string>
-    <string name="text_soporte">Help and support</string>
+    <string name="text_soporte">support</string>
     <string name="text_glossary">Glossary</string>
     <string name="text_register">Register</string>
     <string name="text_logout">Sign off</string>
@@ -204,5 +204,9 @@
     <string name="forward_code">Forward Code</string>
     <string name="enter_code">Enter code </string>
     <string name="something_went">Something went wrong again</string>
+    <string name="invalid_email_or_password">Invalid email or password</string>
+    <string name="the_password_must">The password must have at least nine digits, one uppercase, lowercase, numbers, and one character.</string>
+    <string name="write_message">Write a message</string>
+
 
 </resources>

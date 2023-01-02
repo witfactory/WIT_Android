@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -32,7 +34,8 @@ public class LoginActivity extends AppCompatActivity  implements Callfun {
     Resources resources;
     String locale = "";
     AmplifyCognito amplifyCognito = null;
-
+    String mail = "";
+    String password = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,48 @@ public class LoginActivity extends AppCompatActivity  implements Callfun {
             }
         });
 
+        binding.txtPin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(editable.length() > 0){
+                    validardata();
+
+                }
+            }
+        });
+
+        binding.txtNameUser.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(editable.length() > 0){
+                    validardata();
+
+                }
+            }
+        });
+
         binding.btnEn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,8 +108,8 @@ public class LoginActivity extends AppCompatActivity  implements Callfun {
         binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                var mail = binding.txtNameUser.getText().toString();
-                var password = binding.txtPin.getText().toString();
+                 mail = binding.txtNameUser.getText().toString();
+                 password = binding.txtPin.getText().toString();
 
                 if (mail.isEmpty() || password.isEmpty() || !validarEmail(mail)) {
                     //String cadena = getString(R.string.txt_invalide_email_password);
@@ -150,6 +195,15 @@ public class LoginActivity extends AppCompatActivity  implements Callfun {
     @Override
     public void onError(String s) {
         Log.v("error", s.toString());
+        Toast.makeText(context, getString(R.string.invalid_email_or_password), Toast.LENGTH_SHORT).show();
         //amplifyCognito.resendCode();
+    }
+
+    public void validardata(){
+        if (mail.isEmpty() || password.isEmpty() || !validarEmail(mail)) {
+            binding.btnSignUp.setBackgroundResource(R.drawable.ic_btn_activo);
+        }else{
+            binding.btnSignUp.setBackgroundResource(R.drawable.ic_btn_inactivo);
+        }
     }
 }

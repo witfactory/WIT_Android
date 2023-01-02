@@ -1,7 +1,6 @@
 
 package com.cb.witfactory.ui.register;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,8 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.Utils;
@@ -148,7 +145,7 @@ public class RegisterFragment extends Fragment {
                 if (!txtUser.isEmpty() && !txtEmail.isEmpty() && !txtPin.isEmpty() && !txtComfirmPin.isEmpty()) {
 
                     if (!Utils.isValidPassword(txtPin)){
-                        Toast.makeText(getContext(), "Contraseña muy debil", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.the_password_must), Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (txtPin.toString().equals(txtComfirmPin.toString())) {
