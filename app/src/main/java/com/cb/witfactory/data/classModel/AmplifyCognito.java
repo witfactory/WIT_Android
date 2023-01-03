@@ -2,8 +2,10 @@ package com.cb.witfactory.data.classModel;
 
 import android.content.Context;
 
+import com.amplifyframework.auth.AuthSession;
 import com.amplifyframework.auth.AuthUserAttribute;
 import com.amplifyframework.auth.AuthUserAttributeKey;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthSession;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Action;
 import com.amplifyframework.core.Amplify;
@@ -80,8 +82,6 @@ public class AmplifyCognito {
     }
 
     public Boolean resendCode() {
-
-
         AuthUserAttributeKey email = AuthUserAttributeKey.email();
 
         Amplify.Auth.resendUserAttributeConfirmationCode(AuthUserAttributeKey.email(),
@@ -151,6 +151,20 @@ public class AmplifyCognito {
                     Log.i("AmplifyQuickstart", result.toString());
                     String sinUp = EnumVaribles.signAuth.toString();
                     Boolean estateSession = result.isSignedIn();
+
+
+                    if(estateSession){
+
+                        AWSCognitoAuthSession cognitoAuthSession = (AWSCognitoAuthSession) result;
+                        String token = cognitoAuthSession.getUserPoolTokens().getValue().getIdToken();
+                        String accesToken = cognitoAuthSession.getUserPoolTokens().getValue().getAccessToken();
+
+                        Log.v("token con session activa--> ${session.userPoolTokensResult.value?.idToken}",cognitoAuthSession.getUserPoolTokens().getValue().getIdToken());
+                        Log.v("token con session activa acces-2.1--> ${session.userPoolTokensResult.value?.accessToken}",cognitoAuthSession.getUserPoolTokens().getValue().getAccessToken());
+
+
+                    }
+
 
 
                     listener.onSuccess(estateSession.toString());
