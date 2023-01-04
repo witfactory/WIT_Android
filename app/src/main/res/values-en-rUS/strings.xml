@@ -161,7 +161,7 @@
     <string name="esptouch2_provisioning_result_bssid">BSSID: %1$s</string>
     <string name="esptouch2_provisioning_result_address">Address: %1$s</string>
     <!---->
-    <string name="text_welcome_user"><b><font color="#C4C4C4">Welcome,\nRosbel</font></b></string>
+    <string name="text_welcome_user"><b><font color="#C4C4C4">Welcome,</font></b></string>
     <string name="text_welcome_uno">Once you connect your WIT devices, you can control them wherever you are.</string>
     <string name="text_welcome_dos"><b><font color="#4D6677">STEP 1. </font></b>Turn on your Wi-Fi network.</string>
     <string name="text_welcome_tres"><b><font color="#4D6677">STEP 2. </font></b>Select the button that appears at the top of the screen.</string>

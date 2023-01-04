@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.databinding.FragmentHomeBinding;
+import com.cb.witfactory.model.PreferencesHelper;
 import com.cb.witfactory.ui.device.DeviceFragment;
 import com.cb.witfactory.ui.register.RegisterFragment;
 
@@ -22,7 +23,7 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
 
-
+    private PreferencesHelper preferencesHelper;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -32,7 +33,14 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        preferencesHelper = new PreferencesHelper(getContext());
 
+        String user= PreferencesHelper.getUser("user", "");
+        String[] arrOfStr = user.split("@");
+
+        String dataUser= arrOfStr[0];
+
+        binding.txtUser.setText(getString(R.string.text_welcome_user)+"\n"+dataUser);
 
         binding.txtUser.setOnClickListener(new View.OnClickListener() {
             @Override
