@@ -11,6 +11,7 @@ import com.amplifyframework.core.Action;
 import com.amplifyframework.core.Amplify;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.EnumVaribles;
+import com.cb.witfactory.model.PreferencesHelper;
 
 import org.chromium.base.Log;
 
@@ -21,6 +22,8 @@ public class AmplifyCognito {
     private Boolean comfirm = false;
     private static Callfun listener;
 
+
+    private PreferencesHelper preferencesHelper;
 
     public AmplifyCognito(Context context) {
         this.mContext = context;
@@ -155,13 +158,19 @@ public class AmplifyCognito {
 
                     if(estateSession){
 
+                        String name = Amplify.Auth.getCurrentUser().getUsername();
+
+                        preferencesHelper = new PreferencesHelper(mContext);
+                        PreferencesHelper.setUser("user", name.toString());
+                        PreferencesHelper.setEmail("email", name.toString());
+
+
                         AWSCognitoAuthSession cognitoAuthSession = (AWSCognitoAuthSession) result;
                         String token = cognitoAuthSession.getUserPoolTokens().getValue().getIdToken();
                         String accesToken = cognitoAuthSession.getUserPoolTokens().getValue().getAccessToken();
 
                         Log.v("token con session activa--> ${session.userPoolTokensResult.value?.idToken}",cognitoAuthSession.getUserPoolTokens().getValue().getIdToken());
                         Log.v("token con session activa acces-2.1--> ${session.userPoolTokensResult.value?.accessToken}",cognitoAuthSession.getUserPoolTokens().getValue().getAccessToken());
-
 
                     }
 
