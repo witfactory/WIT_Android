@@ -74,7 +74,7 @@
                                 android:id="@+id/txt_first_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="textCapCharacters|text"
+                                android:inputType="textAutoComplete"
                                 android:textColor="@color/dark_greenish_blue"
                                 android:textColorHint="@color/text_login"
                                 android:gravity="center|left"
@@ -118,7 +118,7 @@
                             </com.google.android.material.textfield.TextInputLayout>
 
 
-                            <Space
+                            <androidx.legacy.widget.Space
                                 android:layout_width="10sp"
                                 android:layout_height="wrap_content" />
 
@@ -183,7 +183,7 @@
 
                             </com.google.android.material.textfield.TextInputLayout>
 
-                            <Space
+                            <androidx.legacy.widget.Space
                                 android:layout_width="10sp"
                                 android:layout_height="wrap_content" />
 
@@ -204,11 +204,11 @@
                                     android:id="@+id/txt_zip_code"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:inputType="number"
+                                    android:inputType="phone|number"
                                     android:textColor="@color/dark_greenish_blue"
                                     android:textColorHint="@color/text_login"
-                                    android:gravity="center|left"
-                                    android:imeOptions="actionNext"/>
+                                    android:imeOptions="actionNext"
+                                    android:maxLength="6"/>
 
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
@@ -229,10 +229,9 @@
                                 android:id="@+id/txt_cell_phone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="phone|number"
+                                android:inputType="phone"
                                 android:textColor="@color/dark_greenish_blue"
                                 android:textColorHint="@color/text_login"
-                                android:gravity="center|left"
                                 android:maxLength="10"
                                 android:imeOptions="actionDone"
                                 />

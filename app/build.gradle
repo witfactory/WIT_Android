@@ -65,7 +65,16 @@ dependencies {
     implementation 'com.amazonaws:aws-android-sdk-appsync:2.6.+'
     implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0'
     implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
-    implementation 'com.amazonaws:aws-android-sdk-mobile-client:2.57.0'
+    implementation 'com.amazonaws:aws-android-sdk-mobile-client:2.61.0'
 
+
+
+//retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    implementation 'com.amazonaws:aws-android-sdk-auth-userpools:2.61.0'
+    implementation 'com.amazonaws:aws-android-sdk-auth-ui:2.61.0'
+    implementation 'com.amazonaws:aws-android-sdk-cognitoauth:2.61.0'
 
 }

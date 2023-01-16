@@ -39,29 +39,35 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.ResetPassWordActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.RegistroActivity"
             android:exported="false"
-            android:theme="@style/Theme.WitFactory.NoActionBar" />
+            android:theme="@style/Theme.WitFactory.NoActionBar"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.HomeActivity"
             android:exported="false"
-            android:theme="@style/Theme.WitFactory.NoActionBar" />
+            android:theme="@style/Theme.WitFactory.NoActionBar"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.WitMenu"
             android:exported="false"
             android:label="@string/title_activity_login_menu"
-            android:theme="@style/Theme.WitFactory.NoActionBar" />
+            android:theme="@style/Theme.WitFactory.NoActionBar"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login_menu"
-            android:theme="@style/Theme.WitFactory.NoActionBar" />
+            android:theme="@style/Theme.WitFactory.NoActionBar"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.WitFactory.NoActionBar">
+            android:theme="@style/Theme.WitFactory.NoActionBar"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

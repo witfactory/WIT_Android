@@ -26,7 +26,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.amplifyframework.core.Amplify;
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.AmplifyCognito;
 import com.cb.witfactory.databinding.Register3FragmentBinding;
@@ -34,8 +33,6 @@ import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.EnumVaribles;
 import com.cb.witfactory.model.PreferencesHelper;
 import com.cb.witfactory.ui.verificar_cuenta.VerificaTuCuentaFragment;
-
-import java.util.prefs.Preferences;
 
 public class Register3Fragment extends Fragment implements Callfun {
 
@@ -46,16 +43,14 @@ public class Register3Fragment extends Fragment implements Callfun {
     Boolean resulRegiter = false;
 
 
-
     Register2Fragment registerFragment;
     VerificaTuCuentaFragment verificaTuCuentaFragment;
     FragmentManager fragmentManager = null;
     FragmentTransaction fragmentTransaction;
     Animation animation = null;
     String txt_pin;
-    Boolean controlParental =false, terminosCondiciones=false,politicaPrivacidad=false;
+    Boolean controlParental = false, terminosCondiciones = false, politicaPrivacidad = false;
     private PreferencesHelper preferencesHelper;
-
 
 
     public static Register3Fragment newInstance() {
@@ -70,7 +65,7 @@ public class Register3Fragment extends Fragment implements Callfun {
         View root = binding.getRoot();
 
         preferencesHelper = new PreferencesHelper(getContext());
-         animation = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.bottom_in);
+        animation = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.bottom_in);
 
         amplifyCognito = new AmplifyCognito(getContext());
         amplifyCognito.setListener(Register3Fragment.this);
@@ -86,7 +81,6 @@ public class Register3Fragment extends Fragment implements Callfun {
         });
 
 
-
         butttonStyle();
 
 
@@ -94,11 +88,11 @@ public class Register3Fragment extends Fragment implements Callfun {
         binding.controlParental.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean flag) {
-                if(flag){
+                if (flag) {
 
                     binding.txtPin.setFocusable(true);
                     controlParental = true;
-                }else{
+                } else {
                     binding.txtPin.setText("");
                     binding.txtPin.setFocusable(false);
                     controlParental = false;
@@ -129,27 +123,27 @@ public class Register3Fragment extends Fragment implements Callfun {
             @Override
             public void onClick(View view) {
 
-                if(controlParental){
-                    if(txt_pin.isEmpty()){
+                if (controlParental) {
+                    if (txt_pin.isEmpty()) {
                         return;
                     }
 
                 }
-                if(terminosCondiciones  && politicaPrivacidad){
+                if (terminosCondiciones && politicaPrivacidad) {
 
-                    String first_name = PreferencesHelper.getFirstName("first_name","");
-                    String user = PreferencesHelper.getFirstName("user","");
-                    String last_name = PreferencesHelper.getFirstName("last_name","");
-                    String country = PreferencesHelper.getFirstName("country","");
-                    String city = PreferencesHelper.getFirstName("city","");
-                    String zip_code = PreferencesHelper.getFirstName("zip_code","");
-                    String address = PreferencesHelper.getFirstName("address","");
-                    String account_type = PreferencesHelper.getFirstName("account_type","P");
-                    String telephone = PreferencesHelper.getFirstName("telephone","");
-                    String user_principal = PreferencesHelper.getFirstName("user_principal","");
-                    String password = PreferencesHelper.getFirstName("password","");
-                    Log.v("",password);
-                    resulRegiter = amplifyCognito.sinUp(first_name,user,last_name,country,city,zip_code,address,account_type,telephone,user_principal,password);
+                    String first_name = PreferencesHelper.getFirstName("first_name", "");
+                    String user = PreferencesHelper.getFirstName("user", "");
+                    String last_name = PreferencesHelper.getFirstName("last_name", "demos");
+                    String country = PreferencesHelper.getFirstName("country", "");
+                    String city = PreferencesHelper.getFirstName("city", "");
+                    String zip_code = PreferencesHelper.getFirstName("zip_code", "");
+                    String address = PreferencesHelper.getFirstName("address", "");
+                    String account_type = PreferencesHelper.getFirstName("account_type", "P");
+                    String telephone = PreferencesHelper.getFirstName("telephone", "");
+                    String user_principal = PreferencesHelper.getFirstName("user_principal", "");
+                    String password = PreferencesHelper.getFirstName("password", "");
+                    Log.v("", password);
+                    resulRegiter = amplifyCognito.sinUp(first_name, user, "demos", country, city, zip_code, address, account_type, telephone, user_principal, password);
                 }
             }
         });
@@ -171,7 +165,7 @@ public class Register3Fragment extends Fragment implements Callfun {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if(editable.length() > 0){
+                if (editable.length() > 0) {
                     validateData();
                     binding.includeSheep.customLongOtp2.hasFocus();
                     binding.includeSheep.customLongOtp2.setFocusableInTouchMode(true);
@@ -196,7 +190,7 @@ public class Register3Fragment extends Fragment implements Callfun {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if(editable.length() > 0){
+                if (editable.length() > 0) {
                     validateData();
                     binding.includeSheep.customLongOtp3.hasFocus();
                     binding.includeSheep.customLongOtp3.setFocusableInTouchMode(true);
@@ -221,7 +215,7 @@ public class Register3Fragment extends Fragment implements Callfun {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if(editable.length() > 0){
+                if (editable.length() > 0) {
                     validateData();
                     binding.includeSheep.customLongOtp4.hasFocus();
                     binding.includeSheep.customLongOtp4.setFocusableInTouchMode(true);
@@ -246,7 +240,7 @@ public class Register3Fragment extends Fragment implements Callfun {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if(editable.length() > 0){
+                if (editable.length() > 0) {
                     validateData();
                     binding.includeSheep.customLongOtp5.hasFocus();
                     binding.includeSheep.customLongOtp5.setFocusableInTouchMode(true);
@@ -271,7 +265,7 @@ public class Register3Fragment extends Fragment implements Callfun {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if(editable.length() > 0){
+                if (editable.length() > 0) {
                     validateData();
                     binding.includeSheep.customLongOtp6.hasFocus();
                     binding.includeSheep.customLongOtp6.setFocusableInTouchMode(true);
@@ -296,7 +290,7 @@ public class Register3Fragment extends Fragment implements Callfun {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if(editable.length() > 0){
+                if (editable.length() > 0) {
                     validateData();
                 }
             }
@@ -306,7 +300,7 @@ public class Register3Fragment extends Fragment implements Callfun {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 
-                if(i == KeyEvent.ACTION_DOWN  || i == EditorInfo.IME_ACTION_GO){
+                if (i == KeyEvent.ACTION_DOWN || i == EditorInfo.IME_ACTION_GO) {
                     validateData();
                     View view = getActivity().getCurrentFocus();
                     InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
@@ -328,14 +322,12 @@ public class Register3Fragment extends Fragment implements Callfun {
                 String otp4 = binding.includeSheep.customLongOtp4.getText().toString();
                 String otp5 = binding.includeSheep.customLongOtp5.getText().toString();
                 String otp6 = binding.includeSheep.customLongOtp6.getText().toString();
-                String otp = otp1+otp2+otp3+otp4+otp5+otp6;
+                String otp = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
 
-                String userEmail = PreferencesHelper.getFirstName("user","");
+                String userEmail = PreferencesHelper.getFirstName("user", "");
 
-                resulRegiter = amplifyCognito.confirmCode(otp,userEmail);
-                if(resulRegiter){
-                    Log.e("",resulRegiter.toString());
-                }
+                amplifyCognito.confirmSigUp(otp, userEmail);
+
 
             }
         });
@@ -345,7 +337,7 @@ public class Register3Fragment extends Fragment implements Callfun {
             @Override
             public void onClick(View view) {
 
-                String userEmail = PreferencesHelper.getFirstName("user","");
+                String userEmail = PreferencesHelper.getFirstName("user", "");
                 resulRegiter = amplifyCognito.resendCodeEmail(userEmail);
 
             }
@@ -438,7 +430,7 @@ public class Register3Fragment extends Fragment implements Callfun {
     }
 
 
-    private  void  butttonStyle(){
+    private void butttonStyle() {
         binding.includeSheep.btnSignUp.setBackgroundResource(R.drawable.btn_rounded_gray);
         binding.includeSheep.btnSignUp.setTextColor(Color.BLACK);
         binding.includeSheep.btnSignUp.setClickable(false);
@@ -448,43 +440,51 @@ public class Register3Fragment extends Fragment implements Callfun {
     @Override
     public void onSuccess(String s) {
         try {
-            if(s.equals(EnumVaribles.sinUp.toString())){
+            if (s.equals(EnumVaribles.sinUp.toString())) {
                 modalOtp();
             }
 
-            if(s.equals(EnumVaribles.confirmCode.toString())){
+            if (s.equals(EnumVaribles.confirmCode.toString())) {
                 Toast.makeText(getContext(), "Valida tu correo", Toast.LENGTH_SHORT).show();
             }
-        //    Toast.makeText(getContext(), s.toString(), Toast.LENGTH_LONG).show();
+            //    Toast.makeText(getContext(), s.toString(), Toast.LENGTH_LONG).show();
 
 
-            if(s.equals("resendCodeEmail")){
+            if (s.equals("resendCodeEmail")) {
                 Toast.makeText(getContext(), "resendCodeEmail", Toast.LENGTH_SHORT).show();
             }
 
-        }catch (Exception e){
+            if (s.equals(EnumVaribles.confirmSigUp.toString())) {
+                Toast.makeText(getContext(), "s+" + s, Toast.LENGTH_SHORT).show();
+            }
 
-            Log.v("error callback",e.getMessage().toString());
+
+        } catch (Exception e) {
+
+            Log.v("error callback", e.getMessage().toString());
         }
     }
 
     @Override
     public void onError(String s) {
+
+        ///' modalOtp();
+        //  Toast.makeText(getContext(), "resendCodeEmail", Toast.LENGTH_SHORT).show();
         try {
-            if(s.equals(EnumVaribles.sinUp.toString())){
+            if (s.equals(EnumVaribles.sinUp.toString())) {
                 modalOtp();
             }
 
-            if(s.equals(EnumVaribles.confirmCode.toString())){
+            if (s.equals(EnumVaribles.confirmCode.toString())) {
                 Toast.makeText(getContext(), "error tu correo", Toast.LENGTH_SHORT).show();
             }
 
-            if(s.equals("resendCodeEmail")){
+            if (s.equals("resendCodeEmail")) {
                 Toast.makeText(getContext(), "resendCodeEmail", Toast.LENGTH_SHORT).show();
             }
 
-        }catch (Exception e){
-            Log.v("error callback",e.getMessage().toString());
+        } catch (Exception e) {
+            Log.v("error callback", e.getMessage().toString());
         }
     }
 
@@ -501,29 +501,24 @@ public class Register3Fragment extends Fragment implements Callfun {
         });
 
 
-
-
     }
 
     public void validateDataForm() {
         txt_pin = binding.txtPin.getText().toString();
         //txtFirstName = binding.txtFirstName.getText().toString();
 
-        if(controlParental){
-            if(txt_pin.isEmpty()){
+        if (controlParental) {
+            if (txt_pin.isEmpty()) {
                 binding.btnFinish.setBackgroundResource(R.drawable.ic_btn_inactivo);
                 Toast.makeText(getContext(), getString(R.string.all_fields_are_required), Toast.LENGTH_SHORT).show();
                 return;
             }
 
         }
-        if(terminosCondiciones  && politicaPrivacidad){
+        if (terminosCondiciones && politicaPrivacidad) {
             binding.btnFinish.setClickable(true);
             binding.btnFinish.setBackgroundResource(R.drawable.ic_btn_activo);
         }
 
     }
-
-
-
 }

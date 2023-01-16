@@ -27,6 +27,11 @@ public enum EnumVaribles {
         public String toString() {
             return "signAuth";
         }
+    },
+    confirmSigUp {
+        public String toString() {
+            return "confirmSigUp";
+        }
     }
 
 

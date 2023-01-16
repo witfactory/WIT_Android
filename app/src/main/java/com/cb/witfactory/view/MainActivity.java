@@ -57,7 +57,7 @@ public class MainActivity extends Activity implements Callfun {
         amplifyCognito = new AmplifyCognito(getApplicationContext());
         amplifyCognito.setListener(MainActivity.this);
 
-        amplifyCognito.validarAuth();
+
 
         //lenguage
         if (locale.equals(null) || locale.equals("")) {
@@ -112,6 +112,8 @@ public class MainActivity extends Activity implements Callfun {
         });
 
         binding.imgLogo.startAnimation(hold);
+
+        amplifyCognito.validarAuth();
 
     }
 
