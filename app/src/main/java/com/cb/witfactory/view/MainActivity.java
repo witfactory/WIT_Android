@@ -23,9 +23,6 @@ import com.cb.witfactory.data.classModel.Utils;
 import com.cb.witfactory.databinding.ActivityMainBinding;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.LocaleHelper;
-import com.cb.witfactory.ui.register.Register3Fragment;
-
-import okhttp3.internal.Util;
 
 public class MainActivity extends Activity implements Callfun {
 
@@ -113,7 +110,8 @@ public class MainActivity extends Activity implements Callfun {
 
         binding.imgLogo.startAnimation(hold);
 
-        amplifyCognito.validarAuth();
+
+      amplifyCognito.validarAuth();
 
     }
 

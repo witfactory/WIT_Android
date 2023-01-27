@@ -207,6 +207,7 @@
     <string name="invalid_email_or_password">Invalid email or password</string>
     <string name="the_password_must">The password must have at least nine digits, one uppercase, lowercase, numbers, and one character.</string>
     <string name="write_message">Write a message</string>
+    <string name="recover_account">Recover account</string>
 
 
 </resources>

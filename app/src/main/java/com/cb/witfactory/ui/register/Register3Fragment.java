@@ -33,6 +33,7 @@ import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.EnumVaribles;
 import com.cb.witfactory.model.PreferencesHelper;
 import com.cb.witfactory.ui.verificar_cuenta.VerificaTuCuentaFragment;
+import com.cb.witfactory.view.MainActivity;
 
 public class Register3Fragment extends Fragment implements Callfun {
 
@@ -60,6 +61,8 @@ public class Register3Fragment extends Fragment implements Callfun {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+
 
         binding = Register3FragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

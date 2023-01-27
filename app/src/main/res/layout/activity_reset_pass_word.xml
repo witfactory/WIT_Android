@@ -4,8 +4,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -36,7 +35,7 @@
                         android:text="@string/text_spanish"
                         android:textColor="@color/white" />
 
-                    <Space
+                    <androidx.legacy.widget.Space
                         android:layout_width="@dimen/sp5"
                         android:layout_height="wrap_content" />
 
@@ -50,9 +49,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/sp60"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/sp30"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -60,7 +58,7 @@
                         android:layout_width="@dimen/sp90"
                         android:layout_height="@dimen/sp90"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_logo_wit" />
+                        android:background="@drawable/ic_logo" />
                 </LinearLayout>
 
 
@@ -73,7 +71,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@string/txt_Log_in"
+                        android:text="@string/recover_account"
                         android:textColor="@color/background"
                         android:textSize="@dimen/sp20" />
 
@@ -110,7 +108,7 @@
                             android:id="@+id/btn_sign_up"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/sp10"
+                            android:layout_marginTop="@dimen/sp100"
                             android:background="@drawable/ic_btn_inactivo"
                             android:text="@string/send_information"
                             android:textColor="@color/white"

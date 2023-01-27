@@ -101,7 +101,7 @@ public class WitMenu extends AppCompatActivity implements Callfun {
                 }
                 if (id == R.id.menu_logoff) {
                     Toast.makeText(getApplicationContext(), getString(R.string.text_logout), Toast.LENGTH_LONG).show();
-                    amplifyCognito.logOut(getApplicationContext());
+                    amplifyCognito.logoutAmplify(getApplicationContext());
                     return true;
                 }
 

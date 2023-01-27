@@ -11,6 +11,10 @@ import com.amazonaws.mobile.client.results.UserCodeDeliveryDetails;
 import com.amplifyframework.auth.AuthUserAttribute;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession;
+import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult;
+import com.amplifyframework.auth.cognito.result.GlobalSignOutError;
+import com.amplifyframework.auth.cognito.result.HostedUIError;
+import com.amplifyframework.auth.cognito.result.RevokeTokenError;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Action;
 import com.amplifyframework.core.Amplify;
@@ -43,46 +47,39 @@ public class AmplifyCognito {
     //registro
     public Boolean sinUp(String first_name, String user, String last_name, String country, String city,
                          String zip_code, String address, String account_type, String telephone, String user_principal, String password) {
-        final String username = "xitatak493@webonoid.com";
-        final String _password = "T@pi@231290.";
-        final Map<String, String> attributes = new HashMap<>();
-        attributes.put("first_name", "maria luisa");
-        attributes.put("user", "xitatak493@webonoid.com");
-        attributes.put("last_name", "Lopez Perez");
-        attributes.put("country", "Colombia");
-        attributes.put("city", "Manizales");
-        attributes.put("zip_code", "170007");
-        attributes.put("address", "Cr 19 # 25-28");
-        attributes.put("account_type", "P");
-        attributes.put("telephone", "3196381721");
-        attributes.put("user_principal", "");
-        attributes.put("suite", "test");
-        attributes.put("device_id", "new");
-        attributes.put("appos", "new");
-        AWSMobileClient.getInstance().signUp(username, _password, attributes, null, new Callback<SignUpResult>() {
-            @Override
-            public void onResult(final SignUpResult signUpResult) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.d("ie", "Sign-up callback state: " + signUpResult.getConfirmationState());
-                        if (!signUpResult.getConfirmationState()) {
-                            final UserCodeDeliveryDetails details = signUpResult.getUserCodeDeliveryDetails();
-                           // makeToast("Confirm sign-up with: " + details.getDestination());
-                            Log.v("daTA", details.getDestination().toString());
-                        } else {
-                          //  makeToast("Sign-up done.");
-                            Log.v("daTA","Sign-up done.");
-                        }
-                    }
-                });
-            }
+        AuthSignUpOptions options = AuthSignUpOptions.builder()
+                .userAttribute(AuthUserAttributeKey.custom("custom:first_name"), first_name)
+                .userAttribute(AuthUserAttributeKey.custom("custom:user"), user)
+                .userAttribute(AuthUserAttributeKey.custom("custom:last_name"), last_name)
+                .userAttribute(AuthUserAttributeKey.custom("custom:country"), country)
+                .userAttribute(AuthUserAttributeKey.custom("custom:city"), city)
+                .userAttribute(AuthUserAttributeKey.custom("custom:zip_code"), zip_code)
+                .userAttribute(AuthUserAttributeKey.custom("custom:address"), address)
+                .userAttribute(AuthUserAttributeKey.custom("custom:account_type"), "P")
+                .userAttribute(AuthUserAttributeKey.custom("custom:telephone"), "3104208010")
+                .userAttribute(AuthUserAttributeKey.custom("custom:user_principal"), "PRINCIPAL123")
+                .build();
 
-            @Override
-            public void onError(Exception e) {
-                Log.e("TAG", "Sign-up error", e);
-            }
-        });
+
+        Amplify.Auth.signUp(
+                user,
+                password,
+                options,
+                result ->
+                {
+                    authSignUpResult = result.isSignUpComplete();
+                    Log.i("AuthQuickstart", result.toString());
+                    String sinUp = EnumVaribles.sinUp.toString();
+                    listener.onSuccess(sinUp);
+
+                },
+                error -> {
+                    Log.e("AuthQuickstart", error.toString());
+                    String sinUp = EnumVaribles.sinUp.toString();
+                    listener.onError(sinUp);
+                }
+        );
+
         return authSignUpResult;
     }
 
@@ -122,12 +119,11 @@ public class AmplifyCognito {
     }
 
 
-
-    public void confirmSigUp(String code, String emailUserName){
+    public void confirmSigUp(String code, String emailUserName) {
         try {
-         //   AuthUserAttributeKey email = AuthUserAttributeKey.email();
+            //   AuthUserAttributeKey email = AuthUserAttributeKey.email();
             Amplify.Auth.confirmSignUp(
-                    "woteme7765@tohup.com",
+                    emailUserName,
                     code,
                     result ->
                     {
@@ -155,7 +151,7 @@ public class AmplifyCognito {
                 email,
                 password,
                 result -> {
-                    Log.i("AuthQuickstart", result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
+                    Log.i("AuthQuickstart", result.isSignedIn() ? "Sign in succeeded" : "Sign in not complete");
                     String token = result.getClass().getName();
                     String sinUp = EnumVaribles.signIn.toString();
                     listener.onSuccess(sinUp);
@@ -178,49 +174,102 @@ public class AmplifyCognito {
                     Boolean estateSession = result.isSignedIn();
 
 
-                    if(estateSession){
+                    if (estateSession) {
 
-                        String name = Amplify.Auth.getCurrentUser().getUsername();
-                        String idAmplify = Amplify.Auth.getCurrentUser().getUserId();
 
                         preferencesHelper = new PreferencesHelper(mContext);
-                        PreferencesHelper.setUser("user", name.toString());
-                        PreferencesHelper.setEmail("email", name.toString());
-
+                        //  PreferencesHelper.setUser("user", name.toString());
 
                         AWSCognitoAuthSession cognitoAuthSession = (AWSCognitoAuthSession) result;
-                        String token = cognitoAuthSession.getUserPoolTokens().getValue().getIdToken();
-                        String accesToken = cognitoAuthSession.getUserPoolTokens().getValue().getAccessToken();
-                        String refreshToken = cognitoAuthSession.getUserPoolTokens().getValue().getRefreshToken();
+                        String token = cognitoAuthSession.getUserPoolTokensResult().getValue().getIdToken();
+                     //   String token = cognitoAuthSession.getUserPoolTokens().getValue().getIdToken();
+                       // String accesToken = cognitoAuthSession.getUserPoolTokens().getValue().getAccessToken();
+                        //String refreshToken = cognitoAuthSession.getUserPoolTokens().getValue().getRefreshToken();
 
-                        Log.v("token con session activa--> ${session.userPoolTokensResult.value?.idToken}",cognitoAuthSession.getUserPoolTokens().getValue().getIdToken());
-                        Log.v("token con session activa acces-2.1--> ${session.userPoolTokensResult.value?.accessToken}",cognitoAuthSession.getUserPoolTokens().getValue().getAccessToken());
+                        Log.v("token con session activa--> ${session.userPoolTokensResult.value?.idToken}", cognitoAuthSession.getUserPoolTokensResult().getValue().getIdToken());
+                        Log.v("token con session activa acces-2.1--> ${session.userPoolTokensResult.value?.accessToken}", cognitoAuthSession.getUserPoolTokensResult().getValue().getAccessToken());
 
                     }
-
 
 
                     listener.onSuccess(estateSession.toString());
                 },
                 error -> {
                     Log.e("AmplifyQuickstart", error.toString());
-                    listener.onSuccess("fetchAuthSessionError");
+                    listener.onError("fetchAuthSessionError");
+                }
+        );
+    }
+
+    public void resetPassword(String emailUserName){
+        Amplify.Auth.resetPassword(emailUserName,
+                result->{
+                    Log.i("AuthQuickstart", "New password confirmed");
+                    listener.onSuccess("ok");
+                }, error->{
+                    Log.e("AuthQuickstart", error.toString());
+                    listener.onError("error");
+                });
+    }
+
+
+    public void confirmResetPassword( String emailUserName,String password,String code){
+        Amplify.Auth.confirmResetPassword(
+                emailUserName,
+                password,
+                code,
+                () ->{
+                    Log.i("AuthQuickstart", "New password confirmed");
+                    listener.onSuccess("ok");
+                },
+                error ->{
+                    Log.e("AuthQuickstart", error.toString());
+                    listener.onError("errror");
                 }
         );
     }
 
 
-    public void logOut(Context context) {
+    public void logoutAmplify(Context context){
+        Amplify.Auth.signOut( signOutResult -> {
+            if (signOutResult instanceof AWSCognitoAuthSignOutResult.CompleteSignOut) {
+                // Sign Out completed fully and without errors.
+                Log.i("AuthQuickStart", "Signed out successfully");
+                listener.onSuccess("ok");
+            } else if (signOutResult instanceof AWSCognitoAuthSignOutResult.PartialSignOut) {
+                // Sign Out completed with some errors. User is signed out of the device.
+                AWSCognitoAuthSignOutResult.PartialSignOut partialSignOutResult =
+                        (AWSCognitoAuthSignOutResult.PartialSignOut) signOutResult;
+                listener.onSuccess("ok");
 
-        Amplify.Auth.signOut(new Action() {
-                                 @Override
-                                 public void call() {
-                                   Utils.goToLoginRegister(context);
-                                 }
-                             },
-                error -> {
-                    Log.e("", "Error");
-                });
+                HostedUIError hostedUIError = partialSignOutResult.getHostedUIError();
+                if (hostedUIError != null) {
+                    Log.e("AuthQuickStart", "HostedUI Error", hostedUIError.getException());
+                    // Optional: Re-launch hostedUIError.getUrl() in a Custom tab to clear Cognito web session.
+                    listener.onError("error");
+                }
+
+                GlobalSignOutError globalSignOutError = partialSignOutResult.getGlobalSignOutError();
+                if (globalSignOutError != null) {
+                    Log.e("AuthQuickStart", "GlobalSignOut Error", globalSignOutError.getException());
+                    // Optional: Use escape hatch to retry revocation of globalSignOutError.getAccessToken().
+                    listener.onError("error");
+                }
+
+                RevokeTokenError revokeTokenError = partialSignOutResult.getRevokeTokenError();
+                if (revokeTokenError != null) {
+                    Log.e("AuthQuickStart", "RevokeToken Error", revokeTokenError.getException());
+                    // Optional: Use escape hatch to retry revocation of revokeTokenError.getRefreshToken().
+                    listener.onError("error");
+                }
+            } else if (signOutResult instanceof AWSCognitoAuthSignOutResult.FailedSignOut) {
+                AWSCognitoAuthSignOutResult.FailedSignOut failedSignOutResult =
+                        (AWSCognitoAuthSignOutResult.FailedSignOut) signOutResult;
+                // Sign Out failed with an exception, leaving the user signed in.
+                Log.e("AuthQuickStart", "Sign out Failed", failedSignOutResult.getException());
+                listener.onError("error");
+            }
+        });
     }
 
     //https://www.youtube.com/watch?v=B4HjPRA4A8k&list=PLrAF24Xspn3WsVBl4AwmpdMl5g-kHw2Zu
