@@ -25,6 +25,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.AmplifyCognito;
@@ -43,11 +45,6 @@ public class Register3Fragment extends Fragment implements Callfun {
     AmplifyCognito amplifyCognito = null;
     Boolean resulRegiter = false;
 
-
-    Register2Fragment registerFragment;
-    VerificaTuCuentaFragment verificaTuCuentaFragment;
-    FragmentManager fragmentManager = null;
-    FragmentTransaction fragmentTransaction;
     Animation animation = null;
     String txt_pin;
     Boolean controlParental = false, terminosCondiciones = false, politicaPrivacidad = false;
@@ -63,7 +60,6 @@ public class Register3Fragment extends Fragment implements Callfun {
                              @Nullable Bundle savedInstanceState) {
 
 
-
         binding = Register3FragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -76,10 +72,10 @@ public class Register3Fragment extends Fragment implements Callfun {
         binding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registerFragment = new Register2Fragment();
-                fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.add(R.id.registro, registerFragment).commit();
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_registro);
+                navController.navigateUp();
+                navController.navigate(R.id.nenu_register2);
+
             }
         });
 

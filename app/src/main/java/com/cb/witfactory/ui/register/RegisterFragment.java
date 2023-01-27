@@ -16,6 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.Utils;
@@ -28,9 +31,6 @@ public class RegisterFragment extends Fragment {
     private RegisterFragmentBinding binding;
     private PreferencesHelper preferencesHelper;
 
-    Register2Fragment registerFragment;
-    FragmentManager fragmentManager = null;
-    FragmentTransaction fragmentTransaction;
 
     String txtUser="", txtEmail="", txtPin="", txtComfirmPin="";
 
@@ -153,10 +153,14 @@ public class RegisterFragment extends Fragment {
                         PreferencesHelper.setEmail("email", txtEmail.toString());
                         PreferencesHelper.setPassword("password", txtPin.toString());
 
-                        registerFragment = new Register2Fragment();
-                        fragmentManager = getActivity().getSupportFragmentManager();
-                        fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.add(R.id.registro, registerFragment).commit();
+
+                        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_registro);
+                        navController.navigateUp();
+                        navController.navigate(R.id.nenu_register2);
+
+
+
+
                     }
                 }
             }

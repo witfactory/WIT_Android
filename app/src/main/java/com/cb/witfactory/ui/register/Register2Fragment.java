@@ -17,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.databinding.Register2FragmentBinding;
@@ -40,10 +42,6 @@ public class Register2Fragment extends Fragment {
     private Register2FragmentBinding binding;
 
 
-    RegisterFragment registerFragment;
-    Register3Fragment registerFragment3;
-    FragmentManager fragmentManager = null;
-    FragmentTransaction fragmentTransaction;
     List<String> listCountry = new ArrayList<String>();
     List<Country> listObjCountry = new ArrayList<Country>();
     List<String> listCity = new ArrayList<String>();
@@ -236,10 +234,10 @@ public class Register2Fragment extends Fragment {
                     PreferencesHelper.setZipCode("zip_code", txtZipCode.toString());
                     PreferencesHelper.setTelephone("telephone", txtCellPhone.toString());
 
-                    registerFragment3 = new Register3Fragment();
-                    fragmentManager = getActivity().getSupportFragmentManager();
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.add(R.id.registro, registerFragment3).commit();
+                    NavController navController = Navigation.findNavController(getActivity(), R.id.nav_registro);
+                    navController.navigateUp();
+                    navController.navigate(R.id.nenu_register3);
+
                 } else {
                     Toast.makeText(getContext(), getString(R.string.all_fields_are_required), Toast.LENGTH_SHORT).show();
                 }
@@ -252,21 +250,9 @@ public class Register2Fragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if (!txtFirstName.isEmpty() && !txtCountry.isEmpty() && !txtCity.isEmpty() && !txtAddress.isEmpty() && !txtZipCode.isEmpty() && !txtCellPhone.isEmpty()) {
-
-                    PreferencesHelper.setUser("firstName", txtFirstName.toString());
-                    PreferencesHelper.setEmail("country", txtCountry.toString());
-                    PreferencesHelper.setPassword("city", txtCity.toString());
-                    PreferencesHelper.setPassword("address", txtAddress.toString());
-                    PreferencesHelper.setPassword("zipCode", txtZipCode.toString());
-                    PreferencesHelper.setPassword("cellPhone", txtCellPhone.toString());
-
-
-                    registerFragment = new RegisterFragment();
-                    fragmentManager = getActivity().getSupportFragmentManager();
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.add(R.id.registro, registerFragment).commit();
-                }
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_registro);
+                navController.navigateUp();
+                navController.navigate(R.id.nenu_register);
             }
         });
 

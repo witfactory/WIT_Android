@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.databinding.ActivityRegistroBinding;
@@ -16,9 +19,6 @@ public class RegistroActivity extends AppCompatActivity {
 
     private ActivityRegistroBinding binding;
 
-    RegisterFragment registerFragment;
-    FragmentManager fragmentManager = null;
-    FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +29,16 @@ public class RegistroActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_registro);
 
 
-        registerFragment = new RegisterFragment();
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.registro, registerFragment).commit();
+        NavController navController = Navigation.findNavController(this, R.id.nav_registro);
+        navController.navigateUp();
+        navController.navigate(R.id.nenu_register);
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
