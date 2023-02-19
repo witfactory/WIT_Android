@@ -4,9 +4,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -25,10 +28,12 @@ public class ResetPassWordActivity extends AppCompatActivity implements Callfun 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_reset_pass_word);
+
 
         amplifyCognito = new AmplifyCognito(getApplicationContext());
         amplifyCognito.setListener(ResetPassWordActivity.this);
@@ -87,15 +92,31 @@ public class ResetPassWordActivity extends AppCompatActivity implements Callfun 
 
     @Override
     public void onSuccess(String s) {
-      //  FragmentManager fragmentManager = getSupportFragmentManager();
+        runOnUiThread(new Runnable() {
 
-        DialogResetPassword dialogFragment = new DialogResetPassword();
-        dialogFragment.setStyle(DialogFragment.STYLE_NO_FRAME, 0);
-        dialogFragment.show(getSupportFragmentManager(),"dialogo_reset_password");
+            @Override
+            public void run() {
+                DialogResetPassword dialogFragment = new DialogResetPassword();
+                dialogFragment.setStyle(DialogFragment.STYLE_NO_FRAME, 0);
+                dialogFragment.show(getSupportFragmentManager(),"dialogo_reset_password");
+            }
+        });
+
+
     }
 
     @Override
     public void onError(String s) {
+
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                Log.v("error", s.toString());
+                Toast.makeText(getApplicationContext(), getString(R.string.invalid_email), Toast.LENGTH_SHORT).show();
+                //amplifyCognito.resendCode();
+            }
+        });
 
     }
 }

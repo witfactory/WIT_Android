@@ -50,17 +50,17 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/sp60"
+                    android:layout_height="@dimen/sp150"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/sp30"
                     android:gravity="center"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="@dimen/sp90"
-                        android:layout_height="@dimen/sp90"
+                        android:layout_width="@dimen/sp150"
+                        android:layout_height="@dimen/sp150"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_logo_wit" />
+                        android:src="@drawable/ic_logo" />
                 </LinearLayout>
 
 
@@ -137,17 +137,18 @@
                                 android:gravity="center|left"
                                 android:orientation="horizontal">
 
+                                <com.google.android.material.switchmaterial.SwitchMaterial
+                                    style="@style/SwitchButtonStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="false" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/save_session_data"
                                     android:textColor="@color/background" />
 
-                                <com.google.android.material.switchmaterial.SwitchMaterial
-                                    style="@style/SwitchButtonStyle"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="false" />
+
 
                             </LinearLayout>
 
@@ -157,7 +158,8 @@
                                 android:layout_gravity="center"
                                 android:layout_weight="2"
                                 android:gravity="center|right"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="wrap_content"

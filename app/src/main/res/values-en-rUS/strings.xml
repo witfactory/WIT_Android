@@ -208,6 +208,9 @@
     <string name="the_password_must">The password must have at least nine digits, one uppercase, lowercase, numbers, and one character.</string>
     <string name="write_message">Write a message</string>
     <string name="recover_account">Recover account</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="invalid_password">Invalid password</string>
+
 
 
 </resources>

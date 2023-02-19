@@ -4,113 +4,111 @@
 
     <!--mrnu login-->
     <string name="menu_soporte">Soporte</string>
-    <string name="menu_ayuda">Ayuda</string>
-    <string name="menu_glosario">Glosario</string>
-    <string name="menu_politica">Polírtica</string>
-    <string name="menu_services">Servicios</string>
-    <string name="menu_add_user">Añadir Usuario</string>
-    <string name="menu_log_off">cerrar sesión</string>
+    <string name="menu_ayuda">Help</string>
+    <string name="menu_glosario">Glossary</string>
+    <string name="menu_politica">politics</string>
+    <string name="menu_services">Service</string>
+    <string name="menu_add_user">Add User</string>
+    <string name="menu_log_off">Log Off</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Configuración</string>
-    <string name="sinInternet">Sin Internet</string>
-    <string name="sinInternetDescripcion">Sin Conexión a Internet</string>
-    <string name="ingresoFallido"><b>Ingreso fallido</b></string>
-    <string name="ingresoFallidoDescrip">Tus datos no parecen estar correctos. Revisa tus datos y/o
-        tu acceso a Internet</string>
-    <string name="registrarse">Registarse</string>
-    <string name="recuperear_contraseña">Recuperar Contraseña</string>
-    <string name="silenciar">Silenciar</string>
-    <string name="valvula">Valvula</string>
-    <string name="direccion">Dirección</string>
-    <string name="codigo">Código</string>
-    <string name="pais">País</string>
-    <string name="ciudad">Ciudad</string>
+    <string name="action_settings">Settings</string>
+    <string name="sinInternet">Without Internet</string>
+    <string name="sinInternetDescripcion">No internet connection</string>
+    <string name="ingresoFallido"><b>Failed login</b></string>
+    <string name="ingresoFallidoDescrip">Your data does not seem to be correct. Check your data and/or
+        your internet access</string>
+    <string name="registrarse">Check in</string>
+    <string name="recuperear_contraseña">Recover password</string>
+    <string name="silenciar">Mute</string>
+    <string name="valvula">Valve</string>
+    <string name="direccion">Direction</string>
+    <string name="codigo">Code</string>
+    <string name="pais">Country</string>
+    <string name="ciudad">Town</string>
     <string name="title_activity_menu">MenuActivity</string>
 
-    <string name="text_validating_information">Validando la información...</string>
-    <string name="text_without_internet">Sin internet</string>
-    <string name="text_retry">Reintentar</string>
+    <string name="text_validating_information">Validating the information...</string>
+    <string name="text_without_internet">Without Internet</string>
+    <string name="text_retry">retry</string>
 
-    <string name="register">REGISTRO</string>
-    <string name="login_email_hint">CORREO</string>
-    <string name="login_password_hint">CONTRASEÑA</string>
-    <string name="signup_login_hint">¿Ya tienes una cuenta? Registrarse</string>
-    <string name="login_signup_hint">¿No tienes una cuenta? Inscribirse</string>
+    <string name="register">REGISTER</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="signup_login_hint">Already have an account? Sign In</string>
+    <string name="login_signup_hint">Don\'t have an account? Sign Up</string>
 
-
-    <string name="menu_login">Acceso</string>
-    <string name="menu_home">Inicio</string>
-    <string name="menu_perfil">Perfil</string>
-    <string name="menu_activity">Activivdad</string>
-    <string name="menu_gallery">Datos</string>
-    <string name="menu_slideshow">Grafica</string>
-    <string name="text_umbrales">Umbrales</string>
-    <string name="text_alarm">Alarmas</string>
-    <string name="text_soporte">Ayuda y Soporte</string>
-    <string name="text_glossary">Glosario</string>
-    <string name="text_register">Registro</string>
-    <string name="text_logout">Cerrar Sessión</string>
+    <string name="menu_login">Login</string>
+    <string name="menu_home">WIT</string>
+    <string name="menu_perfil">Profile</string>
+    <string name="menu_activity">Activity</string>
+    <string name="menu_gallery">Data</string>
+    <string name="menu_slideshow">Graph</string>
+    <string name="text_umbrales">thresholds</string>
+    <string name="text_alarm">alarms</string>
+    <string name="text_soporte">support</string>
+    <string name="text_glossary">Glossary</string>
+    <string name="text_register">Register</string>
+    <string name="text_logout">Sign off</string>
 
     <!--http://104.156.229.154:3085/api/v1/dat-->
 
-    <string name="txt_to_start">Para comenzar, por favor \n ingresa <b>tu número celular.</b></string>
-    <string name="cell_phone_number">NÚMERO CELULAR</string>
-    <string name="account_data">DATOS DE CUENTA</string>
-    <string name="what_are_your_data"><b>¿CUÁLES SON TUS DATOS?</b></string>
-    <string name="now_we_need_to_know">Ahora necesitamos saber algunos datos tuyos</string>
-    <string name="identification_document">Documento de identidad</string>
-    <string name="document_type">Tipo de documento</string>
-    <string name="document_number">Número de documento</string>
-    <string name="document_issue_date">Fecha de expedición del documento</string>
-    <string name="date_birth">Fecha de nacimiento</string>
-    <string name="gender">Genero</string>
-    <string name="set_up_your_account"><b>Configura tu cuenta</b></string>
-    <string name="email">Correo electrónico</string>
-    <string name="confirm_email">Confirmar correo electrónico</string>
-    <string name="security_pin">Contraseña</string>
-    <string name="confirm_security_pin">Confirmar Contraseña</string>
-    <string name="next">SIGUIENTE</string>
+    <string name="txt_to_start">To start please \n enter <b>your cell number.</b></string>
+    <string name="cell_phone_number">CELL PHONE NUMBER</string>
+    <string name="account_data">ACCOUNT DATA</string>
+    <string name="what_are_your_data"><b>WHAT ARE YOUR DATA?</b></string>
+    <string name="now_we_need_to_know">Now we need to know some information about you</string>
+    <string name="identification_document">Identification document</string>
+    <string name="document_type">Document type</string>
+    <string name="document_number">Document number</string>
+    <string name="document_issue_date">Document issue date</string>
+    <string name="date_birth">Date of birth</string>
+    <string name="gender">Gender</string>
+    <string name="set_up_your_account"><b>Set up your account</b></string>
+    <string name="email">Email</string>
+    <string name="confirm_email">Confirm Email</string>
+    <string name="security_pin">Password</string>
+    <string name="confirm_security_pin">Confirm password</string>
+    <string name="next">NEXT</string>
     <string name="hint_cell_phone_number">( X X X - X X X X X X )</string>
-    <string name="txt_Welcome">Bienvenidos</string>
-    <string name="txt_Wit">WIT</string>
-    <string name="txt_Log_in">Iniciar sesión</string>
-    <string name="txt_name_user">Nombre de  usuario</string>
-    <string name="save_session_data">Guardar datos de sesión</string>
-    <string name="set_face_id">Establezca Face ID</string>
-    <string name="i_forgot_my_data">Olvidé mis datos</string>
-    <string name="text_register_user">Registro de Usuario</string>
-    <string name="text_spanish">Español</string>
-    <string name="text_english">Ingles</string>
-    <string name="text_name_and_last_name">Nombres y apellidos</string>
-    <string name="text_code_postcard">Cod. Postal</string>
-    <string name="text_to_return">Regresar</string>
-    <string name="text_set_the_language">Configurar el idioma</string>
-    <string name="text_activate_child_safety">Activar seguro \n infantil</string>
+    <string name="txt_Welcome">Welcome</string>
+    <string name="txt_Wit"> WIT</string>
+    <string name="txt_Log_in">Log in</string>
+    <string name="txt_name_user">Name User</string>
+    <string name="save_session_data">Save session data</string>
+    <string name="set_face_id">Set FaceID</string>
+    <string name="i_forgot_my_data">I forgot my data</string>
+    <string name="text_register_user">Register User</string>
+    <string name="text_spanish">Spanish</string>
+    <string name="text_english">English</string>
+    <string name="text_name_and_last_name">Names and surnames</string>
+    <string name="text_code_postcard">Cod. Postcard</string>
+    <string name="text_to_return">Return</string>
+    <string name="text_set_the_language">Set the language</string>
+    <string name="text_activate_child_safety">Activate child \n safety</string>
     <string name="text_asterisks">****</string>
-    <string name="txt_child_insurance">NOTA: Si tiene niños en casa, puede activar el Seguro Infantil y crear un pin de seguridad de 4 dígitos para su aplicación WIT.</string>
-    <string name="txt_terms_and_conditions">Acepto los términos y condiciones de uso de la aplicación WIT.</string>
-    <string name="txt_privacy_policies">Acepto la Política de Privacidad de los datos establecida por WIT.</string>
-    <string name="txtto_finalize">Finalizar</string>
-    <string name="phone_number">Númer telefónico</string>
-    <string name="txt_validation_mail" translatable="false">Hemosenviado un código a tu correo \n electrónico, <b>verifica tu cuenta</b> y disfruta de las bondades de WIT</string>
-    <string name="send_information">Enviar Información</string>
-    <string name="write_your_email_correctly">Asegúrese de <b>escribir correctamente</b> su correo. Enviaremos la información que necesita para recuperar su cuenta.</string>
+    <string name="txt_child_insurance">NOTE: If you have children at home, you can activate Child Lock and create a 4-digit security pin for your WIT app.</string>
+    <string name="txt_terms_and_conditions">I accept the terms and conditions of use of the WIT application.</string>
+    <string name="txt_privacy_policies">I accept the Data Privacy Policy established by WIT.</string>
+    <string name="txtto_finalize">Finalize</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="txt_validation_mail">We have sent a code to your email n, <b>verify your account</b> and enjoy the benefits of WIT</string>
+    <string name="send_information">Send Information</string>
+    <string name="write_your_email_correctly">Make <b>sure you </b>type your email correctly. We will send the information you need to recover your account</string>
+    <string name="connect_dispositive">Connect</string>
+    <string name="txt_dispositive">Dispositive</string>
 
-    <string name="connect_dispositive">Conectar</string>
-    <string name="txt_dispositive">Dispositivo</string>
-
-
-    <string name="txt_connect_device">Conectar dispositivo</string>
-    <string name="txt_be_sure_to_keep_your_wi_fi_network_connected">Asegúrese de mantener conectada su red Wi-fi y siga cuidadosamente las <font color="#23ADC6"> instrucciones de conexión.</font></string>
+    <string name="txt_connect_device">Connect device</string>
+    <string name="txt_be_sure_to_keep_your_wi_fi_network_connected" tools:ignore="DuplicateDefinition">Be sure to keep your Wi-Fi network connected and carefully follow the <font color="#23ADC6"> connection instructions.</font></string>
     <string name="txt_Product">Producto</string>
-    <string name="txt_solenoid_valve">Electroválvula</string>
-    <string name="txt_device_name">Nombre del dispositivo</string>
+    <string name="txt_solenoid_valve">Solenoid valve</string>
+    <string name="txt_device_name">Device name</string>
     <string name="wifi">wifi</string>
-    <string name="txt_wifi_password">Contraseña Wifi</string>
+    <string name="txt_wifi_password">Wifi Password</string>
+
 
 
     <!--esptouch-->
@@ -163,54 +161,54 @@
     <string name="esptouch2_provisioning_result_bssid">BSSID: %1$s</string>
     <string name="esptouch2_provisioning_result_address">Address: %1$s</string>
     <!---->
-    <string name="text_welcome_user"><b><font color="#C4C4C4">Bienvenido,</font></b></string>
-    <string name="text_welcome_uno">Una vez que conecte sus dispositivos WIT, podrá controlarlos dondequiera que se encuentre.</string>
-    <string name="text_welcome_dos"><b><font color="#4D6677">PASO 1. </font></b>Encienda su red Wi-Fi.</string>
-    <string name="text_welcome_tres"><b><font color="#4D6677">PASO 2. </font></b>Seleccione el botón  que aparece en la parte superior de la pantalla.</string>
-    <string name="text_welcome_cuatro"><b><font color="#4D6677">PASO 3. </font></b>Etiquete sus dispositivos en el proceso de registro.</string>
-    <string name="text_how_to_connect_it" tools:ignore="ExtraTranslation"><b><font color="#4D6677">¿cómo conectarlo?</font></b></string>
-    <string name="text_my_devices" tools:ignore="ExtraTranslation"><font color="#4D6677">Mis dispositivos</font></string>
+    <string name="text_welcome_user"><b><font color="#C4C4C4">Welcome,</font></b></string>
+    <string name="text_welcome_uno">Once you connect your WIT devices, you can control them wherever you are.</string>
+    <string name="text_welcome_dos"><b><font color="#4D6677">STEP 1. </font></b>Turn on your Wi-Fi network.</string>
+    <string name="text_welcome_tres"><b><font color="#4D6677">STEP 2. </font></b>Select the button that appears at the top of the screen.</string>
+    <string name="text_welcome_cuatro"><b><font color="#4D6677">STEP 3. </font></b>Tag your devices in the registration process.</string>
+    <string name="text_how_to_connect_it" tools:ignore="ExtraTranslation"><b><font color="#4D6677">¿How to connect it?</font></b></string>
+    <string name="text_my_devices" tools:ignore="ExtraTranslation"><font color="#4D6677">My Devices</font></string>
 
 
-
-    <string name="text_perfil_config">Configurar perfil</string>
-    <string name="text_name_lastname"><b><font color="#4D6677">Nombre Apellido</font></b></string>
-    <string name="text_hint_name_user"> Nombre de usuario</string>
+    <string name="text_perfil_config">Configure profile</string>
+    <string name="text_name_lastname"><b><font color="#4D6677">First Name Surname</font></b></string>
+    <string name="text_hint_name_user"> Username</string>
     <string name="text_name_user"> UserName001</string>
-    <string name="text_mail_user"> Correo Electrónico</string>
+    <string name="text_mail_user"> Email</string>
     <string name="text_mail_example"> example@gmail.com</string>
-    <string name="text_addres_example"> País, Ciudad, Dirección</string>
-    <string name="text_number_phone"> Número de teléfono</string>
+    <string name="text_addres_example"> Country, City, Address</string>
+    <string name="text_number_phone"> Phone Number</string>
     <string name="text_number_phone_example"> +00 000 00 00</string>
     <string name="text_pin_example"> ***********</string>
-    <string name="text_language"> Idioma</string>
+    <string name="text_language"> language</string>
     <string name="text_language_example"> Ingles</string>
-    <string name="text_edit">Editar</string>
-    <string name="text_divice">Dispositivo</string>
+    <string name="text_edit">Edit</string>
+    <string name="text_divice">Device</string>
     <string name="text_divice_example">Garaje</string>
     <string name="text_divice_adapter"><b><font color="#4D6677">Air Quality is good</font></b></string>
-    <string name="text_humidity_relative">Humedad relativa</string>
+    <string name="text_humidity_relative">Relative humidity</string>
     <string name="text_percentage"><b><font color="#4D6677">47%</font></b></string>
-    <string name="text_search_device">Buscar dispositivos</string>
-
-
+    <string name="text_search_device">Find devices</string>
 
     <string name="txt_invalide_email_password" tools:ignore="ExtraTranslation">Incorrect email or password</string>
     <string name="btn_acept" tools:ignore="ExtraTranslation">Acept</string>
     <string name="btn_cancel" tools:ignore="ExtraTranslation">Cancel</string>
     <string name="txt_code_verificaction" tools:ignore="ExtraTranslation">Enter verification code</string>
-    <string name="text_invalid_code">código no válido</string>
-    <string name="phone_verification">Verificación de teléfono</string>
-    <string name="txt_phone_verification">Hemos enviado un código a su teléfono vía SMS. Por favor, ingrese los 6 dígitos recibidos.</string>
-    <string name="btn_verify">Verificar</string>
-    <string name="txt_forward_code">reenviar código</string>
-    <string name="all_fields_are_required">Todos los campos son obligatorios</string>
-    <string name="passwords_not_mismatch">las contraseñas no coinciden</string>
-    <string name="forward_code">Reenviar Código</string>
-    <string name="enter_code">Ingresar código </string>
-    <string name="something_went">Algo salió mal intento de nuevo</string>
-    <string name="invalid_email_or_password">Correo o contraseña inválidos</string>
-    <string name="the_password_must">La contraseña debe tener mínimo nueve  dígitos, una mayúscula, minúscula, números y un carácter.</string>
-    <string name="write_message">Escribe un mensaje</string>
-    <string name="recover_account">Recuperar cuenta</string>
+    <string name="text_invalid_code">invalid code</string>
+    <string name="phone_verification">Phone verification</string>
+    <string name="txt_phone_verification">We have sent a code to your phone via SMS. Please enter the 6 digits received.</string>
+    <string name="btn_verify">Verify</string>
+    <string name="txt_forward_code">Forward Code</string>
+    <string name="all_fields_are_required">All fields are required</string>
+    <string name="passwords_not_mismatch">Passwords do not match</string>
+    <string name="forward_code">Forward Code</string>
+    <string name="enter_code">Enter code </string>
+    <string name="something_went">Something went wrong again</string>
+    <string name="invalid_email_or_password">Invalid email or password</string>
+    <string name="the_password_must">The password must have at least nine digits, one uppercase, lowercase, numbers, and one character.</string>
+    <string name="write_message">Write a message</string>
+    <string name="recover_account">Recover account</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="invalid_password">Invalid password</string>
+
 </resources>

@@ -1,5 +1,7 @@
 package com.cb.witfactory.view;
 
+import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,9 +14,13 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.AmplifyCognito;
 import com.cb.witfactory.data.classModel.Utils;
@@ -26,7 +32,7 @@ import com.cb.witfactory.ui.register.Register3Fragment;
 
 import java.util.regex.Pattern;
 
-public class LoginActivity extends AppCompatActivity  implements Callfun {
+public class LoginActivity extends AppCompatActivity implements Callfun {
 
     private ActivityLoginBinding binding;
     private static final String SELECTED_LANGUAGE = "Locale.Helper.Selected.Language";
@@ -70,7 +76,7 @@ public class LoginActivity extends AppCompatActivity  implements Callfun {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if(editable.length() > 0){
+                if (editable.length() > 0) {
                     validardata();
 
                 }
@@ -91,7 +97,7 @@ public class LoginActivity extends AppCompatActivity  implements Callfun {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if(editable.length() > 0){
+                if (editable.length() > 0) {
                     validardata();
 
                 }
@@ -108,17 +114,17 @@ public class LoginActivity extends AppCompatActivity  implements Callfun {
         binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 mail = binding.txtNameUser.getText().toString();
-                 password = binding.txtPin.getText().toString();
+                mail = binding.txtNameUser.getText().toString();
+                password = binding.txtPin.getText().toString();
 
                 if (mail.isEmpty() || password.isEmpty() || !validarEmail(mail)) {
                     //String cadena = getString(R.string.txt_invalide_email_password);
                     Toast.makeText(getApplicationContext(), "Incorrect email or password", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    amplifyCognito.signIn(mail,password);
-                  //  Intent intent = new Intent(getApplicationContext(), WitMenu.class);
-                   // startActivity(intent);
+                    amplifyCognito.signIn(mail, password);
+                    //  Intent intent = new Intent(getApplicationContext(), WitMenu.class);
+                    // startActivity(intent);
                 }
 
             }
@@ -188,21 +194,36 @@ public class LoginActivity extends AppCompatActivity  implements Callfun {
 
     @Override
     public void onSuccess(String s) {
-        Log.v("succes", s.toString());
-        Utils.goToHome(getApplicationContext());
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Log.v("succes", s.toString());
+                Utils.goToHome(getApplicationContext());
+            }
+        });
     }
 
     @Override
     public void onError(String s) {
-        Log.v("error", s.toString());
-        Toast.makeText(context, getString(R.string.invalid_email_or_password), Toast.LENGTH_SHORT).show();
-        //amplifyCognito.resendCode();
+
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                Log.v("error", s.toString());
+                Toast.makeText(context, getString(R.string.invalid_email_or_password), Toast.LENGTH_SHORT).show();
+                //amplifyCognito.resendCode();
+            }
+        });
+
+
     }
 
-    public void validardata(){
+    public void validardata() {
         if (mail.isEmpty() || password.isEmpty() || !validarEmail(mail)) {
             binding.btnSignUp.setBackgroundResource(R.drawable.ic_btn_activo);
-        }else{
+        } else {
             binding.btnSignUp.setBackgroundResource(R.drawable.ic_btn_inactivo);
         }
     }

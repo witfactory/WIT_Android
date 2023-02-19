@@ -42,6 +42,14 @@
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 
+
+    <fragment
+        android:id="@+id/menu_politicas"
+        android:name="com.cb.witfactory.ui.glosario.GlosarioFragment"
+        android:label="@string/menu_soporte"
+        tools:layout="@layout/fragment_glosario" />
+
+
     <fragment
         android:id="@+id/nenu_login"
         android:name="com.cb.witfactory.ui.login.LoginFragment"

@@ -162,9 +162,12 @@
         <entry key="..\:/WitFactory/app/src/main/res/layout/type_message_area.xml" value="0.25" />
         <entry key="..\:/WitFactory/app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
         <entry key="..\:/WitFactory/app/src/main/res/menu/login_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/android/factory/app/src/main/res/drawable/btn_rounded_bacgraund.xml" value="0.1915" />
+        <entry key="..\:/android/factory/app/src/main/res/drawable/ic_btn_inactivo.xml" value="0.1915" />
+        <entry key="..\:/android/factory/app/src/main/res/drawable/ic_politic.xml" value="0.1" />
         <entry key="..\:/android/factory/app/src/main/res/layout/activity_esp_touch.xml" value="0.5" />
         <entry key="..\:/android/factory/app/src/main/res/layout/activity_home.xml" value="0.75" />
-        <entry key="..\:/android/factory/app/src/main/res/layout/activity_login.xml" value="0.5" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/activity_login.xml" value="0.11492122335495829" />
         <entry key="..\:/android/factory/app/src/main/res/layout/activity_main.xml" value="0.1675929884566054" />
         <entry key="..\:/android/factory/app/src/main/res/layout/activity_registro.xml" value="0.67" />
         <entry key="..\:/android/factory/app/src/main/res/layout/activity_reset_pass_word.xml" value="0.67" />
@@ -192,7 +195,10 @@
         <entry key="..\:/android/factory/app/src/main/res/layout/register2_fragment.xml" value="0.1675929884566054" />
         <entry key="..\:/android/factory/app/src/main/res/layout/register3_fragment.xml" value="0.1675929884566054" />
         <entry key="..\:/android/factory/app/src/main/res/layout/register_fragment.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/reset_password.xml" value="0.18" />
         <entry key="..\:/android/factory/app/src/main/res/layout/type_message_area.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/menu/activity_main_drawer.xml" value="0.5" />
+        <entry key="..\:/android/factory/app/src/main/res/menu/login_menu.xml" value="0.1675929884566054" />
       </map>
     </option>
   </component>
