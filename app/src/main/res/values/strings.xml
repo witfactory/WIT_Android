@@ -196,7 +196,7 @@
     <string name="txt_code_verificaction" tools:ignore="ExtraTranslation">Enter verification code</string>
     <string name="text_invalid_code">invalid code</string>
     <string name="phone_verification">Phone verification</string>
-    <string name="txt_phone_verification">We have sent a code to your phone via SMS. Please enter the 6 digits received.</string>
+    <string name="txt_phone_verification">We have sent a code to your phone via Email. Please enter the 6 digits received.</string>
     <string name="btn_verify">Verify</string>
     <string name="txt_forward_code">Forward Code</string>
     <string name="all_fields_are_required">All fields are required</string>

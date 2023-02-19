@@ -1,7 +1,9 @@
 package com.cb.witfactory.view;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -14,17 +16,19 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.AmplifyCognito;
 import com.cb.witfactory.data.model.DialogResetPassword;
 import com.cb.witfactory.databinding.ActivityResetPassWordBinding;
 import com.cb.witfactory.model.Callfun;
+import com.cb.witfactory.model.PreferencesHelper;
 
 public class ResetPassWordActivity extends AppCompatActivity implements Callfun {
     private ActivityResetPassWordBinding binding;
     AmplifyCognito amplifyCognito = null;
+    private PreferencesHelper preferencesHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,7 @@ public class ResetPassWordActivity extends AppCompatActivity implements Callfun 
 
         amplifyCognito = new AmplifyCognito(getApplicationContext());
         amplifyCognito.setListener(ResetPassWordActivity.this);
-
+        preferencesHelper = new PreferencesHelper(getApplicationContext());
 
         binding.txtEmail.addTextChangedListener(new TextWatcher() {
             @Override
@@ -65,6 +69,8 @@ public class ResetPassWordActivity extends AppCompatActivity implements Callfun 
             public void onClick(View view) {
                 if (!Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.getHint().toString()).matches()) {
                     String email  = binding.txtEmail.getText().toString();
+                    PreferencesHelper.setEmail("email", email);
+
                     amplifyCognito.resetPassword(email);
                 }
             }

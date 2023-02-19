@@ -23,8 +23,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -34,8 +32,6 @@ import com.cb.witfactory.databinding.Register3FragmentBinding;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.EnumVaribles;
 import com.cb.witfactory.model.PreferencesHelper;
-import com.cb.witfactory.ui.verificar_cuenta.VerificaTuCuentaFragment;
-import com.cb.witfactory.view.MainActivity;
 
 public class Register3Fragment extends Fragment implements Callfun {
 

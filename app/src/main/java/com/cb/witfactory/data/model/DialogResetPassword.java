@@ -39,15 +39,18 @@ import javax.annotation.MatchesPattern;
 public class DialogResetPassword extends DialogFragment implements Callfun {
 
     AmplifyCognito amplifyCognito = null;
+
     Button btn_sign_up;
     EditText ed1,ed2,ed3,ed4,ed5,ed6,new_password;
+    TextView txt_close;
+    private PreferencesHelper preferencesHelper;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-
+        preferencesHelper = new PreferencesHelper(getContext());
         amplifyCognito = new AmplifyCognito(getContext());
         amplifyCognito.setListener(DialogResetPassword.this);
 
@@ -62,6 +65,7 @@ public class DialogResetPassword extends DialogFragment implements Callfun {
         ed5 = (EditText)v.findViewById(R.id.custom_long_otp_5);
         ed6 = (EditText)v.findViewById(R.id.custom_long_otp_6);
         new_password = (EditText)v.findViewById(R.id.new_password);
+        txt_close = (TextView) v.findViewById(R.id.txt_close);
 
 
         ed1.addTextChangedListener(new TextWatcher() {
@@ -233,6 +237,12 @@ public class DialogResetPassword extends DialogFragment implements Callfun {
         getDialog().getWindow().setLayout(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getDialog().setCancelable(false);
 
+        txt_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDialog().dismiss();
+            }
+        });
 
         btn_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,19 +250,22 @@ public class DialogResetPassword extends DialogFragment implements Callfun {
 
                 String password = new_password.getText().toString();
                 String otp1 = ed1.getText().toString();
-                String otp2 = ed2.toString();
+                String otp2 = ed2.getText().toString();
                 String otp3 = ed3.getText().toString();
                 String otp4 = ed4.getText().toString();
                 String otp5 = ed5.getText().toString();
                 String otp6 = ed6.getText().toString();
                 String otp = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
 
-                String userEmail = PreferencesHelper.getFirstName("user", "");
+
+                String userEmail = PreferencesHelper.getFirstName("email", "");
 
                 amplifyCognito.confirmResetPassword(userEmail,password, otp);
 
             }
         });
+
+
 
         return v;
     }
