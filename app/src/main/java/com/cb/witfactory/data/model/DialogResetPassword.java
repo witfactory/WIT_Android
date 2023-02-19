@@ -309,7 +309,6 @@ public class DialogResetPassword extends DialogFragment implements Callfun {
     @Override
     public void onSuccess(String s) {
         runOnUiThread(new Runnable() {
-
             @Override
             public void run() {
                 Utils.goToLogin(getContext());

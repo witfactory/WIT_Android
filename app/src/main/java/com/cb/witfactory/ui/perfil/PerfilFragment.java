@@ -1,5 +1,6 @@
 package com.cb.witfactory.ui.perfil;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -14,27 +16,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cb.witfactory.R;
+import com.cb.witfactory.data.retrofit.user.GetUserResponse;
 import com.cb.witfactory.databinding.FragmentHomeBinding;
 import com.cb.witfactory.databinding.FragmentPerfilBinding;
 import com.cb.witfactory.model.PreferencesHelper;
 import com.cb.witfactory.ui.home.HomeViewModel;
+
+import java.util.List;
 
 public class PerfilFragment extends Fragment {
 
     private FragmentPerfilBinding binding;
     private PerfilViewModel mViewModel;
     private PreferencesHelper preferencesHelper;
+    PerfilViewModel perfilViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+
 
         binding = FragmentPerfilBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
         preferencesHelper = new PreferencesHelper(getContext());
 
        String user= PreferencesHelper.getUser("user", "");
@@ -47,9 +54,22 @@ public class PerfilFragment extends Fragment {
         binding.txtUser.setText(dataUser);
         binding.txtUserEmail.setText(email);
 
-
+        perfilViewModel.getDataUSer("d86a2ef1-7db2-4611-a8b1-9bdf43b1d3e4");
+        getDataUser();
 
         return root;
+    }
+
+    public void getDataUser(){
+
+        perfilViewModel.getUserObserver().observe(getActivity(), new Observer<List<GetUserResponse>>() {
+            @Override
+            public void onChanged(List<GetUserResponse> getUserResponses) {
+                if(getUserResponses != null){
+                    Toast.makeText(getActivity(), getUserResponses.get(0).getUser().toString()+"", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 }

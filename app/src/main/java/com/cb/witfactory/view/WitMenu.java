@@ -1,9 +1,13 @@
 package com.cb.witfactory.view;
 
+import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
+
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +20,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.AmplifyCognito;
+import com.cb.witfactory.data.classModel.Utils;
 import com.cb.witfactory.databinding.ActivityWitMenuBinding;
 import com.cb.witfactory.model.Callfun;
 import com.google.android.material.navigation.NavigationView;
@@ -91,7 +96,7 @@ public class WitMenu extends AppCompatActivity implements Callfun {
                     return true;
                 }
 
-                if (id == R.id.menu_soporte) {
+                if (id == R.id.menu_soporte ) {
                     binding.appBarLoginMenu.fab.setVisibility(View.GONE);
                     NavController navController = Navigation.findNavController(WitMenu.this, R.id.nav_host_fragment_content_login_menu);
                     navController.navigateUp();
@@ -99,6 +104,17 @@ public class WitMenu extends AppCompatActivity implements Callfun {
                     drawer.close();
                     return true;
                 }
+
+                if (id == R.id.menu_politicas) {
+                    binding.appBarLoginMenu.fab.setVisibility(View.GONE);
+                    NavController navController = Navigation.findNavController(WitMenu.this, R.id.nav_host_fragment_content_login_menu);
+                    navController.navigateUp();
+                    navController.navigate(R.id.menu_politicas);
+                    drawer.close();
+                    return true;
+                }
+
+
                 if (id == R.id.menu_logoff) {
                     Toast.makeText(getApplicationContext(), getString(R.string.text_logout), Toast.LENGTH_LONG).show();
                     amplifyCognito.logoutAmplify(getApplicationContext());
@@ -122,6 +138,13 @@ public class WitMenu extends AppCompatActivity implements Callfun {
     @Override
     public void onSuccess(String s) {
 
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                Utils.goToLogin(getApplicationContext());
+            }
+        });
     }
 
     @Override

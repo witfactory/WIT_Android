@@ -48,6 +48,7 @@ public class AmplifyCognito {
     public Boolean sinUp(String first_name, String user, String last_name, String country, String city,
                          String zip_code, String address, String account_type, String telephone, String user_principal, String password) {
         AuthSignUpOptions options = AuthSignUpOptions.builder()
+
                 .userAttribute(AuthUserAttributeKey.custom("custom:first_name"), first_name)
                 .userAttribute(AuthUserAttributeKey.custom("custom:user"), user)
                 .userAttribute(AuthUserAttributeKey.custom("custom:last_name"), last_name)
@@ -56,8 +57,8 @@ public class AmplifyCognito {
                 .userAttribute(AuthUserAttributeKey.custom("custom:zip_code"), zip_code)
                 .userAttribute(AuthUserAttributeKey.custom("custom:address"), address)
                 .userAttribute(AuthUserAttributeKey.custom("custom:account_type"), "P")
-                .userAttribute(AuthUserAttributeKey.custom("custom:telephone"), "3104208010")
-                .userAttribute(AuthUserAttributeKey.custom("custom:user_principal"), "PRINCIPAL123")
+                .userAttribute(AuthUserAttributeKey.custom("custom:telephone"), telephone)
+                .userAttribute(AuthUserAttributeKey.custom("custom:user_principal"), "")
                 .build();
 
 
