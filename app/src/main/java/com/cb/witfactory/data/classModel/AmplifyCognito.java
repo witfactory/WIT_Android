@@ -152,7 +152,6 @@ public class AmplifyCognito {
                 password,
                 result -> {
                     Log.i("AuthQuickstart", result.isSignedIn() ? "Sign in succeeded" : "Sign in not complete");
-                    String token = result.getClass().getName();
                     String sinUp = EnumVaribles.signIn.toString();
                     listener.onSuccess(sinUp);
                 },

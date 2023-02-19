@@ -2,17 +2,20 @@ package com.cb.witfactory.data.retrofit;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+@Module
 public class ApiConecxion {
     private static MyApiService API_SERVICE;
 
     public static MyApiService getApiService() { //utiliza patron singelton se utiliza una instancia
-
-
 
         // Creamos un interceptor y le indicamos el log level a usar
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();//va a mostrar lo resultados de la peticion el codigo de respuetsa

@@ -162,17 +162,37 @@
         <entry key="..\:/WitFactory/app/src/main/res/layout/type_message_area.xml" value="0.25" />
         <entry key="..\:/WitFactory/app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
         <entry key="..\:/WitFactory/app/src/main/res/menu/login_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/activity_esp_touch.xml" value="0.5" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/activity_home.xml" value="0.75" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/activity_login.xml" value="0.5" />
         <entry key="..\:/android/factory/app/src/main/res/layout/activity_main.xml" value="0.1675929884566054" />
-        <entry key="..\:/android/factory/app/src/main/res/layout/activity_registro.xml" value="0.1675929884566054" />
-        <entry key="..\:/android/factory/app/src/main/res/layout/activity_reset_pass_word.xml" value="0.335042735042735" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/activity_registro.xml" value="0.67" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/activity_reset_pass_word.xml" value="0.67" />
         <entry key="..\:/android/factory/app/src/main/res/layout/activity_wit_menu.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/adapter_dispositivo.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/app_bar_login_menu.xml" value="0.1675929884566054" />
         <entry key="..\:/android/factory/app/src/main/res/layout/content_login_menu.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/fragment_connect_dispositive.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/fragment_device.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/fragment_glosario.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/fragment_home.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/fragment_list_device.xml" value="0.1675929884566054" />
         <entry key="..\:/android/factory/app/src/main/res/layout/fragment_login.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/fragment_perfil.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/fragment_slideshow.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/fragment_support.xml" value="0.1675929884566054" />
         <entry key="..\:/android/factory/app/src/main/res/layout/fragment_verifica_tu_cuenta.xml" value="0.1675929884566054" />
-        <entry key="..\:/android/factory/app/src/main/res/layout/persistent_bottom_sheet.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/item_code_verification.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/list_adapter_dispositivo.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/list_adapter_dispositivo2.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/list_group.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/list_item.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/nav_header_login_menu.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/persistent_bottom_sheet.xml" value="0.25" />
         <entry key="..\:/android/factory/app/src/main/res/layout/register2_fragment.xml" value="0.1675929884566054" />
         <entry key="..\:/android/factory/app/src/main/res/layout/register3_fragment.xml" value="0.1675929884566054" />
         <entry key="..\:/android/factory/app/src/main/res/layout/register_fragment.xml" value="0.1675929884566054" />
+        <entry key="..\:/android/factory/app/src/main/res/layout/type_message_area.xml" value="0.1675929884566054" />
       </map>
     </option>
   </component>
