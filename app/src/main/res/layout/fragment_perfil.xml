@@ -180,6 +180,7 @@
                                         android:textSize="12sp" />
 
                                     <TextView
+                                        android:id="@+id/txt_addres"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:text="@string/text_addres_example"
@@ -224,6 +225,7 @@
                                         android:textSize="12sp" />
 
                                     <TextView
+                                        android:id="@+id/txt_phone"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:text="@string/text_number_phone_example"
@@ -288,7 +290,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="30sp"

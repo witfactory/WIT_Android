@@ -18,12 +18,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.util.Util;
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.retrofit.user.GetUserResponse;
 import com.cb.witfactory.databinding.FragmentHomeBinding;
 import com.cb.witfactory.databinding.FragmentPerfilBinding;
 import com.cb.witfactory.model.PreferencesHelper;
 import com.cb.witfactory.ui.home.HomeViewModel;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
@@ -33,6 +35,7 @@ public class PerfilFragment extends Fragment {
     private PerfilViewModel mViewModel;
     private PreferencesHelper preferencesHelper;
     PerfilViewModel perfilViewModel;
+    private NavigationView navigationView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +46,8 @@ public class PerfilFragment extends Fragment {
 
         perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
         preferencesHelper = new PreferencesHelper(getContext());
+
+
 
        String user= PreferencesHelper.getUser("user", "");
         String email= PreferencesHelper.getEmail("email", "");
@@ -60,7 +65,9 @@ public class PerfilFragment extends Fragment {
         binding.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_login_menu);
+                navController.navigateUp();
+                navController.navigate(R.id.edit_profile);
             }
         });
 
@@ -74,6 +81,11 @@ public class PerfilFragment extends Fragment {
             public void onChanged(List<GetUserResponse> getUserResponses) {
                 if(getUserResponses != null){
                     Toast.makeText(getActivity(), getUserResponses.get(0).getUser().toString()+"", Toast.LENGTH_SHORT).show();
+
+                    binding.txtUser.setText("Data");
+                    binding.txtUserEmail.setText(getUserResponses.get(0).getUser().toString());
+                    binding.txtAddres.setText(getUserResponses.get(0).getAddress().toString());
+                    binding.txtPhone.setText(getUserResponses.get(0).getTelephone().toString());
                 }
             }
         });

@@ -82,4 +82,11 @@
         android:name="com.cb.witfactory.ui.support.SupportFragment"
         android:label="@string/text_soporte"
         tools:layout="@layout/fragment_support" />
+
+
+    <fragment
+        android:id="@+id/edit_profile"
+        android:name="com.cb.witfactory.ui.perfil.EditProfileFragment"
+        android:label="@string/menu_perfil"
+        tools:layout="@layout/fragment_edit_profile" />
 </navigation>
