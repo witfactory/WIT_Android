@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.termsConditions.TermsConditionsFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/sp20">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/terms_conditions"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:paddingTop="20sp"
+                android:text="Estos Términos y Condiciones de Servicio (en adelante, “los términos”) rigen el uso y acceso a la aplicación, y cualquier información capturada por la misma.Las personas deben aceptar estos términos de uso, los cuales tienen un carácter obligatorio y vinculante, si usted no acepta los términos y condiciones deberá abstenerse de utilizar la aplicación   Mediante el uso de la aplicación, el usuario acepta la utilización de la información tratada por aquella, en los términos y condiciones establecidos en éstos. Asimismo, al hacer uso de estos servicios, el usuario accede a vincularse a estos Términos.       El Usuario declara haber leído y aceptado los términos y condiciones. En caso que el usuario no esté de acuerdo con estos términos, deberá abstenerse de utilizar los servicios que proporciona la aplicación, sea que la desinstale o simplemente deje de usarla."/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

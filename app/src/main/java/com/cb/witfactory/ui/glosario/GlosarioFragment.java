@@ -40,9 +40,6 @@ public class GlosarioFragment extends Fragment {
         binding = FragmentGlosarioBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        // final TextView textView = binding.textGallery;
-        //loginViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
 
         expandableListView = (ExpandableListView) root.findViewById(R.id.expandableListView);
         expandableListDetail = ExpandableListDataPumpDumy.getData();
@@ -99,19 +96,5 @@ public class GlosarioFragment extends Fragment {
     }
 
 
-    //intent fragment
-    /*
-    *
-    * binding.btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                NavController navController = Navigation.findNavController(HomeActivity.this, R.id.nav_host_fragment_content_login_menu);
-                navController.navigateUp();
-                navController.navigate(R.id.nenu_register);
-
-
-            }
-        });
-    * */
 }

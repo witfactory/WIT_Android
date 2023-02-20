@@ -210,7 +210,11 @@
     <string name="recover_account">Recover account</string>
     <string name="invalid_email">Invalid email</string>
     <string name="invalid_password">Invalid password</string>
-
+    <string name="change_pin">Change pin</string>
+    <string name="nota_update_user">NOTE: you have children at home, you can activate child Lock and <b>create a security pin</b> of <b>4 digits</b> for your WIT application.</string>
+    <string name="change_password">Change password</string>
+    <string name="configure_profile">Configure profile</string>
+    <string name="terms_conditions">Terms  &amp; Conditions</string>
 
 
 </resources>

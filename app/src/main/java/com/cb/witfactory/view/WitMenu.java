@@ -105,11 +105,20 @@ public class WitMenu extends AppCompatActivity implements Callfun {
                     return true;
                 }
 
-                if (id == R.id.menu_politicas) {
+                if (id == R.id.activity) {
                     binding.appBarLoginMenu.fab.setVisibility(View.GONE);
                     NavController navController = Navigation.findNavController(WitMenu.this, R.id.nav_host_fragment_content_login_menu);
                     navController.navigateUp();
-                    navController.navigate(R.id.menu_politicas);
+                    navController.navigate(R.id.activity);
+                    drawer.close();
+                    return true;
+                }
+
+                if (id == R.id.terms_conditions) {
+                    binding.appBarLoginMenu.fab.setVisibility(View.GONE);
+                    NavController navController = Navigation.findNavController(WitMenu.this, R.id.nav_host_fragment_content_login_menu);
+                    navController.navigateUp();
+                    navController.navigate(R.id.terms_conditions);
                     drawer.close();
                     return true;
                 }

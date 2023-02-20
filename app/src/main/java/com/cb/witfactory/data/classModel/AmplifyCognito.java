@@ -1,14 +1,7 @@
 package com.cb.witfactory.data.classModel;
 
-import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
-
 import android.content.Context;
 
-import com.amazonaws.mobile.client.AWSMobileClient;
-import com.amazonaws.mobile.client.Callback;
-import com.amazonaws.mobile.client.results.SignUpResult;
-import com.amazonaws.mobile.client.results.UserCodeDeliveryDetails;
-import com.amplifyframework.auth.AuthUserAttribute;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession;
 import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult;
@@ -16,17 +9,12 @@ import com.amplifyframework.auth.cognito.result.GlobalSignOutError;
 import com.amplifyframework.auth.cognito.result.HostedUIError;
 import com.amplifyframework.auth.cognito.result.RevokeTokenError;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
-import com.amplifyframework.core.Action;
 import com.amplifyframework.core.Amplify;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.EnumVaribles;
 import com.cb.witfactory.model.PreferencesHelper;
-import com.cb.witfactory.ui.login.LoginFragment;
 
 import org.chromium.base.Log;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class AmplifyCognito {
 
@@ -182,9 +170,11 @@ public class AmplifyCognito {
 
                         AWSCognitoAuthSession cognitoAuthSession = (AWSCognitoAuthSession) result;
                         String token = cognitoAuthSession.getUserPoolTokensResult().getValue().getIdToken();
+
                      //   String token = cognitoAuthSession.getUserPoolTokens().getValue().getIdToken();
                        // String accesToken = cognitoAuthSession.getUserPoolTokens().getValue().getAccessToken();
                         //String refreshToken = cognitoAuthSession.getUserPoolTokens().getValue().getRefreshToken();
+
 
                         Log.v("token con session activa--> ${session.userPoolTokensResult.value?.idToken}", cognitoAuthSession.getUserPoolTokensResult().getValue().getIdToken());
                         Log.v("token con session activa acces-2.1--> ${session.userPoolTokensResult.value?.accessToken}", cognitoAuthSession.getUserPoolTokensResult().getValue().getAccessToken());

@@ -36,7 +36,7 @@
             android:icon="@drawable/ic_glosario"
             android:title="@string/text_glossary" /-->
         <item
-            android:id="@+id/menu_politicas"
+            android:id="@+id/terms_conditions"
             android:icon="@drawable/ic_politic"
             android:title="@string/menu_politica" />
 

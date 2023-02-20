@@ -215,4 +215,9 @@
     <string name="recover_account">Recuperar cuenta</string>
     <string name="invalid_email">Correo inválidos</string>
     <string name="invalid_password">Contraseña inválida</string>
+    <string name="change_pin">cambiar pin</string>
+    <string name="nota_update_user">NOTA: si tiene niños en casa, puede activar el bloqueo infantil y <b>crear un pin de seguridad</b> de <b>4 dígitos</b> para su aplicación WIT</string>
+    <string name="change_password">Cambiar contraseña</string>
+    <string name="configure_profile">Configurar perfil</string>
+    <string name="terms_conditions">Terminos  &amp; Condiciones</string>
 </resources>
