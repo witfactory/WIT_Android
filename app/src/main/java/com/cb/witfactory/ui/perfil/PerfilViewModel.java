@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.cb.witfactory.data.retrofit.ApiConecxion;
+import com.cb.witfactory.data.retrofit.user.ObjectResponseUser;
 import com.cb.witfactory.data.retrofit.user.GetUserResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -32,24 +32,26 @@ public class PerfilViewModel extends ViewModel {
 
     public void getDataUSer(String idUser) {
         try {
-            final Call<Object> obj = ApiConecxion.getApiService().getUser(idUser);
-            obj.enqueue(new Callback<Object>() {
+            final Call<ObjectResponseUser> obj = ApiConecxion.getApiService().getUser(idUser);
+            obj.enqueue(new Callback<ObjectResponseUser>() {
                 @Override
-                public void onResponse(Call<Object> call, Response<Object> response) {
-                    //listMutableLiveDataUser.postValue(response.body());
-                    Log.v("obj", response.body().toString());
+                public void onResponse(Call<ObjectResponseUser> call, Response<ObjectResponseUser> response) {
+                    //
+                    ObjectResponseUser bodyResponseUser = new ObjectResponseUser();
+                    bodyResponseUser = response.body();
+                    listMutableLiveDataUser.postValue(response.body().getBody().body);
+                    Log.v("bodyResponseUser", bodyResponseUser.getBody().toString());
                 }
 
                 @Override
-                public void onFailure(Call<Object> call, Throwable t) {
+                public void onFailure(Call<ObjectResponseUser> call, Throwable t) {
                    // listMutableLiveDataUser.postValue(null);
+                    Log.v("Error", "");
                 }
             });
 
         } catch (Exception exception) {
-
             Log.v("Error", exception.getMessage());
         }
-
     }
 }

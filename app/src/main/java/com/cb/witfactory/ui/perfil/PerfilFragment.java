@@ -57,6 +57,13 @@ public class PerfilFragment extends Fragment {
         perfilViewModel.getDataUSer("d86a2ef1-7db2-4611-a8b1-9bdf43b1d3e4");
         getDataUser();
 
+        binding.btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return root;
     }
 
