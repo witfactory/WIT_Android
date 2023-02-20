@@ -260,8 +260,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/sp10"
                                 android:layout_weight="1"
-                                android:background="@drawable/ic_btn_inactivo"
-                                android:text="@string/next"
+                                android:background="@drawable/ic_btn_activo"
+                                android:text="@string/text_edit"
                                 android:textColor="@color/white"
                                 android:textStyle="bold" />
 
