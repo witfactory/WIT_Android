@@ -47,6 +47,7 @@ public class PerfilViewModel extends ViewModel {
                 public void onFailure(Call<ObjectResponseUser> call, Throwable t) {
                    // listMutableLiveDataUser.postValue(null);
                     Log.v("Error", "");
+                    listMutableLiveDataUser.postValue(null);
                 }
             });
 

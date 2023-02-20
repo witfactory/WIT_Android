@@ -2,6 +2,7 @@ package com.cb.witfactory.ui.device;
 
 import static org.chromium.base.ContextUtils.getApplicationContext;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -25,7 +26,11 @@ import com.cb.witfactory.adapter.ListValueDeviceAdapter;
 import com.cb.witfactory.data.classModel.MyDividerItemDecoration;
 import com.cb.witfactory.data.model.Device;
 import com.cb.witfactory.data.model.ValueDevice;
+import com.cb.witfactory.data.retrofit.device.DeviceResponse;
+import com.cb.witfactory.data.retrofit.device.GetDeviceResponse;
+import com.cb.witfactory.data.retrofit.user.GetUserResponse;
 import com.cb.witfactory.databinding.FragmentDeviceBinding;
+import com.cb.witfactory.ui.perfil.PerfilViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +38,9 @@ import java.util.List;
 public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdapterListener,ListValueDeviceAdapter.ValueDeviceAdapterListener {
 
     private FragmentDeviceBinding binding;
-    private DeviceViewModel mViewModel;
+    private DeviceViewModel deviceViewModel;
+
+
 
 
     private static final String TAG = DeviceFragment.class.getSimpleName();
@@ -47,10 +54,13 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        com.cb.witfactory.ui.device.DeviceViewModel deviceViewModel =
-                new ViewModelProvider(this).get(com.cb.witfactory.ui.device.DeviceViewModel.class);
-        binding = FragmentDeviceBinding.inflate(inflater, container, false);
+          binding = FragmentDeviceBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        deviceViewModel = new ViewModelProvider(this).get(DeviceViewModel.class);
+
+
+        deviceViewModel.getDataDevice("c7b6c3ae-1fb3-4726-92c2-6e32b095e8b7");
+        getDataDevice();
 
        //Horizontal
         deviceList = new ArrayList<>();
@@ -97,6 +107,18 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         return root;
     }
 
+
+    public void getDataDevice(){
+
+        deviceViewModel.getDeviceObserver().observe(getActivity(), new Observer<List<DeviceResponse>>() {
+            @Override
+            public void onChanged(List<DeviceResponse> getDeviceResponses) {
+                if(getDeviceResponses != null){
+                    Toast.makeText(getActivity(), getDeviceResponses.get(0).getDevice_id().toString()+"", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 
     @Override
     public void onDeviceSelected(Device device) {

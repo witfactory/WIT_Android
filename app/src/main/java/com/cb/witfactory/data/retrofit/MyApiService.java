@@ -1,5 +1,6 @@
 package com.cb.witfactory.data.retrofit;
 
+import com.cb.witfactory.data.retrofit.device.ObjectResponseDevice;
 import com.cb.witfactory.data.retrofit.user.ObjectResponseUser;
 
 import retrofit2.Call;
@@ -13,6 +14,11 @@ public interface MyApiService {
             @Query("id") String id
     );
 
+
+    @GET("device")
+    Call<ObjectResponseDevice> getDevice(
+            @Query("user_id") String user_id
+    );
 
 
 }
