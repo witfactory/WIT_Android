@@ -26,7 +26,6 @@ import com.cb.witfactory.data.classModel.MyDividerItemDecoration;
 import com.cb.witfactory.data.model.Device;
 import com.cb.witfactory.data.model.ValueDevice;
 import com.cb.witfactory.databinding.FragmentDeviceBinding;
-import com.cb.witfactory.databinding.FragmentLoginBinding;
 
 import java.util.ArrayList;
 import java.util.List;

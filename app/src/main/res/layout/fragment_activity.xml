@@ -11,9 +11,57 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:orientation="vertical"
             android:padding="@dimen/sp30">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/general_activity"
+                android:textColor="@color/txt_color"
+                android:textSize="20sp"
+                android:gravity="center|left"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/general_activity2"
+                android:textColor="@color/txt_color"
+                android:textSize="15sp"
+                android:gravity="center|left"
+                />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/filter_device"
+                android:paddingBottom="@dimen/sp10"
+                android:textColorHint="@color/text_login"
+                app:boxStrokeColor="@color/dark_greenish_blue"
+                app:endIconMode="dropdown_menu"
+                android:paddingTop="10sp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/txt_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:padding="5sp"
+                    android:textColor="@color/dark_greenish_blue"
+                    android:textColorHint="@color/text_login"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0.498"
+                    app:layout_constraintHorizontal_bias="0.502"
+                    android:editable="false"
+                    android:focusable="false"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
 
 

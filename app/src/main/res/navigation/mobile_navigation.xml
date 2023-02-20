@@ -97,7 +97,7 @@
         tools:layout="@layout/fragment_terms_conditions" />
 
     <fragment
-        android:id="@+id/activity"
+        android:id="@+id/menu_activity"
         android:name="com.cb.witfactory.ui.activity.ActivityFragment"
         android:label="@string/menu_perfil"
         tools:layout="@layout/fragment_activity" />

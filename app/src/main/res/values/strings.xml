@@ -215,4 +215,7 @@
     <string name="change_password">Change password</string>
     <string name="configure_profile">Configure profile</string>
     <string name="terms_conditions">Terms  &amp; Conditions</string>
+    <string name="general_activity">General activity log</string>
+    <string name="general_activity2">Below is the date of the last 30 days. See the full history of your devices.</string>
+    <string name="filter_device">Filter by device</string>
 </resources>

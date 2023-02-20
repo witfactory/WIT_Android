@@ -105,11 +105,11 @@ public class WitMenu extends AppCompatActivity implements Callfun {
                     return true;
                 }
 
-                if (id == R.id.activity) {
+                if (id == R.id.menu_activity) {
                     binding.appBarLoginMenu.fab.setVisibility(View.GONE);
                     NavController navController = Navigation.findNavController(WitMenu.this, R.id.nav_host_fragment_content_login_menu);
                     navController.navigateUp();
-                    navController.navigate(R.id.activity);
+                    navController.navigate(R.id.menu_activity);
                     drawer.close();
                     return true;
                 }

@@ -220,4 +220,10 @@
     <string name="change_password">Cambiar contraseña</string>
     <string name="configure_profile">Configurar perfil</string>
     <string name="terms_conditions">Terminos  &amp; Condiciones</string>
+
+    <string name="general_activity">Registro de actividad general</string>
+    <string name="general_activity2">A continuación, se presenta la data de los últimos 30 días. consulte todo el histórico completo de sus dispositivos.</string>
+    <string name="filter_device">Filtrar pos dispositivo</string>
+
+
 </resources>
