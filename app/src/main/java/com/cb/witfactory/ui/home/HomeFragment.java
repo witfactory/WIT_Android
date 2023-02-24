@@ -1,6 +1,9 @@
 package com.cb.witfactory.ui.home;
 
+import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +25,15 @@ import org.bouncycastle.openssl.PEMParser;
 import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
@@ -34,6 +43,12 @@ import java.security.KeyStore;
 import java.security.Security;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
@@ -45,13 +60,20 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private PreferencesHelper preferencesHelper;
     final String TAG = "HomeFragment";
-    MqttAndroidClient client;
 
+    final String mBroker ="mqtts://a30yv4dd3vnzo-ats.iot.us-east-1.amazonaws.com:8883/";
+    // 测试的Mqtt Topic
+    String mTopic;
+    // mqtt的client id
+    String mClientId ="android_client_snx";
+    MqttClient mSampleClient;
+    MemoryPersistence mPersistence = new MemoryPersistence();
 
-
+    // 证书信息
     InputStream mCaCrtFile;
     InputStream mCrtFile;
     InputStream mKeyFile;
+
 
 
 
@@ -90,46 +112,72 @@ public class HomeFragment extends Fragment {
 
 
     public void conexionMqtt(){
-        String clientId = MqttClient.generateClientId();
-        client =
-                new MqttAndroidClient(getContext(), "mqtts://a30yv4dd3vnzo-ats.iot.us-east-1.amazonaws.com:8883/",
-                        clientId);
 
         try {
-            IMqttToken token = client.connect();
-            token.setActionCallback(new IMqttActionListener() {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    // Si mqtt conectó
-                    Toast.makeText(getContext(), "CONECTADO MQTT", Toast.LENGTH_LONG).show();
-                    suscripcionTopics();
+            mSampleClient = new MqttClient(mBroker, mClientId, mPersistence);
+            final MqttConnectOptions connOpts = new MqttConnectOptions();
+            System.out.println("Connecting to broker: " + mBroker);
+
+            final String[] topicFilters=new String[]{mTopic};
+            final int[]qos={1};
+            connOpts.setServerURIs(new String[] { mBroker });
+            connOpts.setSocketFactory(getSocketFactory(mCaCrtFile, mCrtFile, mKeyFile, ""));
+            // MQTT clearSession 参数，设置确定是否继续接受离线消息
+            connOpts.setCleanSession(false);
+            // MQTT keepalive 参数，与离线时间有关，支持多久的掉线时间
+            connOpts.setKeepAliveInterval(600);
+            connOpts.setAutomaticReconnect(true);
+            final ExecutorService executorService = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MILLISECONDS,
+                    new LinkedBlockingQueue<Runnable>());
+            mSampleClient.setCallback(new MqttCallbackExtended() {
+                public void connectComplete(boolean reconnect, String serverURI) {
+                    System.out.println("connect success");
+                    //连接成功，需要上传客户端所有的订阅关系
+                    try
+                    {
+                        mSampleClient.subscribe(topicFilters, qos);
+                    } catch(Exception me)
+                    {
+                        me.printStackTrace();
+                    }
                 }
 
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    // Something went wrong e.g. connection timeout or firewall problems
-                    Toast.makeText(getContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
+                public void connectionLost(Throwable throwable) {
+                    Log.d(TAG, "mqtt connection lost");
+                }
+
+                public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
+
+                    String msg = "接收到订阅主题消息\n时间：" + getCurrentDataFormat() + "\nTopic:" + topic + "\n消息内容: " +
+                            new String(mqttMessage.getPayload());
+                    Log.i(TAG, msg);
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Toast.makeText(getContext(), ""+msg, Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
                 }
+
+                public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
+                    Log.i(TAG, "deliveryComplete:" + iMqttDeliveryToken.getMessageId());
+                }
+
             });
+            mSampleClient.connect(connOpts);
+            mSampleClient.subscribe(topicFilters,qos);
         } catch (MqttException e) {
             e.printStackTrace();
-        }
-
-    }
-
-
-    private void suscripcionTopics(){
-
-        try{
-           // client.subscribe("pepito/wit102/sensor/sala/c7b6c3ae-1fb3-4726-92c2-6e32b095e8b7/alarms",0);
-            client.subscribe("mqtts://a30yv4dd3vnzo-ats.iot.us-east-1.amazonaws.com:8883",0);
-
-        }catch (MqttException e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
+
+
 
 
     public void initCert() {
@@ -141,6 +189,40 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+   
+
+    public String getCurrentDataFormat() {
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        return format.format(date);
+    }
+
+
+    public void subcribeTopic(String topic, int qos) throws MqttException {
+        mSampleClient.subscribe(topic, qos, new IMqttMessageListener() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                String msg = "接收到订阅主题消息\n时间：" + getCurrentDataFormat() + "\nTopic:" + topic + "\n消息内容: " +
+                        new String(message.getPayload());
+                Log.i(TAG, msg);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //mMsgText.setText(mMsgText.getText().toString() + msg + "\n-------分割线-------\n");
+                        Toast.makeText(getContext(), ""+msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+    }
+
+    public void unsubcribeTopic(String topic) throws MqttException {
+        mSampleClient.unsubscribe(topic);
+    }
+
+
 
     // SSLSocketFactory 实现双向TLS认证，因为IoT Core需要双向TLS认证
     public static SSLSocketFactory getSocketFactory(InputStream caCrtFile, InputStream crtFile, InputStream keyFile,
