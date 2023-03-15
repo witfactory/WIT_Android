@@ -24,10 +24,8 @@ import org.bouncycastle.openssl.PEMKeyPair;
 import org.bouncycastle.openssl.PEMParser;
 import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
 import org.eclipse.paho.android.service.MqttAndroidClient;
-import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
-import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
@@ -61,12 +59,14 @@ public class HomeFragment extends Fragment {
     private PreferencesHelper preferencesHelper;
     final String TAG = "HomeFragment";
 
-    final String mBroker ="mqtts://a30yv4dd3vnzo-ats.iot.us-east-1.amazonaws.com:8883/";
+    final String mBroker2 ="mqtts://a30yv4dd3vnzo-ats.iot.us-east-1.amazonaws.com:8883/";
+    final String mBroker1 ="tcp://a3106v8p7zalp8-ats.iot.us-east-1.amazonaws.com:8883/";
+    final String mBroker ="mqtts://a3106v8p7zalp8-ats.iot.us-east-1.amazonaws.com:8883/";
     // 测试的Mqtt Topic
     String mTopic;
     // mqtt的client id
-    String mClientId ="android_client_snx";
-    MqttClient mSampleClient;
+    String mClientId ="697989f23667460a8c2023b110de6571";
+    MqttAndroidClient mSampleClient;
     MemoryPersistence mPersistence = new MemoryPersistence();
 
     // 证书信息
@@ -105,7 +105,7 @@ public class HomeFragment extends Fragment {
         });
 
         initCert();
-        conexionMqtt();
+
 
         return root;
     }
@@ -114,13 +114,13 @@ public class HomeFragment extends Fragment {
     public void conexionMqtt(){
 
         try {
-            mSampleClient = new MqttClient(mBroker, mClientId, mPersistence);
+            mSampleClient = new MqttAndroidClient(getActivity(),mBroker, mClientId);
             final MqttConnectOptions connOpts = new MqttConnectOptions();
             System.out.println("Connecting to broker: " + mBroker);
 
             final String[] topicFilters=new String[]{mTopic};
             final int[]qos={1};
-            connOpts.setServerURIs(new String[] { mBroker });
+           // connOpts.setServerURIs(new String[] { mBroker });
             connOpts.setSocketFactory(getSocketFactory(mCaCrtFile, mCrtFile, mKeyFile, ""));
             // MQTT clearSession 参数，设置确定是否继续接受离线消息
             connOpts.setCleanSession(false);
@@ -133,6 +133,8 @@ public class HomeFragment extends Fragment {
                 public void connectComplete(boolean reconnect, String serverURI) {
                     System.out.println("connect success");
                     //连接成功，需要上传客户端所有的订阅关系
+                    Toast.makeText(getContext(), "connect success", Toast.LENGTH_SHORT).show();
+                    Log.w("ingreso--138", "connect success");
                     try
                     {
                         mSampleClient.subscribe(topicFilters, qos);
@@ -144,6 +146,8 @@ public class HomeFragment extends Fragment {
 
                 public void connectionLost(Throwable throwable) {
                     Log.d(TAG, "mqtt connection lost");
+                    Toast.makeText(getContext(), "mqtt connection lost", Toast.LENGTH_SHORT).show();
+                    Log.w("no ingreso--", "no success 151");
                 }
 
                 public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
@@ -151,6 +155,8 @@ public class HomeFragment extends Fragment {
                     String msg = "接收到订阅主题消息\n时间：" + getCurrentDataFormat() + "\nTopic:" + topic + "\n消息内容: " +
                             new String(mqttMessage.getPayload());
                     Log.i(TAG, msg);
+
+                    Log.w("ingreso--160", "Topic");
                     runOnUiThread(new Runnable() {
 
                         @Override
@@ -163,6 +169,8 @@ public class HomeFragment extends Fragment {
 
                 public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
                     Log.i(TAG, "deliveryComplete:" + iMqttDeliveryToken.getMessageId());
+                    Log.w("ingreso--173", "deliveryComplete");
+
                 }
 
             });
@@ -172,6 +180,7 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+            Log.w("exeption--184", e.getMessage());
         }
 
     }
@@ -185,6 +194,8 @@ public class HomeFragment extends Fragment {
             mCaCrtFile = this.getResources().openRawResource(R.raw.amazontootca3);
             mCrtFile = this.getResources().openRawResource(R.raw.certificate);
             mKeyFile = this.getResources().openRawResource(R.raw.privatepem);
+
+            conexionMqtt();
         } catch (Exception e) {
             e.printStackTrace();
         }

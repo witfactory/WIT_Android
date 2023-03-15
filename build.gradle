@@ -6,7 +6,8 @@ buildscript {
         google()
         mavenCentral {
             url "https://plugins.gradle.org/m2/"
-            url "https://repo.eclipse.org/content/repositories/paho-snapshots/"
+            //url "https://repo.eclipse.org/content/repositories/paho-snapshots/"
+            url "https://repo.eclipse.org/content/repositories/paho-releases/"
         }
 
 
