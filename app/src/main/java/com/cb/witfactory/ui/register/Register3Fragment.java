@@ -138,7 +138,7 @@ public class Register3Fragment extends Fragment implements Callfun {
                     String user_principal = PreferencesHelper.getFirstName("user_principal", "");
                     String password = PreferencesHelper.getFirstName("password", "");
                     Log.v("", password);
-                    resulRegiter = amplifyCognito.sinUp(first_name, user, "demos", country, city, zip_code, address, account_type, telephone, user_principal, password);
+                    amplifyCognito.sinUp(first_name, user, "demos", country, city, zip_code, address, account_type, telephone, user_principal, password);
                 }
             }
         });

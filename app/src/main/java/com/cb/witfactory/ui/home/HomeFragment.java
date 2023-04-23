@@ -27,7 +27,6 @@ import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
-import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -59,24 +58,6 @@ public class HomeFragment extends Fragment {
     private PreferencesHelper preferencesHelper;
     final String TAG = "HomeFragment";
 
-    final String mBroker2 ="mqtts://a30yv4dd3vnzo-ats.iot.us-east-1.amazonaws.com:8883/";
-    final String mBroker1 ="tcp://a3106v8p7zalp8-ats.iot.us-east-1.amazonaws.com:8883/";
-    final String mBroker ="mqtts://a3106v8p7zalp8-ats.iot.us-east-1.amazonaws.com:8883/";
-    // 测试的Mqtt Topic
-    String mTopic;
-    // mqtt的client id
-    String mClientId ="697989f23667460a8c2023b110de6571";
-    MqttAndroidClient mSampleClient;
-    MemoryPersistence mPersistence = new MemoryPersistence();
-
-    // 证书信息
-    InputStream mCaCrtFile;
-    InputStream mCrtFile;
-    InputStream mKeyFile;
-
-
-
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -104,181 +85,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        initCert();
-
 
         return root;
-    }
-
-
-    public void conexionMqtt(){
-
-        try {
-            mSampleClient = new MqttAndroidClient(getActivity(),mBroker, mClientId);
-            final MqttConnectOptions connOpts = new MqttConnectOptions();
-            System.out.println("Connecting to broker: " + mBroker);
-
-            final String[] topicFilters=new String[]{mTopic};
-            final int[]qos={1};
-           // connOpts.setServerURIs(new String[] { mBroker });
-            connOpts.setSocketFactory(getSocketFactory(mCaCrtFile, mCrtFile, mKeyFile, ""));
-            // MQTT clearSession 参数，设置确定是否继续接受离线消息
-            connOpts.setCleanSession(false);
-            // MQTT keepalive 参数，与离线时间有关，支持多久的掉线时间
-            connOpts.setKeepAliveInterval(600);
-            connOpts.setAutomaticReconnect(true);
-            final ExecutorService executorService = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MILLISECONDS,
-                    new LinkedBlockingQueue<Runnable>());
-            mSampleClient.setCallback(new MqttCallbackExtended() {
-                public void connectComplete(boolean reconnect, String serverURI) {
-                    System.out.println("connect success");
-                    //连接成功，需要上传客户端所有的订阅关系
-                    Toast.makeText(getContext(), "connect success", Toast.LENGTH_SHORT).show();
-                    Log.w("ingreso--138", "connect success");
-                    try
-                    {
-                        mSampleClient.subscribe(topicFilters, qos);
-                    } catch(Exception me)
-                    {
-                        me.printStackTrace();
-                    }
-                }
-
-                public void connectionLost(Throwable throwable) {
-                    Log.d(TAG, "mqtt connection lost");
-                    Toast.makeText(getContext(), "mqtt connection lost", Toast.LENGTH_SHORT).show();
-                    Log.w("no ingreso--", "no success 151");
-                }
-
-                public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-
-                    String msg = "接收到订阅主题消息\n时间：" + getCurrentDataFormat() + "\nTopic:" + topic + "\n消息内容: " +
-                            new String(mqttMessage.getPayload());
-                    Log.i(TAG, msg);
-
-                    Log.w("ingreso--160", "Topic");
-                    runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            Toast.makeText(getContext(), ""+msg, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                }
-
-                public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
-                    Log.i(TAG, "deliveryComplete:" + iMqttDeliveryToken.getMessageId());
-                    Log.w("ingreso--173", "deliveryComplete");
-
-                }
-
-            });
-            mSampleClient.connect(connOpts);
-            mSampleClient.subscribe(topicFilters,qos);
-        } catch (MqttException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.w("exeption--184", e.getMessage());
-        }
-
-    }
-
-
-
-
-
-    public void initCert() {
-        try {
-            mCaCrtFile = this.getResources().openRawResource(R.raw.amazontootca3);
-            mCrtFile = this.getResources().openRawResource(R.raw.certificate);
-            mKeyFile = this.getResources().openRawResource(R.raw.privatepem);
-
-            conexionMqtt();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-   
-
-    public String getCurrentDataFormat() {
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        return format.format(date);
-    }
-
-
-    public void subcribeTopic(String topic, int qos) throws MqttException {
-        mSampleClient.subscribe(topic, qos, new IMqttMessageListener() {
-            @Override
-            public void messageArrived(String topic, MqttMessage message) throws Exception {
-                String msg = "接收到订阅主题消息\n时间：" + getCurrentDataFormat() + "\nTopic:" + topic + "\n消息内容: " +
-                        new String(message.getPayload());
-                Log.i(TAG, msg);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //mMsgText.setText(mMsgText.getText().toString() + msg + "\n-------分割线-------\n");
-                        Toast.makeText(getContext(), ""+msg, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-            }
-        });
-    }
-
-    public void unsubcribeTopic(String topic) throws MqttException {
-        mSampleClient.unsubscribe(topic);
-    }
-
-
-
-    // SSLSocketFactory 实现双向TLS认证，因为IoT Core需要双向TLS认证
-    public static SSLSocketFactory getSocketFactory(InputStream caCrtFile, InputStream crtFile, InputStream keyFile,
-                                                    String password) throws Exception {
-        Security.addProvider(new BouncyCastleProvider());
-
-        // load CA certificate
-        X509Certificate caCert = null;
-
-        BufferedInputStream bis = new BufferedInputStream(caCrtFile);
-        CertificateFactory cf = CertificateFactory.getInstance("X.509");
-
-        while (bis.available() > 0) {
-            caCert = (X509Certificate) cf.generateCertificate(bis);
-        }
-        // load client certificate
-        bis = new BufferedInputStream(crtFile);
-        X509Certificate cert = null;
-        while (bis.available() > 0) {
-            cert = (X509Certificate) cf.generateCertificate(bis);
-        }
-        // load client private cert
-        PEMParser pemParser = new PEMParser(new InputStreamReader(keyFile));
-        Object object = pemParser.readObject();
-        JcaPEMKeyConverter converter = new JcaPEMKeyConverter();
-        KeyPair key = converter.getKeyPair((PEMKeyPair) object);
-
-        KeyStore caKs = KeyStore.getInstance(KeyStore.getDefaultType());
-        caKs.load(null, null);
-        caKs.setCertificateEntry("cert-certificate", caCert);
-        TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-        tmf.init(caKs);
-
-        KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
-        ks.load(null, null);
-        ks.setCertificateEntry("certificate", cert);
-        ks.setKeyEntry("private-cert", key.getPrivate(), password.toCharArray(),
-                new java.security.cert.Certificate[]{cert});
-        KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-        kmf.init(ks, password.toCharArray());
-
-        SSLContext context = SSLContext.getInstance("TLSv1.2");
-        context.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
-
-        return context.getSocketFactory();
     }
 
 

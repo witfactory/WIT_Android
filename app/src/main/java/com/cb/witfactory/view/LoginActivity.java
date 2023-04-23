@@ -1,7 +1,5 @@
 package com.cb.witfactory.view;
 
-import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,8 +12,6 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,8 +23,6 @@ import com.cb.witfactory.data.classModel.Utils;
 import com.cb.witfactory.databinding.ActivityLoginBinding;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.LocaleHelper;
-import com.cb.witfactory.model.PreferencesHelper;
-import com.cb.witfactory.ui.register.Register3Fragment;
 
 import java.util.regex.Pattern;
 
@@ -213,6 +207,7 @@ public class LoginActivity extends AppCompatActivity implements Callfun {
             public void run() {
                 Log.v("error", s.toString());
                 Toast.makeText(getApplicationContext(), getString(R.string.invalid_email_or_password).toString(), Toast.LENGTH_SHORT).show();
+                amplifyCognito.logoutAmplify(getApplicationContext());
                 //amplifyCognito.resendCode();
             }
         });
