@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
@@ -23,6 +24,7 @@ import com.cb.witfactory.data.classModel.Utils;
 import com.cb.witfactory.databinding.ActivityLoginBinding;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.LocaleHelper;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.regex.Pattern;
 
@@ -48,6 +50,23 @@ public class LoginActivity extends AppCompatActivity implements Callfun {
         amplifyCognito = new AmplifyCognito(getApplicationContext());
         amplifyCognito.setListener(LoginActivity.this);
 
+
+        getToken();
+
+
+        // Obtener los datos enviados a través de putExtra
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String titulo = extras.getString("titulo");
+            String detalle = extras.getString("detalle");
+
+            // Utilizar el valor recibido
+            if (titulo != null && detalle != null) {
+
+                Log.d("DestinoActivity", "titulo recibido: " + titulo);
+                Toast.makeText(getApplicationContext(),titulo +" : "+ detalle, Toast.LENGTH_SHORT).show();
+            }
+        }
 
         binding.btnEs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,5 +240,22 @@ public class LoginActivity extends AppCompatActivity implements Callfun {
         } else {
             binding.btnSignUp.setBackgroundResource(R.drawable.ic_btn_inactivo);
         }
+    }
+
+    public void getToken(){
+
+        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(token -> {
+            if (!TextUtils.isEmpty(token)) {
+                Log.d("TAG", "retrieve token successful : " + token);
+                Toast.makeText(getApplicationContext(), token.toString(), Toast.LENGTH_SHORT).show();
+                Log.w("TOKEN", "token : "+ token.toString());
+            } else{
+                Log.w("TAG", "token should not be null...");
+            }
+        }).addOnFailureListener(e -> {
+            //handle e
+        }).addOnCanceledListener(() -> {
+            //handle cancel
+        }).addOnCompleteListener(task -> Log.v("TAG", "This is the token : " + task.getResult()));
     }
 }

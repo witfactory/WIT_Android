@@ -93,6 +93,7 @@ public class EspTouchApp extends Application {
         super.onTerminate();
 
         unregisterReceiver(mReceiver);
+
     }
 
     public static EspTouchApp getInstance() {
