@@ -250,7 +250,7 @@ public class AmplifyCognito {
                 if (revokeTokenError != null) {
                     Log.e("AuthQuickStart", "RevokeToken Error", revokeTokenError.getException());
                     // Optional: Use escape hatch to retry revocation of revokeTokenError.getRefreshToken().
-                    
+
                 }
             } else if (signOutResult instanceof AWSCognitoAuthSignOutResult.FailedSignOut) {
                 AWSCognitoAuthSignOutResult.FailedSignOut failedSignOutResult =
