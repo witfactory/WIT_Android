@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -20,17 +19,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.cb.witfactory.R;
 import com.cb.witfactory.adapter.DeviceAdapter;
 import com.cb.witfactory.adapter.ListValueDeviceAdapter;
 import com.cb.witfactory.data.classModel.MyDividerItemDecoration;
-import com.cb.witfactory.data.model.Device;
-import com.cb.witfactory.data.model.ValueDevice;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
-import com.cb.witfactory.data.retrofit.device.GetDeviceResponse;
-import com.cb.witfactory.data.retrofit.user.GetUserResponse;
 import com.cb.witfactory.databinding.FragmentDeviceBinding;
-import com.cb.witfactory.ui.perfil.PerfilViewModel;
+import com.cb.witfactory.model.Callfun;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +38,8 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
 
 
     private static final String TAG = DeviceFragment.class.getSimpleName();
-    private List<Device> deviceList;
-    private List<ValueDevice> valueDeviceList;
+    private List<Callfun.Device> deviceList;
+    private List<Callfun.ValueDevice> valueDeviceList;
     private DeviceAdapter mAdapter;
     private ListValueDeviceAdapter listValueDeviceAdapter;
 
@@ -64,9 +58,9 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
 
        //Horizontal
         deviceList = new ArrayList<>();
-        Device objDevice = new Device(true,"","","Dispositivo","Garaje");
-        Device objDevice2 = new Device(false,"","","Electorválvula","Cocina");
-        Device objDevice3 = new Device(true,"","","Dispositivo","Baño");
+        Callfun.Device objDevice = new Callfun.Device(true,"","","Dispositivo","Garaje");
+        Callfun.Device objDevice2 = new Callfun.Device(false,"","","Electorválvula","Cocina");
+        Callfun.Device objDevice3 = new Callfun.Device(true,"","","Dispositivo","Baño");
         deviceList.add(objDevice);
         deviceList.add(objDevice2);
         deviceList.add(objDevice3);
@@ -85,9 +79,9 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
 
         //vertical
         valueDeviceList = new ArrayList<>();
-        ValueDevice objValueDevice = new ValueDevice("","45%",false,"Humedad Relativa");
-        ValueDevice objValueDevice2 = new ValueDevice("","385ppb",true,"TVOC");
-        ValueDevice objValueDevice3 = new ValueDevice("","75 F",false,"Temperatur<");
+        Callfun.ValueDevice objValueDevice = new Callfun.ValueDevice("","45%",false,"Humedad Relativa");
+        Callfun.ValueDevice objValueDevice2 = new Callfun.ValueDevice("","385ppb",true,"TVOC");
+        Callfun.ValueDevice objValueDevice3 = new Callfun.ValueDevice("","75 F",false,"Temperatur<");
         valueDeviceList.add(objValueDevice);
         valueDeviceList.add(objValueDevice2);
         valueDeviceList.add(objValueDevice3);
@@ -121,13 +115,13 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
     }
 
     @Override
-    public void onDeviceSelected(Device device) {
+    public void onDeviceSelected(Callfun.Device device) {
         Toast.makeText(getApplicationContext(), "Selected: " + device.getTitle(), Toast.LENGTH_LONG).show();
     }
 
 
     @Override
-    public void onListValueDeviceSelected(ValueDevice device) {
+    public void onListValueDeviceSelected(Callfun.ValueDevice device) {
         Toast.makeText(getApplicationContext(), "Selected: " + device.getTitle(), Toast.LENGTH_LONG).show();
     }
 }

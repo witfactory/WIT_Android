@@ -8,6 +8,7 @@ import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult;
 import com.amplifyframework.auth.cognito.result.GlobalSignOutError;
 import com.amplifyframework.auth.cognito.result.HostedUIError;
 import com.amplifyframework.auth.cognito.result.RevokeTokenError;
+import com.amplifyframework.auth.options.AuthConfirmSignUpOptions;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.cb.witfactory.model.Callfun;
@@ -33,23 +34,25 @@ public class AmplifyCognito {
 
 
     //registro
-    public Boolean sinUp(String first_name, String user, String last_name, String country, String city,
-                         String zip_code, String address, String account_type, String telephone, String user_principal, String password) {
-        AuthSignUpOptions options = AuthSignUpOptions.builder()
 
-                .userAttribute(AuthUserAttributeKey.custom("custom:first_name"), first_name)
-                .userAttribute(AuthUserAttributeKey.custom("custom:user"), user)
-                .userAttribute(AuthUserAttributeKey.custom("custom:last_name"), last_name)
+    public Boolean sinUp2(String first_name, String user, String last_name, String country, String city,
+                         String zip_code, String address, String account_type, String telephone, String user_principal, String password,String device_id) {
+
+        AuthSignUpOptions options = AuthSignUpOptions.builder()
+                .userAttribute(AuthUserAttributeKey.email(), user)
+                .userAttribute(AuthUserAttributeKey.givenName(), first_name)
+                .userAttribute(AuthUserAttributeKey.familyName(), "Timestamp")
                 .userAttribute(AuthUserAttributeKey.custom("custom:country"), country)
                 .userAttribute(AuthUserAttributeKey.custom("custom:city"), city)
                 .userAttribute(AuthUserAttributeKey.custom("custom:zip_code"), zip_code)
                 .userAttribute(AuthUserAttributeKey.custom("custom:address"), address)
-                .userAttribute(AuthUserAttributeKey.custom("custom:account_type"), "P")
-                .userAttribute(AuthUserAttributeKey.custom("custom:telephone"), telephone)
                 .userAttribute(AuthUserAttributeKey.custom("custom:user_principal"), "")
+                .userAttribute(AuthUserAttributeKey.custom("custom:account_type"), "P")
+                .userAttribute(AuthUserAttributeKey.phoneNumber(), telephone)
+                .userAttribute(AuthUserAttributeKey.custom("custom:suite"), "dasda")
+                .userAttribute(AuthUserAttributeKey.custom("custom:appos"), "ANDROID")
+                .userAttribute(AuthUserAttributeKey.custom("custom:device_id"), device_id)
                 .build();
-
-
         Amplify.Auth.signUp(
                 user,
                 password,
@@ -70,6 +73,69 @@ public class AmplifyCognito {
         );
 
         return authSignUpResult;
+    }
+public Boolean sinUp(String first_name, String user, String last_name, String country, String city,
+                         String zip_code, String address, String account_type, String telephone, String user_principal, String password,String device_id) {
+
+        AuthSignUpOptions options = AuthSignUpOptions.builder()
+                .userAttribute(AuthUserAttributeKey.email(), "siyeke2923@chodyi.com")
+                .userAttribute(AuthUserAttributeKey.givenName(), "pepito")
+                .userAttribute(AuthUserAttributeKey.familyName(), "Timestamp")
+                .userAttribute(AuthUserAttributeKey.custom("custom:country"), "Colombia")
+                .userAttribute(AuthUserAttributeKey.custom("custom:city"), "caldas")
+                .userAttribute(AuthUserAttributeKey.custom("custom:zip_code"), "17001")
+                .userAttribute(AuthUserAttributeKey.custom("custom:address"), "address")
+                .userAttribute(AuthUserAttributeKey.custom("custom:user_principal"), "")
+                .userAttribute(AuthUserAttributeKey.custom("custom:account_type"), "P")
+                .userAttribute(AuthUserAttributeKey.phoneNumber(), telephone)
+                .userAttribute(AuthUserAttributeKey.custom("custom:suite"), "dasda")
+                .userAttribute(AuthUserAttributeKey.custom("custom:appos"), "ANDROID")
+                .userAttribute(AuthUserAttributeKey.custom("custom:device_id"), device_id)
+                .build();
+        Amplify.Auth.signUp(
+                "siyeke2923@chodyi.com",
+                "T@pi@231290.",
+                options,
+                result ->
+                {
+                    authSignUpResult = result.isSignUpComplete();
+                    Log.i("AuthQuickstart", result.toString());
+                    String sinUp = EnumVaribles.sinUp.toString();
+                    listener.onSuccess(sinUp);
+
+                },
+                error -> {
+                    Log.e("AuthQuickstart", error.toString());
+                    String sinUp = EnumVaribles.sinUp.toString();
+                    listener.onError(sinUp);
+                }
+        );
+
+        return authSignUpResult;
+    }
+
+
+    public void confirmSigUp(String code, String emailUserName) {
+        try {
+
+            Amplify.Auth.confirmSignUp(
+                    "siyeke2923@chodyi.com",
+                    code,
+                    result ->
+                    {
+                        Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete");
+                        String sinUp = EnumVaribles.confirmSigUp.toString();
+                        listener.onSuccess(sinUp);
+                    },
+                    error -> {
+                        Log.e("AuthQuickstart", error.toString());
+                        String sinUp = EnumVaribles.confirmCode.toString();
+                        listener.onError(sinUp);
+                    }
+            );
+        } catch (Exception error) {
+            Log.e("AuthQuickstart", "unexpected error: " + error);
+        }
     }
 
 
@@ -110,29 +176,6 @@ public class AmplifyCognito {
         return comfirm;
     }
 
-
-    public void confirmSigUp(String code, String emailUserName) {
-        try {
-            //   AuthUserAttributeKey email = AuthUserAttributeKey.email();
-            Amplify.Auth.confirmSignUp(
-                    emailUserName,
-                    code,
-                    result ->
-                    {
-                        Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete");
-                        String sinUp = EnumVaribles.confirmSigUp.toString();
-                        listener.onSuccess(sinUp);
-                    },
-                    error -> {
-                        Log.e("AuthQuickstart", error.toString());
-                        String sinUp = EnumVaribles.confirmCode.toString();
-                        listener.onError(sinUp);
-                    }
-            );
-        } catch (Exception error) {
-            Log.e("AuthQuickstart", "unexpected error: " + error);
-        }
-    }
 
 
     //Inicia sesión

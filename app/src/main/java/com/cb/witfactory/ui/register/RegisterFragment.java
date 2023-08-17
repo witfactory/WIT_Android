@@ -31,7 +31,6 @@ public class RegisterFragment extends Fragment {
     private RegisterFragmentBinding binding;
     private PreferencesHelper preferencesHelper;
 
-
     String txtUser="", txtEmail="", txtPin="", txtComfirmPin="";
 
     public static RegisterFragment newInstance() {
@@ -157,10 +156,6 @@ public class RegisterFragment extends Fragment {
                         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_registro);
                         navController.navigateUp();
                         navController.navigate(R.id.nenu_register2);
-
-
-
-
                     }
                 }
             }

@@ -1,4 +1,4 @@
-package com.cb.witfactory.data.retrofit;
+package com.cb.witfactory.data.retrofit.connection;
 
 import com.cb.witfactory.data.retrofit.device.ObjectResponseDevice;
 import com.cb.witfactory.data.retrofit.user.ObjectResponseUser;

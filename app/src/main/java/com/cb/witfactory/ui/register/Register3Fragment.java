@@ -5,6 +5,7 @@ import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiTh
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -126,6 +127,10 @@ public class Register3Fragment extends Fragment implements Callfun {
                 }
                 if (terminosCondiciones && politicaPrivacidad) {
 
+                    String device_id = Settings.Secure.getString(getActivity().getContentResolver(),
+                            Settings.Secure.ANDROID_ID);
+
+
                     String first_name = PreferencesHelper.getFirstName("first_name", "");
                     String user = PreferencesHelper.getFirstName("user", "");
                     String last_name = PreferencesHelper.getFirstName("last_name", "demos");
@@ -138,7 +143,7 @@ public class Register3Fragment extends Fragment implements Callfun {
                     String user_principal = PreferencesHelper.getFirstName("user_principal", "");
                     String password = PreferencesHelper.getFirstName("password", "");
                     Log.v("", password);
-                    amplifyCognito.sinUp(first_name, user, "demos", country, city, zip_code, address, account_type, telephone, user_principal, password);
+                    amplifyCognito.sinUp(first_name, user, "demos", country, city, zip_code, address, account_type, telephone, user_principal, password,device_id);
                 }
             }
         });

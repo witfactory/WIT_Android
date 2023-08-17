@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cb.witfactory.R;
-import com.cb.witfactory.data.model.ValueDevice;
+import com.cb.witfactory.model.Callfun;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +21,8 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
         implements Filterable {
 
     private Context context;
-    private List<ValueDevice> deviceList;
-    private List<ValueDevice> deviceListFiltered;
+    private List<Callfun.ValueDevice> deviceList;
+    private List<Callfun.ValueDevice> deviceListFiltered;
     private ValueDeviceAdapterListener listener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -49,7 +49,7 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
         }
     }
 
-    public ListValueDeviceAdapter(Context context, List<ValueDevice> deviceList, ValueDeviceAdapterListener listener) {
+    public ListValueDeviceAdapter(Context context, List<Callfun.ValueDevice> deviceList, ValueDeviceAdapterListener listener) {
         this.context = context;
         this.listener = listener;
         this.deviceList = deviceList;
@@ -66,7 +66,7 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final ValueDevice device = deviceListFiltered.get(position);
+        final Callfun.ValueDevice device = deviceListFiltered.get(position);
         holder.title_device.setText(device.getTitle());
         holder.txt_description.setText(device.getDescription());
 
@@ -88,8 +88,8 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
                 if (charString.isEmpty()) {
                     deviceListFiltered = deviceList;
                 } else {
-                    List<ValueDevice> filteredList = new ArrayList<>();
-                    for (ValueDevice row : deviceList) {
+                    List<Callfun.ValueDevice> filteredList = new ArrayList<>();
+                    for (Callfun.ValueDevice row : deviceList) {
 
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
@@ -108,13 +108,13 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                deviceListFiltered = (ArrayList<ValueDevice>) filterResults.values;
+                deviceListFiltered = (ArrayList<Callfun.ValueDevice>) filterResults.values;
                 notifyDataSetChanged();
             }
         };
     }
 
     public interface ValueDeviceAdapterListener {
-        void onListValueDeviceSelected(ValueDevice device);
+        void onListValueDeviceSelected(Callfun.ValueDevice device);
     }
 }

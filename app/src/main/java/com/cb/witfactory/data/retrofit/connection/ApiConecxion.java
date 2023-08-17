@@ -1,11 +1,8 @@
-package com.cb.witfactory.data.retrofit;
+package com.cb.witfactory.data.retrofit.connection;
 
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
-import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -27,7 +24,7 @@ public class ApiConecxion {
 
         String baseUrlService = "https://api.witfactory.com.co/staging/";
 
-        //si api service es null se va instaciar de lo contrario va a devolver el objeto
+        //si api service es null se va instanciar de lo contrario va a devolver el objeto
         if (API_SERVICE == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(baseUrlService)

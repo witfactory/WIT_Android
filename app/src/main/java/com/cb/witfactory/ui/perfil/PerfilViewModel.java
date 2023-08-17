@@ -5,7 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.cb.witfactory.data.retrofit.ApiConecxion;
+import com.cb.witfactory.data.retrofit.connection.ApiConecxion;
 import com.cb.witfactory.data.retrofit.user.ObjectResponseUser;
 import com.cb.witfactory.data.retrofit.user.GetUserResponse;
 
