@@ -130,20 +130,19 @@ public class Register3Fragment extends Fragment implements Callfun {
                     String device_id = Settings.Secure.getString(getActivity().getContentResolver(),
                             Settings.Secure.ANDROID_ID);
 
-
-                    String first_name = PreferencesHelper.getFirstName("first_name", "");
-                    String user = PreferencesHelper.getFirstName("user", "");
-                    String last_name = PreferencesHelper.getFirstName("last_name", "demos");
-                    String country = PreferencesHelper.getFirstName("country", "");
-                    String city = PreferencesHelper.getFirstName("city", "");
-                    String zip_code = PreferencesHelper.getFirstName("zip_code", "");
-                    String address = PreferencesHelper.getFirstName("address", "");
-                    String account_type = PreferencesHelper.getFirstName("account_type", "P");
-                    String telephone = PreferencesHelper.getFirstName("telephone", "");
-                    String user_principal = PreferencesHelper.getFirstName("user_principal", "");
-                    String password = PreferencesHelper.getFirstName("password", "");
+                    String email = PreferencesHelper.getEmail("email", "");
+                   // String first_name = PreferencesHelper.getFirstName("first_name", "");
+                    String user = PreferencesHelper.getUser("user", "");
+                    String last_name = PreferencesHelper.getLastName("last_name", "demos");
+                    String country = PreferencesHelper.getCountry("country", "");
+                    String city = PreferencesHelper.getCity("city", "");
+                    String zip_code = PreferencesHelper.getZipCode("zip_code", "");
+                    String address = PreferencesHelper.getAddress("address", "");
+                    String account_type = PreferencesHelper.getAccountType("account_type", "P");
+                    String telephone = PreferencesHelper.getTelephone("telephone", "");
+                    String password = PreferencesHelper.getPassword("password", "");
                     Log.v("", password);
-                    amplifyCognito.sinUp(first_name, user, "demos", country, city, zip_code, address, account_type, telephone, user_principal, password,device_id);
+                    amplifyCognito.sinUp(email, user, last_name, country, city, zip_code, address, account_type, telephone, password,device_id);
                 }
             }
         });

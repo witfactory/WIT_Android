@@ -74,27 +74,27 @@ public class AmplifyCognito {
 
         return authSignUpResult;
     }
-public Boolean sinUp(String first_name, String user, String last_name, String country, String city,
-                         String zip_code, String address, String account_type, String telephone, String user_principal, String password,String device_id) {
+public Boolean sinUp(String email, String user, String last_name, String country, String city,
+                         String zip_code, String address, String account_type, String telephone, String password,String device_id) {
 
         AuthSignUpOptions options = AuthSignUpOptions.builder()
-                .userAttribute(AuthUserAttributeKey.email(), "siyeke2923@chodyi.com")
-                .userAttribute(AuthUserAttributeKey.givenName(), "pepito")
-                .userAttribute(AuthUserAttributeKey.familyName(), "Timestamp")
-                .userAttribute(AuthUserAttributeKey.custom("custom:country"), "Colombia")
-                .userAttribute(AuthUserAttributeKey.custom("custom:city"), "caldas")
-                .userAttribute(AuthUserAttributeKey.custom("custom:zip_code"), "17001")
-                .userAttribute(AuthUserAttributeKey.custom("custom:address"), "address")
-                .userAttribute(AuthUserAttributeKey.custom("custom:user_principal"), "")
-                .userAttribute(AuthUserAttributeKey.custom("custom:account_type"), "P")
+                .userAttribute(AuthUserAttributeKey.email(), email)
+                .userAttribute(AuthUserAttributeKey.givenName(), user)
+                .userAttribute(AuthUserAttributeKey.familyName(), last_name)
+                .userAttribute(AuthUserAttributeKey.custom("custom:country"), country)
+                .userAttribute(AuthUserAttributeKey.custom("custom:city"), city)
+                .userAttribute(AuthUserAttributeKey.custom("custom:zip_code"), zip_code)
+                .userAttribute(AuthUserAttributeKey.custom("custom:address"), address)
+                .userAttribute(AuthUserAttributeKey.custom("custom:user_principal"), user)
+                .userAttribute(AuthUserAttributeKey.custom("custom:account_type"), account_type)
                 .userAttribute(AuthUserAttributeKey.phoneNumber(), telephone)
                 .userAttribute(AuthUserAttributeKey.custom("custom:suite"), "dasda")
                 .userAttribute(AuthUserAttributeKey.custom("custom:appos"), "ANDROID")
                 .userAttribute(AuthUserAttributeKey.custom("custom:device_id"), device_id)
                 .build();
         Amplify.Auth.signUp(
-                "siyeke2923@chodyi.com",
-                "T@pi@231290.",
+                user,
+                password,
                 options,
                 result ->
                 {
@@ -119,7 +119,7 @@ public Boolean sinUp(String first_name, String user, String last_name, String co
         try {
 
             Amplify.Auth.confirmSignUp(
-                    "siyeke2923@chodyi.com",
+                    emailUserName,
                     code,
                     result ->
                     {
