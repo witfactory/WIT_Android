@@ -1,5 +1,7 @@
 package com.cb.witfactory.view;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +10,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -17,6 +20,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.databinding.DataBindingUtil;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.core.Amplify;
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.AmplifyCognito;
 import com.cb.witfactory.data.classModel.Utils;
@@ -53,8 +58,6 @@ public class MainActivity extends Activity implements Callfun {
 
         amplifyCognito = new AmplifyCognito(getApplicationContext());
         amplifyCognito.setListener(MainActivity.this);
-
-
 
         //lenguage
         if (locale.equals(null) || locale.equals("")) {

@@ -83,6 +83,34 @@ public class AmplifyCognito {
 public Boolean sinUp(String email, String user, String last_name, String country, String city,
                          String zip_code, String address, String account_type, String telephone, String password,String device_id) {
 
+<<<<<<< HEAD
+=======
+        AuthSignUpOptions options = AuthSignUpOptions.builder()
+                .userAttribute(AuthUserAttributeKey.email(), email)
+                .userAttribute(AuthUserAttributeKey.givenName(), user)
+                .userAttribute(AuthUserAttributeKey.familyName(), last_name)
+                .userAttribute(AuthUserAttributeKey.custom("custom:country"), country)
+                .userAttribute(AuthUserAttributeKey.custom("custom:city"), city)
+                .userAttribute(AuthUserAttributeKey.custom("custom:zip_code"), zip_code)
+                .userAttribute(AuthUserAttributeKey.custom("custom:address"), address)
+                .userAttribute(AuthUserAttributeKey.custom("custom:user_principal"), user)
+                .userAttribute(AuthUserAttributeKey.custom("custom:account_type"), account_type)
+                .userAttribute(AuthUserAttributeKey.phoneNumber(), telephone)
+                .userAttribute(AuthUserAttributeKey.custom("custom:suite"), "dasda")
+                .userAttribute(AuthUserAttributeKey.custom("custom:appos"), "ANDROID")
+                .userAttribute(AuthUserAttributeKey.custom("custom:device_id"), device_id)
+                .build();
+        Amplify.Auth.signUp(
+                user,
+                password,
+                options,
+                result ->
+                {
+                    authSignUpResult = result.isSignUpComplete();
+                    Log.i("AuthQuickstart", result.toString());
+                    String sinUp = EnumVaribles.sinUp.toString();
+                    listener.onSuccess(sinUp);
+>>>>>>> f17e0e3f08579580cc71595f51d3324d31bd9b87
 
 
 
