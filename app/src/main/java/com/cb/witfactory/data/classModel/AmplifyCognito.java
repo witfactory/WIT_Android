@@ -83,62 +83,44 @@ public class AmplifyCognito {
 public Boolean sinUp(String first_name, String user, String last_name, String country, String city,
                          String zip_code, String address, String account_type, String telephone, String user_principal, String password,String device_id) {
 
-      /*  AuthSignUpOptions options = AuthSignUpOptions.builder()
-                .userAttribute(AuthUserAttributeKey.email(), "vayavoj276@bagonew.com")
-                .userAttribute(AuthUserAttributeKey.givenName(), "pepito")
-                .userAttribute(AuthUserAttributeKey.familyName(), "Timestamp")
-                .userAttribute(AuthUserAttributeKey.custom("custom:country"), "Colombia")
-                .userAttribute(AuthUserAttributeKey.custom("custom:city"), "caldas")
-                .userAttribute(AuthUserAttributeKey.custom("custom:zip_code"), "17001")
-                .userAttribute(AuthUserAttributeKey.custom("custom:address"), "address")
-                .userAttribute(AuthUserAttributeKey.custom("custom:user_principal"), "")
-                .userAttribute(AuthUserAttributeKey.custom("custom:account_type"), "P")
-                .userAttribute(AuthUserAttributeKey.phoneNumber(), "3154325166")
-                .userAttribute(AuthUserAttributeKey.custom("custom:suite"), "dasda")
-                .userAttribute(AuthUserAttributeKey.custom("custom:appos"), "ANDROID")
-                .userAttribute(AuthUserAttributeKey.custom("custom:device_id"), device_id)
-                .build();*/
-
-
-   /* List<AuthUserAttribute> userAttributes = new ArrayList<>();
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.email(), user));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.givenName(), first_name));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.familyName(), last_name));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:country"), "Colombia"));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:city"), city));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:zip_code"), zip_code));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.address(), address));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:user_principal"), ""));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:account_type"), "P"));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.phoneNumber(), telephone));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:suite"), "sdsd"));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:appos"), "ANDROID"));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:device_id"), device_id));*/
 
 
 
+    List<AuthUserAttribute> userAttributes = new ArrayList<>();
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.email(), user));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.givenName(), first_name));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.familyName(), last_name));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:country"), country));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:city"), city));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:zip_code"), zip_code));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:address"), address));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:user_principal"), user));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:account_type"), account_type));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:country"), account_type));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.phoneNumber(), "+573144321234"));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:suite"), "rndm"));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:appos"), "ANDROID"));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:device_id"), device_id));
 
-    ArrayList<AuthUserAttribute> userAttributes = new ArrayList<>();
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.email(), user));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.givenName(), first_name));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.familyName(), last_name));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:country"), "Colombia"));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:city"), city));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:zip_code"), zip_code));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.address(), address));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:user_principal"), ""));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:account_type"), "P"));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.phoneNumber(), telephone));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:suite"), "sdsd"));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:appos"), "ANDROID"));
-    userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:device_id"), device_id));
+            AuthSignUpOptions options = AuthSignUpOptions.builder().userAttributes(userAttributes).build();
 
     Amplify.Auth.signUp(
             user,
             password,
-            AuthSignUpOptions.builder().userAttributes(userAttributes).build(),
-            result -> Log.i("AuthQuickstart", result.toString()),
-            error -> Log.e("AuthQuickstart", error.toString())
+            options,
+            result ->
+            {
+                authSignUpResult = result.isSignUpComplete();
+                Log.i("AuthQuickstart", result.toString());
+                String sinUp = EnumVaribles.sinUp.toString();
+                listener.onSuccess(sinUp);
+
+            },
+            error -> {
+                Log.e("AuthQuickstart", error.toString());
+                String sinUp = EnumVaribles.sinUp.toString();
+                listener.onError("error");
+            }
     );
 
         return authSignUpResult;
@@ -284,7 +266,7 @@ public Boolean sinUp(String first_name, String user, String last_name, String co
                 code,
                 () ->{
                     Log.i("AuthQuickstart", "New password confirmed");
-                    listener.onSuccess("ok");
+                    listener.onSuccess("comfirmcode");
                 },
                 error ->{
                     Log.e("AuthQuickstart", error.toString());

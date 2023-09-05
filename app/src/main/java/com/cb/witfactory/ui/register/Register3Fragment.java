@@ -3,6 +3,8 @@ package com.cb.witfactory.ui.register;
 import static android.content.Context.INPUT_METHOD_SERVICE;
 import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
 
+import static org.chromium.base.ContextUtils.getApplicationContext;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -29,6 +31,7 @@ import androidx.navigation.Navigation;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.AmplifyCognito;
+import com.cb.witfactory.data.classModel.Utils;
 import com.cb.witfactory.databinding.Register3FragmentBinding;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.EnumVaribles;
@@ -440,23 +443,34 @@ public class Register3Fragment extends Fragment implements Callfun {
     @Override
     public void onSuccess(String s) {
         try {
-            if (s.equals(EnumVaribles.sinUp.toString())) {
-                modalOtp();
-            }
 
-            if (s.equals(EnumVaribles.confirmCode.toString())) {
-                Toast.makeText(getContext(), "Valida tu correo", Toast.LENGTH_SHORT).show();
-            }
-            //    Toast.makeText(getContext(), s.toString(), Toast.LENGTH_LONG).show();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (s.equals(EnumVaribles.sinUp.toString())) {
+                        modalOtp();
+                    }
+
+                    if (s.equals(EnumVaribles.confirmCode.toString())) {
+                        Toast.makeText(getContext(), "Valida tu correo", Toast.LENGTH_SHORT).show();
+                    }
+                    //    Toast.makeText(getContext(), s.toString(), Toast.LENGTH_LONG).show();
 
 
-            if (s.equals("resendCodeEmail")) {
-                Toast.makeText(getContext(), "resendCodeEmail", Toast.LENGTH_SHORT).show();
-            }
+                    if (s.equals("resendCodeEmail")) {
+                        Toast.makeText(getContext(), "resendCodeEmail", Toast.LENGTH_SHORT).show();
+                    }
 
-            if (s.equals(EnumVaribles.confirmSigUp.toString())) {
-                Toast.makeText(getContext(), "s+" + s, Toast.LENGTH_SHORT).show();
-            }
+                    if (s.equals(EnumVaribles.confirmSigUp.toString())) {
+                        Toast.makeText(getContext(), "s+" + s, Toast.LENGTH_SHORT).show();
+                    }
+                    if (s.equals(EnumVaribles.confirmCode.toString())) {
+                        Utils.goToHome(getApplicationContext());
+                    }
+
+
+                }
+            });
 
 
         } catch (Exception e) {
