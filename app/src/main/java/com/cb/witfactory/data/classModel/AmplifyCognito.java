@@ -88,7 +88,7 @@ public Boolean sinUp(String email, String user, String last_name, String country
 
     List<AuthUserAttribute> userAttributes = new ArrayList<>();
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.email(), user));
-            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.givenName(), first_name));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.givenName(), last_name));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.familyName(), last_name));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:country"), country));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:city"), city));
@@ -97,7 +97,7 @@ public Boolean sinUp(String email, String user, String last_name, String country
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:user_principal"), user));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:account_type"), account_type));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:country"), account_type));
-            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.phoneNumber(), "+573144321234"));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.phoneNumber(), "+57"+telephone));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:suite"), "rndm"));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:appos"), "ANDROID"));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:device_id"), device_id));
@@ -119,7 +119,7 @@ public Boolean sinUp(String email, String user, String last_name, String country
             error -> {
                 Log.e("AuthQuickstart", error.toString());
                 String sinUp = EnumVaribles.sinUp.toString();
-                listener.onError("error");
+                listener.onError(sinUp);
             }
     );
 

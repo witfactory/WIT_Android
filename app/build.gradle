@@ -73,9 +73,9 @@ dependencies {
     // glide image library
     implementation 'com.github.bumptech.glide:glide:4.3.1'
 
-
     //alert
     implementation 'com.github.f0ris.sweetalert:library:1.6.2'
+
 
 
     //retrofit

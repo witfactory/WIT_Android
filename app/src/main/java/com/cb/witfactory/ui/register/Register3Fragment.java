@@ -37,6 +37,8 @@ import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.EnumVaribles;
 import com.cb.witfactory.model.PreferencesHelper;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class Register3Fragment extends Fragment implements Callfun {
 
     private Register3ViewModel mViewModel;
@@ -134,7 +136,7 @@ public class Register3Fragment extends Fragment implements Callfun {
                             Settings.Secure.ANDROID_ID);
 
                     String email = PreferencesHelper.getEmail("email", "");
-                   // String first_name = PreferencesHelper.getFirstName("first_name", "");
+                    String first_name = PreferencesHelper.getFirstName("first_name", "");
                     String user = PreferencesHelper.getUser("user", "");
                     String last_name = PreferencesHelper.getLastName("last_name", "demos");
                     String country = PreferencesHelper.getCountry("country", "");
@@ -145,7 +147,7 @@ public class Register3Fragment extends Fragment implements Callfun {
                     String telephone = PreferencesHelper.getTelephone("telephone", "");
                     String password = PreferencesHelper.getPassword("password", "");
                     Log.v("", password);
-                    amplifyCognito.sinUp(email, user, last_name, country, city, zip_code, address, account_type, telephone, password,device_id);
+                    amplifyCognito.sinUp(email, user, last_name, country, city, zip_code, address, account_type, telephone, password, device_id);
                 }
             }
         });
@@ -484,21 +486,38 @@ public class Register3Fragment extends Fragment implements Callfun {
         ///' modalOtp();
         //  Toast.makeText(getContext(), "resendCodeEmail", Toast.LENGTH_SHORT).show();
         try {
-            if (s.equals(EnumVaribles.sinUp.toString())) {
-                modalOtp();
-            }
 
-            if (s.equals(EnumVaribles.confirmCode.toString())) {
-                Toast.makeText(getContext(), "error tu correo", Toast.LENGTH_SHORT).show();
-            }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (s.equals(EnumVaribles.sinUp.toString())) {
+                        alerta("Correo registrado", "Valida los datos");
+                    }
 
-            if (s.equals("resendCodeEmail")) {
-                Toast.makeText(getContext(), "resendCodeEmail", Toast.LENGTH_SHORT).show();
-            }
+                    if (s.equals(EnumVaribles.confirmCode.toString())) {
+                        alerta("Código erroneo", "Valida los datos");
+                    }
+
+                    if (s.equals("resendCodeEmail")) {
+                        alerta("Código erroneo", "Valida los datos");
+                    }
+                }
+            });
 
         } catch (Exception e) {
             Log.v("error callback", e.getMessage().toString());
+            alerta("Correo ya registrado o invalido", "Valida los datos");
         }
+    }
+
+
+    public void alerta(String titulo, String mensaje) {
+        new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText(titulo)
+                .setContentText(mensaje)
+                .setConfirmText("OK")
+                .showCancelButton(true)
+                .show();
     }
 
     private void modalOtp() {
