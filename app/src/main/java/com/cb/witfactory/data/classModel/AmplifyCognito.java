@@ -2,6 +2,7 @@ package com.cb.witfactory.data.classModel;
 
 import android.content.Context;
 
+import com.amplifyframework.auth.AuthUserAttribute;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession;
 import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult;
@@ -16,6 +17,9 @@ import com.cb.witfactory.model.EnumVaribles;
 import com.cb.witfactory.model.PreferencesHelper;
 
 import org.chromium.base.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AmplifyCognito {
 
@@ -74,24 +78,30 @@ public class AmplifyCognito {
 
         return authSignUpResult;
     }
-public Boolean sinUp(String email, String user, String last_name, String country, String city,
-                         String zip_code, String address, String account_type, String telephone, String password,String device_id) {
 
-        AuthSignUpOptions options = AuthSignUpOptions.builder()
-                .userAttribute(AuthUserAttributeKey.email(), email)
-                .userAttribute(AuthUserAttributeKey.givenName(), user)
-                .userAttribute(AuthUserAttributeKey.familyName(), last_name)
-                .userAttribute(AuthUserAttributeKey.custom("custom:country"), country)
-                .userAttribute(AuthUserAttributeKey.custom("custom:city"), city)
-                .userAttribute(AuthUserAttributeKey.custom("custom:zip_code"), zip_code)
-                .userAttribute(AuthUserAttributeKey.custom("custom:address"), address)
-                .userAttribute(AuthUserAttributeKey.custom("custom:user_principal"), user)
-                .userAttribute(AuthUserAttributeKey.custom("custom:account_type"), account_type)
-                .userAttribute(AuthUserAttributeKey.phoneNumber(), telephone)
-                .userAttribute(AuthUserAttributeKey.custom("custom:suite"), "dasda")
-                .userAttribute(AuthUserAttributeKey.custom("custom:appos"), "ANDROID")
-                .userAttribute(AuthUserAttributeKey.custom("custom:device_id"), device_id)
-                .build();
+    public Boolean sinUp(String email, String user, String last_name, String country, String city,
+                         String zip_code, String address, String account_type, String telephone, String password, String device_id) {
+
+        List<AuthUserAttribute> userAttributes = new ArrayList<>();
+        userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.email(), email));
+        userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.givenName(), user));
+        userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.familyName(), last_name));
+        userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:country"), country));
+        userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:city"), city));
+        userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:zip_code"), zip_code));
+        userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:address"), address));
+        userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:user_principal"), user));
+        userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:account_type"), account_type));
+        userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:country"), account_type));
+        userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.phoneNumber(), "+51992406360"));
+        userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:suite"), "rndm"));
+        userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:appos"), "ANDROID"));
+        userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:device_id"), device_id));
+
+        AuthSignUpOptions options = AuthSignUpOptions.builder().userAttributes(
+                userAttributes
+        ).build();
+
         Amplify.Auth.signUp(
                 user,
                 password,
