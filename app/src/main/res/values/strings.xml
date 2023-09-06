@@ -218,4 +218,6 @@
     <string name="general_activity">General activity log</string>
     <string name="general_activity2">Below is the date of the last 30 days. See the full history of your devices.</string>
     <string name="filter_device">Filter by device</string>
+
+
 </resources>

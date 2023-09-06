@@ -71,7 +71,6 @@ public class MainActivity extends Activity implements Callfun {
         Animation hold = AnimationUtils.loadAnimation(this, R.anim.hold);
         final Animation translateScale = AnimationUtils.loadAnimation(this, R.anim.translate_scale);
 
-
         translateScale.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -164,20 +163,7 @@ public class MainActivity extends Activity implements Callfun {
     public void validateInternet(){
         if(!Utils.internetstaus(getApplicationContext())){
 
-            SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
-
-            pDialog.setTitleText("Sin Internet");
-            pDialog.setContentText("Sin Conexión a internet!");
-            pDialog.setConfirmText("Reintentar");
-            pDialog.setCancelable(false);
-            pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sDialog) {
-                            sDialog.dismissWithAnimation();
-                            validateInternet();
-                        }
-                    })
-                    .show();
+           Utils.aletSinInternet(this);
         }else{
             amplifyCognito.validarAuth();
         }

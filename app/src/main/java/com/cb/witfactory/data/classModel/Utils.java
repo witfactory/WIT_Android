@@ -5,12 +5,16 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.cb.witfactory.R;
 import com.cb.witfactory.view.HomeActivity;
 import com.cb.witfactory.view.LoginActivity;
+import com.cb.witfactory.view.MainActivity;
 import com.cb.witfactory.view.WitMenu;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Utils {
 
@@ -66,6 +70,24 @@ public class Utils {
         return false;
     }
 
+    //alert internet
+    public  static void aletSinInternet(Context context){
+        SweetAlertDialog pDialog = new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE);
+
+        pDialog.setTitleText(context.getString(R.string.sinInternet));
+        pDialog.setContentText(context.getString(R.string.sinInternetDescripcion));
+        pDialog.setConfirmText(context.getString(R.string.text_retry));
+        pDialog.setCancelable(false);
+        pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.dismissWithAnimation();
+                        goToMain(context);
+                    }
+                })
+                .show();
+    }
+
 
     // Function to validate the password.
     public static boolean
@@ -113,6 +135,12 @@ public class Utils {
 
     public static void goToLoginRegister(Context context) {
         Intent intent = new Intent(context, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
+    public static void goToMain(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
