@@ -29,6 +29,8 @@ import com.cb.witfactory.databinding.ActivityMainBinding;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.LocaleHelper;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class MainActivity extends Activity implements Callfun {
 
     private ActivityMainBinding binding;
@@ -114,7 +116,8 @@ public class MainActivity extends Activity implements Callfun {
         binding.imgLogo.startAnimation(hold);
 
 
-      amplifyCognito.validarAuth();
+        validateInternet();
+
 
     }
 
@@ -156,5 +159,27 @@ public class MainActivity extends Activity implements Callfun {
 
         String error = getString(R.string.something_went);
         Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
+    }
+
+    public void validateInternet(){
+        if(!Utils.internetstaus(getApplicationContext())){
+
+            SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
+
+            pDialog.setTitleText("Sin Internet");
+            pDialog.setContentText("Sin Conexión a internet!");
+            pDialog.setConfirmText("Reintentar");
+            pDialog.setCancelable(false);
+            pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            sDialog.dismissWithAnimation();
+                            validateInternet();
+                        }
+                    })
+                    .show();
+        }else{
+            amplifyCognito.validarAuth();
+        }
     }
 }

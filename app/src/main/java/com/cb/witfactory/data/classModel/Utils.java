@@ -2,6 +2,8 @@ package com.cb.witfactory.data.classModel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.cb.witfactory.view.HomeActivity;
 import com.cb.witfactory.view.LoginActivity;
@@ -13,11 +15,61 @@ import java.util.regex.Pattern;
 public class Utils {
 
 
+    public static boolean internetstaus(Context context) {
+        Boolean status = false;
+
+        if (isNetDisponible(context)) {
+            if (isNetDisponible(context)) {
+                if (isOnlineNet()) {
+                    status = true;
+                } else {
+                    status = false;
+                }
+            } else {
+                status = false;
+            }
+        } else {
+            status = false;
+        }
+
+        return status;
+
+    }
+
+    //validate internert
+    public static  boolean isNetDisponible(Context context) {
+
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo actNetInfo = connectivityManager.getActiveNetworkInfo();
+
+        return (actNetInfo != null && actNetInfo.isConnected());
+    }
+
+    //
+    // Para comprobar si hay acceso a internet:
+
+    public static Boolean isOnlineNet() {
+
+        try {
+            Process p = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.es");
+
+            int val = p.waitFor();
+            boolean reachable = (val == 0);
+            return reachable;
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     // Function to validate the password.
     public static boolean
-    isValidPassword(String password)
-    {
+    isValidPassword(String password) {
 
         // Regex to check valid password.
         String regex = "^(?=.*[0-9])"
