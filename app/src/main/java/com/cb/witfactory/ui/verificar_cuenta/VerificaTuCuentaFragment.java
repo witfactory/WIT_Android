@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.cb.witfactory.databinding.FragmentVerificaTuCuentaBinding;
-import com.cb.witfactory.ui.register.view.HomeActivity;
+import com.cb.witfactory.view.HomeActivity;
 
 public class VerificaTuCuentaFragment extends Fragment {
 

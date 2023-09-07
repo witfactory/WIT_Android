@@ -13,12 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.Utils;
@@ -195,7 +192,7 @@ public class RegisterFragment extends Fragment {
 
     public void loadPreference(){
 
-        String user = PreferencesHelper.getFirstName("first_name", "");
+        String user = PreferencesHelper.getFirstName("user", "");
         String email = PreferencesHelper.getEmail("email", "");
         String password = PreferencesHelper.getUser("password", "");
 
@@ -203,6 +200,7 @@ public class RegisterFragment extends Fragment {
         binding.txtEmail.setText(email);
         binding.txtComfirmPin.setText(password);
         binding.txtPin.setText(password);
+        validateData();
 
     }
 

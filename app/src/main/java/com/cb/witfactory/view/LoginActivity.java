@@ -1,4 +1,4 @@
-package com.cb.witfactory.ui.register.view;
+package com.cb.witfactory.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,7 @@ import com.cb.witfactory.data.classModel.Utils;
 import com.cb.witfactory.databinding.ActivityLoginBinding;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.LocaleHelper;
+import com.cb.witfactory.model.PreferencesHelper;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.regex.Pattern;
@@ -38,12 +40,17 @@ public class LoginActivity extends AppCompatActivity implements Callfun {
     AmplifyCognito amplifyCognito = null;
     String mail = "";
     String password = "";
+    private PreferencesHelper preferencesHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+        preferencesHelper = new PreferencesHelper(getApplicationContext());
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         locale = getPersistedLocale(getApplicationContext());
@@ -52,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements Callfun {
 
 
         getToken();
+        loadData();
 
 
         // Obtener los datos enviados a través de putExtra
@@ -64,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements Callfun {
             if (titulo != null && detalle != null) {
 
                 Log.d("DestinoActivity", "titulo recibido: " + titulo);
-                Toast.makeText(getApplicationContext(),titulo +" : "+ detalle, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), titulo + " : " + detalle, Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -151,6 +159,21 @@ public class LoginActivity extends AppCompatActivity implements Callfun {
                 startActivity(intent);
             }
         });
+
+
+        binding.savesession.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean flag) {
+                if (flag) {
+                    preferencesHelper.setSaveSession("savesession", binding.txtNameUser.getText().toString());
+
+                } else {
+                    preferencesHelper.setSaveSession("savesession", "");
+
+                }
+            }
+        });
+
     }
 
 
@@ -242,14 +265,14 @@ public class LoginActivity extends AppCompatActivity implements Callfun {
         }
     }
 
-    public void getToken(){
+    public void getToken() {
 
         FirebaseMessaging.getInstance().getToken().addOnSuccessListener(token -> {
             if (!TextUtils.isEmpty(token)) {
                 Log.d("TAG", "retrieve token successful : " + token);
                 Toast.makeText(getApplicationContext(), token.toString(), Toast.LENGTH_SHORT).show();
-                Log.w("TOKEN", "token : "+ token.toString());
-            } else{
+                Log.w("TOKEN", "token : " + token.toString());
+            } else {
                 Log.w("TAG", "token should not be null...");
             }
         }).addOnFailureListener(e -> {
@@ -257,5 +280,17 @@ public class LoginActivity extends AppCompatActivity implements Callfun {
         }).addOnCanceledListener(() -> {
             //handle cancel
         }).addOnCompleteListener(task -> Log.v("TAG", "This is the token : " + task.getResult()));
+    }
+
+
+    public void loadData() {
+
+
+        String correo = PreferencesHelper.getSaveSession("savesession", "");
+
+        if (!correo.isEmpty()) {
+            binding.savesession.setChecked(true);
+            binding.txtNameUser.setText(correo);
+        }
     }
 }

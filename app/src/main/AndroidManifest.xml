@@ -31,7 +31,7 @@
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity"
         android:fullBackupContent="@xml/backup_descriptor"
         android:usesCleartextTraffic="true"
-        android:allowClearUserData="true">
+        android:allowClearUserData="false">
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
 
@@ -40,33 +40,33 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.register.view.ResetPassWordActivity"
+            android:name=".view.ResetPassWordActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.register.view.RegistroActivity"
-            android:exported="false"
-            android:theme="@style/Theme.WitFactory.NoActionBar"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.register.view.HomeActivity"
+            android:name=".view.RegistroActivity"
             android:exported="false"
             android:theme="@style/Theme.WitFactory.NoActionBar"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.register.view.WitMenu"
+            android:name=".view.HomeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.WitFactory.NoActionBar"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.WitMenu"
             android:exported="false"
             android:label="@string/title_activity_login_menu"
             android:theme="@style/Theme.WitFactory.NoActionBar"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.register.view.LoginActivity"
+            android:name=".view.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login_menu"
             android:theme="@style/Theme.WitFactory.NoActionBar"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.register.view.MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.WitFactory.NoActionBar"
             android:screenOrientation="portrait" >

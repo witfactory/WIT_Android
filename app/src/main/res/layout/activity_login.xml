@@ -87,7 +87,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/txt_name_user"
+                            android:hint="@string/email"
                             android:paddingBottom="@dimen/sp10"
                             android:textColorHint="@color/text_login"
                             app:boxStrokeColor="@color/dark_greenish_blue"
@@ -139,6 +139,7 @@
 
                                 <com.google.android.material.switchmaterial.SwitchMaterial
                                     style="@style/SwitchButtonStyle"
+                                    android:id="@+id/savesession"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="false" />

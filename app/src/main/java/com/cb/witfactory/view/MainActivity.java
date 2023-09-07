@@ -1,4 +1,4 @@
-package com.cb.witfactory.ui.register.view;
+package com.cb.witfactory.view;
 
 import android.app.Activity;
 import android.content.Context;

@@ -172,6 +172,18 @@ public class PreferencesHelper {
         prefsEditor.apply();
     }
 
+
+
+    public static String getSaveSession(String key, String defValue) {
+        return mSharedPref.getString(key, defValue);
+    }
+
+    public static void setSaveSession(String key, String value) {
+        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        prefsEditor.putString(key, value);
+        prefsEditor.apply();
+    }
+
     public static void clearUserPreference(){
         SharedPreferences.Editor prefsEditor = mSharedPref.edit();
         prefsEditor.putString("user", "");

@@ -9,20 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.databinding.Register2FragmentBinding;
-import com.cb.witfactory.model.City;
 import com.cb.witfactory.model.Country;
 import com.cb.witfactory.model.PreferencesHelper;
 import com.cb.witfactory.model.State;
@@ -337,6 +333,7 @@ public class Register2Fragment extends Fragment {
         binding.txtAddress.setText(address);
         binding.txtZipCode.setText(zip_code);
         binding.txtCellPhone.setText(telephone);
+        validateData();
 
 
     }

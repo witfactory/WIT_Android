@@ -70,7 +70,7 @@ public class Register3Fragment extends Fragment implements Callfun {
 
         amplifyCognito = new AmplifyCognito(getContext());
         amplifyCognito.setListener(Register3Fragment.this);
-
+        loadPreference();
         binding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,6 +99,7 @@ public class Register3Fragment extends Fragment implements Callfun {
                 if (editable.length() > 1) {
                     PreferencesHelper.setFirstName("txtPin", binding.txtPin.getText().toString());
                     validateDataForm();
+                    Toast.makeText(getActivity(), "ingreso", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -326,6 +327,26 @@ public class Register3Fragment extends Fragment implements Callfun {
             }
         });
 
+        binding.includeSheep.customLongOtp6.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if (editable.length() > 0) {
+                    validateData();
+                }
+            }
+        });
+
         binding.includeSheep.customLongOtp6.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -485,7 +506,7 @@ public class Register3Fragment extends Fragment implements Callfun {
 
 
                     if (s.equals("resendCodeEmail")) {
-                        Toast.makeText(getContext(), "resendCodeEmail", Toast.LENGTH_SHORT).show();
+                       Utils.goToLogin(getActivity());
                     }
 
                     if (s.equals(EnumVaribles.confirmSigUp.toString())) {
@@ -596,6 +617,7 @@ public class Register3Fragment extends Fragment implements Callfun {
 
 
         binding.txtPin.setText(txtPin);
+        validateDataForm();
 
     }
 }

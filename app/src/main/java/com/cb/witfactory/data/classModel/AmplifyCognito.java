@@ -159,7 +159,7 @@ public Boolean sinUp(String email, String user, String last_name, String country
                 result ->
                 {
                     Log.v("AuthQuickstart", result + "");
-                    listener.onError("resendCodeEmail");
+                    listener.onSuccess("resendCodeEmail");
                 },
                 result ->
                 {
@@ -281,6 +281,7 @@ public Boolean sinUp(String email, String user, String last_name, String country
             if (signOutResult instanceof AWSCognitoAuthSignOutResult.CompleteSignOut) {
                 // Sign Out completed fully and without errors.
                 Log.i("AuthQuickStart", "Signed out successfully");
+                listener.onSuccess("logout");
 
             } else if (signOutResult instanceof AWSCognitoAuthSignOutResult.PartialSignOut) {
                 // Sign Out completed with some errors. User is signed out of the device.
@@ -307,12 +308,14 @@ public Boolean sinUp(String email, String user, String last_name, String country
                     // Optional: Use escape hatch to retry revocation of revokeTokenError.getRefreshToken().
                     
                 }
+
+                listener.onSuccess("logout");
             } else if (signOutResult instanceof AWSCognitoAuthSignOutResult.FailedSignOut) {
                 AWSCognitoAuthSignOutResult.FailedSignOut failedSignOutResult =
                         (AWSCognitoAuthSignOutResult.FailedSignOut) signOutResult;
                 // Sign Out failed with an exception, leaving the user signed in.
                 Log.e("AuthQuickStart", "Sign out Failed", failedSignOutResult.getException());
-
+                listener.onSuccess("logout");
             }
         });
     }
