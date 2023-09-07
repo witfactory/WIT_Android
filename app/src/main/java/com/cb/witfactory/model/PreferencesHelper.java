@@ -188,6 +188,6 @@ public class PreferencesHelper {
         prefsEditor.putString("txtPin", "");
         prefsEditor.putBoolean("politica", false);
         prefsEditor.putBoolean("terminos", false);
-        prefsEditor.apply();
+        prefsEditor.clear().apply();
     }
 }
