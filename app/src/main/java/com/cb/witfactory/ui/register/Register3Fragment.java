@@ -512,10 +512,10 @@ public class Register3Fragment extends Fragment implements Callfun {
                     if (s.equals(EnumVaribles.confirmSigUp.toString())) {
 
                       //Toast.makeText(getContext(), "s+" + s, Toast.LENGTH_SHORT).show();
-                        Utils.goToHome(getActivity());
+                        Utils.goToLogin(getActivity());
                     }
                     if (s.equals(EnumVaribles.confirmCode.toString())) {
-                        Utils.goToHome(getApplicationContext());
+                        Utils.goToLogin(getActivity());
                     }
 
 
@@ -570,6 +570,8 @@ public class Register3Fragment extends Fragment implements Callfun {
     }
 
     private void modalOtp() {
+        binding.btnBack.setClickable(false);
+        binding.btnFinish.setClickable(false);
 
         runOnUiThread(new Runnable() {
 
