@@ -1,4 +1,4 @@
-package com.cb.witfactory.view;
+package com.cb.witfactory.ui.register.view;
 
 import android.os.Bundle;
 import android.view.WindowManager;

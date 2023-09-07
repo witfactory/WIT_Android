@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import com.cb.witfactory.R;
-import com.cb.witfactory.view.LoginActivity;
+import com.cb.witfactory.ui.register.view.LoginActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.squareup.picasso.Picasso;

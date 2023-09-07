@@ -1,4 +1,4 @@
-package com.cb.witfactory.view;
+package com.cb.witfactory.ui.register.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,6 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.databinding.ActivityHomeBinding;

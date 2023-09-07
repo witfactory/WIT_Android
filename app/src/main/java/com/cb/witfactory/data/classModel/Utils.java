@@ -6,10 +6,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.cb.witfactory.R;
-import com.cb.witfactory.view.HomeActivity;
-import com.cb.witfactory.view.LoginActivity;
-import com.cb.witfactory.view.MainActivity;
-import com.cb.witfactory.view.WitMenu;
+import com.cb.witfactory.ui.register.view.HomeActivity;
+import com.cb.witfactory.ui.register.view.LoginActivity;
+import com.cb.witfactory.ui.register.view.MainActivity;
+import com.cb.witfactory.ui.register.view.WitMenu;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

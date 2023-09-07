@@ -1,13 +1,9 @@
-package com.cb.witfactory.view;
-
-import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
+package com.cb.witfactory.ui.register.view;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;

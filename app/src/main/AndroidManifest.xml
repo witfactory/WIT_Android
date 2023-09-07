@@ -40,33 +40,33 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.ResetPassWordActivity"
+            android:name=".ui.register.view.ResetPassWordActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.RegistroActivity"
-            android:exported="false"
-            android:theme="@style/Theme.WitFactory.NoActionBar"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.HomeActivity"
+            android:name=".ui.register.view.RegistroActivity"
             android:exported="false"
             android:theme="@style/Theme.WitFactory.NoActionBar"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.WitMenu"
+            android:name=".ui.register.view.HomeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.WitFactory.NoActionBar"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.register.view.WitMenu"
             android:exported="false"
             android:label="@string/title_activity_login_menu"
             android:theme="@style/Theme.WitFactory.NoActionBar"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.LoginActivity"
+            android:name=".ui.register.view.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login_menu"
             android:theme="@style/Theme.WitFactory.NoActionBar"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.MainActivity"
+            android:name=".ui.register.view.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.WitFactory.NoActionBar"
             android:screenOrientation="portrait" >
