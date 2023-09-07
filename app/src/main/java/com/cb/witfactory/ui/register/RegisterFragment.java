@@ -52,6 +52,8 @@ public class RegisterFragment extends Fragment {
 
         preferencesHelper = new PreferencesHelper(getContext());
 
+        loadPreference();
+
 
         binding.txtUser.addTextChangedListener(new TextWatcher() {
             @Override
@@ -191,5 +193,17 @@ public class RegisterFragment extends Fragment {
         }
     }
 
+    public void loadPreference(){
+
+        String user = PreferencesHelper.getFirstName("first_name", "");
+        String email = PreferencesHelper.getEmail("email", "");
+        String password = PreferencesHelper.getUser("password", "");
+
+        binding.txtUser.setText(user);
+        binding.txtEmail.setText(email);
+        binding.txtComfirmPin.setText(password);
+        binding.txtPin.setText(password);
+
+    }
 
 }

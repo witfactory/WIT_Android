@@ -12,10 +12,13 @@ import androidx.navigation.Navigation;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.databinding.ActivityHomeBinding;
+import com.cb.witfactory.model.PreferencesHelper;
 
 public class HomeActivity extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
+
+    private PreferencesHelper preferencesHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,10 @@ public class HomeActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+
+
+        preferencesHelper = new PreferencesHelper(getApplicationContext());
+        preferencesHelper.clearUserPreference();
 
         binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override

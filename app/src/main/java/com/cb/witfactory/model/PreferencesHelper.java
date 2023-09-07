@@ -138,4 +138,56 @@ public class PreferencesHelper {
         prefsEditor.putString(key, value);
         prefsEditor.apply();
     }
+
+
+    public static String getPin(String key, String defValue) {
+        return mSharedPref.getString(key, defValue);
+    }
+
+    public static void setPin(String key, String value) {
+        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        prefsEditor.putString(key, value);
+        prefsEditor.apply();
+    }
+
+
+    public static Boolean getTerminos(String key, Boolean defValue) {
+        return mSharedPref.getBoolean(key, defValue);
+    }
+
+    public static void setTerminos(String key, Boolean value) {
+        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        prefsEditor.putBoolean(key, value);
+        prefsEditor.apply();
+    }
+
+
+    public static Boolean getPolitica(String key, Boolean defValue) {
+        return mSharedPref.getBoolean(key, defValue);
+    }
+
+    public static void setPolitica(String key, Boolean value) {
+        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        prefsEditor.putBoolean(key, value);
+        prefsEditor.apply();
+    }
+
+    public static void clearUserPreference(){
+        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        prefsEditor.putString("user", "");
+        prefsEditor.putString("email", "");
+        prefsEditor.putString("password", "");
+        prefsEditor.putString("first_name", "");
+        prefsEditor.putString("country", "");
+        prefsEditor.putString("last_name", "");
+        prefsEditor.putString("city", "");
+        prefsEditor.putString("address", "");
+        prefsEditor.putString("account_type", "");
+        prefsEditor.putString("zip_code", "");
+        prefsEditor.putString("telephone", "");
+        prefsEditor.putString("txtPin", "");
+        prefsEditor.putBoolean("politica", false);
+        prefsEditor.putBoolean("terminos", false);
+        prefsEditor.apply();
+    }
 }

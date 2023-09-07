@@ -41,7 +41,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Register3Fragment extends Fragment implements Callfun {
 
-    private Register3ViewModel mViewModel;
+    private Register3ViewModel mfViewModel;
     private Register3FragmentBinding binding;
 
     AmplifyCognito amplifyCognito = null;
@@ -82,6 +82,28 @@ public class Register3Fragment extends Fragment implements Callfun {
         });
 
 
+        binding.txtPin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if (editable.length() > 1) {
+                    PreferencesHelper.setFirstName("txtPin", binding.txtPin.getText().toString());
+                    validateDataForm();
+
+                }
+            }
+        });
+
         butttonStyle();
 
 
@@ -92,6 +114,8 @@ public class Register3Fragment extends Fragment implements Callfun {
                 if (flag) {
 
                     binding.txtPin.setFocusable(true);
+
+
                     controlParental = true;
                 } else {
                     binding.txtPin.setText("");
@@ -107,6 +131,7 @@ public class Register3Fragment extends Fragment implements Callfun {
             public void onCheckedChanged(CompoundButton compoundButton, boolean flag) {
 
                 terminosCondiciones = flag;
+                PreferencesHelper.setTerminos("terminos",flag);
                 validateDataForm();
             }
         });
@@ -116,6 +141,7 @@ public class Register3Fragment extends Fragment implements Callfun {
             public void onCheckedChanged(CompoundButton compoundButton, boolean flag) {
 
                 politicaPrivacidad = flag;
+                PreferencesHelper.setPolitica("politica",flag );
                 validateDataForm();
             }
         });
@@ -551,6 +577,25 @@ public class Register3Fragment extends Fragment implements Callfun {
             binding.btnFinish.setClickable(true);
             binding.btnFinish.setBackgroundResource(R.drawable.ic_btn_activo);
         }
+
+    }
+
+    public void loadPreference(){
+
+        Boolean politica = PreferencesHelper.getPolitica("politica", false);
+        Boolean terminos = PreferencesHelper.getTerminos("terminos", false);
+        String txtPin = PreferencesHelper.getUser("txtPin", "");
+
+        if(terminos){
+            binding.checkTerms.setChecked(terminos);
+        }
+
+        if(politica){
+            binding.checkPolitict.setChecked(politica);
+        }
+
+
+        binding.txtPin.setText(txtPin);
 
     }
 }

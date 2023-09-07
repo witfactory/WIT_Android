@@ -69,6 +69,7 @@ public class Register2Fragment extends Fragment {
         preferencesHelper = new PreferencesHelper(getContext());
         listCountry();
         listCity();
+        loadPreference();
 
         binding.txtCountry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -226,7 +227,6 @@ public class Register2Fragment extends Fragment {
 
                 if (!txtFirstName.isEmpty() && !txtCountry.isEmpty() && !txtCity.isEmpty() && !txtAddress.isEmpty() && !txtZipCode.isEmpty() && !txtCellPhone.isEmpty()) {
 
-
                     PreferencesHelper.setFirstName("first_name", txtFirstName.toString());
                     PreferencesHelper.setCountry("country", txtCountry.toString());
                     PreferencesHelper.setCity("city", txtCity.toString());
@@ -319,6 +319,26 @@ public class Register2Fragment extends Fragment {
         } else {
             binding.btnNext.setBackgroundResource(R.drawable.ic_btn_inactivo);
         }
+    }
+
+    public void loadPreference(){
+
+        String first_name = PreferencesHelper.getFirstName("first_name", "");
+        String country = PreferencesHelper.getEmail("country", "");
+        String city = PreferencesHelper.getUser("city", "");
+        String address = PreferencesHelper.getUser("address", "");
+        String zip_code = PreferencesHelper.getUser("zip_code", "");
+        String telephone = PreferencesHelper.getUser("telephone", "");
+
+
+        binding.txtFirstName.setText(first_name);
+        binding.txtCountry.setText(country);
+        binding.txtCity.setText(city);
+        binding.txtAddress.setText(address);
+        binding.txtZipCode.setText(zip_code);
+        binding.txtCellPhone.setText(telephone);
+
+
     }
 
 }
