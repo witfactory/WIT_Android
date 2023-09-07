@@ -80,7 +80,7 @@ public class AmplifyCognito {
 
         return authSignUpResult;
     }
-public Boolean sinUp(String email, String user, String last_name, String country, String city,
+public Boolean sinUp(String email, String user, String first_name, String country, String city,
                          String zip_code, String address, String account_type, String telephone, String password,String device_id) {
 
 
@@ -88,15 +88,14 @@ public Boolean sinUp(String email, String user, String last_name, String country
 
     List<AuthUserAttribute> userAttributes = new ArrayList<>();
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.email(), user));
-            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.givenName(), last_name));
-            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.familyName(), last_name));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.givenName(), first_name));
+            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.familyName(), first_name));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:country"), country));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:city"), city));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:zip_code"), zip_code));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:address"), address));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:user_principal"), user));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:account_type"), account_type));
-            userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:country"), account_type));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.phoneNumber(), "+57"+telephone));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:suite"), "rndm"));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:appos"), "ANDROID"));
@@ -136,13 +135,13 @@ public Boolean sinUp(String email, String user, String last_name, String country
                     result ->
                     {
                         Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete");
-                        String sinUp = EnumVaribles.confirmSigUp.toString();
-                        listener.onSuccess(sinUp);
+                        String confirmSigUp = EnumVaribles.confirmSigUp.toString();
+                        listener.onSuccess(confirmSigUp);
                     },
                     error -> {
                         Log.e("AuthQuickstart", error.toString());
-                        String sinUp = EnumVaribles.confirmCode.toString();
-                        listener.onError(sinUp);
+                        String confirmSigUp = EnumVaribles.confirmCode.toString();
+                        listener.onError(confirmSigUp);
                     }
             );
         } catch (Exception error) {
@@ -274,6 +273,7 @@ public Boolean sinUp(String email, String user, String last_name, String country
                 }
         );
     }
+
 
 
     public void logoutAmplify(Context context){

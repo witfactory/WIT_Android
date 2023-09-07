@@ -165,16 +165,16 @@ public class Register3Fragment extends Fragment implements Callfun {
                     String email = PreferencesHelper.getEmail("email", "");
                     String first_name = PreferencesHelper.getFirstName("first_name", "");
                     String user = PreferencesHelper.getUser("user", "");
-                    String last_name = PreferencesHelper.getLastName("last_name", "demos");
+                    String last_name = PreferencesHelper.getLastName("last_name", "");
                     String country = PreferencesHelper.getCountry("country", "");
                     String city = PreferencesHelper.getCity("city", "");
                     String zip_code = PreferencesHelper.getZipCode("zip_code", "");
                     String address = PreferencesHelper.getAddress("address", "");
-                    String account_type = PreferencesHelper.getAccountType("account_type", "P");
+                    String account_type = "P";
                     String telephone = PreferencesHelper.getTelephone("telephone", "");
                     String password = PreferencesHelper.getPassword("password", "");
                     Log.v("", password);
-                    amplifyCognito.sinUp(email, user, last_name, country, city, zip_code, address, account_type, telephone, password, device_id);
+                    amplifyCognito.sinUp(email, user, first_name, country, city, zip_code, address, account_type, telephone, password, device_id);
                 }
             }
         });
@@ -510,7 +510,9 @@ public class Register3Fragment extends Fragment implements Callfun {
                     }
 
                     if (s.equals(EnumVaribles.confirmSigUp.toString())) {
-                        Toast.makeText(getContext(), "s+" + s, Toast.LENGTH_SHORT).show();
+
+                      //Toast.makeText(getContext(), "s+" + s, Toast.LENGTH_SHORT).show();
+                        Utils.goToHome(getActivity());
                     }
                     if (s.equals(EnumVaribles.confirmCode.toString())) {
                         Utils.goToHome(getApplicationContext());
