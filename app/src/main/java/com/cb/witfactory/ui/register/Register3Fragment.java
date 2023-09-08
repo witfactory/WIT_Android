@@ -516,6 +516,7 @@ public class Register3Fragment extends Fragment implements Callfun {
                     }
                     if (s.equals(EnumVaribles.confirmCode.toString())) {
                         Utils.goToLogin(getActivity());
+                        Register3Fragment.this.finalize();
                     }
 
 
