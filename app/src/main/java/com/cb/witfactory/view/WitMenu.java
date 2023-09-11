@@ -46,6 +46,8 @@ public class WitMenu extends AppCompatActivity implements Callfun {
         amplifyCognito.setListener(WitMenu.this);
 
 
+
+
         binding.appBarLoginMenu.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -156,4 +158,7 @@ public class WitMenu extends AppCompatActivity implements Callfun {
     public void onError(String s) {
 
     }
+
+
+
 }

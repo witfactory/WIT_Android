@@ -202,4 +202,16 @@ public class PreferencesHelper {
         prefsEditor.putBoolean("terminos", false);
         prefsEditor.clear().apply();
     }
+
+
+    public static String getUserAws(String key, String defValue) {
+        return mSharedPref.getString(key, defValue);
+    }
+
+    public static void setUserAws(String key, String value) {
+        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        prefsEditor.putString(key, value);
+        prefsEditor.apply();
+    }
+
 }

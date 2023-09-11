@@ -195,7 +195,7 @@ public Boolean sinUp(String email, String user, String first_name, String countr
                 email,
                 password,
                 result -> {
-                    Log.i("AuthQuickstart", result.isSignedIn() ? "Sign in succeeded" : "Sign in not complete");
+                    Log.i("AuthQuickstart", result.isSignedIn() ? "Sign in succeeded" : "Sign complete");
                     String sinUp = EnumVaribles.signIn.toString();
                     listener.onSuccess(sinUp);
                 },
@@ -203,7 +203,6 @@ public Boolean sinUp(String email, String user, String first_name, String countr
                     Log.e("AuthQuickstart", error.toString());
                     String sinUp = EnumVaribles.signIn.toString();
                     listener.onError(sinUp);
-
                 }
         );
         return false;

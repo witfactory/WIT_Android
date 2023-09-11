@@ -12,11 +12,16 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.cb.witfactory.R;
+import com.cb.witfactory.data.classModel.AmplifyCognito;
+import com.cb.witfactory.data.classModel.Utils;
 import com.cb.witfactory.databinding.FragmentHomeBinding;
+import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.PreferencesHelper;
+import com.cb.witfactory.view.MainActivity;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements Callfun {
 
+    AmplifyCognito amplifyCognito = null;
     private FragmentHomeBinding binding;
     private PreferencesHelper preferencesHelper;
     final String TAG = "HomeFragment";
@@ -31,6 +36,12 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
         preferencesHelper = new PreferencesHelper(getContext());
+
+        amplifyCognito = new AmplifyCognito(getActivity());
+        amplifyCognito.setListener(HomeFragment.this);
+
+
+        validateInternet();
 
         String user = PreferencesHelper.getUser("user", "");
         String[] arrOfStr = user.split("@");
@@ -52,5 +63,22 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    public void validateInternet(){
+        if(!Utils.internetstaus(getActivity())){
 
+            Utils.aletSinInternet(getActivity());
+        }else{
+            amplifyCognito.validarAuth();
+        }
+    }
+
+    @Override
+    public void onSuccess(String s) {
+
+    }
+
+    @Override
+    public void onError(String s) {
+
+    }
 }
