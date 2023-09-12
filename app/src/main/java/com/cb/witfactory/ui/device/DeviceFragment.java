@@ -2,7 +2,6 @@ package com.cb.witfactory.ui.device;
 
 import static org.chromium.base.ContextUtils.getApplicationContext;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -23,8 +22,10 @@ import com.cb.witfactory.adapter.DeviceAdapter;
 import com.cb.witfactory.adapter.ListValueDeviceAdapter;
 import com.cb.witfactory.data.classModel.MyDividerItemDecoration;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
+import com.cb.witfactory.data.retrofit.device.ObjectResponseDevice;
 import com.cb.witfactory.databinding.FragmentDeviceBinding;
 import com.cb.witfactory.model.Callfun;
+import com.cb.witfactory.ui.perfil.PerfilFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
 
 
     private static final String TAG = DeviceFragment.class.getSimpleName();
-    private List<Callfun.Device> deviceList;
+    private ArrayList<DeviceResponse> deviceList;
     private List<Callfun.ValueDevice> valueDeviceList;
     private DeviceAdapter mAdapter;
     private ListValueDeviceAdapter listValueDeviceAdapter;
@@ -52,49 +53,10 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         View root = binding.getRoot();
         deviceViewModel = new ViewModelProvider(this).get(DeviceViewModel.class);
 
+        deviceList = new ArrayList<DeviceResponse>();
 
+        deviceViewModel.setListener(DeviceFragment.this);
         deviceViewModel.getDataDevice("c8174124-b6b3-4a35-8457-429a9b947ea3","V");
-
-       //Horizontal
-        deviceList = new ArrayList<>();
-        Callfun.Device objDevice = new Callfun.Device(true,"","","Dispositivo","Garaje");
-        Callfun.Device objDevice2 = new Callfun.Device(false,"","","Electorválvula","Cocina");
-        Callfun.Device objDevice3 = new Callfun.Device(true,"","","Dispositivo","Baño");
-        deviceList.add(objDevice);
-        deviceList.add(objDevice2);
-        deviceList.add(objDevice3);
-
-        //ArrayList<Device> nombreArrayList = new ArrayList<Device>();
-        mAdapter = new DeviceAdapter(getActivity(), deviceList, this);
-
-
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,
-                false);
-        binding.recyclerHorizontal.setLayoutManager(mLayoutManager);
-        binding.recyclerHorizontal.setItemAnimator(new DefaultItemAnimator());
-        binding.recyclerHorizontal.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL, 5));
-        binding.recyclerHorizontal.setAdapter(mAdapter);
-
-
-        //vertical
-        valueDeviceList = new ArrayList<>();
-        Callfun.ValueDevice objValueDevice = new Callfun.ValueDevice("","45%",false,"Humedad Relativa");
-        Callfun.ValueDevice objValueDevice2 = new Callfun.ValueDevice("","385ppb",true,"TVOC");
-        Callfun.ValueDevice objValueDevice3 = new Callfun.ValueDevice("","75 F",false,"Temperatur<");
-        valueDeviceList.add(objValueDevice);
-        valueDeviceList.add(objValueDevice2);
-        valueDeviceList.add(objValueDevice3);
-
-        listValueDeviceAdapter = new ListValueDeviceAdapter(getActivity(), valueDeviceList, this);
-
-
-        RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,
-                false);
-        binding.recyclerVertical.setLayoutManager(mLayoutManager2);
-        binding.recyclerVertical.setItemAnimator(new DefaultItemAnimator());
-        binding.recyclerVertical.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 5));
-        binding.recyclerVertical.setAdapter(listValueDeviceAdapter);
-
 
 
         return root;
@@ -104,8 +66,8 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
 
 
     @Override
-    public void onDeviceSelected(Callfun.Device device) {
-        Toast.makeText(getApplicationContext(), "Selected: " + device.getTitle(), Toast.LENGTH_LONG).show();
+    public void onDeviceSelected(DeviceResponse device) {
+        Toast.makeText(getApplicationContext(), "Selected: " + device.getDevice_name(), Toast.LENGTH_LONG).show();
     }
 
 
@@ -122,10 +84,51 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
     @Override
     public void onSuccess(Object o, String s) {
 
+        ArrayList<DeviceResponse> deviceList = (ArrayList<DeviceResponse>) o;
+        if (s.equals("getdevice")){
+
+            if (deviceList.size() > 0){
+
+                mAdapter = new DeviceAdapter(getActivity(), deviceList, this);
+
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,
+                        false);
+                binding.recyclerHorizontal.setLayoutManager(mLayoutManager);
+                binding.recyclerHorizontal.setItemAnimator(new DefaultItemAnimator());
+                binding.recyclerHorizontal.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL, 5));
+                binding.recyclerHorizontal.setAdapter(mAdapter);
+
+
+                //Mock
+                //vertical
+                valueDeviceList = new ArrayList<>();
+                Callfun.ValueDevice objValueDevice = new Callfun.ValueDevice("","45%",false,"Humedad Relativa");
+                Callfun.ValueDevice objValueDevice2 = new Callfun.ValueDevice("","385ppb",true,"TVOC");
+                Callfun.ValueDevice objValueDevice3 = new Callfun.ValueDevice("","75 F",false,"Temperatur<");
+                valueDeviceList.add(objValueDevice);
+                valueDeviceList.add(objValueDevice2);
+                valueDeviceList.add(objValueDevice3);
+
+                listValueDeviceAdapter = new ListValueDeviceAdapter(getActivity(), valueDeviceList, this);
+
+
+                RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,
+                        false);
+                binding.recyclerVertical.setLayoutManager(mLayoutManager2);
+                binding.recyclerVertical.setItemAnimator(new DefaultItemAnimator());
+                binding.recyclerVertical.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 5));
+                binding.recyclerVertical.setAdapter(listValueDeviceAdapter);
+
+
+            }
+        }
+
     }
 
     @Override
     public void onError(String s) {
 
     }
+
+
 }

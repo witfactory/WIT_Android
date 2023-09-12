@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cb.witfactory.R;
+import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.cb.witfactory.model.Callfun;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
@@ -23,8 +24,8 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
         implements Filterable {
 
     private Context context;
-    private List<Callfun.Device> deviceList;
-    private List<Callfun.Device> deviceListFiltered;
+    private List<DeviceResponse> deviceList;
+    private List<DeviceResponse> deviceListFiltered;
     private DeviceAdapterListener listener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -44,17 +45,11 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
             txt_title = view.findViewById(R.id.txt_title);
             txt_sub_title = view.findViewById(R.id.txt_sub_title);
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // send selected contact in callback
-                    listener.onDeviceSelected(deviceListFiltered.get(getAdapterPosition()));
-                }
-            });
+          
         }
     }
 
-    public DeviceAdapter(Context context, List<Callfun.Device> deviceList, DeviceAdapterListener listener) {
+    public DeviceAdapter(Context context, List<DeviceResponse> deviceList, DeviceAdapterListener listener) {
         this.context = context;
         this.listener = listener;
         this.deviceList = deviceList;
@@ -71,11 +66,11 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final Callfun.Device device = deviceListFiltered.get(position);
-        holder.txt_title.setText(device.getTitle());
-        holder.txt_sub_title.setText(device.getLocation());
+        final DeviceResponse device = deviceListFiltered.get(position);
+        holder.txt_title.setText(device.getDevice_name());
+        holder.txt_sub_title.setText(device.getDevice_location());
 
-        Glide.with(context)
+       /* Glide.with(context)
                 .load(device.getImageDevice())
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.img_hadeare);
@@ -89,7 +84,7 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
             holder.check_state.setEnabled(true);
         }else{
             holder.check_state.setEnabled(false);
-        }
+        }*/
     }
 
     @Override
@@ -106,12 +101,12 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
                 if (charString.isEmpty()) {
                     deviceListFiltered = deviceList;
                 } else {
-                    List<Callfun.Device> filteredList = new ArrayList<>();
-                    for (Callfun.Device row : deviceList) {
+                    List<DeviceResponse> filteredList = new ArrayList<>();
+                    for (DeviceResponse row : deviceList) {
 
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
-                        if (row.getTitle().toLowerCase().contains(charString.toLowerCase()) || row.getLocation().contains(charSequence)) {
+                        if (row.getDevice_name().toLowerCase().contains(charString.toLowerCase()) || row.getDevice_location().contains(charSequence)) {
                             filteredList.add(row);
                         }
                     }
@@ -126,13 +121,13 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                deviceListFiltered = (ArrayList<Callfun.Device>) filterResults.values;
+                deviceListFiltered = (ArrayList<DeviceResponse>) filterResults.values;
                 notifyDataSetChanged();
             }
         };
     }
 
     public interface DeviceAdapterListener {
-        void onDeviceSelected(Callfun.Device contact);
+        void onDeviceSelected(DeviceResponse contact);
     }
 }

@@ -39,13 +39,6 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
             title_device = view.findViewById(R.id.title_device);
             txt_description = view.findViewById(R.id.txt_description);
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // send selected contact in callback
-                    listener.onListValueDeviceSelected(deviceListFiltered.get(getAdapterPosition()));
-                }
-            });
         }
     }
 

@@ -32,7 +32,7 @@ public class DeviceViewModel extends ViewModel {
 //                    listMutableLiveDataUser.postValue(response.body().getBody().body);
                     Log.v("bodyResponseDevice", bodyResponseDevice.getBody().toString());
 
-                    listener.onSuccess(bodyResponseDevice,"getdevice");
+                    listener.onSuccess(bodyResponseDevice.body,"getdevice");
                 }
 
                 @Override
