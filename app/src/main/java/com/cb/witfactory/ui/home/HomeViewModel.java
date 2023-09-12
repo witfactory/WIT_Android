@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.cb.witfactory.data.retrofit.connection.ApiConecxion;
 import com.cb.witfactory.data.retrofit.user.GetUserResponse;
 import com.cb.witfactory.data.retrofit.user.ObjectResponseUser;
+import com.cb.witfactory.model.Callfun;
 
 import java.util.List;
 
@@ -18,17 +19,7 @@ import retrofit2.Response;
 
 public class HomeViewModel extends ViewModel {
 
-    private MutableLiveData<List<GetUserResponse>> listMutableLiveDataUser;
-
-    public HomeViewModel() {
-        listMutableLiveDataUser = new MutableLiveData<>();
-    }
-
-    public MutableLiveData<List<GetUserResponse>> getUserObserver() {
-        return listMutableLiveDataUser;
-    }
-
-    public GetUserResponse getUserResponse;
+    private static Callfun listener;
 
     public void getDataUSer(String idUser) {
         try {
@@ -39,20 +30,27 @@ public class HomeViewModel extends ViewModel {
                     //
                     ObjectResponseUser bodyResponseUser = new ObjectResponseUser();
                     bodyResponseUser = response.body();
-                    listMutableLiveDataUser.postValue(response.body().getBody());
                     Log.v("bodyResponseUser", bodyResponseUser.getBody().toString());
+
+                    listener.onSuccess(bodyResponseUser,"getuser");
                 }
 
                 @Override
                 public void onFailure(Call<ObjectResponseUser> call, Throwable t) {
                     // listMutableLiveDataUser.postValue(null);
                     Log.v("Error", "");
-                    listMutableLiveDataUser.postValue(null);
+                    listener.onError("getUserError");
                 }
             });
 
         } catch (Exception exception) {
             Log.v("Error", exception.getMessage());
+            listener.onError("getUserError");
         }
     }
+
+    public void setListener(Callfun listener) {
+        this.listener = listener;
+    }
+
 }

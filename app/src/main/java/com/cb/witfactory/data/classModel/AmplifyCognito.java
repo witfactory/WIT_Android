@@ -150,8 +150,6 @@ public Boolean sinUp(String email, String user, String first_name, String countr
     }
 
 
-
-
     public Boolean resendCodeEmail(String emailUserName) {
 
         Amplify.Auth.resendSignUpCode(emailUserName,
@@ -236,7 +234,7 @@ public Boolean sinUp(String email, String user, String first_name, String countr
                         Log.v("token con session activa acces-2.1--> ${session.userPoolTokensResult.value?.accessToken}", cognitoAuthSession.getUserPoolTokensResult().getValue().getAccessToken());
 
 
-                        listener.onSuccess(result);
+                        listener.onSuccess(result,"idUser");
                     }else{
                         listener.onError("fetchAuthSessionError");
                     }

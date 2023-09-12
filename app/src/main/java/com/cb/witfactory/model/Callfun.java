@@ -31,7 +31,7 @@ import com.cb.witfactory.data.classModel.Utils;
 public interface Callfun {
 
      void onSuccess(String s);
-     void onSuccess(Object o);
+     void onSuccess(Object o, String s);
      void onError(String s);
 
     class Device {
@@ -373,7 +373,7 @@ public interface Callfun {
         }
 
         @Override
-        public void onSuccess(Object o) {
+        public void onSuccess(Object o, String s) {
 
         }
 

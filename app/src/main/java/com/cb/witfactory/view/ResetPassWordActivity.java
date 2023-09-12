@@ -109,7 +109,7 @@ public class ResetPassWordActivity extends AppCompatActivity implements Callfun 
     }
 
     @Override
-    public void onSuccess(Object o) {
+    public void onSuccess(Object o, String s) {
 
     }
 

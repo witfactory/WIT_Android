@@ -531,7 +531,7 @@ public class Register3Fragment extends Fragment implements Callfun {
     }
 
     @Override
-    public void onSuccess(Object o) {
+    public void onSuccess(Object o, String s) {
 
     }
 
