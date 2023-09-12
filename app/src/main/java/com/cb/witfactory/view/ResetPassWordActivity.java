@@ -109,6 +109,11 @@ public class ResetPassWordActivity extends AppCompatActivity implements Callfun 
     }
 
     @Override
+    public void onSuccess(Object o) {
+
+    }
+
+    @Override
     public void onError(String s) {
 
         runOnUiThread(new Runnable() {

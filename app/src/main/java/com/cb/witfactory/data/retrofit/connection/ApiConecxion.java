@@ -22,7 +22,7 @@ public class ApiConecxion {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(logging);
 
-        String baseUrlService = "https://api.witfactory.com.co/staging/";
+        String baseUrlService = "https://b5tq0cyj8b.execute-api.us-east-1.amazonaws.com/staging/";
 
         //si api service es null se va instanciar de lo contrario va a devolver el objeto
         if (API_SERVICE == null) {

@@ -1,23 +1,35 @@
 package com.cb.witfactory.ui.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.amplifyframework.auth.AuthSession;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthSession;
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.AmplifyCognito;
 import com.cb.witfactory.data.classModel.Utils;
+import com.cb.witfactory.data.retrofit.user.GetUserResponse;
 import com.cb.witfactory.databinding.FragmentHomeBinding;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.PreferencesHelper;
+import com.cb.witfactory.ui.perfil.PerfilViewModel;
 import com.cb.witfactory.view.MainActivity;
+
+import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class HomeFragment extends Fragment implements Callfun {
 
@@ -25,11 +37,12 @@ public class HomeFragment extends Fragment implements Callfun {
     private FragmentHomeBinding binding;
     private PreferencesHelper preferencesHelper;
     final String TAG = "HomeFragment";
-
+    private HomeViewModel homeViewModel;
+    SweetAlertDialog pDialog;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
+         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
@@ -43,12 +56,6 @@ public class HomeFragment extends Fragment implements Callfun {
 
         validateInternet();
 
-        String user = PreferencesHelper.getUser("user", "");
-        String[] arrOfStr = user.split("@");
-
-        String dataUser = arrOfStr[0];
-
-        binding.txtUser.setText(getString(R.string.text_welcome_user) + "\n" + dataUser);
 
         binding.txtUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +85,46 @@ public class HomeFragment extends Fragment implements Callfun {
     }
 
     @Override
-    public void onError(String s) {
+    public void onSuccess(Object o) {
+        AuthSession auths = (AuthSession) o;
 
+        String user_aws = ((AWSCognitoAuthSession) auths).getUserSubResult().getValue().toString();
+        Log.v("session",auths.toString());
+        PreferencesHelper.setUserAws("user_aws", user_aws.toString());
+        loaduser();
+    }
+
+    @Override
+    public void onError(String s) {
+    }
+
+    public  void loaduser(){
+
+
+
+        String user_aws = PreferencesHelper.getUserAws("user_aws","").toString();
+
+        homeViewModel.getDataUSer(user_aws);
+        getDataUser();
+
+    }
+
+    public void getDataUser(){
+
+        homeViewModel.getUserObserver().observe(getActivity(), new Observer<List<GetUserResponse>>() {
+            @Override
+            public void onChanged(List<GetUserResponse> getUserResponses) {
+                if(getUserResponses != null){
+                    Toast.makeText(getActivity(), getUserResponses.get(0).getUser().toString()+"", Toast.LENGTH_SHORT).show();
+
+                    String user =getUserResponses.get(0).getUser().toString();
+                    String[] arrOfStr = user.split("@");
+
+                    String dataUser = arrOfStr[0];
+
+                    binding.txtUser.setText(getString(R.string.text_welcome_user) + "\n" + dataUser);
+                }
+            }
+        });
     }
 }

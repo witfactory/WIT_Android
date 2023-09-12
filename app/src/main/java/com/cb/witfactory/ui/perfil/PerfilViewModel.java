@@ -39,7 +39,7 @@ public class PerfilViewModel extends ViewModel {
                     //
                     ObjectResponseUser bodyResponseUser = new ObjectResponseUser();
                     bodyResponseUser = response.body();
-                    listMutableLiveDataUser.postValue(response.body().getBody().body);
+                    listMutableLiveDataUser.postValue(response.body().getBody());
                     Log.v("bodyResponseUser", bodyResponseUser.getBody().toString());
                 }
 

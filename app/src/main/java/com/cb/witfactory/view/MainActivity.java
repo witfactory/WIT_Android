@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.databinding.DataBindingUtil;
 
+import com.amplifyframework.auth.AuthSession;
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.AmplifyCognito;
 import com.cb.witfactory.data.classModel.Utils;
@@ -143,6 +145,17 @@ public class MainActivity extends Activity implements Callfun {
         overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
         finish();
 
+    }
+
+    @Override
+    public void onSuccess(Object o) {
+        if (o != null) {
+            Utils.goToHome(getApplicationContext());
+        } else {
+            Utils.goToLoginRegister(getApplicationContext());
+        }
+        overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+        finish();
     }
 
     @Override

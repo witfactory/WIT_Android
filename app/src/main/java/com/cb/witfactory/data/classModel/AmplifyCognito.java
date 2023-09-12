@@ -229,14 +229,20 @@ public Boolean sinUp(String email, String user, String first_name, String countr
                        // String accesToken = cognitoAuthSession.getUserPoolTokens().getValue().getAccessToken();
                         //String refreshToken = cognitoAuthSession.getUserPoolTokens().getValue().getRefreshToken();
 
+                        String idUser = ((AWSCognitoAuthSession) result).getIdentityIdResult().toString();
+
 
                         Log.v("token con session activa--> ${session.userPoolTokensResult.value?.idToken}", cognitoAuthSession.getUserPoolTokensResult().getValue().getIdToken());
                         Log.v("token con session activa acces-2.1--> ${session.userPoolTokensResult.value?.accessToken}", cognitoAuthSession.getUserPoolTokensResult().getValue().getAccessToken());
 
+
+                        listener.onSuccess(result);
+                    }else{
+                        listener.onError("fetchAuthSessionError");
                     }
 
 
-                    listener.onSuccess(estateSession.toString());
+
                 },
                 error -> {
                     Log.e("AmplifyQuickstart", error.toString());

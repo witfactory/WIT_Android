@@ -531,6 +531,11 @@ public class Register3Fragment extends Fragment implements Callfun {
     }
 
     @Override
+    public void onSuccess(Object o) {
+
+    }
+
+    @Override
     public void onError(String s) {
 
         ///' modalOtp();

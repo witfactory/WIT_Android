@@ -32,7 +32,7 @@ import java.util.List;
 public class PerfilFragment extends Fragment {
 
     private FragmentPerfilBinding binding;
-    private PerfilViewModel mViewModel;
+
     private PreferencesHelper preferencesHelper;
     PerfilViewModel perfilViewModel;
     private NavigationView navigationView;
@@ -59,7 +59,7 @@ public class PerfilFragment extends Fragment {
         binding.txtUser.setText(dataUser);
         binding.txtUserEmail.setText(email);
 
-        perfilViewModel.getDataUSer("d86a2ef1-7db2-4611-a8b1-9bdf43b1d3e4");
+        perfilViewModel.getDataUSer(PreferencesHelper.getUserAws("user_aws","").toString());
         getDataUser();
 
         binding.btnEdit.setOnClickListener(new View.OnClickListener() {
@@ -80,12 +80,12 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onChanged(List<GetUserResponse> getUserResponses) {
                 if(getUserResponses != null){
-                    Toast.makeText(getActivity(), getUserResponses.get(0).getUser().toString()+"", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getUserResponses.get(0).getUser_principal().toString()+"", Toast.LENGTH_SHORT).show();
 
                     binding.txtUser.setText("Data");
-                    binding.txtUserEmail.setText(getUserResponses.get(0).getUser().toString());
+                    binding.txtUserEmail.setText(getUserResponses.get(0).getUser_principal().toString());
                     binding.txtAddres.setText(getUserResponses.get(0).getAddress().toString());
-                    binding.txtPhone.setText(getUserResponses.get(0).getTelephone().toString());
+                    binding.txtPhone.setText("**********");
                 }
             }
         });
