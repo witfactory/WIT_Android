@@ -29,7 +29,7 @@ import com.cb.witfactory.model.Callfun;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdapterListener,ListValueDeviceAdapter.ValueDeviceAdapterListener {
+public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdapterListener,ListValueDeviceAdapter.ValueDeviceAdapterListener, Callfun {
 
     private FragmentDeviceBinding binding;
     private DeviceViewModel deviceViewModel;
@@ -53,8 +53,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         deviceViewModel = new ViewModelProvider(this).get(DeviceViewModel.class);
 
 
-        deviceViewModel.getDataDevice("c7b6c3ae-1fb3-4726-92c2-6e32b095e8b7");
-        getDataDevice();
+        deviceViewModel.getDataDevice("c8174124-b6b3-4a35-8457-429a9b947ea3","V");
 
        //Horizontal
         deviceList = new ArrayList<>();
@@ -102,17 +101,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
     }
 
 
-    public void getDataDevice(){
 
-        deviceViewModel.getDeviceObserver().observe(getActivity(), new Observer<List<DeviceResponse>>() {
-            @Override
-            public void onChanged(List<DeviceResponse> getDeviceResponses) {
-                if(getDeviceResponses != null){
-                    Toast.makeText(getActivity(), getDeviceResponses.get(0).getDevice_id().toString()+"", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
 
     @Override
     public void onDeviceSelected(Callfun.Device device) {
@@ -123,5 +112,20 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
     @Override
     public void onListValueDeviceSelected(Callfun.ValueDevice device) {
         Toast.makeText(getApplicationContext(), "Selected: " + device.getTitle(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onSuccess(String s) {
+
+    }
+
+    @Override
+    public void onSuccess(Object o, String s) {
+
+    }
+
+    @Override
+    public void onError(String s) {
+
     }
 }

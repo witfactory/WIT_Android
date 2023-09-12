@@ -2,18 +2,20 @@ package com.cb.witfactory.data.retrofit.device;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class ObjectResponseDevice {
 
     @SerializedName("statusCode")
     private Integer statusCode;
 
 
-    @SerializedName("body")
- private BodyDeviceResponse body;
+    @SerializedName("device")
+    public ArrayList<DeviceResponse> body = new ArrayList<DeviceResponse>();
 
     public ObjectResponseDevice(){}
 
-    public ObjectResponseDevice(Integer statusCode, BodyDeviceResponse body) {
+    public ObjectResponseDevice(Integer statusCode, ArrayList<DeviceResponse> body) {
         this.statusCode = statusCode;
         this.body = body;
     }
@@ -26,11 +28,11 @@ public class ObjectResponseDevice {
         this.statusCode = statusCode;
     }
 
-    public BodyDeviceResponse getBody() {
+    public ArrayList<DeviceResponse> getBody() {
         return body;
     }
 
-    public void setBody(BodyDeviceResponse body) {
+    public void setBody(ArrayList<DeviceResponse> body) {
         this.body = body;
     }
 }
