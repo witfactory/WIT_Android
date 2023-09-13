@@ -9,6 +9,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -74,6 +76,10 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         String idDevice = device.getDevice_id().toString();
 
         Toast.makeText(getActivity(), "Selected: " + idDevice, Toast.LENGTH_LONG).show();
+
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_registro);
+        navController.navigateUp();
+        navController.navigate(R.id.device_detail);
 
     }
 

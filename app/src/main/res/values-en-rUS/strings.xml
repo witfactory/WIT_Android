@@ -218,6 +218,13 @@
     <string name="general_activity">General activity log</string>
     <string name="general_activity2">Below is the date of the last 30 days. See the full history of your devices.</string>
     <string name="filter_device">Filter by device</string>
+    <string name="location">Location</string>
+    <string name="kitchen">Kitchen</string>
+    <string name="locationDescription">Location description</string>
+    <string name="locationDescriptionMsm">On top of the fridge...</string>
+    <string name="establishedConnection">Established connection</string>
+    <string name="detectedvalues">Detected values</string>
+    <string name="seeActivity">See activity</string>
 
 
 </resources>

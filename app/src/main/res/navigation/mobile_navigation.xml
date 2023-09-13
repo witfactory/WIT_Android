@@ -101,4 +101,10 @@
         android:name="com.cb.witfactory.ui.activity.ActivityFragment"
         android:label="@string/menu_perfil"
         tools:layout="@layout/fragment_activity" />
+
+    <fragment
+        android:id="@+id/device_detail"
+        android:name="com.cb.witfactory.ui.device.DetailDevice"
+        android:label="@string/txt_dispositive"
+        tools:layout="@layout/fragment_detail_device" />
 </navigation>
