@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +35,7 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
         public ImageView img_hadeare;
         public ImageView img_wifi;
         public TextView txt_title, txt_sub_title;
+        public RelativeLayout relativecontent;
 
         public MyViewHolder(View view) {
             super(view);
@@ -44,8 +46,15 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
             img_wifi = view.findViewById(R.id.img_wifi);
             txt_title = view.findViewById(R.id.txt_title);
             txt_sub_title = view.findViewById(R.id.txt_sub_title);
+            relativecontent = view.findViewById(R.id.relativecontent);
 
-          
+            relativecontent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // send selected contact in callback
+                    listener.onDeviceSelected(deviceListFiltered.get(getAdapterPosition()));
+                }
+            });
         }
     }
 
