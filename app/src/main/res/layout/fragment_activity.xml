@@ -38,7 +38,6 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:hint="@string/filter_device"
                 android:paddingBottom="@dimen/sp10"
                 android:textColorHint="@color/text_login"
@@ -63,6 +62,12 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <!-- Agregar la vista de calendario CollapsibleCalendar -->
+            <com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
+                android:id="@+id/collapsibleCalendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:expanded="false" />
 
 
 

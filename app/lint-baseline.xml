@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 7.3.1" type="baseline" client="gradle" dependencies="false" name="AGP (7.3.1)" variant="fatal" version="7.3.1">
+
+    <issue
+        id="PackagedPrivateKey"
+        message="The `raw\privatekey.pem` file seems to be a private key file. Please make sure not to embed this in your APK file.">
+        <location
+            file="src/main/res/raw/privatekey.pem"/>
+    </issue>
+
+    <issue
+        id="PackagedPrivateKey"
+        message="The `copia\privatepem.pem` file seems to be a private key file. Please make sure not to embed this in your APK file.">
+        <location
+            file="src/main/res/raw/copia/privatepem.pem"/>
+    </issue>
+
+</issues>

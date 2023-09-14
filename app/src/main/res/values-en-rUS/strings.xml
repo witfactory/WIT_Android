@@ -216,7 +216,7 @@
     <string name="configure_profile">Configure profile</string>
     <string name="terms_conditions">Terms  &amp; Conditions</string>
     <string name="general_activity">General activity log</string>
-    <string name="general_activity2">Below is the date of the last 30 days. See the full history of your devices.</string>
+    <string name="general_activity2">Below is the general activity history for the <b>past 30 days.</b> See all the <u>complete history</u> of your devices.</string>
     <string name="filter_device">Filter by device</string>
     <string name="location">Location</string>
     <string name="kitchen">Kitchen</string>

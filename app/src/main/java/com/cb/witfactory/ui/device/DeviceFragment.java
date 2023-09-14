@@ -77,7 +77,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
 
         Toast.makeText(getActivity(), "Selected: " + idDevice, Toast.LENGTH_LONG).show();
 
-        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_registro);
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_login_menu);
         navController.navigateUp();
         navController.navigate(R.id.device_detail);
 

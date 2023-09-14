@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.cb.witfactory.databinding.FragmentActivityBinding;
+import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar;
 
 
 public class ActivityFragment extends Fragment {
@@ -25,7 +26,35 @@ public class ActivityFragment extends Fragment {
         binding = FragmentActivityBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //https://aws.amazon.com/es/blogs/mobile/building-an-android-app-with-aws-amplify-part-1/
+        // Configura un oyente para eventos de selección de fecha
+        binding.collapsibleCalendar.setCalendarListener(new CollapsibleCalendar.CalendarListener() {
+
+            @Override
+            public void onDaySelect() {
+                String selectedDate = binding.collapsibleCalendar.getSelectedDay().toString();
+
+            }
+
+            @Override
+            public void onItemClick(View v) {
+
+            }
+
+            @Override
+            public void onDataUpdate() {
+
+            }
+
+            @Override
+            public void onMonthChange() {
+
+            }
+
+            @Override
+            public void onWeekChange(int position) {
+
+            }
+        });
 
         return root;
     }

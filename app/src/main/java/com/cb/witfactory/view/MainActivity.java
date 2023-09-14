@@ -1,13 +1,17 @@
 package com.cb.witfactory.view;
 
+import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -137,6 +141,14 @@ public class MainActivity extends Activity implements Callfun {
 
     @Override
     public void onSuccess(String s) {
+
+        if(s.equals("logout")){
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+            finish();
+            return;
+        }
         if (s.equals("true")) {
             Utils.goToHome(getApplicationContext());
         } else {
@@ -161,8 +173,20 @@ public class MainActivity extends Activity implements Callfun {
     @Override
     public void onError(String s) {
 
-        String error = getString(R.string.something_went);
-        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
+
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                String error = getString(R.string.something_went);
+                Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
+                amplifyCognito.logoutAmplify(getApplicationContext());
+
+            }
+        });
+
+
+
     }
 
     public void validateInternet(){
