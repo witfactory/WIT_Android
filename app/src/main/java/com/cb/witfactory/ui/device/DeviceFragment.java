@@ -1,6 +1,5 @@
 package com.cb.witfactory.ui.device;
 
-import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
 import static org.chromium.base.ContextUtils.getApplicationContext;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -9,8 +8,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,24 +16,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
-import com.cb.witfactory.R;
 import com.cb.witfactory.adapter.DeviceAdapter;
 import com.cb.witfactory.adapter.ListValueDeviceAdapter;
 import com.cb.witfactory.data.classModel.MyDividerItemDecoration;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
-import com.cb.witfactory.data.retrofit.device.ObjectResponseDevice;
 import com.cb.witfactory.data.retrofit.events.PayloadResponse;
 import com.cb.witfactory.databinding.FragmentDeviceBinding;
 import com.cb.witfactory.model.Callfun;
-import com.cb.witfactory.ui.perfil.PerfilFragment;
-import com.google.android.play.core.internal.bi;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdapterListener,ListValueDeviceAdapter.ValueDeviceAdapterListener, Callfun {
 
@@ -115,8 +110,8 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
                 binding.recyclerHorizontal.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL, 5));
                 binding.recyclerHorizontal.setAdapter(mAdapter);
 
-                deviceViewModel.getMetrics(deviceList.get(0).getDevice_id(),"2023-09-05T16:00:21","2023-10-05T16:13:21");
 
+                getMetrics(deviceList);
             }
             else{
                // binding.recyclerHorizontal.setVisibility(View.GONE);
@@ -184,4 +179,27 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
     }
 
 
+
+    public void getMetrics(ArrayList<DeviceResponse> deviceList){
+
+
+        // Obtén la fecha actual
+        Calendar calendar = Calendar.getInstance();
+        Date fechaActual = calendar.getTime();
+
+        // Resta 30 días a la fecha actual
+        calendar.add(Calendar.DAY_OF_MONTH, -30);
+        Date fechaMenos30Dias = calendar.getTime();
+
+        // Formatea la fecha en el formato deseado (yyyy-MM-dd'T'HH:mm:ss)
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        String fechaFormateada = sdf.format(fechaMenos30Dias);
+        String fechaActualFormateada = sdf.format(fechaActual);
+        String deviceId = deviceList.get(0).getDevice_id();
+
+        // Imprime la fecha formateada
+
+        deviceViewModel.getMetrics(deviceId,fechaFormateada,fechaActualFormateada);
+
+    }
 }
