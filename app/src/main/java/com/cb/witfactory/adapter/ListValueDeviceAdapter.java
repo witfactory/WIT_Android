@@ -77,7 +77,7 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
 
                 // Define la animación de desvanecimiento
                 final Animation fadeOut = new AlphaAnimation(1.0f, 0.0f);
-                fadeOut.setDuration(700); // Duración de la animación en milisegundos
+                fadeOut.setDuration(500); // Duración de la animación en milisegundos
 
                 // Define un oyente de animación para cambiar la imagen después de desvanecer
                 fadeOut.setAnimationListener(new Animation.AnimationListener() {
