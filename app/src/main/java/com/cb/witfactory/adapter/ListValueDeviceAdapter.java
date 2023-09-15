@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -25,11 +27,13 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
     private List<PayloadResponse> deviceList;
     private List<PayloadResponse> deviceListFiltered;
     private ValueDeviceAdapterListener listener;
+    private boolean isImage1 = true; // Para alternar entre las dos imágenes
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView img_icon,img_exelent;
-        public TextView title_device, txt_description;
+        public ImageView img_icon,img_exelent,img_down;
+        public TextView title_device, txt_description,color_estado;
 
         public MyViewHolder(View view) {
             super(view);
@@ -37,8 +41,10 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
 
             img_icon = view.findViewById(R.id.img_icon);
             img_exelent = view.findViewById(R.id.img_exelent);
+            img_down = view.findViewById(R.id.img_down);
             title_device = view.findViewById(R.id.title_device);
             txt_description = view.findViewById(R.id.txt_description);
+            color_estado = view.findViewById(R.id.color_estado);
 
         }
     }
@@ -63,6 +69,47 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
         final PayloadResponse events = deviceListFiltered.get(0);
         holder.title_device.setText(events.getTemp().toString());
         holder.txt_description.setText("Valor:");
+
+        holder.img_down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                // Define la animación de desvanecimiento
+                final Animation fadeOut = new AlphaAnimation(1.0f, 0.0f);
+                fadeOut.setDuration(700); // Duración de la animación en milisegundos
+
+                // Define un oyente de animación para cambiar la imagen después de desvanecer
+                fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        if (isImage1) {
+                            holder.img_down.setBackgroundResource(R.drawable.arrow_up);
+                            isImage1 = false;
+
+                        } else {
+                            holder.img_down.setBackgroundResource(R.drawable.arrow_down);
+                            isImage1 = true;
+
+                        }
+                      //  isImage1 = !isImage1;
+                      //  holder.img_down.startAnimation(fadeOut); // Iniciar animación de desvanecimiento nuevamente
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                    }
+                });
+
+                // Inicia la animación de desvanecimiento
+                holder.img_down.startAnimation(fadeOut);
+
+            }
+        });
 
 
 

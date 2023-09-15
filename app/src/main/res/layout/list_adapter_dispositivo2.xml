@@ -18,6 +18,7 @@
         >
 
         <TextView
+            android:id="@+id/color_estado"
             android:layout_width="match_parent"
             android:layout_height="15sp"
             android:background="#56D162"/>
@@ -89,10 +90,13 @@
                 android:id="@+id/img_down"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/arrow_down"
-                android:layout_marginTop="20sp"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="30sp"
+                android:layout_marginTop="30sp"
+                android:layout_marginEnd="30sp"
                 android:layout_marginRight="20sp"
-                android:layout_alignParentRight="true"/>
+                android:layout_marginBottom="30sp"
+                android:background="@drawable/arrow_down" />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
