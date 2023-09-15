@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cb.witfactory.R;
+import com.cb.witfactory.data.retrofit.events.PayloadResponse;
 import com.cb.witfactory.model.Callfun;
 
 import java.util.ArrayList;
@@ -21,8 +22,8 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
         implements Filterable {
 
     private Context context;
-    private List<Callfun.ValueDevice> deviceList;
-    private List<Callfun.ValueDevice> deviceListFiltered;
+    private List<PayloadResponse> deviceList;
+    private List<PayloadResponse> deviceListFiltered;
     private ValueDeviceAdapterListener listener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -42,7 +43,7 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
         }
     }
 
-    public ListValueDeviceAdapter(Context context, List<Callfun.ValueDevice> deviceList, ValueDeviceAdapterListener listener) {
+    public ListValueDeviceAdapter(Context context, List<PayloadResponse> deviceList, ValueDeviceAdapterListener listener) {
         this.context = context;
         this.listener = listener;
         this.deviceList = deviceList;
@@ -59,9 +60,9 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final Callfun.ValueDevice device = deviceListFiltered.get(position);
-        holder.title_device.setText(device.getTitle());
-        holder.txt_description.setText(device.getDescription());
+        final PayloadResponse events = deviceListFiltered.get(0);
+        holder.title_device.setText(events.getTemp().toString());
+        holder.txt_description.setText("Valor:");
 
 
 
@@ -81,12 +82,12 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
                 if (charString.isEmpty()) {
                     deviceListFiltered = deviceList;
                 } else {
-                    List<Callfun.ValueDevice> filteredList = new ArrayList<>();
-                    for (Callfun.ValueDevice row : deviceList) {
+                    List<PayloadResponse> filteredList = new ArrayList<>();
+                    for (PayloadResponse row : deviceList) {
 
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
-                        if (row.getTitle().toLowerCase().contains(charString.toLowerCase()) || row.getDescription().contains(charSequence)) {
+                        if (row.getTemp().toString().toLowerCase().contains(charString.toLowerCase()) || row.getTemp().toString().contains(charSequence)) {
                             filteredList.add(row);
                         }
                     }
@@ -101,13 +102,13 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                deviceListFiltered = (ArrayList<Callfun.ValueDevice>) filterResults.values;
+                deviceListFiltered = (ArrayList<PayloadResponse>) filterResults.values;
                 notifyDataSetChanged();
             }
         };
     }
 
     public interface ValueDeviceAdapterListener {
-        void onListValueDeviceSelected(Callfun.ValueDevice device);
+        void onListValueDeviceSelected(PayloadResponse device);
     }
 }

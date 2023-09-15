@@ -1,7 +1,5 @@
 package com.cb.witfactory.view;
 
-import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +8,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -21,7 +17,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.databinding.DataBindingUtil;
 
-import com.amplifyframework.auth.AuthSession;
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.AmplifyCognito;
 import com.cb.witfactory.data.classModel.Utils;
@@ -142,7 +137,7 @@ public class MainActivity extends Activity implements Callfun {
     @Override
     public void onSuccess(String s) {
 
-        if(s.equals("logout")){
+        if (s.equals("logout")) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
@@ -186,14 +181,13 @@ public class MainActivity extends Activity implements Callfun {
         });
 
 
-
     }
 
-    public void validateInternet(){
-        if(!Utils.internetstaus(getApplicationContext())){
+    public void validateInternet() {
+        if (!Utils.internetstaus(getApplicationContext())) {
 
-           Utils.aletSinInternet(this);
-        }else{
+            Utils.aletSinInternet(this);
+        } else {
             amplifyCognito.validarAuth();
         }
     }

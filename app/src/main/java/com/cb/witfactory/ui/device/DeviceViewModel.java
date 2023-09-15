@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 import com.cb.witfactory.data.retrofit.connection.ApiConecxion;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.cb.witfactory.data.retrofit.device.ObjectResponseDevice;
+import com.cb.witfactory.data.retrofit.events.ObjectResponseEvents;
 import com.cb.witfactory.model.Callfun;
 
 import java.util.List;
@@ -50,6 +51,30 @@ public class DeviceViewModel extends ViewModel {
         }
     }
 
+
+    public void getMetrics(String device_id,String from,String to) {
+        try {
+            final Call<ObjectResponseEvents> obj = ApiConecxion.getApiService().getEvents(device_id, from,to);
+            obj.enqueue(new Callback<ObjectResponseEvents>() {
+                @Override
+                public void onResponse(Call<ObjectResponseEvents> call, Response<ObjectResponseEvents> response) {
+                    //
+                    ObjectResponseEvents objectResponseEvents = new ObjectResponseEvents();
+                    objectResponseEvents = response.body();
+
+                    listener.onSuccess(objectResponseEvents.body,"getevents");
+                }
+
+                @Override
+                public void onFailure(Call<ObjectResponseEvents> call, Throwable t) {
+                    listener.onError("getEventsError");
+                }
+            });
+
+        } catch (Exception exception) {
+            Log.v("Error", exception.getMessage());
+        }
+    }
 
     public void setListener(Callfun listener) {
         this.listener = listener;

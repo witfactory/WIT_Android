@@ -23,6 +23,7 @@ import com.cb.witfactory.adapter.DeviceAdapter;
 import com.cb.witfactory.adapter.ListValueDeviceAdapter;
 import com.cb.witfactory.data.classModel.MyDividerItemDecoration;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
+import com.cb.witfactory.data.retrofit.events.PayloadResponse;
 import com.cb.witfactory.databinding.FragmentDetailDeviceBinding;
 import com.cb.witfactory.databinding.FragmentDeviceBinding;
 import com.cb.witfactory.model.Callfun;
@@ -35,7 +36,7 @@ public class DetailDevice extends Fragment  implements DeviceAdapter.DeviceAdapt
     private FragmentDetailDeviceBinding binding;
     private DetailDeviceViewModel mViewModel;
 
-    private List<Callfun.ValueDevice> valueDeviceList;
+    private List<PayloadResponse> valueDeviceList;
     private ListValueDeviceAdapter listValueDeviceAdapter;
 
 
@@ -65,12 +66,8 @@ public class DetailDevice extends Fragment  implements DeviceAdapter.DeviceAdapt
         //Mock
         //vertical
         valueDeviceList = new ArrayList<>();
-        Callfun.ValueDevice objValueDevice = new Callfun.ValueDevice("","45%",false,"Humedad Relativa");
-        Callfun.ValueDevice objValueDevice2 = new Callfun.ValueDevice("","385ppb",true,"TVOC");
-        Callfun.ValueDevice objValueDevice3 = new Callfun.ValueDevice("","75 F",false,"Temperatura");
+        PayloadResponse objValueDevice = new PayloadResponse();
         valueDeviceList.add(objValueDevice);
-        valueDeviceList.add(objValueDevice2);
-        valueDeviceList.add(objValueDevice3);
 
         listValueDeviceAdapter = new ListValueDeviceAdapter(getActivity(), valueDeviceList, this);
 
@@ -89,7 +86,7 @@ public class DetailDevice extends Fragment  implements DeviceAdapter.DeviceAdapt
     }
 
     @Override
-    public void onListValueDeviceSelected(Callfun.ValueDevice device) {
+    public void onListValueDeviceSelected(PayloadResponse device) {
 
     }
 }
