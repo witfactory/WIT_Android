@@ -5,23 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="5sp"
-    >
+    android:paddingTop="5sp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="5dp"
-        android:padding="25dp"
         android:layout_marginHorizontal="10dp"
+        android:padding="25dp"
         app:cardCornerRadius="15dp"
-        >
+        app:cardElevation="5dp">
 
         <TextView
             android:id="@+id/color_estado"
             android:layout_width="match_parent"
             android:layout_height="15sp"
-            android:background="#56D162"/>
+            android:background="#56D162" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -31,12 +30,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingTop="25sp"
-                    android:paddingLeft="10sp">
+                    android:paddingLeft="10sp"
+                    android:paddingTop="25sp">
 
                     <ImageView
                         android:id="@+id/img_icon"
@@ -47,7 +47,7 @@
 
                     <Space
                         android:layout_width="15sp"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -57,24 +57,25 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:layout_gravity="center"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
                             <TextView
                                 android:id="@+id/title_device"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/text_percentage"
-                                android:textColor="@color/background"
                                 android:layout_gravity="center"
-                                android:gravity="center"/>
+                                android:gravity="center"
+                                android:text="@string/text_percentage"
+                                android:textColor="@color/background" />
 
                             <ImageView
                                 android:id="@+id/img_exelent"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/ic_button_exelent"
-                                android:layout_marginLeft="5sp"/>
+                                android:layout_marginLeft="5sp"
+                                android:background="@drawable/ic_button_exelent" />
 
 
                         </LinearLayout>
@@ -85,18 +86,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/text_humidity_relative"
-                            android:textColor="@color/background"
-                            />
+                            android:textColor="@color/background" />
 
                     </LinearLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/semaforo_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10sp"
                     android:orientation="vertical"
-                    android:layout_margin="10sp">
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -105,19 +107,19 @@
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="25sp"
-                            android:layout_height="40"
-                            app:cardElevation="5dp"
+                            android:layout_height="40sp"
                             android:layout_marginHorizontal="10dp"
-                            app:cardCornerRadius="15dp">
+                            app:cardCornerRadius="15dp"
+                            app:cardElevation="5dp">
 
                             <TextView
                                 android:id="@+id/colorverde"
                                 android:layout_width="25sp"
                                 android:layout_height="40sp"
-                                android:background="#56D162"
-                                android:textColor="@color/background"
                                 android:layout_gravity="center"
-                                android:gravity="center"/>
+                                android:background="#56D162"
+                                android:gravity="center"
+                                android:textColor="@color/background" />
                         </androidx.cardview.widget.CardView>
 
 
@@ -126,15 +128,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="GOOD \n 50-109"
-                            android:textColor="@color/background"
-                            />
+                            android:textColor="@color/background" />
 
 
                     </LinearLayout>
 
                     <Space
                         android:layout_width="match_parent"
-                        android:layout_height="5sp"/>
+                        android:layout_height="5sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -143,19 +144,19 @@
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="25sp"
-                            android:layout_height="40"
-                            app:cardElevation="5dp"
+                            android:layout_height="40sp"
                             android:layout_marginHorizontal="10dp"
-                            app:cardCornerRadius="15dp">
+                            app:cardCornerRadius="15dp"
+                            app:cardElevation="5dp">
 
                             <TextView
                                 android:id="@+id/colornaranja"
                                 android:layout_width="25sp"
                                 android:layout_height="40sp"
-                                android:background="#FAB843"
-                                android:textColor="@color/background"
                                 android:layout_gravity="center"
-                                android:gravity="center"/>
+                                android:background="#FAB843"
+                                android:gravity="center"
+                                android:textColor="@color/background" />
                         </androidx.cardview.widget.CardView>
 
                         <TextView
@@ -163,15 +164,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Moderate \n 40-110"
-                            android:textColor="@color/background"
-                            />
+                            android:textColor="@color/background" />
 
 
                     </LinearLayout>
 
                     <Space
                         android:layout_width="match_parent"
-                        android:layout_height="5sp"/>
+                        android:layout_height="5sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -180,19 +180,19 @@
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="25sp"
-                            android:layout_height="40"
-                            app:cardElevation="5dp"
+                            android:layout_height="40sp"
                             android:layout_marginHorizontal="10dp"
-                            app:cardCornerRadius="15dp">
+                            app:cardCornerRadius="15dp"
+                            app:cardElevation="5dp">
 
                             <TextView
                                 android:id="@+id/colornaranja1"
                                 android:layout_width="25sp"
                                 android:layout_height="40sp"
-                                android:background="#FA8701"
-                                android:textColor="@color/background"
                                 android:layout_gravity="center"
-                                android:gravity="center"/>
+                                android:background="#FA8701"
+                                android:gravity="center"
+                                android:textColor="@color/background" />
                         </androidx.cardview.widget.CardView>
 
                         <TextView
@@ -200,15 +200,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Bad \n 40-110"
-                            android:textColor="@color/background"
-                            />
+                            android:textColor="@color/background" />
 
 
                     </LinearLayout>
 
                     <Space
                         android:layout_width="match_parent"
-                        android:layout_height="5sp"/>
+                        android:layout_height="5sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -217,19 +216,19 @@
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="25sp"
-                            android:layout_height="40"
-                            app:cardElevation="5dp"
+                            android:layout_height="40sp"
                             android:layout_marginHorizontal="10dp"
-                            app:cardCornerRadius="15dp">
+                            app:cardCornerRadius="15dp"
+                            app:cardElevation="5dp">
 
                             <TextView
                                 android:id="@+id/colornaranja4"
                                 android:layout_width="25sp"
                                 android:layout_height="40sp"
-                                android:background="#C61943"
-                                android:textColor="@color/background"
                                 android:layout_gravity="center"
-                                android:gravity="center"/>
+                                android:background="#C61943"
+                                android:gravity="center"
+                                android:textColor="@color/background" />
                         </androidx.cardview.widget.CardView>
 
                         <TextView
@@ -237,8 +236,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Very Bad \n 40-110"
-                            android:textColor="@color/background"
-                            />
+                            android:textColor="@color/background" />
 
 
                     </LinearLayout>
@@ -263,7 +261,6 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
-
 
 
 </LinearLayout>

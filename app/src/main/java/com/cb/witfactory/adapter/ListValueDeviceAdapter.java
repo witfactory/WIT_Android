@@ -6,9 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +37,8 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
         public ImageView img_icon,img_exelent,img_down;
         public TextView title_device, txt_description,color_estado;
 
+        public LinearLayout semaforo_layout;
+
         public MyViewHolder(View view) {
             super(view);
 
@@ -45,6 +49,7 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
             title_device = view.findViewById(R.id.title_device);
             txt_description = view.findViewById(R.id.txt_description);
             color_estado = view.findViewById(R.id.color_estado);
+            semaforo_layout = view.findViewById(R.id.semaforo_layout);
 
         }
     }
@@ -87,12 +92,20 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
+
                         if (isImage1) {
+                            Animation fadeIn = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+
                             holder.img_down.setBackgroundResource(R.drawable.arrow_up);
+                            holder.semaforo_layout.setVisibility(View.GONE);
+                            holder.semaforo_layout.startAnimation(fadeIn);
                             isImage1 = false;
 
                         } else {
+                            Animation fadeOut = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
                             holder.img_down.setBackgroundResource(R.drawable.arrow_down);
+                            holder.semaforo_layout.setVisibility(View.VISIBLE);
+                            holder.semaforo_layout.startAnimation(fadeOut);
                             isImage1 = true;
 
                         }

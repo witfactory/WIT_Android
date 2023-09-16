@@ -254,8 +254,6 @@ public class LoginActivity extends AppCompatActivity implements Callfun {
             public void run() {
                 Log.v("error", s.toString());
                 Toast.makeText(getApplicationContext(), getString(R.string.invalid_email_or_password).toString(), Toast.LENGTH_SHORT).show();
-                amplifyCognito.logoutAmplify(getApplicationContext());
-                //amplifyCognito.resendCode();
             }
         });
 
