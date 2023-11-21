@@ -50,7 +50,7 @@ public class WitMenu extends AppCompatActivity implements Callfun {
         binding.appBarLoginMenu.addDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Add device", Toast.LENGTH_SHORT).show();
+                Utils.goToDevice(getApplicationContext());
             }
         });
 
@@ -60,7 +60,11 @@ public class WitMenu extends AppCompatActivity implements Callfun {
                /* Snackbar.make(view, "  Envío de Correos", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
 
-                Utils.goToDevice(getApplicationContext());
+                binding.appBarLoginMenu.fab.setVisibility(View.GONE);
+                NavController navController = Navigation.findNavController(WitMenu.this, R.id.nav_host_fragment_content_login_menu);
+                navController.navigateUp();
+                navController.navigate(R.id.menu_soporte);
+                drawer.close();
             }
         });
 
