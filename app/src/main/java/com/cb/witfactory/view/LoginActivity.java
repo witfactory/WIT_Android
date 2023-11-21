@@ -144,8 +144,6 @@ public class LoginActivity extends AppCompatActivity implements Callfun {
                 } else {
 
                     amplifyCognito.signIn(mail, password);
-                    //  Intent intent = new Intent(getApplicationContext(), WitMenu.class);
-                    // startActivity(intent);
                 }
 
             }

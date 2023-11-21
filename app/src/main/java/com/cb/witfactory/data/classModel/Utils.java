@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.cb.witfactory.R;
+import com.cb.witfactory.esp32.activities.EspMainActivity;
 import com.cb.witfactory.view.HomeActivity;
 import com.cb.witfactory.view.LoginActivity;
 import com.cb.witfactory.view.MainActivity;
@@ -118,6 +119,14 @@ public class Utils {
         return m.matches();
     }
 
+
+    public static void goToDevice(Context context) {
+
+
+        Intent intent = new Intent(context, EspMainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
 
     public static void goToHome(Context context) {
 

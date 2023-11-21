@@ -47,12 +47,20 @@ public class WitMenu extends AppCompatActivity implements Callfun {
 
 
 
+        binding.appBarLoginMenu.addDevice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Add device", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         binding.appBarLoginMenu.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "  Envío de Correos", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+               /* Snackbar.make(view, "  Envío de Correos", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+
+                Utils.goToDevice(getApplicationContext());
             }
         });
 
