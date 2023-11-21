@@ -16,7 +16,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cb.witfactory.R;
-import com.cb.witfactory.data.retrofit.events.PayloadResponse;
+import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.model.Callfun;
 
 import java.util.ArrayList;
@@ -26,8 +26,8 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
         implements Filterable {
 
     private Context context;
-    private List<PayloadResponse> deviceList;
-    private List<PayloadResponse> deviceListFiltered;
+    private List<Metric> deviceList;
+    private List<Metric> deviceListFiltered;
     private ValueDeviceAdapterListener listener;
     private boolean isImage1 = true; // Para alternar entre las dos imágenes
 
@@ -51,10 +51,13 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
             color_estado = view.findViewById(R.id.color_estado);
             semaforo_layout = view.findViewById(R.id.semaforo_layout);
 
+
+
+
         }
     }
 
-    public ListValueDeviceAdapter(Context context, List<PayloadResponse> deviceList, ValueDeviceAdapterListener listener) {
+    public ListValueDeviceAdapter(Context context, List<Metric> deviceList, ValueDeviceAdapterListener listener) {
         this.context = context;
         this.listener = listener;
         this.deviceList = deviceList;
@@ -71,9 +74,30 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final PayloadResponse events = deviceListFiltered.get(0);
-        holder.title_device.setText(events.getTemp().toString());
-        holder.txt_description.setText("Valor:");
+        final Metric events = deviceListFiltered.get(position);
+        holder.title_device.setText(events.getValue()+"");
+        holder.txt_description.setText(events.getTitle().toString());
+        String color = events.getColor().toString();
+
+        if(color.equals("green")){
+
+            holder.color_estado.setBackgroundResource(R.color.green);
+            holder.img_exelent.setBackgroundResource(R.drawable.ic_button_exelent);
+        }
+        if(color.equals("red")){
+            holder.color_estado.setBackgroundResource(R.color.red);
+        }
+
+        if(color.equals("orange")){
+            holder.color_estado.setBackgroundResource(R.color.orange);
+
+        }
+
+        if(color.equals("blue")){
+            holder.color_estado.setBackgroundResource(R.color.blue);
+
+        }
+
 
         holder.img_down.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,12 +166,12 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
                 if (charString.isEmpty()) {
                     deviceListFiltered = deviceList;
                 } else {
-                    List<PayloadResponse> filteredList = new ArrayList<>();
-                    for (PayloadResponse row : deviceList) {
+                    List<Metric> filteredList = new ArrayList<>();
+                    for (Metric row : deviceList) {
 
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
-                        if (row.getTemp().toString().toLowerCase().contains(charString.toLowerCase()) || row.getTemp().toString().contains(charSequence)) {
+                        if (row.getTitle().toString().toLowerCase().contains(charString.toLowerCase()) || row.getTitle().toString().contains(charSequence)) {
                             filteredList.add(row);
                         }
                     }
@@ -162,13 +186,13 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                deviceListFiltered = (ArrayList<PayloadResponse>) filterResults.values;
+                deviceListFiltered = (ArrayList<Metric>) filterResults.values;
                 notifyDataSetChanged();
             }
         };
     }
 
     public interface ValueDeviceAdapterListener {
-        void onListValueDeviceSelected(PayloadResponse device);
+        void onListValueDeviceSelected(Metric device);
     }
 }

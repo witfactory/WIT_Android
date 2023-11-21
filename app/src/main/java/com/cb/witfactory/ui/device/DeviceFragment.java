@@ -22,6 +22,7 @@ import com.cb.witfactory.adapter.DeviceAdapter;
 import com.cb.witfactory.adapter.ListValueDeviceAdapter;
 import com.cb.witfactory.data.classModel.MyDividerItemDecoration;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
+import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.data.retrofit.events.PayloadResponse;
 import com.cb.witfactory.databinding.FragmentDeviceBinding;
 import com.cb.witfactory.model.Callfun;
@@ -71,7 +72,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
 
         Toast.makeText(getActivity(), "Selected: " + idDevice, Toast.LENGTH_LONG).show();
 
-        deviceViewModel.getMetrics(idDevice,"2023-09-05T16:00:21","2023-10-05T16:13:21");
+        deviceViewModel.getMetrics(idDevice,"2023-09-19T19:47:45","2023-09-19T25:47:46");
 
         /* NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_login_menu);
         navController.navigateUp();
@@ -82,9 +83,12 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
     }
 
 
+
+
     @Override
-    public void onListValueDeviceSelected(PayloadResponse device) {
-        Toast.makeText(getApplicationContext(), "Selected: " + device.getTemp(), Toast.LENGTH_LONG).show();
+    public void onListValueDeviceSelected(Metric device) {
+        Toast.makeText(getApplicationContext(), "Selected: " + device.getTitle(), Toast.LENGTH_LONG).show();
+
     }
 
     @Override
@@ -131,7 +135,10 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
 
         if (s.equals("getevents")){
 
-            ArrayList<PayloadResponse> deviceList = (ArrayList<PayloadResponse>) o;
+
+
+           // ArrayList<PayloadResponse> deviceList = (ArrayList<PayloadResponse>) o;
+             ArrayList<Metric> deviceList = (ArrayList<Metric>) o;
             if (deviceList.size() > 0) {
                 //Mock
                 //vertical
@@ -202,4 +209,6 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         deviceViewModel.getMetrics(deviceId,fechaFormateada,fechaActualFormateada);
 
     }
+
+
 }
