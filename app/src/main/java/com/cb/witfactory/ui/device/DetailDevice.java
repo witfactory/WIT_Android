@@ -23,6 +23,7 @@ import com.cb.witfactory.adapter.DeviceAdapter;
 import com.cb.witfactory.adapter.ListValueDeviceAdapter;
 import com.cb.witfactory.data.classModel.MyDividerItemDecoration;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
+import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.data.retrofit.events.PayloadResponse;
 import com.cb.witfactory.databinding.FragmentDetailDeviceBinding;
 import com.cb.witfactory.databinding.FragmentDeviceBinding;
@@ -51,7 +52,6 @@ public class DetailDevice extends Fragment  implements DeviceAdapter.DeviceAdapt
         View root = binding.getRoot();
 
 
-        datamock();
         return root;
     }
 
@@ -62,6 +62,7 @@ public class DetailDevice extends Fragment  implements DeviceAdapter.DeviceAdapt
         // TODO: Use the ViewModel
     }
 
+    /*
     public void datamock(){
         //Mock
         //vertical
@@ -78,15 +79,16 @@ public class DetailDevice extends Fragment  implements DeviceAdapter.DeviceAdapt
         binding.recyclerVertical.setItemAnimator(new DefaultItemAnimator());
         binding.recyclerVertical.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 5));
         binding.recyclerVertical.setAdapter(listValueDeviceAdapter);
-    }
+    }*/
 
     @Override
     public void onDeviceSelected(DeviceResponse contact) {
 
     }
 
+
     @Override
-    public void onListValueDeviceSelected(PayloadResponse device) {
+    public void onListValueDeviceSelected(Metric device) {
 
     }
 }

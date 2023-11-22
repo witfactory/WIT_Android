@@ -8,10 +8,16 @@ import androidx.lifecycle.ViewModel;
 import com.cb.witfactory.data.retrofit.connection.ApiConecxion;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.cb.witfactory.data.retrofit.device.ObjectResponseDevice;
+import com.cb.witfactory.data.retrofit.events.Data;
+import com.cb.witfactory.data.retrofit.events.DeviceMetrics;
+import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.data.retrofit.events.ObjectResponseEvents;
 import com.cb.witfactory.model.Callfun;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,7 +60,7 @@ public class DeviceViewModel extends ViewModel {
 
     public void getMetrics(String device_id,String from,String to) {
         try {
-            final Call<ObjectResponseEvents> obj = ApiConecxion.getApiService().getEvents(device_id, from,to);
+            final Call<ObjectResponseEvents> obj = ApiConecxion.getApiService().getEvents("B5242D31-52CA-4530-9E64-D654FE806D53", from,to);
             obj.enqueue(new Callback<ObjectResponseEvents>() {
                 @Override
                 public void onResponse(Call<ObjectResponseEvents> call, Response<ObjectResponseEvents> response) {
@@ -62,7 +68,23 @@ public class DeviceViewModel extends ViewModel {
                     ObjectResponseEvents objectResponseEvents = new ObjectResponseEvents();
                     objectResponseEvents = response.body();
 
-                    listener.onSuccess(objectResponseEvents.body,"getevents");
+
+
+                    Map<String, DeviceMetrics> deviceMetricsMap = objectResponseEvents.response;
+
+                    // Convertir el Map a ArrayList
+                    List<Metric> metrics = new LinkedList<>();
+                    List<Data> data = new LinkedList<>();
+                    List<DeviceMetrics> deviceMetricsList = new ArrayList<>(deviceMetricsMap.values());
+                    for (DeviceMetrics deviceMetrics : deviceMetricsList) {
+                       metrics = deviceMetrics.getMetrics();
+                       data = deviceMetrics.getData();
+                        // Realiza las acciones necesarias con los datos
+                    }
+
+
+                    //objectResponseEvents.response
+                    listener.onSuccess(metrics,"getevents");
                 }
 
                 @Override

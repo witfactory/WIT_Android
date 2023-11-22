@@ -11,10 +11,56 @@
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
+<<<<<<< HEAD
             android:layout_height="match_parent">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/appBarLayout"
+=======
+            android:layout_height="90sp"
+            android:layout_gravity="right|center"
+            android:gravity="right|center"
+            android:orientation="horizontal"
+            android:translationZ="0.1dp"
+            app:elevation="0.1dp"
+            app:layout_anchorGravity="center">
+
+            <ImageView
+                android:id="@+id/notifications"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_gravity="right|center"
+                android:background="@drawable/ic_notifications"
+                android:foregroundGravity="right" />
+
+            <ImageView
+                android:id="@+id/add_device"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_gravity="right|center"
+                android:background="@drawable/ic_cross"
+                android:foregroundGravity="right" />
+        </LinearLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_head_menu"
+            android:stateListAnimator="@null"
+            android:theme="@style/Theme.WitFactory.AppBarOverlay"
+            android:translationZ="0.1dp"
+            app:elevation="0.1dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+>>>>>>> copiaMain
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_head_menu"
@@ -61,12 +107,8 @@
                                 android:foregroundGravity="right" />
                         </LinearLayout>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-
+<<<<<<< HEAD
+                    </RelativeLayout>
                 </androidx.appcompat.widget.Toolbar>
 
             </com.google.android.material.appbar.AppBarLayout>
@@ -88,8 +130,11 @@
                 />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    </RelativeLayout>
 
 
+
+=======
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+>>>>>>> copiaMain
     </RelativeLayout>
 </layout>
