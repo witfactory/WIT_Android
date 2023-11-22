@@ -138,7 +138,7 @@ public class MainActivity extends Activity implements Callfun {
     public void onSuccess(String s) {
 
         if (s.equals("logout")) {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
             finish();
