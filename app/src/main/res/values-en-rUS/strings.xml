@@ -138,7 +138,7 @@
     <string name="esptouch1_configure_wifi_change_message">Wi-Fi disconnected or changed</string>
     <string name="esptouch1_configure_result_failed">EspTouch failed</string>
     <string name="esptouch1_configure_result_failed_port">Create EspTouch task failed, the EspTouch port could be used by other thread</string>
-    <string name="esptouch1_configure_result_success">EspTouch 完成</string>
+    <string name="esptouch1_configure_result_success">EspTouch Finalizar</string>
     <string name="esptouch1_configure_result_success_item">BSSID = %1$s, InetAddress = %2$s</string>
 
     <string name="esptouch2_title">EspTouch V2</string>

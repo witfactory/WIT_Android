@@ -218,6 +218,8 @@ public class EspTouchActivity extends EspTouchActivityAbs {
             }
         }
 
+
+        //validar si este metodo envia o lee informacion al esp32
         @Override
         protected List<IEsptouchResult> doInBackground(byte[]... params) {
             EspTouchActivity activity = mActivity.get();
