@@ -33,7 +33,7 @@
                     android:textColor="@color/dark_greenish_blue"
                     android:hint="@string/text_search_device"
                     android:textColorHint="@color/text_login"
-                    android:layout_marginLeft="40sp"/>
+                    android:layout_marginStart="40sp"/>
 
             </LinearLayout>
 

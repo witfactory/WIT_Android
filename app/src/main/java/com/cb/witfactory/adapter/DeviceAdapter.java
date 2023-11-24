@@ -136,6 +136,11 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
         };
     }
 
+    public void filterList(ArrayList<DeviceResponse> filteredList) {
+        deviceListFiltered = filteredList;
+        notifyDataSetChanged();
+    }
+
     public interface DeviceAdapterListener {
         void onDeviceSelected(DeviceResponse contact);
     }
