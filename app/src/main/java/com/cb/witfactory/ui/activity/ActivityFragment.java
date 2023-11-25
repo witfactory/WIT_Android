@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -34,7 +35,7 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
     private Spinner spinnerDevice;
     private DeviceViewModel deviceViewModel;
     private List<DeviceResponse> deviceList;  // Cambié ArrayList a List
-
+    private AutoCompleteTextView autoCompleteTextViewDevice;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         ActivityViewModel loginViewModel =
@@ -42,7 +43,7 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
 
         binding = FragmentActivityBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        spinnerDevice = root.findViewById(R.id.spinner_device);
+        autoCompleteTextViewDevice = root.findViewById(R.id.txt_country);
         deviceViewModel = new ViewModelProvider(this).get(DeviceViewModel.class);
         deviceViewModel.setListener(ActivityFragment.this);
         deviceViewModel.getDataDevice("c8174124-b6b3-4a35-8457-429a9b947ea3", "S");
@@ -108,21 +109,14 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
 
             if (deviceList != null) {
                 List<String> deviceNames = getNameDevices(deviceList);
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, deviceNames);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, deviceNames);
+                autoCompleteTextViewDevice.setAdapter(adapter);
 
-                spinnerDevice.setAdapter(adapter);
-
-                spinnerDevice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                autoCompleteTextViewDevice.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                        String selectedDevice = (String) parentView.getItemAtPosition(position);
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String selectedDevice = (String) parent.getItemAtPosition(position);
                         selectDevice(selectedDevice);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parentView) {
-                        // Acciones si no se ha seleccionado nada (opcional)
                     }
                 });
             }
