@@ -3,6 +3,7 @@ package com.cb.witfactory.data.retrofit.device;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GetDeviceResponse {
 
@@ -43,5 +44,15 @@ public class GetDeviceResponse {
 
     public void setScannedCount(Integer scannedCount) {
         this.scannedCount = scannedCount;
+    }
+
+    // obtener dispositivo por 'nombre'
+    public DeviceResponse getDeviceByName(List<DeviceResponse> devices, String deviceName) {
+        for (DeviceResponse device : devices) {
+            if (device.getDevice_name().equals(deviceName)) {
+                return device;
+            }
+        }
+        return null;  // Retorna null si no se encuentra el dispositivo con el nombre dado
     }
 }

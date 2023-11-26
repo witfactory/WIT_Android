@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:elevation="5dp"
+        android:background="@color/gray_ligth_two">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:elevation="8dp"
+            android:background="@drawable/background_bottom_rounded"
             android:padding="@dimen/sp30">
 
             <TextView
@@ -61,18 +69,33 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <!-- Agregar la vista de calendario CollapsibleCalendar -->
             <com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
                 android:id="@+id/collapsibleCalendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:expanded="false" />
-
-
-
         </LinearLayout>
-
-
     </RelativeLayout>
-</layout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        android:background="@color/white">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/btnCalendar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/sp16"
+            android:background="@android:color/white"
+            android:contentDescription="@string/calendar_icon_description"
+            android:src="@drawable/baseline_calendar_month_24" />
+    </LinearLayout>
+</LinearLayout>

@@ -16,6 +16,7 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="gray_ligth">#D3D3D3</color>
     <color name="gray_ligth_one">#757575</color>
+    <color name="gray_ligth_two">#F4F4F4</color>
     <color name="text_login">#00478c</color>
     <color name="text_home">#00478C</color>
     <color name="btn_color">#00478c</color>

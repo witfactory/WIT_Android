@@ -67,9 +67,6 @@ public class DeviceViewModel extends ViewModel {
                     //
                     ObjectResponseEvents objectResponseEvents = new ObjectResponseEvents();
                     objectResponseEvents = response.body();
-
-
-
                     Map<String, DeviceMetrics> deviceMetricsMap = objectResponseEvents.response;
 
                     // Convertir el Map a ArrayList
@@ -81,8 +78,6 @@ public class DeviceViewModel extends ViewModel {
                        data = deviceMetrics.getData();
                         // Realiza las acciones necesarias con los datos
                     }
-
-
                     //objectResponseEvents.response
                     listener.onSuccess(metrics,"getevents");
                 }
