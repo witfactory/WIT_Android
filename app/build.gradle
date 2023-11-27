@@ -160,6 +160,8 @@ dependencies {
     implementation 'com.github.firdausmaulan:AVLoadingIndicatorView:2.3.0'
 
     //sp32  fin
+    implementation 'com.github.akshittyagi205:HorizontalCalendarView:v1.0.0'
+    implementation 'com.michalsvec:single-row-calednar:1.0.0'
 
 }
 

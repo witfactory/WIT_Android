@@ -54,7 +54,7 @@
                 android:paddingTop="10sp">
 
                 <AutoCompleteTextView
-                    android:id="@+id/txt_country"
+                    android:id="@+id/txt_autocomplete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -68,6 +68,11 @@
                     android:focusable="false"/>
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <in.akshit.horizontalcalendar.HorizontalCalendarView
+                android:id="@+id/horizontalCalendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <!-- Agregar la vista de calendario CollapsibleCalendar -->
             <com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
