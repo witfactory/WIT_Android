@@ -79,9 +79,22 @@
                 android:id="@+id/collapsibleCalendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:expanded="false" />
+                app:expanded="false" >
+            </com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar>
         </LinearLayout>
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"> <!-- Altura fija, ajusta según tus necesidades -->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" />
+
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="200px"

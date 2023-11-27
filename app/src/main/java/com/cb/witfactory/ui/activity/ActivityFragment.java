@@ -1,27 +1,31 @@
 package com.cb.witfactory.ui.activity;
 
-import static android.widget.Toast.LENGTH_SHORT;
+import static org.chromium.base.ContextUtils.getApplicationContext;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
-import android.widget.Spinner;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.adapter.DeviceAdapter;
 import com.cb.witfactory.adapter.ListValueDeviceAdapter;
+import com.cb.witfactory.data.classModel.MyDividerItemDecoration;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.cb.witfactory.data.retrofit.device.GetDeviceResponse;
 import com.cb.witfactory.data.retrofit.events.Metric;
@@ -31,6 +35,7 @@ import com.cb.witfactory.ui.device.DeviceViewModel;
 import com.shrikanthravi.collapsiblecalendarview.data.Day;
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,17 +49,20 @@ import in.akshit.horizontalcalendar.Tools;
 public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAdapterListener, ListValueDeviceAdapter.ValueDeviceAdapterListener, Callfun {
 
     private FragmentActivityBinding binding;
-    private Spinner spinnerDevice;
+    private List<Callfun.ValueDevice> valueDeviceList;
+    private ListValueDeviceAdapter listValueDeviceAdapter;
     private DeviceViewModel deviceViewModel;
     private List<DeviceResponse> deviceList;  // Cambié ArrayList a List
     private AutoCompleteTextView autoCompleteTextViewDevice;
     private GetDeviceResponse getDeviceResponse;
     private ArrayAdapter<String> adapter;
+    private TextView monthDayText;
+    private TextView dayOfWeekTV;
+    private ListView hourListView;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         ActivityViewModel loginViewModel =
                 new ViewModelProvider(this).get(ActivityViewModel.class);
-
         binding = FragmentActivityBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -74,7 +82,7 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
 
         // Configurar el HorizontalCalendar
         HorizontalCalendarView calendarView = root.findViewById(R.id.horizontalCalendar);
-
+        collapsibleCalendar.collapse(1);
         Calendar starttime = Calendar.getInstance();
         starttime.add(Calendar.MONTH, -6);
 
@@ -89,18 +97,23 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
             new HorizontalCalendarView.OnCalendarListener() {
                 @Override
                 public void onDateSelected(String date) {
-                    Toast.makeText(requireContext(), "Tu mensaje aquí", Toast.LENGTH_SHORT).show();                    }
+                    Toast.makeText(requireContext(), "Tu mensaje aquí", Toast.LENGTH_SHORT).show();
+                }
             });
+
         binding.collapsibleCalendar.setCalendarListener(new CollapsibleCalendar.CalendarListener() {
 
             @Override
             public void onDaySelect() {
-                String selectedDate = binding.collapsibleCalendar.getSelectedDay().toString();
-                Log.d("TAG", "onDaySelect: "+ selectedDate);
+                Day selectedDay = binding.collapsibleCalendar.getSelectedDay();
+                String selectDate = getFormatedDate(selectedDay);
+                String range = getRange30Days(getFormatedDate(selectedDay));
+                deviceViewModel.getMetrics("", range, selectDate);
             }
 
             @Override
             public void onItemClick(View v) {
+                Log.d("TAG", "item selected: "+ v);
             }
 
             @Override
@@ -113,6 +126,7 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
 
             @Override
             public void onWeekChange(int position) {
+                Log.d("TAG", "week sel: "+ position);
             }
         });
 
@@ -176,6 +190,32 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
                     DeviceResponse deviceSelect = getDeviceResponse.getDeviceByName(deviceList, selectedDevice);
                     selectDevice(deviceSelect.getDevice_id());
                 });
+                getMetrics(deviceList);
+            }
+        }
+        // events
+        if (s.equals("getevents")) {
+            List<Metric> deviceList = (List<Metric>) o;
+            if (deviceList.size() > 0) {
+                valueDeviceList = new ArrayList<>();
+                listValueDeviceAdapter = new ListValueDeviceAdapter(getActivity(), deviceList, this);
+                RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+                listValueDeviceAdapter.notifyDataSetChanged();
+                binding.recyclerVertical.setLayoutManager(mLayoutManager2);
+                binding.recyclerVertical.setItemAnimator(new DefaultItemAnimator());
+                binding.recyclerVertical.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 5));
+                binding.recyclerVertical.setAdapter(listValueDeviceAdapter);
+                listValueDeviceAdapter.notifyDataSetChanged();
+            } else {
+                valueDeviceList = new ArrayList<>();
+                listValueDeviceAdapter = new ListValueDeviceAdapter(getActivity(), deviceList, this);
+                RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+                listValueDeviceAdapter.notifyDataSetChanged();
+                binding.recyclerVertical.setLayoutManager(mLayoutManager2);
+                binding.recyclerVertical.setItemAnimator(new DefaultItemAnimator());
+                binding.recyclerVertical.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 5));
+                binding.recyclerVertical.setAdapter(listValueDeviceAdapter);
+                listValueDeviceAdapter.notifyDataSetChanged();
             }
         }
     }
@@ -186,15 +226,16 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
     }
 
     public void getMetrics(List<DeviceResponse> deviceList) {
+        Date currentDate = new Date();
         Calendar calendar = Calendar.getInstance();
-        Date fechaActual = calendar.getTime();
+        calendar.setTime(currentDate);
         calendar.add(Calendar.DAY_OF_MONTH, -30);
-        Date fechaMenos30Dias = calendar.getTime();
+        Date newDate = calendar.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-        String fechaFormateada = sdf.format(fechaMenos30Dias);
-        String fechaActualFormateada = sdf.format(fechaActual);
+        String formattedCurrentDate = sdf.format(currentDate);
+        String formattedNewDate = sdf.format(newDate);
         String deviceId = deviceList.get(0).getDevice_id();
-        deviceViewModel.getMetrics(deviceId, fechaFormateada, fechaActualFormateada);
+        deviceViewModel.getMetrics(deviceId, formattedNewDate, formattedCurrentDate);
     }
     public DeviceResponse getDeviceByName(List<DeviceResponse> devices, String deviceName) {
         for (DeviceResponse device : devices) {
@@ -204,4 +245,35 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
         }
         return null;  // Retorna null si no se encuentra el dispositivo con el nombre dado
     }
+
+    public void getEventsByDate(String idDevice) {
+        deviceViewModel.getMetrics(idDevice, "2023-09-19T19:47:45", "2023-09-19T25:47:46");
+    }
+
+    public String getFormatedDate(Day selectedDay) {
+        Calendar selectedDateCalendar = Calendar.getInstance();
+        selectedDateCalendar.set(selectedDay.getYear(), selectedDay.getMonth(), selectedDay.getDay());
+        Date selectedDate = selectedDateCalendar.getTime();
+        Log.d("TAG", "onDaySelect: " + selectedDate);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        String selectedDateFormatted = sdf.format(selectedDate);
+        return selectedDateFormatted;
+    }
+
+    public String getRange30Days(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
+
+        try {
+            Date oldDate = sdf.parse(date);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(oldDate);
+            calendar.add(Calendar.DAY_OF_MONTH, -30);
+            Date dateRange = calendar.getTime();
+            return sdf.format(dateRange);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
