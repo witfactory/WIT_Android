@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 
+import com.cb.witfactory.BuildConfig;
 import com.cb.witfactory.R;
 import com.cb.witfactory.databinding.ActivityEspTouchBinding;
 import com.cb.witfactory.espTouch.EspTouchActivityAbs;
@@ -22,7 +23,11 @@ import com.espressif.iot.esptouch.IEsptouchTask;
 import com.espressif.iot.esptouch.util.ByteUtil;
 import com.espressif.iot.esptouch.util.TouchNetUtil;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.ref.WeakReference;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -235,6 +240,18 @@ public class EspTouchActivity extends EspTouchActivityAbs {
                 mEsptouchTask = new EsptouchTask(apSsid, apBssid, apPassword, context);
                 mEsptouchTask.setPackageBroadcast(broadcastData[0] == 1);
                 mEsptouchTask.setEsptouchListener(this::publishProgress);
+
+
+
+
+                // Ejemplo de envío y recepción de datos por Wi-Fi
+                String ipESP32 = "192.168.4.1";  // Reemplazar con la IP del ESP32
+                int puertoESP32 = 80;  // Reemplazar con el puerto correcto
+                String mensaje = "Hola desde Android por Wi-Fi";
+
+
+                String mensajeRecibido = enviarYRecibirDatosPorWiFi(ipESP32, puertoESP32, mensaje);
+
             }
             return mEsptouchTask.executeForResults(taskResultCount);
         }
@@ -285,4 +302,31 @@ public class EspTouchActivity extends EspTouchActivityAbs {
             mResultDialog.setCanceledOnTouchOutside(false);
         }
     }
+
+    public static String enviarYRecibirDatosPorWiFi(String ip, int puerto, String mensaje) {
+        try {
+            Socket socket = new Socket(ip, puerto);
+
+            // Envía datos
+            OutputStream outputStream = socket.getOutputStream();
+            outputStream.write(mensaje.getBytes());
+
+            // Recibe datos
+            InputStream inputStream = socket.getInputStream();
+            byte[] buffer = new byte[1024];
+            int bytesRead = inputStream.read(buffer);
+
+            // Convierte los bytes a una cadena
+            String receivedData = new String(buffer, 0, bytesRead);
+
+            socket.close();
+
+            return receivedData;
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejo de errores
+            return null;
+        }
+    }
+
 }
