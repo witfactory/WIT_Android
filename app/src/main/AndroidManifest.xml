@@ -49,10 +49,7 @@
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
 
-        <activity
-            android:name=".ui.connectDispositive.EspTouchActivity"
-            android:exported="true"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".view.ResetPassWordActivity"
             android:exported="false"
