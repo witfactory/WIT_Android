@@ -69,10 +69,10 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <in.akshit.horizontalcalendar.HorizontalCalendarView
+            <!--<in.akshit.horizontalcalendar.HorizontalCalendarView
                 android:id="@+id/horizontalCalendar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"/> -->
 
             <!-- Agregar la vista de calendario CollapsibleCalendar -->
             <com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
@@ -83,17 +83,16 @@
             </com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar>
         </LinearLayout>
     </RelativeLayout>
-    <RelativeLayout
+    <!--<RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"> <!-- Altura fija, ajusta según tus necesidades -->
-
+        android:layout_height="200dp">
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_vertical"
+            android:id="@+id/events"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical" />
 
-    </RelativeLayout>
+    </RelativeLayout> -->
 
     <LinearLayout
         android:layout_width="match_parent"

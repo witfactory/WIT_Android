@@ -1,5 +1,6 @@
 package com.cb.witfactory.ui.activity;
 
+import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
 import static org.chromium.base.ContextUtils.getApplicationContext;
 
 import android.os.Bundle;
@@ -10,12 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -42,46 +42,30 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import in.akshit.horizontalcalendar.HorizontalCalendarView;
 import in.akshit.horizontalcalendar.Tools;
 
 public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAdapterListener, ListValueDeviceAdapter.ValueDeviceAdapterListener, Callfun {
 
     private FragmentActivityBinding binding;
-    private List<Callfun.ValueDevice> valueDeviceList;
-    private ListValueDeviceAdapter listValueDeviceAdapter;
     private DeviceViewModel deviceViewModel;
-    private List<DeviceResponse> deviceList;  // Cambié ArrayList a List
+    private List<DeviceResponse> deviceList;
     private AutoCompleteTextView autoCompleteTextViewDevice;
     private GetDeviceResponse getDeviceResponse;
     private ArrayAdapter<String> adapter;
-    private TextView monthDayText;
-    private TextView dayOfWeekTV;
-    private ListView hourListView;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         ActivityViewModel loginViewModel =
                 new ViewModelProvider(this).get(ActivityViewModel.class);
         binding = FragmentActivityBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
         autoCompleteTextViewDevice = root.findViewById(R.id.txt_autocomplete);
         deviceViewModel = new ViewModelProvider(this).get(DeviceViewModel.class);
         deviceViewModel.setListener(ActivityFragment.this);
         deviceViewModel.getDataDevice("c8174124-b6b3-4a35-8457-429a9b947ea3", "S");
-
-        // Inicializa el adaptador una vez
         adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line);
-
         getDeviceResponse = new GetDeviceResponse((ArrayList<DeviceResponse>) deviceList, 0, 0);
-
         ImageButton btnCalendar = root.findViewById(R.id.btnCalendar);
         CollapsibleCalendar collapsibleCalendar = root.findViewById(R.id.collapsibleCalendar);
-        // Configurar el TextView con la fecha actual
-
-        // Configurar el HorizontalCalendar
-        HorizontalCalendarView calendarView = root.findViewById(R.id.horizontalCalendar);
         collapsibleCalendar.collapse(1);
         Calendar starttime = Calendar.getInstance();
         starttime.add(Calendar.MONTH, -6);
@@ -91,15 +75,6 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
 
         ArrayList datesToBeColored = new ArrayList();
         datesToBeColored.add(Tools.getFormattedDateToday());
-        calendarView.setUpCalendar(starttime.getTimeInMillis(),
-            endtime.getTimeInMillis(),
-            datesToBeColored,
-            new HorizontalCalendarView.OnCalendarListener() {
-                @Override
-                public void onDateSelected(String date) {
-                    Toast.makeText(requireContext(), "Tu mensaje aquí", Toast.LENGTH_SHORT).show();
-                }
-            });
 
         binding.collapsibleCalendar.setCalendarListener(new CollapsibleCalendar.CalendarListener() {
 
@@ -109,6 +84,7 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
                 String selectDate = getFormatedDate(selectedDay);
                 String range = getRange30Days(getFormatedDate(selectedDay));
                 deviceViewModel.getMetrics("", range, selectDate);
+                onDaySelected();
             }
 
             @Override
@@ -127,19 +103,6 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
             @Override
             public void onWeekChange(int position) {
                 Log.d("TAG", "week sel: "+ position);
-            }
-        });
-
-        btnCalendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (collapsibleCalendar.getVisibility() == View.VISIBLE) {
-                    collapsibleCalendar.setVisibility(View.GONE);
-                    calendarView.setVisibility(View.VISIBLE);
-                } else {
-                    collapsibleCalendar.setVisibility(View.VISIBLE);
-                    calendarView.setVisibility(View.GONE);
-                }
             }
         });
         return root;
@@ -186,9 +149,12 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
                 autoCompleteTextViewDevice.setOnItemClickListener((parent, view, position, id) -> {
                     String selectedDevice = (String) parent.getItemAtPosition(position);
                     selectDevice(selectedDevice);
-                    // Llama a la función correspondiente al dispositivo seleccionado
                     DeviceResponse deviceSelect = getDeviceResponse.getDeviceByName(deviceList, selectedDevice);
                     selectDevice(deviceSelect.getDevice_id());
+                    Day selectedDay = binding.collapsibleCalendar.getSelectedDay();
+                    String selectDate = getFormatedDate(selectedDay);
+                    String range = getRange30Days(getFormatedDate(selectedDay));
+                    deviceViewModel.getMetrics(deviceSelect.getDevice_id(), range, selectDate);
                 });
                 getMetrics(deviceList);
             }
@@ -196,26 +162,13 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
         // events
         if (s.equals("getevents")) {
             List<Metric> deviceList = (List<Metric>) o;
+            //RecyclerView recyclerView = getView().findViewById(R.id.events);
             if (deviceList.size() > 0) {
-                valueDeviceList = new ArrayList<>();
-                listValueDeviceAdapter = new ListValueDeviceAdapter(getActivity(), deviceList, this);
-                RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-                listValueDeviceAdapter.notifyDataSetChanged();
-                binding.recyclerVertical.setLayoutManager(mLayoutManager2);
-                binding.recyclerVertical.setItemAnimator(new DefaultItemAnimator());
-                binding.recyclerVertical.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 5));
-                binding.recyclerVertical.setAdapter(listValueDeviceAdapter);
-                listValueDeviceAdapter.notifyDataSetChanged();
-            } else {
-                valueDeviceList = new ArrayList<>();
-                listValueDeviceAdapter = new ListValueDeviceAdapter(getActivity(), deviceList, this);
-                RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-                listValueDeviceAdapter.notifyDataSetChanged();
-                binding.recyclerVertical.setLayoutManager(mLayoutManager2);
-                binding.recyclerVertical.setItemAnimator(new DefaultItemAnimator());
-                binding.recyclerVertical.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 5));
-                binding.recyclerVertical.setAdapter(listValueDeviceAdapter);
-                listValueDeviceAdapter.notifyDataSetChanged();
+                //RecyclerView recyclerView1 = binding.getRoot().findViewById(R.id.events);
+                RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
+                //recyclerView1.setLayoutManager(mLayoutManager2);
+                //recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                //recyclerView1.addItemDecoration(new MyDividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL, 36));
             }
         }
     }
@@ -276,4 +229,10 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
         }
     }
 
+    public void onDaySelected() {
+        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
+        bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
+    }
+
 }
+
