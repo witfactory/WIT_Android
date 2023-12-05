@@ -3,10 +3,12 @@ package com.cb.witfactory.esp32.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -69,7 +71,19 @@ public class ProvisionActivity extends AppCompatActivity {
 
         Log.d(TAG, "Selected AP -" + ssidValue);
         showLoading();
-        doProvisioning();
+        sendData();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doProvisioning();
+            }
+        }, 5000);
+
+
+
+
+
     }
 
     @Override
@@ -147,27 +161,9 @@ public class ProvisionActivity extends AppCompatActivity {
         tick1.setVisibility(View.GONE);
         progress1.setVisibility(View.VISIBLE);
 
-        String bytesString = "";
-        String email = PreferencesHelper.getEmail("email", "");
-        String userId = PreferencesHelper.getEmail("userId", "");
 
-        bytesString = email+"#"+userId+"#"+ssidValue+"#"+passphraseValue;
-
-        provisionManager.getEspDevice().sendDataToCustomEndPoint("custom-data", bytesString.getBytes(), new ResponseListener() {
-            @Override
-            public void onSuccess(byte[] returnData) {
-                byte[] decryptedData2 = returnData;
-                Log.v("exitoso: ",decryptedData2.toString());
-
-
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                Log.v("error device: ",e.getMessage().toString());
-            }
-        });
         provisionManager.getEspDevice().provision(ssidValue, passphraseValue, new ProvisionListener() {
+
 
             @Override
             public void createSessionFailed(Exception e) {
@@ -199,6 +195,9 @@ public class ProvisionActivity extends AppCompatActivity {
                         progress1.setVisibility(View.GONE);
                         tick2.setVisibility(View.GONE);
                         progress2.setVisibility(View.VISIBLE);
+
+
+
                     }
                 });
             }
@@ -300,6 +299,7 @@ public class ProvisionActivity extends AppCompatActivity {
 
                         String datosWifi = ssidValue + "#"+passphraseValue;
 
+
                         PreferencesHelper.setSsidPassword("setSsidPassword", datosWifi);
 
                         isProvisioningCompleted = true;
@@ -327,6 +327,35 @@ public class ProvisionActivity extends AppCompatActivity {
                         hideLoading();
                     }
                 });
+            }
+        });
+
+
+
+    }
+
+    private void sendData() {
+
+        String bytesString = "";
+        String email = PreferencesHelper.getEmail("email", "");
+        String userId = PreferencesHelper.getEmail("userId", "");
+
+        bytesString = email+"&"+userId;
+        Log.v("bytesString",bytesString);
+
+        Toast.makeText(getApplicationContext(), bytesString , Toast.LENGTH_SHORT).show();
+        provisionManager.getEspDevice().sendDataToCustomEndPoint("custom-data", bytesString.getBytes(), new ResponseListener() {
+            @Override
+            public void onSuccess(byte[] returnData) {
+                byte[] decryptedData2 = returnData;
+                Log.v("exitoso: ",decryptedData2.toString());
+
+
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Log.v("error device: ",e.getMessage().toString());
             }
         });
     }
