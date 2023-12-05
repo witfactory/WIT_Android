@@ -1,6 +1,5 @@
 package com.cb.witfactory.ui.connectDispositive;
 
-
 import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -120,4 +119,3 @@ public class EspTouchApp extends Application {
         return mCacheMap.remove(key);
     }
 }
-
