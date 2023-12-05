@@ -147,7 +147,11 @@ public class ProvisionActivity extends AppCompatActivity {
         tick1.setVisibility(View.GONE);
         progress1.setVisibility(View.VISIBLE);
 
-        String bytesString = PreferencesHelper.getEmail("email", "");
+        String bytesString = "";
+        String email = PreferencesHelper.getEmail("email", "");
+        String userId = PreferencesHelper.getEmail("userId", "");
+
+        bytesString = email+"#"+userId+"#"+ssidValue+"#"+passphraseValue;
 
         provisionManager.getEspDevice().sendDataToCustomEndPoint("custom-data", bytesString.getBytes(), new ResponseListener() {
             @Override
@@ -294,7 +298,10 @@ public class ProvisionActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        String datosWifi = ssidValue + "-"+passphraseValue;
+                        String datosWifi = ssidValue + "#"+passphraseValue;
+
+                        PreferencesHelper.setSsidPassword("setSsidPassword", datosWifi);
+
                         isProvisioningCompleted = true;
                         tick3.setImageResource(R.drawable.ic_checkbox_on);
                         tick3.setVisibility(View.VISIBLE);
