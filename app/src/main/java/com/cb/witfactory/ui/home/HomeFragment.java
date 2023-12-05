@@ -91,6 +91,8 @@ public class HomeFragment extends Fragment implements Callfun {
         if(options.equals("getuser")){
             ObjectResponseUser bodyResponseUser = (ObjectResponseUser) o;
             String user =bodyResponseUser.getBody().get(0).getUser_principal().toString();
+            PreferencesHelper.setEmail("email", user);
+
             String[] arrOfStr = user.split("@");
 
             String dataUser = arrOfStr[0];

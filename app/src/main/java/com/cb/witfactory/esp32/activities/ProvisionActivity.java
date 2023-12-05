@@ -1,7 +1,5 @@
 package com.cb.witfactory.esp32.activities;
 
-
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,13 +16,22 @@ import androidx.core.widget.ContentLoadingProgressBar;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.esp32.AppConstants;
+import com.cb.witfactory.model.PreferencesHelper;
 import com.espressif.provisioning.DeviceConnectionEvent;
 import com.espressif.provisioning.ESPConstants;
+import com.espressif.provisioning.ESPDevice;
 import com.espressif.provisioning.ESPProvisionManager;
 import com.espressif.provisioning.listeners.ProvisionListener;
+import com.espressif.provisioning.listeners.ResponseListener;
+import com.espressif.provisioning.security.Security;
+import com.espressif.provisioning.security.Security0;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 public class ProvisionActivity extends AppCompatActivity {
 
@@ -41,6 +48,11 @@ public class ProvisionActivity extends AppCompatActivity {
     private String ssidValue, passphraseValue = "";
     private ESPProvisionManager provisionManager;
     private boolean isProvisioningCompleted = false;
+
+
+    private PreferencesHelper preferencesHelper;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +103,10 @@ public class ProvisionActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
+
             provisionManager.getEspDevice().disconnectDevice();
+
+            //validar redirecion intent
             finish();
         }
     };
@@ -132,6 +147,22 @@ public class ProvisionActivity extends AppCompatActivity {
         tick1.setVisibility(View.GONE);
         progress1.setVisibility(View.VISIBLE);
 
+        String bytesString = PreferencesHelper.getEmail("email", "");
+
+        provisionManager.getEspDevice().sendDataToCustomEndPoint("custom-data", bytesString.getBytes(), new ResponseListener() {
+            @Override
+            public void onSuccess(byte[] returnData) {
+                byte[] decryptedData2 = returnData;
+                Log.v("exitoso: ",decryptedData2.toString());
+
+
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Log.v("error device: ",e.getMessage().toString());
+            }
+        });
         provisionManager.getEspDevice().provision(ssidValue, passphraseValue, new ProvisionListener() {
 
             @Override
@@ -262,6 +293,8 @@ public class ProvisionActivity extends AppCompatActivity {
 
                     @Override
                     public void run() {
+
+                        String datosWifi = ssidValue + "-"+passphraseValue;
                         isProvisioningCompleted = true;
                         tick3.setImageResource(R.drawable.ic_checkbox_on);
                         tick3.setVisibility(View.VISIBLE);

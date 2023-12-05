@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.esp32.AppConstants;
+import com.cb.witfactory.model.PreferencesHelper;
 import com.espressif.provisioning.DeviceConnectionEvent;
 import com.espressif.provisioning.ESPConstants;
 import com.espressif.provisioning.ESPDevice;
@@ -41,6 +42,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
+import com.espressif.provisioning.listeners.ResponseListener;
+import com.espressif.provisioning.security.Security;
+import com.espressif.provisioning.security.Security0;
+import com.espressif.provisioning.security.Security1;
+import com.espressif.provisioning.security.Security2;
 import com.google.android.material.card.MaterialCardView;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -50,6 +56,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class AddDeviceActivity extends AppCompatActivity {
@@ -64,6 +72,11 @@ public class AddDeviceActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
 
     private ESPDevice espDevice;
+
+    private Security security;
+
+    private PreferencesHelper preferencesHelper;
+
     private ESPProvisionManager provisionManager;
 
     //    private CameraSourcePreview cameraPreview;
@@ -107,6 +120,7 @@ public class AddDeviceActivity extends AppCompatActivity {
             String ssid = getWifiSsid();
             Log.d(TAG, "Currently connected WiFi SSID : " + ssid);
             Log.d(TAG, "Device Name  : " + espDevice.getDeviceName());
+
             if (!TextUtils.isEmpty(ssid) && !ssid.equals(espDevice.getDeviceName())) {
                 Log.e(TAG, "Device is not connected");
                 finish();
@@ -216,7 +230,8 @@ public class AddDeviceActivity extends AppCompatActivity {
                     provisionManager.getEspDevice().setUserName(userName);
                 }
                 Log.d(TAG, "Device Connected Event Received");
-                setSecurityTypeFromVersionInfo();
+
+                      setSecurityTypeFromVersionInfo();
                 break;
 
             case ESPConstants.EVENT_DEVICE_DISCONNECTED:
@@ -799,5 +814,39 @@ public class AddDeviceActivity extends AppCompatActivity {
         });
 
         builder.show();
+    }
+
+    public void sendData() {
+
+        preferencesHelper = new PreferencesHelper(getApplicationContext());
+        String email = preferencesHelper.getEmail("email", "");
+        String bytesString = "";
+        if (!email.isEmpty()) {
+            bytesString = email.toString();
+        }
+
+
+        try {
+            byte[] dataBytes = bytesString.getBytes("UTF-8");
+
+            provisionManager.getEspDevice().sendDataToCustomEndPoint("custom-data", dataBytes, new ResponseListener() {
+                @Override
+                public void onSuccess(byte[] returnData) {
+                    try {
+                        String responseData = new String(returnData, "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    String data = "Error al enviar datos al esp32";
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
