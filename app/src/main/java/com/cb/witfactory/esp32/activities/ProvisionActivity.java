@@ -73,16 +73,13 @@ public class ProvisionActivity extends AppCompatActivity {
         showLoading();
         sendData();
 
-        new Handler().postDelayed(new Runnable() {
+        /*new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 doProvisioning();
             }
         }, 5000);
-
-
-
-
+*/
 
     }
 
@@ -340,22 +337,31 @@ public class ProvisionActivity extends AppCompatActivity {
         String email = PreferencesHelper.getEmail("email", "");
         String userId = PreferencesHelper.getEmail("userId", "");
 
-        bytesString = email+"&"+userId;
+        bytesString = email+"$"+userId;
         Log.v("bytesString",bytesString);
+        byte[] arrayDeBytesUTF8 = bytesString.getBytes();
 
-        Toast.makeText(getApplicationContext(), bytesString , Toast.LENGTH_SHORT).show();
-        provisionManager.getEspDevice().sendDataToCustomEndPoint("custom-data", bytesString.getBytes(), new ResponseListener() {
+
+        //Toast.makeText(getApplicationContext(), bytesString , Toast.LENGTH_SHORT).show();
+        provisionManager.getEspDevice().sendDataToCustomEndPoint("custom-data", arrayDeBytesUTF8, new ResponseListener() {
             @Override
             public void onSuccess(byte[] returnData) {
                 byte[] decryptedData2 = returnData;
-                Log.v("exitoso: ",decryptedData2.toString());
+                Log.v("exitoso: ", decryptedData2.toString());
 
 
+                // Decodificar el array de bytes a String utilizando UTF-8
+                String textoDecodificado = new String(returnData);
+
+                // Imprimir el resultado
+                Log.v("Texto Decodificado: " , textoDecodificado);
+                doProvisioning();
             }
 
             @Override
             public void onFailure(Exception e) {
                 Log.v("error device: ",e.getMessage().toString());
+                doProvisioning();
             }
         });
     }
