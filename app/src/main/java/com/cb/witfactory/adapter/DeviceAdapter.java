@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
+import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.model.Callfun;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
@@ -143,5 +144,7 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
 
     public interface DeviceAdapterListener {
         void onDeviceSelected(DeviceResponse contact);
+
+        void onListValueDeviceSelected(Metric device);
     }
 }

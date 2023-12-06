@@ -1,6 +1,5 @@
 package com.cb.witfactory.ui.activity;
 
-import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
 import static org.chromium.base.ContextUtils.getApplicationContext;
 
 import android.os.Bundle;
@@ -11,11 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -24,10 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.adapter.DeviceAdapter;
-import com.cb.witfactory.adapter.ListValueDeviceAdapter;
+import com.cb.witfactory.adapter.Event;
+import com.cb.witfactory.adapter.EventAdapter;
 import com.cb.witfactory.data.classModel.MyDividerItemDecoration;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.cb.witfactory.data.retrofit.device.GetDeviceResponse;
+import com.cb.witfactory.data.retrofit.events.DeviceMetrics;
 import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.databinding.FragmentActivityBinding;
 import com.cb.witfactory.model.Callfun;
@@ -44,7 +43,7 @@ import java.util.List;
 import java.util.Locale;
 import in.akshit.horizontalcalendar.Tools;
 
-public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAdapterListener, ListValueDeviceAdapter.ValueDeviceAdapterListener, Callfun {
+public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAdapterListener, Callfun {
 
     private FragmentActivityBinding binding;
     private DeviceViewModel deviceViewModel;
@@ -52,6 +51,8 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
     private AutoCompleteTextView autoCompleteTextViewDevice;
     private GetDeviceResponse getDeviceResponse;
     private ArrayAdapter<String> adapter;
+    private List<Callfun.ValueDevice> valueDeviceList;
+    private EventAdapter listValueDeviceAdapter;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         ActivityViewModel loginViewModel =
@@ -160,22 +161,25 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
             }
         }
         // events
-        if (s.equals("getevents")) {
-            List<Metric> deviceList = (List<Metric>) o;
-            //RecyclerView recyclerView = getView().findViewById(R.id.events);
-            if (deviceList.size() > 0) {
-                //RecyclerView recyclerView1 = binding.getRoot().findViewById(R.id.events);
-                RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
-                //recyclerView1.setLayoutManager(mLayoutManager2);
-                //recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                //recyclerView1.addItemDecoration(new MyDividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL, 36));
+        if (s.equals("gettotalevents")) {
+            List<Event> eventList = (List<Event>) o;
+            RecyclerView recyclerView = getView().findViewById(R.id.events);
+            if (eventList.size() > 0) {
+                valueDeviceList = new ArrayList<>();
+                listValueDeviceAdapter = new EventAdapter(getActivity(), eventList, this);
+                RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+                listValueDeviceAdapter.notifyDataSetChanged();
+                binding.events.setLayoutManager(mLayoutManager2);
+                binding.events.setItemAnimator(new DefaultItemAnimator());
+                binding.events.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 5));
+                binding.events.setAdapter(listValueDeviceAdapter);
+                listValueDeviceAdapter.notifyDataSetChanged();
             }
         }
     }
 
     @Override
     public void onError(String s) {
-        // Implementa las acciones necesarias al encontrar un error
     }
 
     public void getMetrics(List<DeviceResponse> deviceList) {
@@ -233,6 +237,7 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
         BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
         bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
     }
+
 
 }
 

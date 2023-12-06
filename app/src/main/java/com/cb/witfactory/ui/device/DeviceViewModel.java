@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.cb.witfactory.adapter.Event;
 import com.cb.witfactory.data.retrofit.connection.ApiConecxion;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.cb.witfactory.data.retrofit.device.ObjectResponseDevice;
@@ -80,6 +81,19 @@ public class DeviceViewModel extends ViewModel {
                     }
                     //objectResponseEvents.response
                     listener.onSuccess(metrics,"getevents");
+
+                    List<Event> events = new ArrayList<>();
+                    for (DeviceMetrics deviceMetrics1 : deviceMetricsList) {
+                        for (Metric metric : deviceMetrics1.getMetrics()) {
+                            Event event = new Event(metric.getTitle(),
+                                    metric.getValue(),
+                                    metric.getColor(),
+                                    deviceMetrics1.getData().get(0).getTimestamp(),
+                                    deviceMetrics1.getData().get(0).getDevice_id());
+                            events.add(event);
+                        }
+                    }
+                    listener.onSuccess(events,"gettotalevents");
                 }
 
                 @Override
