@@ -47,16 +47,24 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         Event event = deviceMetricsList.get(position);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  // Elige el formato deseado
         String formattedDateTime = event.getTimestamp().format(formatter);
+
         if (Objects.equals(event.getColor(), "red")) {
             holder.titleTextView.setTextColor(ContextCompat.getColor(context, R.color.red));
-            holder.alertIcon.setVisibility(View.VISIBLE);
+            holder.alertIcon.setAlpha(1.0f);
+            holder.titleTextView.setText("Events");
         } else {
             holder.titleTextView.setTextColor(ContextCompat.getColor(context, R.color.green));
-            holder.alertIcon.setVisibility(View.GONE);
+            holder.alertIcon.setAlpha(0.0f);
+            holder.titleTextView.setText("No events");
         }
-        holder.date.setText(formattedDateTime);
-        holder.titleTextView.setText(event.getTitle());
+
+        // Utiliza un formato diferente para mostrar solo la hora
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        String formattedTime = event.getTimestamp().format(timeFormatter);
+
+        holder.date.setText(formattedTime);
     }
+
 
 
     private boolean checkForHighValues(List<Metric> metrics) {

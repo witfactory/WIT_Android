@@ -353,6 +353,8 @@
     <string name="summary_secured">Secured</string>
     <string name="summary_unsecured">Unsecured</string>
     <string name="summary_username">(Applicable for security version 2)</string>
+    <string name="no_events">No events</string>
+    <string name="events">Events</string>
 
 
     <!-- fin text esp32-->

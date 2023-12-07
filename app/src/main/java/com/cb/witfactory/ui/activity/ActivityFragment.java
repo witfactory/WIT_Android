@@ -2,6 +2,7 @@ package com.cb.witfactory.ui.activity;
 
 import static org.chromium.base.ContextUtils.getApplicationContext;
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +37,8 @@ import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -77,14 +80,18 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
         ArrayList datesToBeColored = new ArrayList();
         datesToBeColored.add(Tools.getFormattedDateToday());
 
+        RecyclerView recyclerView = root.findViewById(R.id.events);
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL) {
+            @Override
+            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                // No dibujar la línea divisoria
+            }
+        });
+
         binding.collapsibleCalendar.setCalendarListener(new CollapsibleCalendar.CalendarListener() {
 
             @Override
             public void onDaySelect() {
-                Day selectedDay = binding.collapsibleCalendar.getSelectedDay();
-                String selectDate = getFormatedDate(selectedDay);
-                String range = getRange30Days(getFormatedDate(selectedDay));
-                deviceViewModel.getMetrics("", range, selectDate);
                 onDaySelected();
             }
 
@@ -155,7 +162,8 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
                     Day selectedDay = binding.collapsibleCalendar.getSelectedDay();
                     String selectDate = getFormatedDate(selectedDay);
                     String range = getRange30Days(getFormatedDate(selectedDay));
-                    deviceViewModel.getMetrics(deviceSelect.getDevice_id(), range, selectDate);
+                    onDaySelected();
+                    //deviceViewModel.getMetrics(deviceSelect.getDevice_id(), range, selectDate);
                 });
                 getMetrics(deviceList);
             }
@@ -192,7 +200,8 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
         String formattedCurrentDate = sdf.format(currentDate);
         String formattedNewDate = sdf.format(newDate);
         String deviceId = deviceList.get(0).getDevice_id();
-        deviceViewModel.getMetrics(deviceId, formattedNewDate, formattedCurrentDate);
+        onDaySelected();
+        //deviceViewModel.getMetrics(deviceId, formattedNewDate, formattedCurrentDate);
     }
     public DeviceResponse getDeviceByName(List<DeviceResponse> devices, String deviceName) {
         for (DeviceResponse device : devices) {
@@ -232,10 +241,34 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
             return null;
         }
     }
+    public String getRange24Hours(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
+
+        try {
+            Date oldDate = sdf.parse(date);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(oldDate);
+            calendar.add(Calendar.DAY_OF_MONTH, -30);
+            Date dateRange = calendar.getTime();
+            return sdf.format(dateRange);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
     public void onDaySelected() {
-        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
-        bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
+        Day selectedDay = binding.collapsibleCalendar.getSelectedDay();
+        String selectDate = getFormatedDate(selectedDay);
+        LocalDateTime selectedDateTime = LocalDateTime.parse(selectDate, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+        LocalDateTime startOfDayDateTime = selectedDateTime.withHour(0).withMinute(0).withSecond(0);
+        LocalDateTime endOfDayDateTime = selectedDateTime.withHour(23).withMinute(59).withSecond(59);
+        String startRange = startOfDayDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+        String endRange = endOfDayDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+        deviceViewModel.getMetrics("", startRange, endRange);
+        //BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
+        //bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
     }
 
 
