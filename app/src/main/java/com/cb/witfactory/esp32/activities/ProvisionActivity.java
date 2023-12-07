@@ -1,14 +1,14 @@
 package com.cb.witfactory.esp32.activities;
 
-
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,13 +18,22 @@ import androidx.core.widget.ContentLoadingProgressBar;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.esp32.AppConstants;
+import com.cb.witfactory.model.PreferencesHelper;
 import com.espressif.provisioning.DeviceConnectionEvent;
 import com.espressif.provisioning.ESPConstants;
+import com.espressif.provisioning.ESPDevice;
 import com.espressif.provisioning.ESPProvisionManager;
 import com.espressif.provisioning.listeners.ProvisionListener;
+import com.espressif.provisioning.listeners.ResponseListener;
+import com.espressif.provisioning.security.Security;
+import com.espressif.provisioning.security.Security0;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 public class ProvisionActivity extends AppCompatActivity {
 
@@ -42,6 +51,11 @@ public class ProvisionActivity extends AppCompatActivity {
     private ESPProvisionManager provisionManager;
     private boolean isProvisioningCompleted = false;
 
+
+    private PreferencesHelper preferencesHelper;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -57,7 +71,16 @@ public class ProvisionActivity extends AppCompatActivity {
 
         Log.d(TAG, "Selected AP -" + ssidValue);
         showLoading();
-        doProvisioning();
+        sendData();
+
+        /*new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doProvisioning();
+            }
+        }, 5000);
+*/
+
     }
 
     @Override
@@ -91,7 +114,10 @@ public class ProvisionActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
+
             provisionManager.getEspDevice().disconnectDevice();
+
+            //validar redirecion intent
             finish();
         }
     };
@@ -132,7 +158,9 @@ public class ProvisionActivity extends AppCompatActivity {
         tick1.setVisibility(View.GONE);
         progress1.setVisibility(View.VISIBLE);
 
+
         provisionManager.getEspDevice().provision(ssidValue, passphraseValue, new ProvisionListener() {
+
 
             @Override
             public void createSessionFailed(Exception e) {
@@ -164,6 +192,9 @@ public class ProvisionActivity extends AppCompatActivity {
                         progress1.setVisibility(View.GONE);
                         tick2.setVisibility(View.GONE);
                         progress2.setVisibility(View.VISIBLE);
+
+
+
                     }
                 });
             }
@@ -262,6 +293,12 @@ public class ProvisionActivity extends AppCompatActivity {
 
                     @Override
                     public void run() {
+
+                        String datosWifi = ssidValue + "#"+passphraseValue;
+
+
+                        PreferencesHelper.setSsidPassword("setSsidPassword", datosWifi);
+
                         isProvisioningCompleted = true;
                         tick3.setImageResource(R.drawable.ic_checkbox_on);
                         tick3.setVisibility(View.VISIBLE);
@@ -287,6 +324,44 @@ public class ProvisionActivity extends AppCompatActivity {
                         hideLoading();
                     }
                 });
+            }
+        });
+
+
+
+    }
+
+    private void sendData() {
+
+        String bytesString = "";
+        String email = PreferencesHelper.getEmail("email", "");
+        String userId = PreferencesHelper.getEmail("userId", "");
+
+        bytesString = email+"$"+userId;
+        Log.v("bytesString",bytesString);
+        byte[] arrayDeBytesUTF8 = bytesString.getBytes();
+
+
+        //Toast.makeText(getApplicationContext(), bytesString , Toast.LENGTH_SHORT).show();
+        provisionManager.getEspDevice().sendDataToCustomEndPoint("custom-data", arrayDeBytesUTF8, new ResponseListener() {
+            @Override
+            public void onSuccess(byte[] returnData) {
+                byte[] decryptedData2 = returnData;
+                Log.v("exitoso: ", decryptedData2.toString());
+
+
+                // Decodificar el array de bytes a String utilizando UTF-8
+                String textoDecodificado = new String(returnData);
+
+                // Imprimir el resultado
+                Log.v("Texto Decodificado: " , textoDecodificado);
+                doProvisioning();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Log.v("error device: ",e.getMessage().toString());
+                doProvisioning();
             }
         });
     }
