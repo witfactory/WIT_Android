@@ -15,6 +15,8 @@ import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.data.retrofit.events.ObjectResponseEvents;
 import com.cb.witfactory.model.Callfun;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -84,12 +86,22 @@ public class DeviceViewModel extends ViewModel {
 
                     List<Event> events = new ArrayList<>();
                     for (DeviceMetrics deviceMetrics1 : deviceMetricsList) {
+                        Data firstData = deviceMetrics1.getData().get(0);
+                        String deviceId = firstData.getDevice_id();
+                        String timestamp = firstData.getTimestamp();
+
+                        // Itera sobre las métricas
                         for (Metric metric : deviceMetrics1.getMetrics()) {
-                            Event event = new Event(metric.getTitle(),
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+                            LocalDateTime localDateTime = LocalDateTime.parse(timestamp, formatter);
+                            Event event = new Event(
+                                    metric.getTitle(),
                                     metric.getValue(),
                                     metric.getColor(),
-                                    deviceMetrics1.getData().get(0).getTimestamp(),
-                                    deviceMetrics1.getData().get(0).getDevice_id());
+                                    timestamp,
+                                    deviceId
+                            );
+                            event.setTimestamp(localDateTime);
                             events.add(event);
                         }
                     }

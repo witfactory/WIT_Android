@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.ui.activity.ActivityFragment;
+import com.cb.witfactory.ui.activity.BottomSheetFragment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,6 +31,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     private Context context;
     private List<Event> deviceMetricsList;
+    private EventAdapterListener listener;
 
     public EventAdapter(Context context, List<Event> deviceMetricsList, ActivityFragment activityFragment) {
         this.context = context;
@@ -63,16 +65,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         String formattedTime = event.getTimestamp().format(timeFormatter);
 
         holder.date.setText(formattedTime);
-    }
 
-
-
-    private boolean checkForHighValues(List<Metric> metrics) {
-        // Implement your logic to check if there are events with high values
-        // For example, you can iterate through the metrics and check the conditions
-        // ...
-
-        return false; // Change this to return true if there are high values
+        holder.itemView.setOnClickListener(v -> {
+            int adapterPosition = holder.getAdapterPosition();
+            if (adapterPosition != RecyclerView.NO_POSITION && listener != null) {
+                listener.onEventItemClicked(deviceMetricsList.get(adapterPosition), adapterPosition);
+            }
+        });
     }
 
     @Override
@@ -90,7 +89,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             date = itemView.findViewById(R.id.date);
             titleTextView = itemView.findViewById(R.id.titleTextView);
             alertIcon = itemView.findViewById(R.id.alertIcon);
-            // Initialize other views as needed
+
+            // Agregar el OnClickListener al itemView
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Obtener la posición del elemento clickeado
+                    int position = getAdapterPosition();
+                }
+            });
         }
     }
 
@@ -106,6 +113,16 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             }
         }
         return false; // Ninguna métrica es roja
+    }
+
+    public interface EventAdapterListener {
+        void onEventItemClicked(Event clickedEvent, int position);
+    }
+
+    public EventAdapter(Context context, List<Event> deviceMetricsList, EventAdapterListener listener) {
+        this.context = context;
+        this.deviceMetricsList = deviceMetricsList;
+        this.listener = listener;
     }
 }
 

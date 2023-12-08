@@ -2,10 +2,12 @@ package com.cb.witfactory.ui.activity;
 
 import static org.chromium.base.ContextUtils.getApplicationContext;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -56,6 +58,8 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
     private ArrayAdapter<String> adapter;
     private List<Callfun.ValueDevice> valueDeviceList;
     private EventAdapter listValueDeviceAdapter;
+    List<Event> totalEventList;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         ActivityViewModel loginViewModel =
@@ -81,13 +85,36 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
         datesToBeColored.add(Tools.getFormattedDateToday());
 
         RecyclerView recyclerView = root.findViewById(R.id.events);
+
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL) {
             @Override
             public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
                 // No dibujar la línea divisoria
             }
         });
+        binding.events.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                return true;
+            }
 
+            @Override
+            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                int action = e.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        handleActionUp(rv, e);
+                        break;
+                }
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
         binding.collapsibleCalendar.setCalendarListener(new CollapsibleCalendar.CalendarListener() {
 
             @Override
@@ -115,7 +142,24 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
         });
         return root;
     }
+    private void handleActionUp(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+        View childView = rv.findChildViewUnder(e.getX(), e.getY());
+        int position = rv.getChildAdapterPosition(childView);
 
+        if (position != RecyclerView.NO_POSITION) {
+            Event selectedEvent = totalEventList.get(position);
+            BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
+            Bundle args = new Bundle();
+            args.putSerializable("timestamp", selectedEvent.getTimestamp());
+            args.putString("deviceId", selectedEvent.getDeviceId());
+            args.putString("title", selectedEvent.getTitle());
+            args.putDouble("value", selectedEvent.getValue());
+            args.putString("color", selectedEvent.getColor());
+            bottomSheetFragment.setArguments(args);
+
+            bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
+        }
+    }
     private List<String> getNameDevices(List<DeviceResponse> devices) {
         List<String> deviceNames = new ArrayList<>();
         for (DeviceResponse device : devices) {
@@ -173,8 +217,13 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
             List<Event> eventList = (List<Event>) o;
             RecyclerView recyclerView = getView().findViewById(R.id.events);
             if (eventList.size() > 0) {
+                totalEventList = eventList;
                 valueDeviceList = new ArrayList<>();
                 listValueDeviceAdapter = new EventAdapter(getActivity(), eventList, this);
+                Context context = requireContext();
+                EventAdapter eventAdapter = new EventAdapter(context, eventList, this);
+                // Asigna el adaptador al RecyclerView
+                recyclerView.setAdapter(eventAdapter);
                 RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                 listValueDeviceAdapter.notifyDataSetChanged();
                 binding.events.setLayoutManager(mLayoutManager2);
@@ -201,7 +250,6 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
         String formattedNewDate = sdf.format(newDate);
         String deviceId = deviceList.get(0).getDevice_id();
         onDaySelected();
-        //deviceViewModel.getMetrics(deviceId, formattedNewDate, formattedCurrentDate);
     }
     public DeviceResponse getDeviceByName(List<DeviceResponse> devices, String deviceName) {
         for (DeviceResponse device : devices) {
@@ -241,22 +289,6 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
             return null;
         }
     }
-    public String getRange24Hours(String date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
-
-        try {
-            Date oldDate = sdf.parse(date);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(oldDate);
-            calendar.add(Calendar.DAY_OF_MONTH, -30);
-            Date dateRange = calendar.getTime();
-            return sdf.format(dateRange);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
 
     public void onDaySelected() {
         Day selectedDay = binding.collapsibleCalendar.getSelectedDay();
@@ -267,10 +299,6 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
         String startRange = startOfDayDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
         String endRange = endOfDayDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
         deviceViewModel.getMetrics("", startRange, endRange);
-        //BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
-        //bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
     }
-
-
 }
 

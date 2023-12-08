@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event {
-    private String title;
-    private double value;
-    private String color;
-    private LocalDateTime timestamp;
-    private String deviceId;
+    public String title;
+    public double value;
+    public String color;
+    public LocalDateTime timestamp;
+    public String deviceId;
 
     // Constructor
     public Event(String title, double value, String color, String timestamp, String deviceId) {
