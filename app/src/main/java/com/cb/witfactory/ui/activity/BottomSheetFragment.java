@@ -7,6 +7,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,10 +41,13 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         args.putString("color", color);
         fragment.setArguments(args);
         View bottomSheetCardView = view.findViewById(R.id.boderTop);
+        ImageView iconImageView = view.findViewById(R.id.iconImageView);
         if ("red".equals(color)) {
             bottomSheetCardView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red));
+            iconImageView.setImageResource(R.drawable.baseline_warning_amber_24);
         } else if ("green".equals(color)) {
             bottomSheetCardView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green));
+            iconImageView.setImageResource(R.drawable.baseline_check_circle_outline_24);
         }
         return fragment;
     }
@@ -78,10 +82,15 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
                 TextView titleTextView = view.findViewById(R.id.gasDetectadoTextView);
                 TextView valueTextView = view.findViewById(R.id.valorTextView);
 
-                timestampTextView.setText(timestamp.toString());
-                deviceIdTextView.setText(deviceId);
-                titleTextView.setText(title);
-                valueTextView.setText(value.toString());
+                timestampTextView.setText("Fecha: " + timestamp.toString());
+                deviceIdTextView.setText("Nombre del sensor: " + deviceId);
+                titleTextView.setText("Gas detectado: " + title);
+                if ("red".equals(color)) {
+                    valueTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.red));
+                } else {
+                    valueTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
+                }
+                valueTextView.setText("Valor promedio: " + value.toString());
             } catch (Error err) {
                 System.out.println(err);
             }

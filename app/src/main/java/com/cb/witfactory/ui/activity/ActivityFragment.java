@@ -2,9 +2,11 @@ package com.cb.witfactory.ui.activity;
 
 import static org.chromium.base.ContextUtils.getApplicationContext;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -150,8 +152,9 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
             Event selectedEvent = totalEventList.get(position);
             BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
             Bundle args = new Bundle();
+            String selectedDevice = autoCompleteTextViewDevice.getText().toString();
             args.putSerializable("timestamp", selectedEvent.getTimestamp());
-            args.putString("deviceId", selectedEvent.getDeviceId());
+            args.putString("deviceId", selectedDevice);
             args.putString("title", selectedEvent.getTitle());
             args.putDouble("value", selectedEvent.getValue());
             args.putString("color", selectedEvent.getColor());
@@ -216,22 +219,20 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
         if (s.equals("gettotalevents")) {
             List<Event> eventList = (List<Event>) o;
             RecyclerView recyclerView = getView().findViewById(R.id.events);
-            if (eventList.size() > 0) {
-                totalEventList = eventList;
-                valueDeviceList = new ArrayList<>();
-                listValueDeviceAdapter = new EventAdapter(getActivity(), eventList, this);
-                Context context = requireContext();
-                EventAdapter eventAdapter = new EventAdapter(context, eventList, this);
-                // Asigna el adaptador al RecyclerView
-                recyclerView.setAdapter(eventAdapter);
-                RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-                listValueDeviceAdapter.notifyDataSetChanged();
-                binding.events.setLayoutManager(mLayoutManager2);
-                binding.events.setItemAnimator(new DefaultItemAnimator());
-                binding.events.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 5));
-                binding.events.setAdapter(listValueDeviceAdapter);
-                listValueDeviceAdapter.notifyDataSetChanged();
-            }
+            totalEventList = eventList;
+            valueDeviceList = new ArrayList<>();
+            listValueDeviceAdapter = new EventAdapter(getActivity(), eventList, this);
+            Context context = requireContext();
+            EventAdapter eventAdapter = new EventAdapter(context, eventList, this);
+            // Asigna el adaptador al RecyclerView
+            recyclerView.setAdapter(eventAdapter);
+            RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+            listValueDeviceAdapter.notifyDataSetChanged();
+            binding.events.setLayoutManager(mLayoutManager2);
+            binding.events.setItemAnimator(new DefaultItemAnimator());
+            binding.events.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 5));
+            binding.events.setAdapter(listValueDeviceAdapter);
+            listValueDeviceAdapter.notifyDataSetChanged();
         }
     }
 
@@ -298,7 +299,18 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
         LocalDateTime endOfDayDateTime = selectedDateTime.withHour(23).withMinute(59).withSecond(59);
         String startRange = startOfDayDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
         String endRange = endOfDayDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
-        deviceViewModel.getMetrics("", startRange, endRange);
+        String selectedDevice = autoCompleteTextViewDevice.getText().toString();
+        if (TextUtils.isEmpty(selectedDevice)) {
+            // No hay dispositivo seleccionado, muestra un diálogo de alerta
+            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+            builder.setMessage("Por favor, selecciona un dispositivo")
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        dialog.dismiss();
+                    })
+                    .show();
+        } else {
+            deviceViewModel.getMetrics("", startRange, endRange);
+        }
     }
 }
 
