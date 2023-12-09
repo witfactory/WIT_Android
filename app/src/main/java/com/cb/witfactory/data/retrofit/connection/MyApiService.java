@@ -1,11 +1,15 @@
 package com.cb.witfactory.data.retrofit.connection;
 
+import com.cb.witfactory.data.retrofit.device.CreateDevice;
+import com.cb.witfactory.data.retrofit.device.CreateDeviceResponse;
 import com.cb.witfactory.data.retrofit.device.ObjectResponseDevice;
 import com.cb.witfactory.data.retrofit.events.ObjectResponseEvents;
 import com.cb.witfactory.data.retrofit.user.ObjectResponseUser;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface MyApiService {
@@ -29,6 +33,9 @@ public interface MyApiService {
             @Query("from") String from,
             @Query("to") String to
     );
+
+    @POST("create")
+    Call<CreateDeviceResponse> createDevice(@Body CreateDevice createDevice);
 
 
 }

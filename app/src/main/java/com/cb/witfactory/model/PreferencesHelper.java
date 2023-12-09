@@ -225,13 +225,16 @@ public class PreferencesHelper {
         prefsEditor.apply();
     }
 
-    public static String getSsidPassword(String key, String defValue) {
+
+
+    public static String getDeviceId(String key, String defValue) {
         return mSharedPref.getString(key, defValue);
     }
 
-    public static void setSsidPassword(String key, String value) {
+    public static void setDeviceId(String key, String value) {
         SharedPreferences.Editor prefsEditor = mSharedPref.edit();
         prefsEditor.putString(key, value);
         prefsEditor.apply();
     }
 }
+

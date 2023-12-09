@@ -23,7 +23,6 @@ import com.cb.witfactory.adapter.ListValueDeviceAdapter;
 import com.cb.witfactory.data.classModel.MyDividerItemDecoration;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.cb.witfactory.data.retrofit.events.Metric;
-import com.cb.witfactory.data.retrofit.events.PayloadResponse;
 import com.cb.witfactory.databinding.FragmentDeviceBinding;
 import com.cb.witfactory.model.Callfun;
 
