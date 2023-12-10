@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.databinding.FragmentDeviceBinding;
 import com.cb.witfactory.model.Callfun;
+import com.cb.witfactory.model.PreferencesHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,7 +58,9 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         deviceList = new ArrayList<DeviceResponse>();
 
         deviceViewModel.setListener(DeviceFragment.this);
-        deviceViewModel.getDataDevice("c8174124-b6b3-4a35-8457-429a9b947ea3","S");
+        String userId = PreferencesHelper.getEmail("userId", "");
+
+        deviceViewModel.getDataDevice(userId,"S");
 
 
         return root;
@@ -134,46 +138,51 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
 
         if (s.equals("getevents")){
 
-
-
            // ArrayList<PayloadResponse> deviceList = (ArrayList<PayloadResponse>) o;
-             ArrayList<Metric> deviceList = (ArrayList<Metric>) o;
-            if (deviceList.size() > 0) {
-                //Mock
-                //vertical
-                //binding.recyclerVertical.setVisibility(View.VISIBLE);
-                valueDeviceList = new ArrayList<>();
+          try {
+              ArrayList<Metric> deviceList = (ArrayList<Metric>) o;
+              if (deviceList.size() > 0) {
+                  //Mock
+                  //vertical
+                  //binding.recyclerVertical.setVisibility(View.VISIBLE);
+                  valueDeviceList = new ArrayList<>();
 
-                listValueDeviceAdapter = new ListValueDeviceAdapter(getActivity(), deviceList, this);
+                  listValueDeviceAdapter = new ListValueDeviceAdapter(getActivity(), deviceList, this);
 
 
-                RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,
-                        false);
-                listValueDeviceAdapter.notifyDataSetChanged();
-                binding.recyclerVertical.setLayoutManager(mLayoutManager2);
-                binding.recyclerVertical.setItemAnimator(new DefaultItemAnimator());
-                binding.recyclerVertical.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 5));
-                binding.recyclerVertical.setAdapter(listValueDeviceAdapter);
-                listValueDeviceAdapter.notifyDataSetChanged();
+                  RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,
+                          false);
+                  listValueDeviceAdapter.notifyDataSetChanged();
+                  binding.recyclerVertical.setLayoutManager(mLayoutManager2);
+                  binding.recyclerVertical.setItemAnimator(new DefaultItemAnimator());
+                  binding.recyclerVertical.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 5));
+                  binding.recyclerVertical.setAdapter(listValueDeviceAdapter);
+                  listValueDeviceAdapter.notifyDataSetChanged();
+
+              }
+              else{
+                  // binding.recyclerVertical.setVisibility(View.GONE);
+                  deviceList.clear();
+                  valueDeviceList = new ArrayList<>();
+
+                  listValueDeviceAdapter = new ListValueDeviceAdapter(getActivity(), deviceList, this);
+
+
+                  RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,
+                          false);
+                  listValueDeviceAdapter.notifyDataSetChanged();
+                  binding.recyclerVertical.setLayoutManager(mLayoutManager2);
+                  binding.recyclerVertical.setItemAnimator(new DefaultItemAnimator());
+                  binding.recyclerVertical.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 5));
+                  binding.recyclerVertical.setAdapter(listValueDeviceAdapter);
+                  listValueDeviceAdapter.notifyDataSetChanged();
+              }
+          }catch (Exception e){
+                Log.v("sero datos", "sin datos");
+
 
             }
-            else{
-               // binding.recyclerVertical.setVisibility(View.GONE);
-                deviceList.clear();
-                valueDeviceList = new ArrayList<>();
 
-                listValueDeviceAdapter = new ListValueDeviceAdapter(getActivity(), deviceList, this);
-
-
-                RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,
-                        false);
-                listValueDeviceAdapter.notifyDataSetChanged();
-                binding.recyclerVertical.setLayoutManager(mLayoutManager2);
-                binding.recyclerVertical.setItemAnimator(new DefaultItemAnimator());
-                binding.recyclerVertical.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 5));
-                binding.recyclerVertical.setAdapter(listValueDeviceAdapter);
-                listValueDeviceAdapter.notifyDataSetChanged();
-            }
 
         }
 
