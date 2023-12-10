@@ -34,7 +34,7 @@ public interface MyApiService {
             @Query("to") String to
     );
 
-    @POST("create")
+    @POST("device/create")
     Call<CreateDeviceResponse> createDevice(@Body CreateDevice createDevice);
 
 

@@ -1,4 +1,4 @@
-package com.cb.witfactory.esp32.activities;
+package com.cb.witfactory.view;
 
 import android.util.Log;
 
@@ -13,7 +13,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProvidionViewModel extends ViewModel {
+public class CreateDeviceViewModel extends ViewModel {
 
 
     private static Callfun listener;
@@ -26,7 +26,9 @@ public class ProvidionViewModel extends ViewModel {
                     //
                     CreateDeviceResponse bodyResponseDevice = new CreateDeviceResponse();
                     bodyResponseDevice = response.body();
-//
+
+
+
                     listener.onSuccess(bodyResponseDevice,"device");
                 }
 
@@ -50,4 +52,6 @@ public class ProvidionViewModel extends ViewModel {
     public void setListener(Callfun listener) {
         this.listener = listener;
     }
+
+
 }

@@ -236,5 +236,27 @@ public class PreferencesHelper {
         prefsEditor.putString(key, value);
         prefsEditor.apply();
     }
+
+    public static String getLatitud(String key, String defValue) {
+        return mSharedPref.getString(key, defValue);
+    }
+
+    public static void setlatitud(String key, String value) {
+        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        prefsEditor.putString(key, value);
+        prefsEditor.apply();
+    }
+
+
+    public static String getLongitud(String key, String defValue) {
+        return mSharedPref.getString(key, defValue);
+    }
+
+    public static void setLongitud(String key, String value) {
+        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        prefsEditor.putString(key, value);
+        prefsEditor.apply();
+    }
+
 }
 

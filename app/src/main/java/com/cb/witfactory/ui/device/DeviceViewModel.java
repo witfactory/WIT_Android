@@ -60,7 +60,7 @@ public class DeviceViewModel extends ViewModel {
 
     public void getMetrics(String device_id,String from,String to) {
         try {
-            final Call<ObjectResponseEvents> obj = ApiConecxion.getApiService().getEvents("B5242D31-52CA-4530-9E64-D654FE806D53", from,to);
+            final Call<ObjectResponseEvents> obj = ApiConecxion.getApiService().getEvents(device_id, from,to);
             obj.enqueue(new Callback<ObjectResponseEvents>() {
                 @Override
                 public void onResponse(Call<ObjectResponseEvents> call, Response<ObjectResponseEvents> response) {

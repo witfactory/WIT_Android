@@ -110,7 +110,6 @@
     <string name="txt_wifi_password">Wifi Password</string>
 
 
-
     <!--esptouch-->
     <string name="menu_item_about">About App</string>
     <string name="about_app_version">App Version: %s</string>
@@ -361,8 +360,6 @@
     <string name="description_location">Description location</string>
     <string name="device_data">Device data</string>
     <string name="error_register_device">Error registering device</string>
-
-
 
 
 </resources>

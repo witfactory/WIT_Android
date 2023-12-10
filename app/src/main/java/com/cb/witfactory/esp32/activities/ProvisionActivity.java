@@ -1,58 +1,36 @@
 package com.cb.witfactory.esp32.activities;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
 import androidx.core.widget.ContentLoadingProgressBar;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.cb.witfactory.R;
-import com.cb.witfactory.data.retrofit.device.CreateDevice;
 import com.cb.witfactory.esp32.AppConstants;
-import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.PreferencesHelper;
+import com.cb.witfactory.view.CreateDeviceActivity;
 import com.espressif.provisioning.DeviceConnectionEvent;
 import com.espressif.provisioning.ESPConstants;
 import com.espressif.provisioning.ESPProvisionManager;
 import com.espressif.provisioning.listeners.ProvisionListener;
 import com.espressif.provisioning.listeners.ResponseListener;
-import com.google.android.material.textfield.TextInputEditText;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class ProvisionActivity extends AppCompatActivity implements Callfun {
+public class ProvisionActivity extends AppCompatActivity  {
 
     private static final String TAG = ProvisionActivity.class.getSimpleName();
 
@@ -72,16 +50,7 @@ public class ProvisionActivity extends AppCompatActivity implements Callfun {
     private PreferencesHelper preferencesHelper;
     SweetAlertDialog pDialog;
 
-    private LinearLayout mainLayout;
 
-    private ProvidionViewModel providionViewModel;
-
-    String sLatitud = "";
-    String sLongitud = "";
-
-    String textoDecodificado = "";
-    String userId ="";
-    LinearLayout mView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,10 +67,6 @@ public class ProvisionActivity extends AppCompatActivity implements Callfun {
 
 
 
-        providionViewModel = new ViewModelProvider(this).get(ProvidionViewModel.class);
-        mainLayout = (LinearLayout)findViewById(R.id.main_layout);
-
-        gps();
         Log.d(TAG, "Selected AP -" + ssidValue);
         showLoading();
         sendData();
@@ -116,13 +81,6 @@ public class ProvisionActivity extends AppCompatActivity implements Callfun {
 
     }
 
-    private void gps() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
-        } else {
-            locationStart();
-        }
-    }
 
 
     @Override
@@ -157,12 +115,11 @@ public class ProvisionActivity extends AppCompatActivity implements Callfun {
         @Override
         public void onClick(View v) {
 
-            //provisionManager.getEspDevice().disconnectDevice();
+            provisionManager.getEspDevice().disconnectDevice();
 
-            //validar redirecion intent
-
-
-
+            Intent wifiListIntent = new Intent(getApplicationContext(), CreateDeviceActivity.class);
+            wifiListIntent.putExtras(getIntent());
+            startActivity(wifiListIntent);
             finish();
         }
     };
@@ -272,8 +229,9 @@ public class ProvisionActivity extends AppCompatActivity implements Callfun {
                         tick2.setImageResource(R.drawable.ic_checkbox_on);
                         tick2.setVisibility(View.VISIBLE);
                         progress2.setVisibility(View.GONE);
-                        tick3.setVisibility(View.GONE);
+                        //tick3.setVisibility(View.GONE);
                         progress3.setVisibility(View.VISIBLE);
+
                     }
                 });
             }
@@ -343,8 +301,8 @@ public class ProvisionActivity extends AppCompatActivity implements Callfun {
                         tick3.setImageResource(R.drawable.ic_checkbox_on);
                         tick3.setVisibility(View.VISIBLE);
                         progress3.setVisibility(View.GONE);
-                       //hideLoading();
-                        createDevice();
+                        hideLoading();
+
                     }
                 });
             }
@@ -376,7 +334,7 @@ public class ProvisionActivity extends AppCompatActivity implements Callfun {
 
         String bytesString = "";
         String email = PreferencesHelper.getEmail("email", "");
-        userId = PreferencesHelper.getEmail("userId", "");
+        String userId = PreferencesHelper.getEmail("userId", "");
 
         bytesString = email+"$"+userId;
         Log.v("bytesString",bytesString);
@@ -391,11 +349,15 @@ public class ProvisionActivity extends AppCompatActivity implements Callfun {
                 Log.v("exitoso: ", decryptedData2.toString());
 
                 // Decodificar el array de bytes a String utilizando UTF-8
-                 textoDecodificado = new String(returnData);
+                String textoDecodificado = new String(returnData);
+
+                String[] arrOfStr = textoDecodificado.split("/");
+                String datadevice = arrOfStr[0];
+
 
                 // Imprimir el resultado
-                Log.v("Texto Decodificado: " , textoDecodificado);
-                PreferencesHelper.setDeviceId("deviceId",textoDecodificado);
+                Log.v("Texto Decodificado: " , datadevice);
+                PreferencesHelper.setDeviceId("deviceId",datadevice);
                 doProvisioning();
             }
 
@@ -411,76 +373,17 @@ public class ProvisionActivity extends AppCompatActivity implements Callfun {
         provisionManager.getEspDevice().disconnectDevice();
         btnOk.setEnabled(false);
         btnOk.setAlpha(0.5f);
-    }
-    public void showDialog(){
-        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("creating device...");
-        pDialog.setCancelable(false);
-        pDialog.show();
-    }
-
-    public void hidenDialog(){
-        try {
-            if(pDialog != null){
-                pDialog.dismiss();
-            }
-        }catch (Exception e){
-            Log.v("errors", e.getMessage());
-        }
+        btnOk.setClickable(false);
     }
 
 
-    public void createDevice(){
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        LayoutInflater vi = (LayoutInflater)getBaseContext().getSystemService(getApplicationContext().LAYOUT_INFLATER_SERVICE);
-         mView = (LinearLayout)vi.inflate(R.layout.popup_device, mainLayout, false);
-        mView.setLayoutParams(params);
-
-        AppCompatButton addDevice = (AppCompatButton)mView.findViewById(R.id.btn_add_device);
-        TextInputEditText txt_name_device = (TextInputEditText)mView.findViewById(R.id.txt_name_device);
-        TextInputEditText device_location = (TextInputEditText)mView.findViewById(R.id.device_location);
-        TextInputEditText description_location = (TextInputEditText)mView.findViewById(R.id.description_location);
-
-        String name= txt_name_device.getText().toString();
-        String location= device_location.getText().toString();
-        String description= description_location.getText().toString();
-
-        String deviceId = textoDecodificado;
-
-        CreateDevice createDevice = new CreateDevice(name,deviceId, "DeviceSerial",sLatitud,sLongitud,userId ,"mac",location,"S",description);
-
-        addDevice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(!name.isEmpty() && !location.isEmpty() && !description.isEmpty()){
-                    addDevice.setClickable(true);
-                    Toast.makeText(getApplicationContext(), "ok", Toast.LENGTH_SHORT).show();
-
-                    providionViewModel.createDataDevice(createDevice);
-
-                    showDialog();
-                    //CreateDeviceResponse
-
-                }else{
-                    Toast.makeText(getApplicationContext(), getString(R.string.all_fields_are_required), Toast.LENGTH_SHORT).show();
-
-                }
-
-
-            }
-        });
-
-        mainLayout.addView(mView);
-
-    }
 
     public void hideLoading() {
 
         btnOk.setEnabled(true);
         btnOk.setAlpha(1f);
+        btnOk.setClickable(true);
     }
 
     private void showAlertForDeviceDisconnected() {
@@ -503,116 +406,4 @@ public class ProvisionActivity extends AppCompatActivity implements Callfun {
         builder.show();
     }
 
-    @Override
-    public void onSuccess(String s) {
-
-    }
-
-    @Override
-    public void onSuccess(Object o, String s) {
-
-        hideLoading();
-        mView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onError(String s) {
-
-        hideLoading();
-        Toast.makeText(getApplicationContext(), getString(R.string.error_register_device), Toast.LENGTH_LONG).show();
-        mView.setVisibility(View.GONE);
-    }
-
-
-    //location
-
-    private void locationStart() {
-        LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Localizacion Local = new Localizacion();
-        Local.setMainActivity(this);
-        final boolean gpsEnabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if (!gpsEnabled) {
-            Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(settingsIntent);
-        }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
-            return;
-        }
-        mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, (LocationListener) Local);
-        mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) Local);
-       // latitud.setText("Localización agregada");
-
-    }
-
-
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1000) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                locationStart();
-                return;
-            }
-        }
-    }
-    public void setLocation(Location loc) {
-        //Obtener la direccion de la calle a partir de la latitud y la longitud
-        if (loc.getLatitude() != 0.0 && loc.getLongitude() != 0.0) {
-            try {
-                Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-                List<Address> list = geocoder.getFromLocation(
-                        loc.getLatitude(), loc.getLongitude(), 1);
-                if (!list.isEmpty()) {
-                    Address DirCalle = list.get(0);
-                    //direccion.setText(DirCalle.getAddressLine(0));
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    /* Aqui empieza la Clase Localizacion */
-    public class Localizacion implements LocationListener {
-        ProvisionActivity mainActivity;
-        public ProvisionActivity getMainActivity() {
-            return mainActivity;
-        }
-        public void setMainActivity(ProvisionActivity mainActivity) {
-            this.mainActivity = mainActivity;
-        }
-        @Override
-        public void onLocationChanged(Location loc) {
-            // Este metodo se ejecuta cada vez que el GPS recibe nuevas coordenadas
-            // debido a la deteccion de un cambio de ubicacion
-            loc.getLatitude();
-            loc.getLongitude();
-             sLatitud = String.valueOf(loc.getLatitude());
-             sLongitud = String.valueOf(loc.getLongitude());
-           // this.mainActivity.setLocation(loc);
-        }
-        @Override
-        public void onProviderDisabled(String provider) {
-            // Este metodo se ejecuta cuando el GPS es desactivado
-            Toast.makeText(getApplicationContext(), "GPS INACTIVE", Toast.LENGTH_LONG).show();
-        }
-        @Override
-        public void onProviderEnabled(String provider) {
-            // Este metodo se ejecuta cuando el GPS es activado
-            //latitud.setText("GPS Activado");
-        }
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-            switch (status) {
-                case LocationProvider.AVAILABLE:
-                    Log.d("debug", "LocationProvider.AVAILABLE");
-                    break;
-                case LocationProvider.OUT_OF_SERVICE:
-                    Log.d("debug", "LocationProvider.OUT_OF_SERVICE");
-                    break;
-                case LocationProvider.TEMPORARILY_UNAVAILABLE:
-                    Log.d("debug", "LocationProvider.TEMPORARILY_UNAVAILABLE");
-                    break;
-            }
-        }
-    }
 }
