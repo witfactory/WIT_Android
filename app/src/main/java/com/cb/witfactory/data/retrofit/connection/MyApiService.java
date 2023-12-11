@@ -3,9 +3,12 @@ package com.cb.witfactory.data.retrofit.connection;
 import com.cb.witfactory.data.retrofit.device.ObjectResponseDevice;
 import com.cb.witfactory.data.retrofit.events.ObjectResponseEvents;
 import com.cb.witfactory.data.retrofit.user.ObjectResponseUser;
+import com.cb.witfactory.data.retrofit.user.UpdateUserResponse;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface MyApiService {
@@ -13,6 +16,11 @@ public interface MyApiService {
     @GET("user")
     Call<ObjectResponseUser> getUser(
             @Query("id") String id
+    );
+
+    @POST("user")
+    Call<UpdateUserResponse> updateUser(
+            @Body UpdateUserResponse updateUserRequest
     );
 
 

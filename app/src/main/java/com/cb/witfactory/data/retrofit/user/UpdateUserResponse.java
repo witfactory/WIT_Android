@@ -38,8 +38,7 @@ public class UpdateUserResponse {
     private String appos;
 
 
-    public UpdateUserResponse(keyUserResponse key, String address, String city, String first_name, String last_name, String telephone, String zip_code, String country, String suite, String device_id, String appos) {
-        Key = key;
+    public UpdateUserResponse() {
         this.address = address;
         this.city = city;
         this.first_name = first_name;

@@ -82,15 +82,15 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
                 TextView titleTextView = view.findViewById(R.id.gasDetectadoTextView);
                 TextView valueTextView = view.findViewById(R.id.valorTextView);
 
-                timestampTextView.setText("Fecha: " + timestamp.toString());
-                deviceIdTextView.setText("Nombre del sensor: " + deviceId);
-                titleTextView.setText("Gas detectado: " + title);
+                timestampTextView.setText(timestamp.toString());
+                deviceIdTextView.setText(deviceId);
+                titleTextView.setText(title);
                 if ("red".equals(color)) {
                     valueTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.red));
                 } else {
                     valueTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
                 }
-                valueTextView.setText("Valor promedio: " + value.toString());
+                valueTextView.setText(value.toString());
             } catch (Error err) {
                 System.out.println(err);
             }
