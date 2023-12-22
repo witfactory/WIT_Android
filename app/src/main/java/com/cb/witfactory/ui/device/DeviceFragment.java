@@ -201,9 +201,10 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         // Obtén la fecha actual
         Calendar calendar = Calendar.getInstance();
         Date fechaActual = calendar.getTime();
+        calendar.add(Calendar.HOUR, +4);
 
         // Resta 30 días a la fecha actual
-        calendar.add(Calendar.DAY_OF_MONTH, -30);
+        calendar.add(Calendar.DAY_OF_MONTH, -0);
         Date fechaMenos30Dias = calendar.getTime();
 
         // Formatea la fecha en el formato deseado (yyyy-MM-dd'T'HH:mm:ss)
@@ -214,7 +215,9 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
 
         // Imprime la fecha formateada
 
-        deviceViewModel.getMetrics(deviceId,fechaFormateada,fechaActualFormateada);
+        Log.v("fecha  fechaFormateada",fechaFormateada);
+        Log.v("fecha  fechaActualFormateada",fechaActualFormateada);
+        deviceViewModel.getMetrics(deviceId,fechaActualFormateada,fechaFormateada);
 
     }
 

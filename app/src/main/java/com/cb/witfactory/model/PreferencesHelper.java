@@ -237,26 +237,36 @@ public class PreferencesHelper {
         prefsEditor.apply();
     }
 
-    public static String getLatitud(String key, String defValue) {
+
+    public static String getdevicetype(String key, String defValue) {
         return mSharedPref.getString(key, defValue);
     }
 
-    public static void setlatitud(String key, String value) {
+    public static void setdevicetype(String key, String value) {
         SharedPreferences.Editor prefsEditor = mSharedPref.edit();
         prefsEditor.putString(key, value);
         prefsEditor.apply();
     }
 
-
-    public static String getLongitud(String key, String defValue) {
+    public static String getSerial(String key, String defValue) {
         return mSharedPref.getString(key, defValue);
     }
 
-    public static void setLongitud(String key, String value) {
+    public static void setSerial(String key, String value) {
         SharedPreferences.Editor prefsEditor = mSharedPref.edit();
         prefsEditor.putString(key, value);
         prefsEditor.apply();
     }
+    public static String getMac(String key, String defValue) {
+        return mSharedPref.getString(key, defValue);
+    }
+
+    public static void setMac(String key, String value) {
+        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        prefsEditor.putString(key, value);
+        prefsEditor.apply();
+    }
+
 
 }
 

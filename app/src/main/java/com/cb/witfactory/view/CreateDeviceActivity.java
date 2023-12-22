@@ -127,8 +127,12 @@ public class CreateDeviceActivity extends AppCompatActivity implements Callfun {
                 String userId = PreferencesHelper.getEmail("userId", "");
                 String deviceId = PreferencesHelper.getDeviceId("deviceId", "");
 
+                String devicetype = PreferencesHelper.getdevicetype("devicetype", "");
+                String serial = PreferencesHelper.getSerial("serial", "");
+                String mac = PreferencesHelper.getMac("mac", "");
 
-                CreateDevice createDevice = new CreateDevice(name,deviceId,deviceId,"lat","long",userId,"mac",deviceLocation,"S",descriptionLocation);
+
+                CreateDevice createDevice = new CreateDevice(name,deviceId,serial,"lat","long",userId,mac,deviceLocation,devicetype,descriptionLocation);
                 createDeviceViewModel.setListener(CreateDeviceActivity.this);
                 createDeviceViewModel.createDataDevice(createDevice);
 
