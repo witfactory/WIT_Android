@@ -11,6 +11,7 @@ public class DeviceMetrics {
     @SerializedName("Data")
     private List<Data> data;
 
+    private long timestamp;
     public DeviceMetrics(){}
 
     public List<Metric> getMetrics() {
@@ -27,5 +28,13 @@ public class DeviceMetrics {
 
     public void setData(List<Data> data) {
         this.data = data;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }

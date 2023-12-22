@@ -70,7 +70,14 @@ public class DeviceViewModel extends ViewModel {
                     //
                     ObjectResponseEvents objectResponseEvents = new ObjectResponseEvents();
                     objectResponseEvents = response.body();
+<<<<<<< HEAD
+
+
+
                     try{
+=======
+                    Map<String, DeviceMetrics> deviceMetricsMap = objectResponseEvents.response;
+>>>>>>> origin/activity
 
                         Map<String, DeviceMetrics> deviceMetricsMap = objectResponseEvents.response;
 
@@ -83,11 +90,20 @@ public class DeviceViewModel extends ViewModel {
                             data = deviceMetrics.getData();
                             // Realiza las acciones necesarias con los datos
                         }
+
+
                         //objectResponseEvents.response
                         listener.onSuccess(metrics,"getevents");
                     }catch (Exception e){
                         listener.onError("getEventsError");
                     }
+<<<<<<< HEAD
+=======
+                    //objectResponseEvents.response
+                    listener.onSuccess(metrics,"getevents");
+
+                    List<Event> events = new ArrayList<>();
+                    for (DeviceMetrics deviceMetrics1 : deviceMetricsList) {
                         Data firstData = deviceMetrics1.getData().get(0);
                         String deviceId = firstData.getDevice_id();
                         String timestamp = firstData.getTimestamp();
@@ -108,6 +124,7 @@ public class DeviceViewModel extends ViewModel {
                         }
                     }
                     listener.onSuccess(events,"gettotalevents");
+>>>>>>> origin/activity
                 }
 
                 @Override

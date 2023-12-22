@@ -653,7 +653,7 @@ public class AddDeviceActivity extends AppCompatActivity {
 
         } else {
 
-            final String[] deviceTypes = {"SoftAP"};
+            final String[] deviceTypes = {"BLE", "SoftAP"};
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(true);
             builder.setTitle(R.string.dialog_msg_device_selection);
@@ -664,18 +664,7 @@ public class AddDeviceActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int position) {
 
                     switch (position) {
-
                         case 0:
-
-                            if (isSecure) {
-                                provisionManager.createESPDevice(ESPConstants.TransportType.TRANSPORT_SOFTAP, ESPConstants.SecurityType.SECURITY_2);
-                            } else {
-                                provisionManager.createESPDevice(ESPConstants.TransportType.TRANSPORT_SOFTAP, ESPConstants.SecurityType.SECURITY_0);
-                            }
-                            dialog.dismiss();
-                            goToWiFiProvisionLandingActivity(finalSecurityType);
-                            break;
-                        case 1:
 
                             if (isSecure) {
                                 provisionManager.createESPDevice(ESPConstants.TransportType.TRANSPORT_BLE, ESPConstants.SecurityType.SECURITY_2);
@@ -686,7 +675,16 @@ public class AddDeviceActivity extends AppCompatActivity {
                             goToBLEProvisionLandingActivity(finalSecurityType);
                             break;
 
+                        case 1:
 
+                            if (isSecure) {
+                                provisionManager.createESPDevice(ESPConstants.TransportType.TRANSPORT_SOFTAP, ESPConstants.SecurityType.SECURITY_2);
+                            } else {
+                                provisionManager.createESPDevice(ESPConstants.TransportType.TRANSPORT_SOFTAP, ESPConstants.SecurityType.SECURITY_0);
+                            }
+                            dialog.dismiss();
+                            goToWiFiProvisionLandingActivity(finalSecurityType);
+                            break;
                     }
                     dialog.dismiss();
                 }

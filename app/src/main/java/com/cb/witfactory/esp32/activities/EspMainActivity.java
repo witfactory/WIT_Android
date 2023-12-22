@@ -56,7 +56,7 @@ public class EspMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        
         setContentView(R.layout.activity_esp_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -88,7 +88,6 @@ public class EspMainActivity extends AppCompatActivity {
         }
     }
 
-    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -101,7 +100,6 @@ public class EspMainActivity extends AppCompatActivity {
             return true;
         }
     }
-    */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -114,8 +112,6 @@ public class EspMainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
-            overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
-
         }
 
         return super.onOptionsItemSelected(item);
@@ -242,8 +238,7 @@ public class EspMainActivity extends AppCompatActivity {
 
         } else {
 
-            //final String[] deviceTypes = {"BLE", "SoftAP"};
-            final String[] deviceTypes = {"SoftAP"};
+            final String[] deviceTypes = {"BLE", "SoftAP"};
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(true);
             builder.setTitle(R.string.dialog_msg_device_selection);
@@ -313,9 +308,11 @@ public class EspMainActivity extends AppCompatActivity {
         boolean gps_enabled = false;
         boolean network_enabled = false;
         LocationManager lm = (LocationManager) getApplicationContext().getSystemService(Activity.LOCATION_SERVICE);
-        gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-
+        try {
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch (Exception ex) {
+        }
 
         try {
             network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
@@ -331,22 +328,18 @@ public class EspMainActivity extends AppCompatActivity {
     private void gotoQrCodeActivity() {
         Intent intent = new Intent(EspMainActivity.this, AddDeviceActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
-
     }
 
     private void goToBLEProvisionLandingActivity(int securityType) {
 
-        Intent intent = new Intent(EspMainActivity.this, BLEProvisionLanding.class);
-        intent.putExtra(AppConstants.KEY_SECURITY_TYPE, securityType);
-        startActivity(intent);
-        overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
-
+       Intent intent = new Intent(EspMainActivity.this, BLEProvisionLanding.class);
+       intent.putExtra(AppConstants.KEY_SECURITY_TYPE, securityType);
+       startActivity(intent);
     }
 
     private void goToWiFiProvisionLandingActivity(int securityType) {
 
-        // Intent intent = new Intent(EspMainActivity.this, ProvisionLanding.class);
+       // Intent intent = new Intent(EspMainActivity.this, ProvisionLanding.class);
         //intent.putExtra(AppConstants.KEY_SECURITY_TYPE, securityType);
         //startActivity(intent);
     }

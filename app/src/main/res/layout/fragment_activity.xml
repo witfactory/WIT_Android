@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:elevation="5dp"
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="@dimen/sp30">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
@@ -23,7 +27,6 @@
                 android:gravity="center|left"
                 android:textStyle="bold"/>
 
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -32,7 +35,6 @@
                 android:textSize="15sp"
                 android:gravity="center|left"
                 />
-
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -46,7 +48,7 @@
                 android:paddingTop="10sp">
 
                 <AutoCompleteTextView
-                    android:id="@+id/txt_country"
+                    android:id="@+id/txt_autocomplete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -61,18 +63,84 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!--<in.akshit.horizontalcalendar.HorizontalCalendarView
+                android:id="@+id/horizontalCalendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/> -->
 
             <!-- Agregar la vista de calendario CollapsibleCalendar -->
-            <com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
-                android:id="@+id/collapsibleCalendar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:expanded="false" />
-
-
 
         </LinearLayout>
+    </RelativeLayout>
+    <com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
+        android:id="@+id/collapsibleCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:elevation="8dp"
+        app:expanded="false"
+        android:background="@drawable/background_bottom_rounded">
+    </com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/events"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray_ligth_two"
+            android:scrollbars="vertical" />
 
     </RelativeLayout>
-</layout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        android:paddingTop="15dp"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/green_line_event"/>
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/red_line_event"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text="@string/no_events"
+                android:textColor="@color/green"/>
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text="@string/events"
+                android:textColor="@color/red"/>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btnCalendar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/sp16"
+            android:background="@android:color/white"
+            android:contentDescription="@string/calendar_icon_description"
+            android:src="@drawable/baseline_calendar_month_24" />
+    </LinearLayout>
+</LinearLayout>

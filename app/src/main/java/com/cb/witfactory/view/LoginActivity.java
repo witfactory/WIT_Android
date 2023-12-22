@@ -212,8 +212,6 @@ public class LoginActivity extends AppCompatActivity implements Callfun {
 
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
-
 
     }
 

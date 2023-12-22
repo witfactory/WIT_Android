@@ -78,6 +78,9 @@
     <string name="txt_Wit"> WIT</string>
     <string name="txt_Log_in">Log in</string>
     <string name="txt_name_user">Name User</string>
+    <string name="txt_actual_pass" translatable="false">Actual Password</string>
+    <string name="txt_indicate_your_new_password" translatable="false">Indicate your new password</string>
+    <string name="txt_repeat_your_new_password" translatable="false">Repeat your new password</string>
     <string name="save_session_data">Save session data</string>
     <string name="set_face_id">Set FaceID</string>
     <string name="i_forgot_my_data">I forgot my data</string>
@@ -108,6 +111,7 @@
     <string name="txt_device_name">Device name</string>
     <string name="wifi">wifi</string>
     <string name="txt_wifi_password">Wifi Password</string>
+
 
 
     <!--esptouch-->
@@ -182,13 +186,14 @@
     <string name="text_language"> language</string>
     <string name="text_language_example"> Ingles</string>
     <string name="text_edit">Edit</string>
+    <string name="text_save" translatable="false">Save</string>
     <string name="text_divice">Device</string>
     <string name="text_divice_example">Garaje</string>
     <string name="text_divice_adapter"><b><font color="#4D6677">Air Quality is good</font></b></string>
     <string name="text_humidity_relative">Relative humidity</string>
     <string name="text_percentage"><b><font color="#4D6677">47%</font></b></string>
     <string name="text_search_device">Find devices</string>
-
+    <string name="calendar_icon_description" translatable="false">Calendar icon</string>
     <string name="txt_invalide_email_password" tools:ignore="ExtraTranslation">Incorrect email or password</string>
     <string name="btn_acept" tools:ignore="ExtraTranslation">Acept</string>
     <string name="btn_cancel" tools:ignore="ExtraTranslation">Cancel</string>
@@ -212,6 +217,7 @@
     <string name="change_pin">Change pin</string>
     <string name="nota_update_user">NOTE: you have children at home, you can activate child Lock and <b>create a security pin</b> of <b>4 digits</b> for your WIT application.</string>
     <string name="change_password">Change password</string>
+    <string name="forgot_password" translatable="false">I forgot my password</string>
     <string name="configure_profile">Configure profile</string>
     <string name="terms_conditions">Terms  &amp; Conditions</string>
     <string name="general_activity">General activity log</string>
@@ -352,14 +358,13 @@
     <string name="summary_secured">Secured</string>
     <string name="summary_unsecured">Unsecured</string>
     <string name="summary_username">(Applicable for security version 2)</string>
+    <string name="no_events">No events</string>
+    <string name="events">Events</string>
+
 
     <!-- fin text esp32-->
 
-    <string name="device_name">Device name</string>
-    <string name="device_location">Device location</string>
-    <string name="description_location">Description location</string>
-    <string name="device_data">Device data</string>
-    <string name="error_register_device">Error registering device</string>
+
 
 
 </resources>

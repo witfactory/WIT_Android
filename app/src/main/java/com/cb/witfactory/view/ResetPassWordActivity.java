@@ -67,6 +67,7 @@ public class ResetPassWordActivity extends AppCompatActivity implements Callfun 
                 if (!Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.getHint().toString()).matches()) {
                     String email  = binding.txtEmail.getText().toString();
                     PreferencesHelper.setEmail("email", email);
+
                     amplifyCognito.resetPassword(email);
                 }
             }

@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.perfil.EditProfileFragment"
-    android:padding="@dimen/sp30">
+    android:padding="@dimen/sp30"
+    android:id="@+id/container_edit">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -293,6 +294,7 @@
                 android:layout_marginRight="5sp"/>
 
             <TextView
+                android:id="@+id/lblChangePass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/change_password"
