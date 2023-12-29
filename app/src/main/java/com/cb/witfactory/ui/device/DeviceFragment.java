@@ -157,15 +157,10 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
     public void getMetrics(List<DeviceResponse> deviceList) {
         Calendar calendar = Calendar.getInstance();
         Date fechaActual = calendar.getTime();
-        calendar.add(Calendar.HOUR, +4);
-        calendar.add(Calendar.DAY_OF_MONTH, -0);
         Date fechaMenos30Dias = calendar.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         String fechaFormateada = sdf.format(fechaMenos30Dias);
         String fechaActualFormateada = sdf.format(fechaActual);
         String deviceId = deviceList.get(0).getDevice_id();
-        Log.v("fecha  fechaFormateada",fechaFormateada);
-        Log.v("fecha  fechaActualFormateada",fechaActualFormateada);
-        deviceViewModel.getMetrics(deviceId,fechaActualFormateada,fechaFormateada);
     }
 }

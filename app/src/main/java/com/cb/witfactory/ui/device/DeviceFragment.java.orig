@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -158,27 +159,21 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         Date fechaActual = calendar.getTime();
 <<<<<<< HEAD
         calendar.add(Calendar.HOUR, +4);
-
-        // Resta 30 días a la fecha actual
         calendar.add(Calendar.DAY_OF_MONTH, -0);
 =======
         calendar.add(Calendar.DAY_OF_MONTH, -30);
->>>>>>> origin/activity
+>>>>>>> activity
         Date fechaMenos30Dias = calendar.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         String fechaFormateada = sdf.format(fechaMenos30Dias);
         String fechaActualFormateada = sdf.format(fechaActual);
         String deviceId = deviceList.get(0).getDevice_id();
 <<<<<<< HEAD
-
-        // Imprime la fecha formateada
-
         Log.v("fecha  fechaFormateada",fechaFormateada);
         Log.v("fecha  fechaActualFormateada",fechaActualFormateada);
         deviceViewModel.getMetrics(deviceId,fechaActualFormateada,fechaFormateada);
-
 =======
         deviceViewModel.getMetrics(deviceId, fechaFormateada, fechaActualFormateada);
->>>>>>> origin/activity
+>>>>>>> activity
     }
 }

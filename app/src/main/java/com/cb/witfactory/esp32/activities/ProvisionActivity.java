@@ -352,17 +352,6 @@ public class ProvisionActivity extends AppCompatActivity {
                 // Decodificar el array de bytes a String utilizando UTF-8
                 String textoDecodificado = new String(returnData);
 
-                String[] arrOfStr = textoDecodificado.split(",");
-                String deviceId = arrOfStr[0];
-                String devicetype = arrOfStr[1];
-                String serial = arrOfStr[2];
-                String mac = arrOfStr[3];
-                // Imprimir el resultado
-                Log.v("Texto Decodificado: " , deviceId);
-                PreferencesHelper.setDeviceId("deviceId",deviceId);
-                PreferencesHelper.setdevicetype("devicetype",devicetype);
-                PreferencesHelper.setSerial("serial",serial);
-                PreferencesHelper.setMac("mac",mac);
                 doProvisioning();
             }
 

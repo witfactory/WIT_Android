@@ -70,23 +70,16 @@ public class DeviceViewModel extends ViewModel {
                     //
                     ObjectResponseEvents objectResponseEvents = new ObjectResponseEvents();
                     objectResponseEvents = response.body();
-                    try{
+                    Map<String, DeviceMetrics> deviceMetricsMap = objectResponseEvents.response;
 
-                        Map<String, DeviceMetrics> deviceMetricsMap = objectResponseEvents.response;
-
-                        // Convertir el Map a ArrayList
-                        List<Metric> metrics = new LinkedList<>();
-                        List<Data> data = new LinkedList<>();
-                        List<DeviceMetrics> deviceMetricsList = new ArrayList<>(deviceMetricsMap.values());
-                        for (DeviceMetrics deviceMetrics : deviceMetricsList) {
-                            metrics = deviceMetrics.getMetrics();
-                            data = deviceMetrics.getData();
-                            // Realiza las acciones necesarias con los datos
-                        }
-                        //objectResponseEvents.response
-                        listener.onSuccess(metrics,"getevents");
-                    }catch (Exception e){
-                        listener.onError("getEventsError");
+                    // Convertir el Map a ArrayList
+                    List<Metric> metrics = new LinkedList<>();
+                    List<Data> data = new LinkedList<>();
+                    List<DeviceMetrics> deviceMetricsList = new ArrayList<>(deviceMetricsMap.values());
+                    for (DeviceMetrics deviceMetrics : deviceMetricsList) {
+                       metrics = deviceMetrics.getMetrics();
+                       data = deviceMetrics.getData();
+                        // Realiza las acciones necesarias con los datos
                     }
                 }
 
