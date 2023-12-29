@@ -36,6 +36,7 @@ import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.databinding.FragmentActivityBinding;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.ui.device.DeviceViewModel;
+import com.cb.witfactory.ui.home.UserIdHolder;
 import com.shrikanthravi.collapsiblecalendarview.data.Day;
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar;
 
@@ -61,6 +62,7 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
     private List<Callfun.ValueDevice> valueDeviceList;
     private EventAdapter listValueDeviceAdapter;
     List<Event> totalEventList;
+    public String deviceId;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -71,7 +73,8 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
         autoCompleteTextViewDevice = root.findViewById(R.id.txt_autocomplete);
         deviceViewModel = new ViewModelProvider(this).get(DeviceViewModel.class);
         deviceViewModel.setListener(ActivityFragment.this);
-        deviceViewModel.getDataDevice("c8174124-b6b3-4a35-8457-429a9b947ea3", "S");
+        String userId = UserIdHolder.getInstance().getUserId();
+        deviceViewModel.getDataDevice(userId, "S");
         adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line);
         getDeviceResponse = new GetDeviceResponse((ArrayList<DeviceResponse>) deviceList, 0, 0);
         ImageButton btnCalendar = root.findViewById(R.id.btnCalendar);
@@ -206,6 +209,7 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
                     selectDevice(selectedDevice);
                     DeviceResponse deviceSelect = getDeviceResponse.getDeviceByName(deviceList, selectedDevice);
                     selectDevice(deviceSelect.getDevice_id());
+                    this.deviceId = deviceSelect.getDevice_id();
                     Day selectedDay = binding.collapsibleCalendar.getSelectedDay();
                     String selectDate = getFormatedDate(selectedDay);
                     String range = getRange30Days(getFormatedDate(selectedDay));
@@ -309,7 +313,7 @@ public class ActivityFragment extends Fragment implements DeviceAdapter.DeviceAd
                     })
                     .show();
         } else {
-            deviceViewModel.getMetrics("", startRange, endRange);
+            deviceViewModel.getMetrics(this.deviceId, startRange, endRange);
         }
     }
 }
