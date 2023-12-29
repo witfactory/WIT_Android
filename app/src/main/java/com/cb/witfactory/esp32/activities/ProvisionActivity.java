@@ -297,7 +297,6 @@ public class ProvisionActivity extends AppCompatActivity {
                         String datosWifi = ssidValue + "#"+passphraseValue;
 
 
-                        PreferencesHelper.setSsidPassword("setSsidPassword", datosWifi);
 
                         isProvisioningCompleted = true;
                         tick3.setImageResource(R.drawable.ic_checkbox_on);

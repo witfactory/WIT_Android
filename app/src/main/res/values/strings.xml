@@ -364,6 +364,12 @@
 
     <!-- fin text esp32-->
 
+    <string name="device_name">Device name</string>
+    <string name="device_location">Device location</string>
+    <string name="description_location">Description location</string>
+    <string name="device_data">Device data</string>
+    <string name="error_register_device">Error registering device</string>
+
 
 
 

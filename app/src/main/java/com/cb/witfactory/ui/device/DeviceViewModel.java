@@ -88,26 +88,6 @@ public class DeviceViewModel extends ViewModel {
                     }catch (Exception e){
                         listener.onError("getEventsError");
                     }
-                        Data firstData = deviceMetrics1.getData().get(0);
-                        String deviceId = firstData.getDevice_id();
-                        String timestamp = firstData.getTimestamp();
-
-                        // Itera sobre las métricas
-                        for (Metric metric : deviceMetrics1.getMetrics()) {
-                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-                            LocalDateTime localDateTime = LocalDateTime.parse(timestamp, formatter);
-                            Event event = new Event(
-                                    metric.getTitle(),
-                                    metric.getValue(),
-                                    metric.getColor(),
-                                    timestamp,
-                                    deviceId
-                            );
-                            event.setTimestamp(localDateTime);
-                            events.add(event);
-                        }
-                    }
-                    listener.onSuccess(events,"gettotalevents");
                 }
 
                 @Override
