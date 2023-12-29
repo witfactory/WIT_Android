@@ -81,6 +81,7 @@ public class DeviceViewModel extends ViewModel {
                        data = deviceMetrics.getData();
                         // Realiza las acciones necesarias con los datos
                     }
+                    listener.onSuccess(metrics,"getevents");
                 }
 
                 @Override
