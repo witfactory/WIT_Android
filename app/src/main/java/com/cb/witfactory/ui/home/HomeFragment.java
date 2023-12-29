@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment implements Callfun {
             String userId =bodyResponseUser.getBody().get(0).getId().toString();
             PreferencesHelper.setEmail("email", user);
             PreferencesHelper.setUserId("userId", userId);
-
+            UserIdHolder.getInstance().setUserId(userId);
             String[] arrOfStr = user.split("@");
 
             String dataUser = arrOfStr[0];
@@ -110,13 +110,8 @@ public class HomeFragment extends Fragment implements Callfun {
     }
 
     public  void loaduser(){
-
         String user_aws = PreferencesHelper.getUserAws("user_aws","").toString();
-
         homeViewModel.setListener(HomeFragment.this);
         homeViewModel.getDataUSer(user_aws);
-
     }
-
-
 }

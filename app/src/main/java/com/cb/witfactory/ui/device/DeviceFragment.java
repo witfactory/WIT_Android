@@ -25,6 +25,7 @@ import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.data.retrofit.events.PayloadResponse;
 import com.cb.witfactory.databinding.FragmentDeviceBinding;
 import com.cb.witfactory.model.Callfun;
+import com.cb.witfactory.ui.home.UserIdHolder;
 import com.google.android.material.textfield.TextInputEditText;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,11 +50,10 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         binding = FragmentDeviceBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         deviceViewModel = new ViewModelProvider(this).get(DeviceViewModel.class);
-
         deviceList = new ArrayList<>();
-
+        String userId = UserIdHolder.getInstance().getUserId();
         deviceViewModel.setListener(DeviceFragment.this);
-        deviceViewModel.getDataDevice("c8174124-b6b3-4a35-8457-429a9b947ea3", "S");
+        deviceViewModel.getDataDevice(userId, "S");
 
         txtSearch = root.findViewById(R.id.txt_search);
 
@@ -79,7 +79,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
     public void onDeviceSelected(DeviceResponse device) {
         String idDevice = device.getDevice_id().toString();
         Toast.makeText(getActivity(), "Selected: " + idDevice, Toast.LENGTH_LONG).show();
-        deviceViewModel.getMetrics(idDevice, "2023-09-19T19:47:45", "2023-09-19T25:47:46");
+        deviceViewModel.getMetrics(idDevice, "2023-09-19T19:47:45", "2024-09-19T25:47:46");
     }
 
     @Override
