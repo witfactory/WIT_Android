@@ -1,65 +1,26 @@
 {
   "project_info": {
-    "project_number": "728420066259",
-    "project_id": "wit102",
-    "storage_bucket": "wit102.appspot.com"
+    "project_number": "924028952081",
+    "project_id": "wit-android-c2898",
+    "storage_bucket": "wit-android-c2898.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:728420066259:android:2f81156d283f15e3c1c526",
+        "mobilesdk_app_id": "1:924028952081:android:6bf6799d87ad4c3be1dbb0",
         "android_client_info": {
           "package_name": "com.cb.witfactory"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "728420066259-aonmpirbfd42or03cpqoc0k5aqges2gt.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCr1uZ379_dXvHuBZFGjUvFnKfr-AoNgrQ"
+          "current_key": "AIzaSyBAYG8b5jvHy-UWrOcTiz2Musma_eN0sx8"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "728420066259-aonmpirbfd42or03cpqoc0k5aqges2gt.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:728420066259:android:2af5239b7a0f98a9c1c526",
-        "android_client_info": {
-          "package_name": "com.wit.notificacionwit"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "728420066259-aonmpirbfd42or03cpqoc0k5aqges2gt.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCr1uZ379_dXvHuBZFGjUvFnKfr-AoNgrQ"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "728420066259-aonmpirbfd42or03cpqoc0k5aqges2gt.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
