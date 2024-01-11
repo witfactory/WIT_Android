@@ -17,9 +17,20 @@ import androidx.lifecycle.ViewModelProvider;
 import com.cb.witfactory.data.retrofit.user.UpdateUserResponse;
 import com.cb.witfactory.data.retrofit.user.keyUserResponse;
 import com.cb.witfactory.databinding.FragmentEditProfileBinding;
+import com.cb.witfactory.model.City;
+import com.cb.witfactory.model.GeonamesApi;
 import com.cb.witfactory.model.PreferencesHelper;
 import com.cb.witfactory.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.hbb20.CountryCodePicker;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EditProfileFragment extends Fragment {
 
@@ -34,9 +45,15 @@ public class EditProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentEditProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        CountryCodePicker countryCodePicker = root.findViewById(R.id.countryCodePicker);
+        String selectedCountryCode = countryCodePicker.getSelectedCountryNameCode();
         SwitchMaterial switchMaterial = root.findViewById(R.id.control_parental);
         Button btnPing = root.findViewById(R.id.btn_ping);
-
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://api.geonames.org/") // URL base de la API de Geonames
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        GeonamesApi geonamesApi = retrofit.create(GeonamesApi.class);
         switchMaterial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -81,7 +98,24 @@ public class EditProfileFragment extends Fragment {
                 }
             }
         });
+        Call<List<City>> call = geonamesApi.getCities(selectedCountryCode);
+        call.enqueue(new Callback<List<City>>() {
 
+            @Override
+            public void onResponse(Call<List<City>> call, Response<List<City>> response) {
+                if (response.isSuccessful()) {
+                    List<City> cities = response.body();
+                    //
+                } else {
+                    //
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<City>> call, Throwable t) {
+                //
+            }
+        });
         return root;
     }
 
