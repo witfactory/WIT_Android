@@ -88,7 +88,8 @@
         android:id="@+id/edit_profile"
         android:name="com.cb.witfactory.ui.perfil.EditProfileFragment"
         android:label="@string/menu_perfil"
-        tools:layout="@layout/fragment_edit_profile" />
+        tools:layout="@layout/fragment_edit_profile" >
+    </fragment>
 
     <fragment
         android:id="@+id/terms_conditions"
@@ -107,4 +108,10 @@
         android:name="com.cb.witfactory.ui.device.DetailDevice"
         android:label="@string/txt_dispositive"
         tools:layout="@layout/fragment_detail_device" />
+
+    <fragment
+        android:id="@+id/fragment_edit_profile_detail"
+        android:name="com.cb.witfactory.ui.perfil.EditProfileDetailsFragment"
+        android:label="@string/txt_dispositive"
+        tools:layout="@layout/fragment_edit_profile_details" />
 </navigation>
