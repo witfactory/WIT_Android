@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- fragment_edit_profile_details.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <!-- Puedes agregar vistas y elementos de diseño aquí -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detalles de la Edición del Perfil"
+        android:textSize="18sp" />
+
+    <!-- Agrega más vistas según sea necesario -->
+
+</LinearLayout>

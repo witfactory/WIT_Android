@@ -23,16 +23,16 @@
                 android:text="@string/configure_profile"
                 android:textColor="@color/background"
                 android:layout_gravity="center"
-               android:textSize="@dimen/sp25" />
-
+                android:textSize="@dimen/sp25" />
 
             <TextView
+                android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nombre Apellido"
-                android:textColor="@color/dark_greenish_blue"
+                android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:textSize="@dimen/sp25"/>
+                android:textSize="@dimen/sp23"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -61,7 +61,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email"
+                android:hint="@string/txt_name_user"
                 android:layoutDirection="rtl"
                 android:paddingBottom="@dimen/sp10"
                 android:textColorHint="@color/text_login"
@@ -70,13 +70,11 @@
                 app:startIconDrawable="@drawable/ic_email">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_email"
+                    android:id="@+id/txt_lastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:gravity="center|left"
-                    android:editable="false"
-                    android:focusable="false"
                     android:textColor="@color/dark_greenish_blue"
                     android:textColorHint="@color/text_login" />
 
@@ -86,14 +84,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-                <com.hbb20.CountryCodePicker
-                    android:id="@+id/countryCodePicker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:ccp_showFlag="true"
-                    app:ccp_showFullName="false"
-                    app:ccp_defaultNameCode="US" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -112,14 +102,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
+                        android:textSize="16sp"
                         android:padding="5sp"
                         android:textColor="@color/dark_greenish_blue"
                         android:textColorHint="@color/text_login"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintVertical_bias="0.498"
-                        app:layout_constraintHorizontal_bias="0.502"
-                        android:editable="false"
-                        android:focusable="false"/>
+                        app:layout_constraintHorizontal_bias="0.502"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -146,13 +135,12 @@
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:padding="5sp"
+                        android:textSize="16sp"
                         android:textColor="@color/dark_greenish_blue"
                         android:textColorHint="@color/text_login"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintVertical_bias="0.498"
-                        app:layout_constraintHorizontal_bias="0.502"
-                        android:editable="false"
-                        android:focusable="false"/>
+                        app:layout_constraintHorizontal_bias="0.502"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -327,7 +315,7 @@
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_edit"
+                    android:id="@+id/btn_edit2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/sp10"

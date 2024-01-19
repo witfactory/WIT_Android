@@ -32,6 +32,12 @@ public class GetUserResponse {
     @SerializedName("user_principal")
     private String user_principal;
 
+    @SerializedName("last_name")
+    private String last_name;
+
+    @SerializedName("first_name")
+    private String first_name;
+
     @SerializedName("telephone")
     private String telephone;
 
@@ -41,7 +47,7 @@ public class GetUserResponse {
     @SerializedName("id")
     private String id;
 
-    public GetUserResponse(String city, String country, String zip_code, String device_id, String address, String email, String suite, String user, String user_principal, String telephone, String account_type, String id) {
+    public GetUserResponse(String city, String country, String zip_code, String device_id, String address, String email, String suite, String user, String user_principal, String telephone, String account_type, String id, String first_name, String last_name) {
         this.city = city;
         this.country = country;
         this.zip_code = zip_code;
@@ -54,6 +60,8 @@ public class GetUserResponse {
         this.telephone = telephone;
         this.account_type = account_type;
         this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
     }
 
     public String getCity() {
@@ -150,5 +158,21 @@ public class GetUserResponse {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setFirstName(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public String getFirstName() {
+        return first_name;
+    }
+
+    public void setLastName(String last_name) {
+        this.last_name = last_name;
+    }
+
+    public String getLastName() {
+        return last_name;
     }
 }
