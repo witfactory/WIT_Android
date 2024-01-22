@@ -11,8 +11,10 @@ import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.cb.witfactory.data.retrofit.device.ObjectResponseDevice;
 import com.cb.witfactory.data.retrofit.events.Data;
 import com.cb.witfactory.data.retrofit.events.DeviceMetrics;
+import com.cb.witfactory.data.retrofit.events.EventsRealtime;
 import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.data.retrofit.events.ObjectResponseEvents;
+import com.cb.witfactory.data.retrofit.events.ObjectResponseEventsRealtime;
 import com.cb.witfactory.model.Callfun;
 
 import java.time.LocalDateTime;
@@ -61,6 +63,7 @@ public class DeviceViewModel extends ViewModel {
     }
 
 
+
     public void getMetrics(String device_id,String from,String to) {
         try {
             final Call<ObjectResponseEvents> obj = ApiConecxion.getApiService().getEvents(device_id, from,to);
@@ -77,8 +80,8 @@ public class DeviceViewModel extends ViewModel {
                     List<Data> data = new LinkedList<>();
                     List<DeviceMetrics> deviceMetricsList = new ArrayList<>(deviceMetricsMap.values());
                     for (DeviceMetrics deviceMetrics : deviceMetricsList) {
-                       metrics = deviceMetrics.getMetrics();
-                       data = deviceMetrics.getData();
+                        metrics = deviceMetrics.getMetrics();
+                        data = deviceMetrics.getData();
                         // Realiza las acciones necesarias con los datos
                     }
                     listener.onSuccess(metrics,"getevents");
@@ -108,6 +111,37 @@ public class DeviceViewModel extends ViewModel {
 
                 @Override
                 public void onFailure(Call<ObjectResponseEvents> call, Throwable t) {
+                    listener.onError("getEventsError");
+                }
+            });
+
+        } catch (Exception exception) {
+            Log.v("Error", exception.getMessage());
+        }
+    }
+
+    public void getMetricsRealtime(String device_id,String user) {
+        try {
+
+            EventsRealtime eventsRealtime = new EventsRealtime(device_id,user);
+            final Call<ObjectResponseEventsRealtime> obj = ApiConecxion.getApiService().getEventsRealtime(eventsRealtime);
+            obj.enqueue(new Callback<ObjectResponseEventsRealtime>() {
+                @Override
+                public void onResponse(Call<ObjectResponseEventsRealtime> call, Response<ObjectResponseEventsRealtime> response) {
+                    //
+                    ObjectResponseEventsRealtime objectResponseEventsRealtime = new ObjectResponseEventsRealtime();
+                    objectResponseEventsRealtime = response.body();
+
+                    if(objectResponseEventsRealtime.response != null){
+                        listener.onSuccess(objectResponseEventsRealtime.response,"getevents");
+
+                    }else{
+                        listener.onError("getEventsError");
+                    }
+                  }
+
+                @Override
+                public void onFailure(Call<ObjectResponseEventsRealtime> call, Throwable t) {
                     listener.onError("getEventsError");
                 }
             });

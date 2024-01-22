@@ -3,7 +3,9 @@ package com.cb.witfactory.data.retrofit.connection;
 import com.cb.witfactory.data.retrofit.device.CreateDevice;
 import com.cb.witfactory.data.retrofit.device.CreateDeviceResponse;
 import com.cb.witfactory.data.retrofit.device.ObjectResponseDevice;
+import com.cb.witfactory.data.retrofit.events.EventsRealtime;
 import com.cb.witfactory.data.retrofit.events.ObjectResponseEvents;
+import com.cb.witfactory.data.retrofit.events.ObjectResponseEventsRealtime;
 import com.cb.witfactory.data.retrofit.user.ObjectResponseUser;
 import com.cb.witfactory.data.retrofit.user.UpdateUserResponse;
 
@@ -39,6 +41,13 @@ public interface MyApiService {
             @Query("from") String from,
             @Query("to") String to
     );
+
+
+    @POST("events")
+    Call<ObjectResponseEventsRealtime> getEventsRealtime(
+            @Body EventsRealtime eventsRealtime
+            );
+
 
     @POST("create")
     Call<CreateDeviceResponse> createDevice(@Body CreateDevice createDevice);

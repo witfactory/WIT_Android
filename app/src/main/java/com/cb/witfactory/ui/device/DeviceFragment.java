@@ -1,5 +1,6 @@
 package com.cb.witfactory.ui.device;
 
+import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
 import static org.chromium.base.ContextUtils.getApplicationContext;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.fragment.app.Fragment;
@@ -25,6 +26,7 @@ import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.data.retrofit.events.PayloadResponse;
 import com.cb.witfactory.databinding.FragmentDeviceBinding;
 import com.cb.witfactory.model.Callfun;
+import com.cb.witfactory.model.PreferencesHelper;
 import com.cb.witfactory.ui.home.UserIdHolder;
 import com.google.android.material.textfield.TextInputEditText;
 import java.text.SimpleDateFormat;
@@ -78,8 +80,9 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
     @Override
     public void onDeviceSelected(DeviceResponse device) {
         String idDevice = device.getDevice_id().toString();
+        String userEmail = PreferencesHelper.getEmail("email", "");
         Toast.makeText(getActivity(), "Selected: " + idDevice, Toast.LENGTH_LONG).show();
-        deviceViewModel.getMetrics(idDevice, "2023-09-19T19:47:45", "2024-09-19T25:47:46");
+        deviceViewModel.getMetricsRealtime(idDevice, userEmail);
     }
 
     @Override
@@ -116,6 +119,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         if (s.equals("getevents")) {
             List<Metric> deviceList = (List<Metric>) o;
             if (deviceList.size() > 0) {
+                binding.recyclerVertical.setVisibility(View.VISIBLE);
                 valueDeviceList = new ArrayList<>();
                 listValueDeviceAdapter = new ListValueDeviceAdapter(getActivity(), deviceList, this);
                 RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
@@ -140,8 +144,17 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
     }
 
     @Override
-    public void onError(String s) {}
+    public void onError(String s) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                binding.recyclerVertical.setVisibility(View.GONE);
+             }
+        });
 
+
+
+    }
     private void filterDevices(String searchText) {
         ArrayList<DeviceResponse> filteredList = new ArrayList<>();
 
@@ -162,5 +175,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         String fechaFormateada = sdf.format(fechaMenos30Dias);
         String fechaActualFormateada = sdf.format(fechaActual);
         String deviceId = deviceList.get(0).getDevice_id();
+        String userEmail = PreferencesHelper.getEmail("email", "");
+        deviceViewModel.getMetricsRealtime(deviceId,userEmail);
     }
 }
