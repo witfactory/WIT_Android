@@ -78,23 +78,44 @@ public class ListValueDeviceAdapter extends RecyclerView.Adapter<ListValueDevice
         holder.title_device.setText(events.getValue()+"");
         holder.txt_description.setText(events.getTitle().toString());
         String color = events.getColor().toString();
+        String tipodato = events.getTitle().toString();
+
+
+        if(tipodato.equals("co") || tipodato.equals("co2")){
+            holder.img_icon.setBackgroundResource(R.drawable.img_sun);
+        }
+        else if(tipodato.equals("temp")){
+            holder.img_icon.setBackgroundResource(R.drawable.tempp);
+        }
+
+        else if(tipodato.equals("hum")){
+            holder.img_icon.setBackgroundResource(R.drawable.ic_humidity);
+        }
+
+        else if(tipodato.equals("press")){
+            holder.img_icon.setBackgroundResource(R.drawable.img_press);
+        }else{
+            holder.img_icon.setBackgroundResource(R.drawable.ic_humidity);
+        }
 
         if(color.equals("green")){
-
             holder.color_estado.setBackgroundResource(R.color.green);
-            holder.img_exelent.setBackgroundResource(R.drawable.ic_button_exelent);
+            holder.img_exelent.setBackgroundResource(R.drawable.img_good);
         }
         if(color.equals("red")){
             holder.color_estado.setBackgroundResource(R.color.red);
+            holder.img_exelent.setBackgroundResource(R.drawable.img_very_bad);
         }
 
         if(color.equals("orange")){
             holder.color_estado.setBackgroundResource(R.color.orange);
+            holder.img_exelent.setBackgroundResource(R.drawable.img_bad);
 
         }
 
         if(color.equals("blue")){
             holder.color_estado.setBackgroundResource(R.color.blue);
+            holder.img_exelent.setBackgroundResource(R.drawable.img_moderate);
 
         }
 
