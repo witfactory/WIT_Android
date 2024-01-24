@@ -98,6 +98,13 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
             }
         });
 
+        binding.txtSensor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deviceViewModel.getDataDevice(userId, "S");
+            }
+        });
+
         return root;
     }
 
@@ -132,6 +139,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         if (s.equals("getdevice")) {
             List<DeviceResponse> deviceList = (List<DeviceResponse>) o;
             if (deviceList.size() > 0) {
+                binding.recyclerHorizontal.setVisibility(View.VISIBLE);
                 this.deviceListAux = (ArrayList<DeviceResponse>) deviceList;
                 mAdapter = new DeviceAdapter(getActivity(), deviceList, this,deviceViewModel);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -155,7 +163,9 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
             } else {
                 /**######**/
                 binding.recyclerHorizontal.setVisibility(View.GONE);
+                binding.recyclerVertical.setVisibility(View.GONE);
                 binding.imageView4.setVisibility(View.VISIBLE);
+                Toast.makeText(getActivity(),"no data", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -199,6 +209,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
                 public void run() {
                     Toast.makeText(getActivity(),"no data", Toast.LENGTH_LONG).show();
                     binding.recyclerHorizontal.setVisibility(View.GONE);
+                    binding.recyclerVertical.setVisibility(View.GONE);
                 }
             });
         }
