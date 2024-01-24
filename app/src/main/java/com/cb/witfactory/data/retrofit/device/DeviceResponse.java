@@ -35,13 +35,16 @@ public class DeviceResponse {
     @SerializedName("device_serial")
     private String device_serial;
 
+    @SerializedName("device_type")
+    private String device_type;
+
     @SerializedName("lat")
     private String lat;
 
     @SerializedName("description_location")
     private String description_location;
 
-    public DeviceResponse(String date_entered, String lon, String device_id, String device_name, String mac, String date_modified, String user_id, String deleted, String device_location, String device_serial, String lat, String description_location) {
+    public DeviceResponse(String date_entered, String lon, String device_id, String device_name, String mac, String date_modified, String user_id, String deleted, String device_location, String device_serial, String device_type, String lat, String description_location) {
         this.date_entered = date_entered;
         this.lon = lon;
         this.device_id = device_id;
@@ -52,6 +55,7 @@ public class DeviceResponse {
         this.deleted = deleted;
         this.device_location = device_location;
         this.device_serial = device_serial;
+        this.device_type = device_type;
         this.lat = lat;
         this.description_location = description_location;
     }
@@ -134,6 +138,14 @@ public class DeviceResponse {
 
     public void setDevice_serial(String device_serial) {
         this.device_serial = device_serial;
+    }
+
+    public String getDevice_type() {
+        return device_type;
+    }
+
+    public void setDevice_type(String device_type) {
+        this.device_type = device_type;
     }
 
     public String getLat() {

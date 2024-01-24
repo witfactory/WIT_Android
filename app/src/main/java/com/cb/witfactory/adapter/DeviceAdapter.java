@@ -118,6 +118,15 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
         holder.txt_title.setText(device.getDevice_name());
         holder.txt_sub_title.setText(device.getDevice_location());
 
+        String typeDevice = device.getDevice_type();
+        if(typeDevice.equals("S")){
+            holder.img_hadeare.setBackgroundResource(R.drawable.hadware_dispositivo);
+        }else{
+            holder.img_hadeare.setBackgroundResource(R.drawable.img_valvula);
+        }
+
+
+
         holder.check_state.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
