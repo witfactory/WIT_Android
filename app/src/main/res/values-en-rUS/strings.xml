@@ -188,7 +188,7 @@
     <string name="text_divice_adapter"><b><font color="#4D6677">Air Quality is good</font></b></string>
     <string name="text_humidity_relative">Relative humidity</string>
     <string name="text_percentage"><b><font color="#4D6677">47%</font></b></string>
-    <string name="text_search_device">Find devices</string>
+    <string name="text_search_device">Search devices</string>
 
     <string name="txt_invalide_email_password" tools:ignore="ExtraTranslation">Incorrect email or password</string>
     <string name="btn_acept" tools:ignore="ExtraTranslation">Acept</string>
