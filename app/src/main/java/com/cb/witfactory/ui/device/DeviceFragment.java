@@ -90,6 +90,14 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
             }
         });
 
+
+        binding.txtValvula.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deviceViewModel.getDataDevice(userId, "V");
+            }
+        });
+
         return root;
     }
 
@@ -180,6 +188,17 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
                 public void run() {
                     Toast.makeText(getActivity(),"no data", Toast.LENGTH_LONG).show();
 
+                }
+            });
+        }
+
+
+        if(s.equals("getDeviceError")){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getActivity(),"no data", Toast.LENGTH_LONG).show();
+                    binding.recyclerHorizontal.setVisibility(View.GONE);
                 }
             });
         }
