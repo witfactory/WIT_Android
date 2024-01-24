@@ -162,13 +162,13 @@ public class DeviceViewModel extends ViewModel {
 
                 @Override
                 public void onResponse(Call<ObjectResponseAlarm> call, Response<ObjectResponseAlarm> response) {
-                    listener.onSuccess(response.body().message);
+                    listener.onSuccess("alarmaok");
 
                 }
 
                 @Override
                 public void onFailure(Call<ObjectResponseAlarm> call, Throwable t) {
-                    listener.onError("Alarm not disabled");
+                    listener.onError("alarmaerror");
                 }
             });
 

@@ -56,12 +56,35 @@
 
 
 
-            <TextView
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="horizontal">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/text_my_devices"
+                   android:textColor="@color/txt_color"
+                   android:textSize="15sp"
+                   android:gravity="left"/>
+
+
+               <TextView
+                   android:id="@+id/closeall"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="Mute all"
+                   android:textColor="@color/txt_color"
+                   android:textSize="15sp"
+                   android:gravity="right"
+                   android:clickable="true"/>
+           </LinearLayout>
+
+
+            <Space
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/text_my_devices"
-                android:textColor="@color/txt_color"
-                android:textSize="15sp" />
+                android:layout_height="10sp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_horizontal"
@@ -83,5 +106,14 @@
 
         </LinearLayout>
 
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_logo_wit"
+            android:layout_gravity="center"/>
+
     </LinearLayout>
+
+
 </FrameLayout>

@@ -23,6 +23,7 @@ import com.cb.witfactory.data.retrofit.alarms.Alarm;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.model.Callfun;
+import com.cb.witfactory.model.PreferencesHelper;
 import com.cb.witfactory.ui.device.DeviceViewModel;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
@@ -122,7 +123,8 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
             public void onClick(View v) {
                 Toast.makeText(context.getApplicationContext(), device.getDevice_id(), Toast.LENGTH_LONG).show();
                 ArrayList<Alarm> alarms = new ArrayList<>();
-                Alarm alarm = new Alarm(device.getDevice_id(),device.getDevice_name());
+                String userEmail = PreferencesHelper.getEmail("email", "");
+                Alarm alarm = new Alarm(device.getDevice_id(),userEmail);
                 alarms.add(alarm);
 
                 deviceViewModel.setAlarm(alarms);

@@ -21,6 +21,7 @@ import com.cb.witfactory.R;
 import com.cb.witfactory.adapter.DeviceAdapter;
 import com.cb.witfactory.adapter.ListValueDeviceAdapter;
 import com.cb.witfactory.data.classModel.MyDividerItemDecoration;
+import com.cb.witfactory.data.retrofit.alarms.Alarm;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.data.retrofit.events.PayloadResponse;
@@ -46,7 +47,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
     private ListValueDeviceAdapter listValueDeviceAdapter;
     private TextInputEditText txtSearch;
     private ArrayList<DeviceResponse> deviceListAux;
-
+    private ArrayList<Alarm> alarms;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentDeviceBinding.inflate(inflater, container, false);
@@ -74,6 +75,21 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
             }
         });
 
+        binding.closeall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(alarms.size() > 0){
+                    deviceViewModel.setAlarm(alarms);
+
+                }else{
+                    Toast.makeText(getActivity(),"no data", Toast.LENGTH_LONG).show();
+                }
+
+
+
+            }
+        });
+
         return root;
     }
 
@@ -87,11 +103,21 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
 
     @Override
     public void onListValueDeviceSelected(Metric device) {
-        Toast.makeText(getApplicationContext(), "Selected: " + device.getTitle(), Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), "Selected: " + device.getTitle(), Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void onSuccess(String s) {}
+    public void onSuccess(String s) {
+        if(s.equals("alarmaok")){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getActivity(),"silenced devices", Toast.LENGTH_LONG).show();
+
+                }
+            });
+        }
+    }
 
     @Override
     public void onSuccess(Object o, String s) {
@@ -105,9 +131,23 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
                 binding.recyclerHorizontal.setItemAnimator(new DefaultItemAnimator());
                 binding.recyclerHorizontal.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL, 5));
                 binding.recyclerHorizontal.setAdapter(mAdapter);
+
+
+                alarms = new ArrayList<>();
+                String userEmail = PreferencesHelper.getEmail("email", "");
+
+                for (int i = 0; i < deviceList.size(); i++) {
+                    Alarm alarm = new Alarm(deviceList.get(i).getDevice_id(),userEmail);
+                    alarms.add(alarm);
+                }
+
+
+
                 getMetrics(deviceList);
             } else {
+                /**######**/
                 binding.recyclerHorizontal.setVisibility(View.GONE);
+                binding.imageView4.setVisibility(View.VISIBLE);
             }
         }
 
@@ -126,16 +166,28 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
                 listValueDeviceAdapter.notifyDataSetChanged();
             } else {
                 binding.recyclerVertical.setVisibility(View.GONE);
+                binding.imageView4.setVisibility(View.VISIBLE);
             }
         }
     }
 
     @Override
     public void onError(String s) {
+
+        if(s.equals("alarmaerror")){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getActivity(),"no data", Toast.LENGTH_LONG).show();
+
+                }
+            });
+        }
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 binding.recyclerVertical.setVisibility(View.GONE);
+                binding.imageView4.setVisibility(View.VISIBLE);
              }
         });
 
