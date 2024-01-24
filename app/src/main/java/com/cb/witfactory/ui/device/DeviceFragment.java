@@ -99,7 +99,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
             List<DeviceResponse> deviceList = (List<DeviceResponse>) o;
             if (deviceList.size() > 0) {
                 this.deviceListAux = (ArrayList<DeviceResponse>) deviceList;
-                mAdapter = new DeviceAdapter(getActivity(), deviceList, this);
+                mAdapter = new DeviceAdapter(getActivity(), deviceList, this,deviceViewModel);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                 binding.recyclerHorizontal.setLayoutManager(mLayoutManager);
                 binding.recyclerHorizontal.setItemAnimator(new DefaultItemAnimator());
@@ -107,12 +107,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
                 binding.recyclerHorizontal.setAdapter(mAdapter);
                 getMetrics(deviceList);
             } else {
-                mAdapter = new DeviceAdapter(getActivity(), deviceList, this);
-                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-                binding.recyclerHorizontal.setLayoutManager(mLayoutManager);
-                binding.recyclerHorizontal.setItemAnimator(new DefaultItemAnimator());
-                binding.recyclerHorizontal.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL, 5));
-                binding.recyclerHorizontal.setAdapter(mAdapter);
+                binding.recyclerHorizontal.setVisibility(View.GONE);
             }
         }
 
@@ -130,15 +125,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
                 binding.recyclerVertical.setAdapter(listValueDeviceAdapter);
                 listValueDeviceAdapter.notifyDataSetChanged();
             } else {
-                valueDeviceList = new ArrayList<>();
-                listValueDeviceAdapter = new ListValueDeviceAdapter(getActivity(), deviceList, this);
-                RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-                listValueDeviceAdapter.notifyDataSetChanged();
-                binding.recyclerVertical.setLayoutManager(mLayoutManager2);
-                binding.recyclerVertical.setItemAnimator(new DefaultItemAnimator());
-                binding.recyclerVertical.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 5));
-                binding.recyclerVertical.setAdapter(listValueDeviceAdapter);
-                listValueDeviceAdapter.notifyDataSetChanged();
+                binding.recyclerVertical.setVisibility(View.GONE);
             }
         }
     }

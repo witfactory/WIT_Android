@@ -1,6 +1,9 @@
 package com.cb.witfactory.adapter;
 
+import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
+
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,26 +12,59 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cb.witfactory.R;
+import com.cb.witfactory.data.retrofit.alarms.Alarm;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.model.Callfun;
+import com.cb.witfactory.ui.device.DeviceViewModel;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.ArrayList;
 import java.util.List;
 public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHolder>
-        implements Filterable {
+        implements Filterable,Callfun {
 
     private Context context;
     private List<DeviceResponse> deviceList;
     private List<DeviceResponse> deviceListFiltered;
     private DeviceAdapterListener listener;
+
+    private DeviceViewModel deviceViewModel;
+
+    @Override
+    public void onSuccess(String s) {
+        Log.v("success alarm",s);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    @Override
+    public void onSuccess(Object o, String s) {
+
+    }
+
+    @Override
+    public void onError(String s) {
+        Log.v("error alarm",s);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+               Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -59,11 +95,12 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
         }
     }
 
-    public DeviceAdapter(Context context, List<DeviceResponse> deviceList, DeviceAdapterListener listener) {
+    public DeviceAdapter(Context context, List<DeviceResponse> deviceList, DeviceAdapterListener listener, DeviceViewModel _deviceViewModel) {
         this.context = context;
         this.listener = listener;
         this.deviceList = deviceList;
         this.deviceListFiltered = deviceList;
+        this.deviceViewModel = _deviceViewModel;
     }
 
     @Override
@@ -79,6 +116,18 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
         final DeviceResponse device = deviceListFiltered.get(position);
         holder.txt_title.setText(device.getDevice_name());
         holder.txt_sub_title.setText(device.getDevice_location());
+
+        holder.check_state.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context.getApplicationContext(), device.getDevice_id(), Toast.LENGTH_LONG).show();
+                ArrayList<Alarm> alarms = new ArrayList<>();
+                Alarm alarm = new Alarm(device.getDevice_id(),device.getDevice_name());
+                alarms.add(alarm);
+
+                deviceViewModel.setAlarm(alarms);
+            }
+        });
 
        /* Glide.with(context)
                 .load(device.getImageDevice())
