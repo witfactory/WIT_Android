@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -37,6 +39,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdapterListener, ListValueDeviceAdapter.ValueDeviceAdapterListener, Callfun {
 
     private FragmentDeviceBinding binding;
@@ -48,6 +52,8 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
     private TextInputEditText txtSearch;
     private ArrayList<DeviceResponse> deviceListAux;
     private ArrayList<Alarm> alarms;
+
+    SweetAlertDialog pDialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentDeviceBinding.inflate(inflater, container, false);
@@ -56,6 +62,8 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         deviceList = new ArrayList<>();
         String userId = UserIdHolder.getInstance().getUserId();
         deviceViewModel.setListener(DeviceFragment.this);
+
+        loadAlert();
         deviceViewModel.getDataDevice(userId, "S");
 
         txtSearch = root.findViewById(R.id.txt_search);
@@ -94,6 +102,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         binding.txtValvula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadAlert();
                 deviceViewModel.getDataDevice(userId, "V");
             }
         });
@@ -101,6 +110,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         binding.txtSensor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadAlert();
                 deviceViewModel.getDataDevice(userId, "S");
             }
         });
@@ -187,10 +197,13 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
                 binding.imageView4.setVisibility(View.VISIBLE);
             }
         }
+
+        hidenLoadAlert();
     }
 
     @Override
     public void onError(String s) {
+        hidenLoadAlert();
 
         if(s.equals("alarmaerror")){
             runOnUiThread(new Runnable() {
@@ -246,5 +259,20 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         String deviceId = deviceList.get(0).getDevice_id();
         String userEmail = PreferencesHelper.getEmail("email", "");
         deviceViewModel.getMetricsRealtime(deviceId,userEmail);
+    }
+
+    public void loadAlert(){
+        pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();
+    }
+
+    public void hidenLoadAlert(){
+        if(pDialog != null){
+            pDialog.dismiss();
+        }
+
     }
 }
