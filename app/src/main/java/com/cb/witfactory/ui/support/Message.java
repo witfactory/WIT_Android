@@ -5,6 +5,7 @@ public class Message {
     String user;
     String fecha;
 
+
     public Message(String mensaje, String user, String fecha) {
         this.mensaje = mensaje;
         this.user = user;

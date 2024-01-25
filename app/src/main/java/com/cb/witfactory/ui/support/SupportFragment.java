@@ -74,7 +74,7 @@ public class SupportFragment extends Fragment {
                 if(!binding.txtMensaje.getText().toString().isEmpty()){
                     String currentDateTime = DateTimeHelper.getCurrentDateTime();
                     Log.d("Fecha y Hora Actual", currentDateTime);
-
+                    int timestamp = (int) System.currentTimeMillis();
                     Message message = new Message(binding.txtMensaje.getText().toString(), userEmail,currentDateTime);
                     //chatReference.push().setValue(message);
                     String messageId = chatReference.push().getKey(); // Generar una clave única
@@ -100,6 +100,8 @@ public class SupportFragment extends Fragment {
                     var fecha =  chatSnapshot.child("fecha").getValue().toString();
                     var mensaje =  chatSnapshot.child("mensaje").getValue().toString();
                     var user =  chatSnapshot.child("user").getValue().toString();
+                    String currentDateTime = DateTimeHelper.getCurrentDateTime();
+                    Log.d("Fecha y Hora Actual", currentDateTime);
                     Message message = new Message(mensaje,user,fecha);
                     if (message != null) {
                         messageList.add(message);
