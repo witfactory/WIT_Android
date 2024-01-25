@@ -19,6 +19,7 @@ import androidx.core.widget.ContentLoadingProgressBar;
 import com.cb.witfactory.R;
 import com.cb.witfactory.esp32.AppConstants;
 import com.cb.witfactory.model.PreferencesHelper;
+import com.cb.witfactory.view.CreateDeviceActivity;
 import com.espressif.provisioning.DeviceConnectionEvent;
 import com.espressif.provisioning.ESPConstants;
 import com.espressif.provisioning.ESPDevice;
@@ -116,6 +117,10 @@ public class ProvisionActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             provisionManager.getEspDevice().disconnectDevice();
+
+            Intent wifiListIntent = new Intent(getApplicationContext(), CreateDeviceActivity.class);
+            wifiListIntent.putExtras(getIntent());
+            startActivity(wifiListIntent);
 
             //validar redirecion intent
             finish();
