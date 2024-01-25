@@ -1,12 +1,12 @@
 package com.cb.witfactory.ui.support;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +19,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -30,6 +34,10 @@ public class SupportFragment extends Fragment {
 
     FirebaseDatabase database;
     DatabaseReference chatReference;
+
+    private RecyclerView recyclerView;
+    private MessageAdapter messageAdapter;
+    private List<Message> messageList;
 
     public static SupportFragment newInstance() {
         return new SupportFragment();
@@ -45,13 +53,25 @@ public class SupportFragment extends Fragment {
         chatReference = database.getReference("chat");
 
 
+        String userEmail = PreferencesHelper.getUserId("email", "");
+        String userid = PreferencesHelper.getUserId("userId", "");
+
+        // Obtener referencia a la base de datos
+        chatReference = FirebaseDatabase.getInstance().getReference().child("chat")
+                .child(userid);
+
+        // Configurar RecyclerView
+        binding.rvMensajes.setLayoutManager(new LinearLayoutManager(getActivity()));
+        messageList = new ArrayList<>();
+
+
+        // Leer datos desde Firebase
+
         binding.btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(!binding.txtMensaje.getText().toString().isEmpty()){
-                    String userEmail = PreferencesHelper.getUserId("email", "");
-                    String userid = PreferencesHelper.getUserId("userId", "");
                     String currentDateTime = DateTimeHelper.getCurrentDateTime();
                     Log.d("Fecha y Hora Actual", currentDateTime);
 
@@ -59,7 +79,7 @@ public class SupportFragment extends Fragment {
                     //chatReference.push().setValue(message);
                     String messageId = chatReference.push().getKey(); // Generar una clave única
 
-                    chatReference.child(userid+"/"+messageId).setValue(message);
+                    chatReference.child(messageId).setValue(message);
 
                     binding.txtMensaje.setText("");
                 }else{
@@ -71,17 +91,26 @@ public class SupportFragment extends Fragment {
         });
 
 
-        // Dentro de tu actividad o fragmento
         chatReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot snapshot) {
+
+
+
+
                 // Itera sobre los mensajes y actualiza tu interfaz de usuario
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    //Message message = snapshot.getValue(Message.class);
-
-
-                   Log.v("mensaje recivido", snapshot.toString());
+                for (DataSnapshot chatSnapshot : snapshot.getChildren()){
+                    var fecha =  chatSnapshot.child("fecha").getValue().toString();
+                    var mensaje =  chatSnapshot.child("mensaje").getValue().toString();
+                    var user =  chatSnapshot.child("user").getValue().toString();
+                    Message message = new Message(mensaje,user,fecha);
+                    if (message != null) {
+                        messageList.add(message);
+                    }
                 }
+
+                messageAdapter = new MessageAdapter(getActivity(),messageList);
+                binding.rvMensajes.setAdapter(messageAdapter);
             }
 
             @Override
@@ -99,5 +128,7 @@ public class SupportFragment extends Fragment {
                 .setTitleText("Required fields")
                 .show();
     }
+
+
 
 }
