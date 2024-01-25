@@ -94,10 +94,7 @@ public class SupportFragment extends Fragment {
         chatReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-
-
-
-
+                messageList.clear();
                 // Itera sobre los mensajes y actualiza tu interfaz de usuario
                 for (DataSnapshot chatSnapshot : snapshot.getChildren()){
                     var fecha =  chatSnapshot.child("fecha").getValue().toString();
