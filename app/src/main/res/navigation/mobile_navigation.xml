@@ -114,4 +114,16 @@
         android:name="com.cb.witfactory.ui.perfil.EditProfileDetailsFragment"
         android:label="@string/txt_dispositive"
         tools:layout="@layout/fragment_edit_profile_details" />
+
+    <fragment
+        android:id="@+id/fragment_ping"
+        android:name="com.cb.witfactory.ui.perfil.PinFragment"
+        android:label="@string/txt_dispositive"
+        tools:layout="@layout/fragment_pin" />
+
+    <fragment
+        android:id="@+id/fragment_pass"
+        android:name="com.cb.witfactory.ui.perfil.PasswordFragment"
+        android:label="@string/txt_dispositive"
+        tools:layout="@layout/fragment_password" />
 </navigation>

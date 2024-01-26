@@ -47,7 +47,10 @@ public class GetUserResponse {
     @SerializedName("id")
     private String id;
 
-    public GetUserResponse(String city, String country, String zip_code, String device_id, String address, String email, String suite, String user, String user_principal, String telephone, String account_type, String id, String first_name, String last_name) {
+    @SerializedName("pin")
+    private String pin;
+
+    public GetUserResponse(String city, String country, String zip_code, String device_id, String address, String email, String suite, String user, String user_principal, String telephone, String account_type, String id, String first_name, String last_name, String pin) {
         this.city = city;
         this.country = country;
         this.zip_code = zip_code;
@@ -62,6 +65,7 @@ public class GetUserResponse {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
+        this.pin = pin;
     }
 
     public String getCity() {
@@ -174,5 +178,13 @@ public class GetUserResponse {
 
     public String getLastName() {
         return last_name;
+    }
+
+    public void setPin(String pin) {
+        this.pin = pin;
+    }
+
+    public String getPin() {
+        return pin;
     }
 }

@@ -1,9 +1,15 @@
 package com.cb.witfactory.ui.perfil;
 
+import static org.bouncycastle.asn1.x500.style.RFC4519Style.o;
+
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,50 +18,48 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import com.cb.witfactory.R;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.viewmodel.CreationExtras;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.cb.witfactory.R;
 import com.cb.witfactory.data.retrofit.user.ObjectResponseUser;
 import com.cb.witfactory.data.retrofit.user.UpdateUserResponse;
 import com.cb.witfactory.data.retrofit.user.keyUserResponse;
-import com.cb.witfactory.databinding.FragmentPasswordBinding;
+import com.cb.witfactory.databinding.FragmentEditProfileBinding;
 import com.cb.witfactory.databinding.FragmentPinBinding;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.PreferencesHelper;
 import com.cb.witfactory.ui.home.HomeViewModel;
 import com.cb.witfactory.ui.home.UserIdHolder;
-import com.cb.witfactory.view.ResetPassWordActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class PasswordFragment extends Fragment implements Callfun {
-    private @NonNull FragmentPasswordBinding binding;
+public class PinFragment extends Fragment implements Callfun {
+    private FragmentPinBinding binding;
     private boolean isEyeIconLongPressed = false;
     private final Handler handler = new Handler();
     private static final int LONG_PRESS_TIMEOUT = 300;
     private EditProfileViewModel mViewModel;
     private HomeViewModel homeViewModel;
     private String serverPin;
-    @NonNull
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_password, container, false);
-        binding = FragmentPasswordBinding.inflate(inflater, container, false);
+        View view = inflater.inflate(R.layout.fragment_pin, container, false);
+        binding = FragmentPinBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        TextInputLayout textInputLayout1 = view.findViewById(R.id.txtCurrentPassLayout);
+        TextInputLayout textInputLayout1 = view.findViewById(R.id.txtCurrentPinLayout);
         TextView txtError2 = view.findViewById(R.id.txtError2);
         TextView txtError3 = view.findViewById(R.id.txtError3);
 
-        TextInputLayout textInputLayout2 = view.findViewById(R.id.txtNewPassLayout);
-        EditText editText2 = view.findViewById(R.id.new_pass);
+        TextInputLayout textInputLayout2 = view.findViewById(R.id.txtNewPinLayout);
+        EditText editText2 = view.findViewById(R.id.new_pin);
 
-        TextInputLayout textInputLayout3 = view.findViewById(R.id.txtRepeatPassLayout);
-        EditText editText3 = view.findViewById(R.id.repeat_new_pass);
-        TextInputEditText editText1 = view.findViewById(R.id.txtCurrentPass);
+        TextInputLayout textInputLayout3 = view.findViewById(R.id.txtRepeatPinLayout);
+        EditText editText3 = view.findViewById(R.id.repeat_new_pin);
+        TextInputEditText editText1 = view.findViewById(R.id.txtCurrentPin);
         TextView txtError = view.findViewById(R.id.txtError);
         setupEyeIconLogic(textInputLayout1, editText1);
         setupEyeIconLogic(textInputLayout2, editText2);
@@ -78,11 +82,6 @@ public class PasswordFragment extends Fragment implements Callfun {
             } else {
                 txtError.setText(getString(R.string.error_pins_do_not_match));
             }
-        });
-
-        binding.lblChangePass.setOnClickListener(view12 -> {
-            Intent intent = new Intent(getActivity(), ResetPassWordActivity.class);
-            startActivity(intent);
         });
 
         view.findViewById(R.id.btnSave).setOnClickListener(v -> {
@@ -133,7 +132,7 @@ public class PasswordFragment extends Fragment implements Callfun {
         keyUserResponse key = new keyUserResponse(user_aws);
         key.setId(user_aws);
         updateUserRequest.setKey(key);
-        updateUserRequest.setPin(binding.newPass.getText().toString());
+        updateUserRequest.setPin(binding.newPin.getText().toString());
         mViewModel.updateUser(updateUserRequest);
         navigateToEditProfileDetailsFragment();
     }
@@ -157,9 +156,8 @@ public class PasswordFragment extends Fragment implements Callfun {
         }
     }
 
-
+    @Override
     public void onError(String s) {
 
     }
-
 }
