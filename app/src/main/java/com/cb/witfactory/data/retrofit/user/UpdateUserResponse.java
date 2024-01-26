@@ -37,6 +37,9 @@ public class UpdateUserResponse {
     @SerializedName("appos")
     private String appos;
 
+    @SerializedName("pin")
+    private String pin;
+
 
     public UpdateUserResponse() {
         this.address = address;
@@ -137,5 +140,13 @@ public class UpdateUserResponse {
 
     public void setAppos(String appos) {
         this.appos = appos;
+    }
+
+    public void setPin(String pin) {
+        this.pin = pin;
+    }
+
+    public String getPin() {
+        return pin;
     }
 }

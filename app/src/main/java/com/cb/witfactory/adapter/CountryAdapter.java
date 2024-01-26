@@ -37,14 +37,12 @@ public class CountryAdapter extends ArrayAdapter<CountryCapitals> implements Fil
                 suggestions.addAll(countryListFull);  // Sin filtro, mostrar la lista completa
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
-
                 for (CountryCapitals country : countryListFull) {
                     if (country.getName().toLowerCase().contains(filterPattern)) {
                         suggestions.add(country);
                     }
                 }
             }
-
             results.values = suggestions;
             results.count = suggestions.size();
             return results;
@@ -52,7 +50,7 @@ public class CountryAdapter extends ArrayAdapter<CountryCapitals> implements Fil
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            clear();  // Limpiar la lista actual
+            clear(); // Limpiar la lista actual
             addAll((List) results.values);  // Agregar los resultados filtrados
             notifyDataSetChanged();  // Notificar cambios en la vista
         }

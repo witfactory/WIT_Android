@@ -71,6 +71,12 @@
     <string name="email">Email</string>
     <string name="confirm_email">Confirm Email</string>
     <string name="security_pin">Password</string>
+    <string name="current_pin" translatable="false">Current pin</string>
+    <string name="current_pass" translatable="false">Current password</string>
+    <string name="your_new_pin" translatable="false">Indicate your new pin</string>
+    <string name="your_new_pass" translatable="false">Indicate your new password</string>
+    <string name="repeat_new_pin" translatable="false">Repeat your new pin</string>
+    <string name="repeat_new_pass" translatable="false">Repeat your new password</string>
     <string name="confirm_security_pin">Confirm password</string>
     <string name="next">NEXT</string>
     <string name="hint_cell_phone_number">( X X X - X X X X X X )</string>
@@ -89,6 +95,10 @@
     <string name="text_english">English</string>
     <string name="text_name_and_last_name">Names and surnames</string>
     <string name="text_code_postcard">Cod. Postcard</string>
+    <string name="back" translatable="false">Back</string>
+    <string name="save" translatable="false">Save</string>
+    <string name="error_current_pin_incorrect" translatable="false">El PIN actual es incorrecto</string>
+    <string name="error_pins_do_not_match" translatable="false">Error pins do not match</string>
     <string name="text_to_return">Return</string>
     <string name="text_set_the_language">Set the language</string>
     <string name="text_activate_child_safety">Activate child \n safety</string>
@@ -215,6 +225,8 @@
     <string name="invalid_email">Invalid email</string>
     <string name="invalid_password">Invalid password</string>
     <string name="change_pin">Change pin</string>
+    <string name="forgot_pin" translatable="false">I forgot my pin</string>
+    <string name="forgot_pass" translatable="false">I forgot my password</string>
     <string name="nota_update_user">NOTE: you have children at home, you can activate child Lock and <b>create a security pin</b> of <b>4 digits</b> for your WIT application.</string>
     <string name="change_password">Change password</string>
     <string name="forgot_password" translatable="false">I forgot my password</string>
