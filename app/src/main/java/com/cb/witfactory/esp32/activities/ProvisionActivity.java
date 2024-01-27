@@ -119,8 +119,8 @@ public class ProvisionActivity extends AppCompatActivity {
             provisionManager.getEspDevice().disconnectDevice();
 
             Intent wifiListIntent = new Intent(getApplicationContext(), CreateDeviceActivity.class);
-            wifiListIntent.putExtras(getIntent());
-            startActivity(wifiListIntent);
+                        wifiListIntent.putExtras(getIntent());
+                        startActivity(wifiListIntent);
 
             //validar redirecion intent
             finish();
