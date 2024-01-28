@@ -66,12 +66,12 @@
 
                 <TextView
                     android:id="@+id/txtError"
-                    android:layout_width="wrap_content"
-                    android:layout_height="2dp"
-                    android:text=""
-                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_width="match_parent"
+                    android:layout_height="14dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/sp8"
+                    android:text=""
+                    android:textColor="@android:color/holo_red_dark"
                     android:textSize="@dimen/sp10" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -101,12 +101,12 @@
 
                 <TextView
                     android:id="@+id/txtError2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="2dp"
-                    android:text=""
-                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_width="match_parent"
+                    android:layout_height="14dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/sp8"
+                    android:text=""
+                    android:textColor="@android:color/holo_red_dark"
                     android:textSize="@dimen/sp10" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -135,13 +135,13 @@
 
                 <TextView
                     android:id="@+id/txtError3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="2dp"
-                    android:text=""
-                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_width="match_parent"
+                    android:layout_height="14dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/sp8"
-                    android:textSize="@dimen/sp10" />
+                    android:text=""
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="@dimen/sp10"  />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -197,14 +197,14 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnBack"
+                    android:id="@+id/btn_back"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/sp10"
                     android:layout_weight="1"
-                    android:background="@drawable/button_border"
-                    android:text="@string/back"
-                    android:textColor="#01478D"
+                    android:background="@drawable/ic_btn_activo"
+                    android:text="@string/text_to_return"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatButton
