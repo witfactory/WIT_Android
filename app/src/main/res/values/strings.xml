@@ -98,7 +98,8 @@
     <string name="back" translatable="false">Back</string>
     <string name="save" translatable="false">Save</string>
     <string name="error_current_pin_incorrect" translatable="false">El PIN actual es incorrecto</string>
-    <string name="error_pins_do_not_match" translatable="false">Error pins do not match</string>
+    <string name="error_pins_do_not_match" translatable="false">Pins do not match</string>
+    <string name="does_not_match_current_pin" translatable="false">Does not match your current pin</string>
     <string name="text_to_return">Return</string>
     <string name="text_set_the_language">Set the language</string>
     <string name="text_activate_child_safety">Activate child \n safety</string>

@@ -76,7 +76,6 @@ public class EditProfileFragment extends Fragment implements Callfun {
         SwitchMaterial switchMaterial = root.findViewById(R.id.control_parental);
         Button btnPing = root.findViewById(R.id.btn_ping);
         switchMaterial.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            // Cambia la visibilidad del botón según el estado del SwitchMaterial
             btnPing.setVisibility(isChecked ? View.VISIBLE : View.GONE);
         });
 
