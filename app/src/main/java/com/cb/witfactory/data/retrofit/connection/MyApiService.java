@@ -34,8 +34,7 @@ public interface MyApiService {
 
     @GET("device")
     Call<ObjectResponseDevice> getDevice(
-            @Query("user_id") String user_id,
-            @Query("device_type") String device_type
+            @Query("user_id") String user_id
     );
 
 

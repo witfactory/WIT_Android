@@ -14,6 +14,12 @@ public class DeviceResponse {
     @SerializedName("device_id")
     private String device_id;
 
+    @SerializedName("buzzer")
+    private Boolean buzzer;
+
+    @SerializedName("online")
+    private Boolean online;
+
     @SerializedName("device_name")
     private String device_name;
 
@@ -44,10 +50,12 @@ public class DeviceResponse {
     @SerializedName("description_location")
     private String description_location;
 
-    public DeviceResponse(String date_entered, String lon, String device_id, String device_name, String mac, String date_modified, String user_id, String deleted, String device_location, String device_serial, String device_type, String lat, String description_location) {
+    public DeviceResponse(String date_entered, String lon, String device_id, Boolean buzzer,Boolean online,String device_name, String mac, String date_modified, String user_id, String deleted, String device_location, String device_serial, String device_type, String lat, String description_location) {
         this.date_entered = date_entered;
         this.lon = lon;
         this.device_id = device_id;
+        this.buzzer = buzzer;
+        this.online = online;
         this.device_name = device_name;
         this.mac = mac;
         this.date_modified = date_modified;
@@ -82,6 +90,23 @@ public class DeviceResponse {
 
     public void setDevice_id(String device_id) {
         this.device_id = device_id;
+    }
+
+    public Boolean getBuzzer() {
+        return buzzer;
+    }
+
+    public void setBuzzer(Boolean buzzer) {
+        this.buzzer = buzzer;
+    }
+
+
+    public Boolean getOnline() {
+        return online;
+    }
+
+    public void setOnline(Boolean online) {
+        this.online = online;
     }
 
     public String getDevice_name() {

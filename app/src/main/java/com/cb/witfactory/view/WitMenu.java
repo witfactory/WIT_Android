@@ -45,13 +45,14 @@ public class WitMenu extends AppCompatActivity implements Callfun {
         amplifyCognito = new AmplifyCognito(getApplicationContext());
         amplifyCognito.setListener(WitMenu.this);
 
+        binding.appBarLoginMenu.fab.setVisibility(View.VISIBLE);
+
 
 
         binding.appBarLoginMenu.addDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utils.goToDevice(getApplicationContext());
-                Utils.goToDevice(getApplicationContext());
+                Utils.goToQR(getApplicationContext());
             }
         });
 

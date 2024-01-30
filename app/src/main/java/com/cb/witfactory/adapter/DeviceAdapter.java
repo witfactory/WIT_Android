@@ -126,6 +126,22 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
         }
 
 
+        if(device.getBuzzer() != null) {
+            if (device.getBuzzer()) {
+                holder.check_state.setChecked(true);
+            } else {
+                holder.check_state.setChecked(true);
+            }
+
+        }
+
+        if(device.getOnline() != null) {
+            if (device.getOnline()) {
+                holder.img_wifi.setBackgroundResource(R.drawable.ic_wifi_on);
+            } else {
+                holder.img_wifi.setBackgroundResource(R.drawable.ic_wifi_of);
+            }
+        }
 
         holder.check_state.setOnClickListener(new View.OnClickListener() {
             @Override

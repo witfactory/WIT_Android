@@ -2,6 +2,7 @@ package com.cb.witfactory.esp32.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.cb.witfactory.R;
@@ -28,6 +29,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;;
 import android.os.Vibrator;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -316,24 +318,24 @@ public class AddDeviceActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(AddDeviceActivity.this, new
                         String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
 
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+
             } else {
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-
-                    if (ActivityCompat.checkSelfPermission(AddDeviceActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                            || ActivityCompat.checkSelfPermission(AddDeviceActivity.this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED
-                            || ActivityCompat.checkSelfPermission(AddDeviceActivity.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-
-                        ActivityCompat.requestPermissions(AddDeviceActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                                Manifest.permission.BLUETOOTH_SCAN,
-                                Manifest.permission.BLUETOOTH_CONNECT}, REQUEST_ACCESS_FINE_LOCATION);
-                    }
-                } else {
                     if (ActivityCompat.checkSelfPermission(AddDeviceActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         ActivityCompat.requestPermissions(AddDeviceActivity.this, new
                                 String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_ACCESS_FINE_LOCATION);
+
+                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", getPackageName(), null);
+                        intent.setData(uri);
+                        startActivity(intent);
+
                     }
-                }
+
             }
         }
     };
@@ -653,6 +655,14 @@ public class AddDeviceActivity extends AppCompatActivity {
 
         } else {
 
+            if (isSecure) {
+                provisionManager.createESPDevice(ESPConstants.TransportType.TRANSPORT_SOFTAP, ESPConstants.SecurityType.SECURITY_2);
+            } else {
+                provisionManager.createESPDevice(ESPConstants.TransportType.TRANSPORT_SOFTAP, ESPConstants.SecurityType.SECURITY_0);
+            }
+
+            /*
+
             final String[] deviceTypes = {"SoftAP"};
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(true);
@@ -691,6 +701,7 @@ public class AddDeviceActivity extends AppCompatActivity {
                 }
             });
             builder.show();
+            */
         }
     }
 
@@ -850,4 +861,24 @@ public class AddDeviceActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
+    public static void showGpsSettingsDialog(final Context context) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("El GPS está desactivado. ¿Quieres activarlo?")
+                .setCancelable(false)
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        context.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+
 }

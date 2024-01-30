@@ -80,6 +80,7 @@
                    android:textSize="15sp"
                    android:gravity="center"
                    android:clickable="true"
+                   android:visibility="gone"
                    android:layout_weight="1"/>
 
 

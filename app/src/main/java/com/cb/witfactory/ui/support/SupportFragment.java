@@ -23,6 +23,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -108,6 +110,17 @@ public class SupportFragment extends Fragment {
                     }
                 }
 
+
+
+                // Ordenar el ArrayList por fecha
+                Collections.sort(messageList, new Comparator<Message>() {
+                    @Override
+                    public int compare(Message m1, Message m2) {
+                        // Comparar las fechas, si se desea en orden ascendente
+                        return m1.getFecha().compareTo(m2.getFecha());
+                        // Si se desea en orden descendente, puedes cambiarlo a m2.compareTo(m1)
+                    }
+                });
                 messageAdapter = new MessageAdapter(getActivity(),messageList);
                 binding.rvMensajes.setAdapter(messageAdapter);
             }

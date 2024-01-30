@@ -36,7 +36,7 @@ public class DeviceViewModel extends ViewModel {
     private static Callfun listener;
     public void getDataDevice(String user_id,String device_type) {
         try {
-            final Call<ObjectResponseDevice> obj = ApiConecxion.getApiService().getDevice(user_id, device_type);
+            final Call<ObjectResponseDevice> obj = ApiConecxion.getApiService().getDevice(user_id);
             obj.enqueue(new Callback<ObjectResponseDevice>() {
                 @Override
                 public void onResponse(Call<ObjectResponseDevice> call, Response<ObjectResponseDevice> response) {
