@@ -45,7 +45,7 @@ public class WitMenu extends AppCompatActivity implements Callfun {
         amplifyCognito = new AmplifyCognito(getApplicationContext());
         amplifyCognito.setListener(WitMenu.this);
 
-        binding.appBarLoginMenu.fab.setVisibility(View.VISIBLE);
+
 
 
 
@@ -150,6 +150,12 @@ public class WitMenu extends AppCompatActivity implements Callfun {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        binding.appBarLoginMenu.fab.setVisibility(View.VISIBLE);
     }
 
     @Override

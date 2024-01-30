@@ -267,8 +267,7 @@ public class AddDeviceActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            String deviceType = sharedPreferences.getString(AppConstants.KEY_DEVICE_TYPES, AppConstants.DEVICE_TYPE_DEFAULT);
-
+            String deviceType = "softap";
             if (deviceType.equals(AppConstants.DEVICE_TYPE_BLE) || deviceType.equals(AppConstants.DEVICE_TYPE_BOTH)) {
 
                 final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
@@ -627,7 +626,7 @@ public class AddDeviceActivity extends AppCompatActivity {
 
     private void startProvisioningFlow() {
 
-        String deviceType = sharedPreferences.getString(AppConstants.KEY_DEVICE_TYPES, AppConstants.DEVICE_TYPE_DEFAULT);
+        String deviceType = "softap";//sharedPreferences.getString(AppConstants.KEY_DEVICE_TYPES, AppConstants.DEVICE_TYPE_DEFAULT);
         final boolean isSecure = sharedPreferences.getBoolean(AppConstants.KEY_SECURITY_TYPE, true);
         Log.d(TAG, "Device Types : " + deviceType);
         int securityType = AppConstants.SEC_TYPE_0;
