@@ -635,16 +635,7 @@ public class AddDeviceActivity extends AppCompatActivity {
             securityType = AppConstants.SEC_TYPE_DEFAULT;
         }
 
-        if (deviceType.equals(AppConstants.DEVICE_TYPE_BLE)) {
-
-            if (isSecure) {
-                provisionManager.createESPDevice(ESPConstants.TransportType.TRANSPORT_BLE, ESPConstants.SecurityType.SECURITY_2);
-            } else {
-                provisionManager.createESPDevice(ESPConstants.TransportType.TRANSPORT_BLE, ESPConstants.SecurityType.SECURITY_0);
-            }
-            goToBLEProvisionLandingActivity(securityType);
-
-        } else if (deviceType.equals(AppConstants.DEVICE_TYPE_SOFTAP)) {
+        if (deviceType.equals(AppConstants.DEVICE_TYPE_SOFTAP)) {
 
             if (isSecure) {
                 provisionManager.createESPDevice(ESPConstants.TransportType.TRANSPORT_SOFTAP, ESPConstants.SecurityType.SECURITY_2);
