@@ -51,6 +51,13 @@ public class ProvisionLanding extends ManualProvBaseActivity {
         deviceName = getIntent().getStringExtra(AppConstants.KEY_DEVICE_NAME);
         pop = getIntent().getStringExtra(AppConstants.KEY_PROOF_OF_POSSESSION);
         initViews();
+
+        if (deviceName == null) {
+
+            startActivityForResult(new Intent(Settings.ACTION_WIFI_SETTINGS), WIFI_SETTINGS_ACTIVITY_REQUEST);
+
+
+        }
     }
 
     @Override
