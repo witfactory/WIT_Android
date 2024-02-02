@@ -35,8 +35,13 @@ public class CreateDevice {
     @SerializedName("description_location")
     private String description_location;
 
+    @SerializedName("buzzer")
+    private Boolean buzzer;
 
-    public CreateDevice(String device_name, String device_id, String device_serial, String lat, String lon, String user_id, String mac, String device_location, String device_type, String description_location) {
+    @SerializedName("online")
+    private Boolean online;
+
+    public CreateDevice(String device_name, String device_id, String device_serial, String lat, String lon, String user_id, String mac, String device_location, String device_type, String description_location, Boolean buzzer, Boolean online) {
         this.device_name = device_name;
         this.device_id = device_id;
         this.device_serial = device_serial;
@@ -47,6 +52,8 @@ public class CreateDevice {
         this.device_location = device_location;
         this.device_type = device_type;
         this.description_location = description_location;
+        this.buzzer = buzzer;
+        this.online = online;
     }
 
     public String getDevice_name() {
@@ -127,6 +134,22 @@ public class CreateDevice {
 
     public void setDescription_location(String description_location) {
         this.description_location = description_location;
+    }
+
+    public Boolean getBuzzer() {
+        return buzzer;
+    }
+
+    public void setBuzzer(Boolean buzzer) {
+        this.buzzer = buzzer;
+    }
+
+    public Boolean getOnline() {
+        return online;
+    }
+
+    public void setOnline(Boolean online) {
+        this.online = online;
     }
 }
 
