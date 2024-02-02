@@ -52,7 +52,7 @@ public interface MyApiService {
             );
 
 
-    @POST("create")
+    @POST("device/create")
     Call<CreateDeviceResponse> createDevice(@Body CreateDevice createDevice);
 
     @POST("alarms")

@@ -119,8 +119,8 @@ public class ProvisionActivity extends AppCompatActivity {
             provisionManager.getEspDevice().disconnectDevice();
 
             Intent wifiListIntent = new Intent(getApplicationContext(), CreateDeviceActivity.class);
-                        wifiListIntent.putExtras(getIntent());
-                        startActivity(wifiListIntent);
+            wifiListIntent.putExtras(getIntent());
+            startActivity(wifiListIntent);
 
             //validar redirecion intent
             finish();
@@ -351,6 +351,9 @@ public class ProvisionActivity extends AppCompatActivity {
             @Override
             public void onSuccess(byte[] returnData) {
                 byte[] decryptedData2 = returnData;
+                Log.v("exitoso: ", decryptedData2.toString());
+
+
                 Log.v("exitoso: ", decryptedData2.toString());
 
 
