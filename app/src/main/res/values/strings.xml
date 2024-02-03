@@ -21,7 +21,7 @@
     <string name="ingresoFallido"><b>Failed login</b></string>
     <string name="ingresoFallidoDescrip">Your data does not seem to be correct. Check your data and/or
         your internet access</string>
-    <string name="registrarse">Check in</string>
+    <string name="registrarse">Register</string>
     <string name="recuperear_contraseña">Recover password</string>
     <string name="silenciar">Mute</string>
     <string name="valvula">Valve</string>
@@ -81,8 +81,8 @@
     <string name="next">NEXT</string>
     <string name="hint_cell_phone_number">( X X X - X X X X X X )</string>
     <string name="txt_Welcome">Welcome</string>
-    <string name="txt_Wit"> WIT</string>
-    <string name="txt_Log_in">Log in</string>
+    <string name="txt_Wit"> W I T</string>
+    <string name="txt_Log_in">Login</string>
     <string name="txt_name_user">Name User</string>
     <string name="txt_actual_pass" translatable="false">Actual Password</string>
     <string name="txt_indicate_your_new_password" translatable="false">Indicate your new password</string>
