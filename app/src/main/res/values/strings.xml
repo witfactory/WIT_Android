@@ -81,7 +81,7 @@
     <string name="next">NEXT</string>
     <string name="hint_cell_phone_number">( X X X - X X X X X X )</string>
     <string name="txt_Welcome">Welcome</string>
-    <string name="txt_Wit"> WIT</string>
+    <string name="txt_Wit"> W I T</string>
     <string name="txt_Log_in">Login</string>
     <string name="txt_name_user">Name User</string>
     <string name="txt_actual_pass" translatable="false">Actual Password</string>
