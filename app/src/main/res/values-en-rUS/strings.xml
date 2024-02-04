@@ -78,9 +78,9 @@
     <string name="txt_Wit"> WIT</string>
     <string name="txt_Log_in">Login</string>
     <string name="txt_name_user">Name User</string>
-    <string name="save_session_data">Save session data</string>
+    <string name="save_session_data">Save data</string>
     <string name="set_face_id">Set FaceID</string>
-    <string name="i_forgot_my_data">I forgot my data</string>
+    <string name="i_forgot_my_data">Forgot my data</string>
     <string name="text_register_user">Register User</string>
     <string name="text_spanish">Spanish</string>
     <string name="text_english">English</string>

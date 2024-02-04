@@ -77,6 +77,10 @@
                         android:textColor="@color/background"
                         android:textSize="@dimen/sp20" />
 
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -84,14 +88,15 @@
                         android:orientation="vertical">
 
                         <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            style="@style/Widget.App.TextInputLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/email"
                             android:paddingBottom="@dimen/sp10"
                             android:textColorHint="@color/text_login"
                             app:boxStrokeColor="@color/dark_greenish_blue"
-                            app:endIconMode="custom">
+                            app:endIconMode="custom"
+                            app:endIconDrawable="@drawable/ic_user">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/txt_name_user"
@@ -105,8 +110,7 @@
 
 
                         <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
+                            style="@style/Widget.App.TextInputLayout"                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/security_pin"
                             android:paddingBottom="@dimen/sp10"
@@ -149,8 +153,6 @@
                                     android:text="@string/save_session_data"
                                     android:textColor="@color/background" />
 
-
-
                             </LinearLayout>
 
                             <LinearLayout
@@ -186,7 +188,7 @@
                             android:background="@drawable/ic_btn_inactivo"
                             android:text="@string/txt_Log_in"
                             android:textColor="@color/white"
-                            android:textStyle="bold" />
+                            android:textAllCaps="false"/>
 
 
                         <TextView
