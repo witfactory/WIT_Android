@@ -6,4 +6,19 @@
         <item name="boxStrokeColor">#000000</item>
         <item name="boxStrokeWidthFocused">@dimen/sp23</item>
     </style>
+    <style name="AppTheme.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxBackgroundMode">none</item>
+        <item name="boxStrokeColor">@color/dark_greenish_blue</item>
+        <item name="boxStrokeWidthFocused">@dimen/sp25</item>
+        <item name="hintTextAppearance">@style/AppTheme.HintTextAppearance</item>
+    </style>
+
+    <style name="AppTheme.HintTextAppearance" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">@dimen/sp10</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:paddingStart">@dimen/sp10</item>
+    </style>
+
 </resources>

@@ -55,12 +55,15 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="@dimen/sp90"
-                        android:layout_height="@dimen/sp90"
+                        android:layout_width="@dimen/sp170"
+                        android:layout_height="@dimen/sp100"
                         android:layout_gravity="center"
                         android:background="@drawable/ic_logo" />
                 </LinearLayout>
 
+                <android.widget.Space
+                    android:layout_width="@dimen/sp5"
+                    android:layout_height="@dimen/sp10" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -81,9 +84,12 @@
                         android:gravity="center"
                         android:orientation="vertical">
 
+                        <android.widget.Space
+                            android:layout_width="@dimen/sp5"
+                            android:layout_height="@dimen/sp80" />
+
                         <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
+                            style="@style/AppTheme.TextInputLayout"                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/email"
                             android:layoutDirection="rtl"
@@ -108,11 +114,12 @@
                             android:id="@+id/btn_sign_up"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/sp100"
+                            android:layout_marginTop="@dimen/sp80"
                             android:background="@drawable/ic_btn_inactivo"
                             android:text="@string/send_information"
                             android:textColor="@color/white"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:textAllCaps="false"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -120,18 +127,9 @@
                             android:gravity="center"
                             android:text="@string/write_your_email_correctly"
                             android:textColor="@color/background" />
-
-
                     </LinearLayout>
                 </LinearLayout>
-
-
             </LinearLayout>
-
-
         </RelativeLayout>
-
-
     </RelativeLayout>
-
 </layout>

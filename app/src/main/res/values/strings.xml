@@ -68,7 +68,7 @@
     <string name="date_birth">Date of birth</string>
     <string name="gender">Gender</string>
     <string name="set_up_your_account"><b>Set up your account</b></string>
-    <string name="email">Email</string>
+    <string name="email">email</string>
     <string name="confirm_email">Confirm Email</string>
     <string name="security_pin">Password</string>
     <string name="current_pin" translatable="false">Current pin</string>
@@ -110,11 +110,10 @@
     <string name="txtto_finalize">Finalize</string>
     <string name="phone_number">Phone Number</string>
     <string name="txt_validation_mail">We have sent a code to your email n, <b>verify your account</b> and enjoy the benefits of WIT</string>
-    <string name="send_information">Send Information</string>
-    <string name="write_your_email_correctly">Make <b>sure you </b>type your email correctly. We will send the information you need to recover your account</string>
+    <string name="send_information">Submit Information</string>
+    <string name="write_your_email_correctly">Make <b>sure your </b>enter your email correctly. We will send a link to your email for account recovery.</string>
     <string name="connect_dispositive">Connect</string>
     <string name="txt_dispositive">Dispositive</string>
-
     <string name="txt_connect_device">Connect device</string>
     <string name="txt_be_sure_to_keep_your_wi_fi_network_connected" tools:ignore="DuplicateDefinition">Be sure to keep your Wi-Fi network connected and carefully follow the <font color="#23ADC6"> connection instructions.</font></string>
     <string name="txt_Product">Producto</string>

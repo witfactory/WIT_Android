@@ -57,24 +57,27 @@ public class LoginActivity extends AppCompatActivity implements Callfun {
         amplifyCognito = new AmplifyCognito(getApplicationContext());
         amplifyCognito.setListener(LoginActivity.this);
 
-
         getToken();
         loadData();
 
-
-        // Obtener los datos enviados a través de putExtra
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String titulo = extras.getString("titulo");
             String detalle = extras.getString("detalle");
 
-            // Utilizar el valor recibido
             if (titulo != null && detalle != null) {
 
                 Log.d("DestinoActivity", "titulo recibido: " + titulo);
                 Toast.makeText(getApplicationContext(), titulo + " : " + detalle, Toast.LENGTH_SHORT).show();
             }
         }
+
+        binding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         binding.btnEs.setOnClickListener(new View.OnClickListener() {
             @Override
