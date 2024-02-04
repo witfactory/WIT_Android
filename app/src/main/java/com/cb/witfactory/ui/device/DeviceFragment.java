@@ -137,7 +137,15 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getActivity(),"silenced devices", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),"silence sensor", Toast.LENGTH_LONG).show();
+
+                }
+            });
+        } if(s.equals("alarmaokV")){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getActivity(),"close valve", Toast.LENGTH_LONG).show();
 
                 }
             });

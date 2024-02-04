@@ -60,4 +60,10 @@ public interface MyApiService {
             @Body ArrayList<Alarm> alarms
     );
 
+
+    @POST("valvula")
+    Call<ObjectResponseAlarm> setValvula(
+            @Body ArrayList<Alarm> alarms
+    );
+
 }

@@ -146,13 +146,28 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
         holder.check_state.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context.getApplicationContext(), device.getDevice_id(), Toast.LENGTH_LONG).show();
-                ArrayList<Alarm> alarms = new ArrayList<>();
-                String userEmail = PreferencesHelper.getEmail("email", "");
-                Alarm alarm = new Alarm(device.getDevice_id(),userEmail);
-                alarms.add(alarm);
 
-                deviceViewModel.setAlarm(alarms);
+                if(device.getDevice_type()=="S"){
+
+                    Toast.makeText(context.getApplicationContext(), device.getDevice_id(), Toast.LENGTH_LONG).show();
+                    ArrayList<Alarm> alarms = new ArrayList<>();
+                    String userEmail = PreferencesHelper.getEmail("email", "");
+                    Alarm alarm = new Alarm(device.getDevice_id(),userEmail);
+                    alarms.add(alarm);
+
+                    deviceViewModel.setAlarm(alarms);
+                }
+
+                if(device.getDevice_type()=="V"){
+                    Toast.makeText(context.getApplicationContext(), device.getDevice_id(), Toast.LENGTH_LONG).show();
+                    ArrayList<Alarm> alarms = new ArrayList<>();
+                    String userEmail = PreferencesHelper.getEmail("email", "");
+                    Alarm alarm = new Alarm(device.getDevice_id(),userEmail);
+                    alarms.add(alarm);
+
+                    deviceViewModel.setValvula(alarms);
+
+                }
             }
         });
 

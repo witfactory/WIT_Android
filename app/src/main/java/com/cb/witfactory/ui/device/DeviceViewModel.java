@@ -177,6 +177,30 @@ public class DeviceViewModel extends ViewModel {
         }
     }
 
+    public void setValvula(ArrayList<Alarm> alarms) {
+        try {
+
+            final Call<ObjectResponseAlarm> obj = ApiConecxion.getApiService().setValvula(alarms);
+            obj.enqueue(new Callback<ObjectResponseAlarm>() {
+
+                @Override
+                public void onResponse(Call<ObjectResponseAlarm> call, Response<ObjectResponseAlarm> response) {
+                    listener.onSuccess("alarmaokV");
+
+                }
+
+                @Override
+                public void onFailure(Call<ObjectResponseAlarm> call, Throwable t) {
+                    listener.onError("alarmaerror");
+                }
+            });
+
+        } catch (Exception exception) {
+            Log.v("Error", exception.getMessage());
+        }
+    }
+
+
     public void setListener(Callfun listener) {
         this.listener = listener;
     }
