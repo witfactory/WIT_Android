@@ -75,21 +75,11 @@ public class EditProfileFragment extends Fragment implements Callfun {
         preferencesHelper = new PreferencesHelper(getContext());
         SwitchMaterial switchMaterial = root.findViewById(R.id.control_parental);
         Button btnPing = root.findViewById(R.id.btn_ping);
-        switchMaterial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // Cambia la visibilidad del botón según el estado del SwitchMaterial
-                btnPing.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-            }
+        switchMaterial.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            btnPing.setVisibility(isChecked ? View.VISIBLE : View.GONE);
         });
 
-        btnPing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Abrir el nuevo Fragmento (PingFragment)
-                openPingFragment();
-            }
-        });
+        btnPing.setOnClickListener(view -> openPinFragment());
         mViewModel = new ViewModelProvider(this).get(EditProfileViewModel.class);
 
         binding.btnEdit2.setOnClickListener(new View.OnClickListener() {
@@ -102,26 +92,14 @@ public class EditProfileFragment extends Fragment implements Callfun {
         binding.lblChangePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), PasswordFragment.class);
-                startActivity(intent);
-            }
-        });
-        binding.lblChangePass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
                 try {
-                    FragmentManager fragmentManager = getParentFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.container_edit, new PasswordFragment());
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
+                    navigateToPasswordFragment();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
         AutoCompleteTextView autoCompleteTextView = root.findViewById(R.id.txt_country);
-        List<String> countryNames = new ArrayList<>();
 
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://countriesnow.space/api/v0.1/")
@@ -130,7 +108,7 @@ public class EditProfileFragment extends Fragment implements Callfun {
 
         CountryService countryService = retrofit.create(CountryService.class);
         Call<CountryResponse> call = countryService.getCountries();
-        call.enqueue(new Callback<CountryResponse>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<CountryResponse> call, Response<CountryResponse> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
@@ -144,19 +122,19 @@ public class EditProfileFragment extends Fragment implements Callfun {
                     CountryAdapter countryAdapter = new CountryAdapter(requireContext(), countries);
                     binding.txtCountry.setAdapter(countryAdapter);
 
-                    // Crear un ArrayAdapter y configurarlo en el AutoCompleteTextView (si aún lo necesitas)
+                    // Crear un ArrayAdapter y configurarlo en el AutoCompleteTextView
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(),
                             android.R.layout.simple_dropdown_item_1line, countryNames);
 
                     autoCompleteTextView.setAdapter(adapter);
                 } else {
-                    // Manejar errores
+                    // errores
                 }
             }
 
             @Override
             public void onFailure(Call<CountryResponse> call, Throwable t) {
-                // Manejar errores de la solicitud
+                // errores de la solicitud
             }
         });
         AutoCompleteTextView autoTxtCity = root.findViewById(R.id.txt_city);
@@ -184,29 +162,14 @@ public class EditProfileFragment extends Fragment implements Callfun {
         updateUserRequest.setCountry(binding.txtCountry.getText().toString());
         updateUserRequest.setSuite("test2");
         updateUserRequest.setAppos("mod");
-
         mViewModel.updateUser(updateUserRequest);
         navigateToEditProfileDetailsFragment();
     }
 
-    private void openPingFragment() {
-        // Crear una instancia del nuevo fragmento
-        PingFragment pingFragment = PingFragment.newInstance();
-
-        // Obtener el FragmentManager
-        FragmentManager fragmentManager = getParentFragmentManager();
-
-        // Iniciar la transacción del fragmento
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        // Reemplazar el contenido actual con el nuevo fragmento
-        fragmentTransaction.replace(R.id.container_edit, pingFragment);
-
-        // Agregar la transacción al back stack
-        fragmentTransaction.addToBackStack(null);
-
-        // Confirmar la transacción
-        fragmentTransaction.commit();
+    private void openPinFragment() {
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_login_menu);
+        navController.navigateUp();
+        navController.navigate(R.id.fragment_ping);
     }
 
     private void getCitiesForCountry(String country, AutoCompleteTextView autoTxtCity) {
@@ -261,6 +224,12 @@ public class EditProfileFragment extends Fragment implements Callfun {
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_login_menu);
         navController.navigateUp();
         navController.navigate(R.id.fragment_edit_profile_detail);
+    }
+
+    private void navigateToPasswordFragment() {
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_login_menu);
+        navController.navigateUp();
+        navController.navigate(R.id.fragment_pass);
     }
 
     @Override

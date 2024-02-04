@@ -6,13 +6,39 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <!-- Puedes agregar vistas y elementos de diseño aquí -->
+    <ImageView
+        android:layout_width="433dp"
+        android:layout_height="327dp"
+        android:layout_gravity="center"
+        android:src="@mipmap/check"
+        android:layout_marginTop="-100dp" /> <!-- Ajusta el valor según tu necesidad -->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Detalles de la Edición del Perfil"
-        android:textSize="18sp" />
+        android:text="We have sent to your email the instructions to renew your Pin"
+        android:textSize="18sp"
+        android:layout_margin="@dimen/sp20"
+        android:gravity="center"
+        android:layout_marginTop="-10dp" />
 
-    <!-- Agrega más vistas según sea necesario -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/return_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/sp90"
+            android:layout_weight="1"
+            android:background="@drawable/ic_btn_activo"
+            android:text="Return to Home"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
 </LinearLayout>
+
