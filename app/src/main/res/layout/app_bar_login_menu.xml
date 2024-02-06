@@ -23,7 +23,8 @@
                 android:layout_height="30sp"
                 android:layout_gravity="right|center"
                 android:background="@drawable/ic_notifications"
-                android:foregroundGravity="right" />
+                android:foregroundGravity="right"
+                android:layout_marginRight="30px"/>
 
             <ImageView
                 android:id="@+id/add_device"
@@ -31,7 +32,8 @@
                 android:layout_height="30sp"
                 android:layout_gravity="right|center"
                 android:background="@drawable/ic_cross"
-                android:foregroundGravity="right" />
+                android:foregroundGravity="right"
+                android:layout_marginRight="10px"/>
         </LinearLayout>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -44,8 +46,8 @@
                 android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_head_menu"
                 android:stateListAnimator="@null"
+                android:background="@drawable/ic_head_menu"
                 android:theme="@style/Theme.WitFactory.AppBarOverlay"
                 android:translationZ="0.1dp"
                 app:elevation="0.1dp">

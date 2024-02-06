@@ -19,6 +19,7 @@ import androidx.core.widget.ContentLoadingProgressBar;
 import com.cb.witfactory.R;
 import com.cb.witfactory.esp32.AppConstants;
 import com.cb.witfactory.model.PreferencesHelper;
+import com.cb.witfactory.view.CreateDeviceActivity;
 import com.espressif.provisioning.DeviceConnectionEvent;
 import com.espressif.provisioning.ESPConstants;
 import com.espressif.provisioning.ESPDevice;
@@ -116,6 +117,10 @@ public class ProvisionActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             provisionManager.getEspDevice().disconnectDevice();
+
+            Intent wifiListIntent = new Intent(getApplicationContext(), CreateDeviceActivity.class);
+            wifiListIntent.putExtras(getIntent());
+            startActivity(wifiListIntent);
 
             //validar redirecion intent
             finish();
@@ -349,9 +354,25 @@ public class ProvisionActivity extends AppCompatActivity {
                 Log.v("exitoso: ", decryptedData2.toString());
 
 
+                Log.v("exitoso: ", decryptedData2.toString());
+
+
                 // Decodificar el array de bytes a String utilizando UTF-8
                 String textoDecodificado = new String(returnData);
 
+                String[] arrOfStr = textoDecodificado.split(",");
+                String deviceId = arrOfStr[0];
+                String devicetype = arrOfStr[1];
+                String serial = arrOfStr[2];
+                String mac = arrOfStr[3];
+                // Imprimir el resultado
+                Log.v("Texto Decodificado: " , deviceId);
+                PreferencesHelper.setDeviceId("deviceId",deviceId);
+                PreferencesHelper.setdevicetype("devicetype",devicetype);
+                PreferencesHelper.setSerial("serial",serial);
+                PreferencesHelper.setMac("mac",mac);
+
+                Log.v("Texto Decodificado: " , textoDecodificado);
                 doProvisioning();
             }
 

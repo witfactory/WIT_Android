@@ -20,6 +20,8 @@ import com.cb.witfactory.data.retrofit.device.CreateDevice;
 import com.cb.witfactory.databinding.ActivityCreateDeviceBinding;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.PreferencesHelper;
+import com.cb.witfactory.ui.home.HomeFragment;
+import com.cb.witfactory.ui.home.HomeViewModel;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -30,7 +32,7 @@ public class CreateDeviceActivity extends AppCompatActivity implements Callfun {
     private PreferencesHelper preferencesHelper;
     private CreateDeviceViewModel createDeviceViewModel;
 
-   private SweetAlertDialog pDialog;
+    private SweetAlertDialog pDialog;
 
 
     @Override
@@ -130,7 +132,7 @@ public class CreateDeviceActivity extends AppCompatActivity implements Callfun {
                 String mac = PreferencesHelper.getMac("mac", "");
 
 
-                CreateDevice createDevice = new CreateDevice(name,deviceId,serial,"lat","long",userId,mac,deviceLocation,devicetype,descriptionLocation);
+                CreateDevice createDevice = new CreateDevice(name,deviceId,serial,"0.0","0.0",userId,mac,deviceLocation,"V",descriptionLocation,false,true);
                 createDeviceViewModel.setListener(CreateDeviceActivity.this);
                 createDeviceViewModel.createDataDevice(createDevice);
 

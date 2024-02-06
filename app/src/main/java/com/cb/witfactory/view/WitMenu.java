@@ -47,11 +47,12 @@ public class WitMenu extends AppCompatActivity implements Callfun {
 
 
 
+
+
         binding.appBarLoginMenu.addDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utils.goToDevice(getApplicationContext());
-                Utils.goToDevice(getApplicationContext());
+                Utils.goToQR(getApplicationContext());
             }
         });
 
@@ -60,6 +61,8 @@ public class WitMenu extends AppCompatActivity implements Callfun {
             public void onClick(View view) {
                /* Snackbar.make(view, "  Envío de Correos", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
+
+                binding.appBarLoginMenu.fab.setVisibility(View.GONE);
 
                 NavController navController = Navigation.findNavController(WitMenu.this, R.id.nav_host_fragment_content_login_menu);
                 navController.navigateUp();
@@ -147,6 +150,12 @@ public class WitMenu extends AppCompatActivity implements Callfun {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        binding.appBarLoginMenu.fab.setVisibility(View.VISIBLE);
     }
 
     @Override

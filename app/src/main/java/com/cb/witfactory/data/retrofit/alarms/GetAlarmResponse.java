@@ -1,6 +1,5 @@
 package com.cb.witfactory.data.retrofit.alarms;
 
-import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -8,17 +7,17 @@ import java.util.ArrayList;
 public class GetAlarmResponse {
 
     @SerializedName("alarms")
-    public ArrayList<AlamResponse> listDevice = new ArrayList<AlamResponse>();
+    public ArrayList<Alarm> listDevice = new ArrayList<Alarm>();
 
-    public GetAlarmResponse(ArrayList<AlamResponse> listDevice) {
+    public GetAlarmResponse(ArrayList<Alarm> listDevice) {
         this.listDevice = listDevice;
     }
 
-    public ArrayList<AlamResponse> getListDevice() {
+    public ArrayList<Alarm> getListDevice() {
         return listDevice;
     }
 
-    public void setListDevice(ArrayList<AlamResponse> listDevice) {
+    public void setListDevice(ArrayList<Alarm> listDevice) {
         this.listDevice = listDevice;
     }
 }
