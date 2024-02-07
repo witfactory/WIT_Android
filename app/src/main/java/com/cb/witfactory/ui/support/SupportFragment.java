@@ -123,6 +123,8 @@ public class SupportFragment extends Fragment {
                 });
                 messageAdapter = new MessageAdapter(getActivity(),messageList);
                 binding.rvMensajes.setAdapter(messageAdapter);
+                messageAdapter.notifyDataSetChanged();
+                binding.rvMensajes.scrollToPosition(messageList.size() - 1);
             }
 
             @Override

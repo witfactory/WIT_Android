@@ -13,6 +13,7 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.AmplifyCognito;
@@ -122,6 +123,10 @@ public class CreateDeviceActivity extends AppCompatActivity implements Callfun {
                 String deviceLocation = binding.descriptionLocation.getText().toString();
                 String descriptionLocation = binding.descriptionLocation.getText().toString();
 
+                if(name.isEmpty() || descriptionLocation.isEmpty() || descriptionLocation.isEmpty()){
+                    Toast.makeText(getApplicationContext(), R.string.all_fields_are_required, Toast.LENGTH_LONG).show();
+                    return;
+                }
 
                 String email = PreferencesHelper.getEmail("email", "");
                 String userId = PreferencesHelper.getEmail("userId", "");
