@@ -118,7 +118,7 @@ public class CreateDeviceActivity extends AppCompatActivity implements Callfun {
             @Override
             public void onClick(View view) {
 
-                showDialog();
+
                 String name = binding.txtNameDevice.getText().toString();
                 String deviceLocation = binding.descriptionLocation.getText().toString();
                 String descriptionLocation = binding.descriptionLocation.getText().toString();
@@ -127,7 +127,7 @@ public class CreateDeviceActivity extends AppCompatActivity implements Callfun {
                     Toast.makeText(getApplicationContext(), R.string.all_fields_are_required, Toast.LENGTH_LONG).show();
                     return;
                 }
-
+                showDialog();
                 String email = PreferencesHelper.getEmail("email", "");
                 String userId = PreferencesHelper.getEmail("userId", "");
                 String deviceId = PreferencesHelper.getDeviceId("deviceId", "");
