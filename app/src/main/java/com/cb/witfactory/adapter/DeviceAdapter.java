@@ -132,7 +132,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.MyViewHold
             if (device.getBuzzer()) {
                 holder.check_state.setChecked(true);
             } else {
-                holder.check_state.setChecked(true);
+                holder.check_state.setChecked(false);
             }
 
         }
@@ -163,22 +163,29 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.MyViewHold
 
                 if (device_type.equals("V")) {
 
-                    int estado = 0;
+
                     if (device.getBuzzer() != null) {
+                        int estado = 0;
                         if (device.getBuzzer()) {
                             estado = 1;
                         } else {
                             estado = 0;
                         }
+
+                        Toast.makeText(context.getApplicationContext(), device.getDevice_id(), Toast.LENGTH_LONG).show();
+                        String userEmail = PreferencesHelper.getEmail("email", "");
+                        ClosedOpenValve alarm = new ClosedOpenValve(userEmail, device.getDevice_id(), estado);
+                        deviceViewModel.setValvula(alarm);
+                    }else {
+                        Toast.makeText(context.getApplicationContext(), "Buzzer is not connected", Toast.LENGTH_LONG).show();
+                        holder.check_state.setChecked(false);
                     }
 
 
-                    Toast.makeText(context.getApplicationContext(), device.getDevice_id(), Toast.LENGTH_LONG).show();
-                    String userEmail = PreferencesHelper.getEmail("email", "");
-                    ClosedOpenValve alarm = new ClosedOpenValve(userEmail, device.getDevice_id(), estado);
 
 
-                    deviceViewModel.setValvula(alarm);
+
+
 
                 }
             }
