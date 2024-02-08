@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.cb.witfactory.adapter.Event;
 import com.cb.witfactory.data.retrofit.alarms.Alarm;
+import com.cb.witfactory.data.retrofit.alarms.ClosedOpenValve;
 import com.cb.witfactory.data.retrofit.connection.ApiConecxion;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.cb.witfactory.data.retrofit.device.ObjectResponseDevice;
@@ -15,6 +16,7 @@ import com.cb.witfactory.data.retrofit.events.DeviceMetrics;
 import com.cb.witfactory.data.retrofit.events.EventsRealtime;
 import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.data.retrofit.events.ObjectResponseAlarm;
+import com.cb.witfactory.data.retrofit.events.ObjectResponseAlarmValve;
 import com.cb.witfactory.data.retrofit.events.ObjectResponseEvents;
 import com.cb.witfactory.data.retrofit.events.ObjectResponseEventsRealtime;
 import com.cb.witfactory.model.Callfun;
@@ -177,20 +179,20 @@ public class DeviceViewModel extends ViewModel {
         }
     }
 
-    public void setValvula(ArrayList<Alarm> alarms) {
+    public void setValvula(ClosedOpenValve alarms) {
         try {
 
-            final Call<ObjectResponseAlarm> obj = ApiConecxion.getApiService().setValvula(alarms);
-            obj.enqueue(new Callback<ObjectResponseAlarm>() {
+            final Call<ObjectResponseAlarmValve> obj = ApiConecxion.getApiService().setValvula(alarms);
+            obj.enqueue(new Callback<ObjectResponseAlarmValve>() {
 
                 @Override
-                public void onResponse(Call<ObjectResponseAlarm> call, Response<ObjectResponseAlarm> response) {
+                public void onResponse(Call<ObjectResponseAlarmValve> call, Response<ObjectResponseAlarmValve> response) {
                     listener.onSuccess("alarmaokV");
 
                 }
 
                 @Override
-                public void onFailure(Call<ObjectResponseAlarm> call, Throwable t) {
+                public void onFailure(Call<ObjectResponseAlarmValve> call, Throwable t) {
                     listener.onError("alarmaerror");
                 }
             });
