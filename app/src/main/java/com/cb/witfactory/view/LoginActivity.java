@@ -274,7 +274,7 @@ public class LoginActivity extends AppCompatActivity implements Callfun {
         FirebaseMessaging.getInstance().getToken().addOnSuccessListener(token -> {
             if (!TextUtils.isEmpty(token)) {
                 Log.d("TAG", "retrieve token successful : " + token);
-                Toast.makeText(getApplicationContext(), token.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), token.toString(), Toast.LENGTH_SHORT).show();
                 Log.w("TOKEN", "token : " + token.toString());
             } else {
                 Log.w("TAG", "token should not be null...");

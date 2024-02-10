@@ -41,6 +41,13 @@ public class ResetPassWordActivity extends AppCompatActivity implements Callfun 
         amplifyCognito.setListener(ResetPassWordActivity.this);
         preferencesHelper = new PreferencesHelper(getApplicationContext());
 
+        binding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         binding.txtEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -67,6 +74,9 @@ public class ResetPassWordActivity extends AppCompatActivity implements Callfun 
                 String email  = binding.txtEmail.getText().toString();
                 PreferencesHelper.setEmail("email", email);
                 amplifyCognito.resetPassword(email);
+
+                DialogResetPassword dialogFragment = new DialogResetPassword();
+                dialogFragment.show(getSupportFragmentManager(), "dialogo_reset_password");
             }
         });
     }
@@ -82,7 +92,6 @@ public class ResetPassWordActivity extends AppCompatActivity implements Callfun 
             binding.btnSignUp.setTextColor(Color.BLACK);
             binding.btnSignUp.setClickable(false);
             binding.btnSignUp.setEnabled(false);
-
         }
     }
 

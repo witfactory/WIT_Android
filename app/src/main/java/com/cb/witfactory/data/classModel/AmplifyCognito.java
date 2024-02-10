@@ -251,13 +251,13 @@ public Boolean sinUp(String email, String user, String first_name, String countr
 
     public void resetPassword(String emailUserName){
         Amplify.Auth.resetPassword(emailUserName,
-                result->{
-                    Log.i("AuthQuickstart", "New password confirmed");
-                    listener.onSuccess("ok");
-                }, error->{
-                    Log.e("AuthQuickstart", error.toString());
-                    listener.onError("error");
-                });
+            result->{
+                Log.i("AuthQuickstart", "New password confirmed");
+                listener.onSuccess("ok");
+            }, error->{
+                Log.e("AuthQuickstart", error.toString());
+                listener.onError("error");
+            });
     }
 
 
