@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.cb.witfactory">
 
-
-
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />
+
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
@@ -33,22 +34,25 @@
         tools:ignore="CoarseFineLocation" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
     <application
         android:name=".ui.connectDispositive.EspTouchApp"
         android:allowBackup="false"
+        android:allowClearUserData="false"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WitFactory"
-        tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity"
-        android:fullBackupContent="@xml/backup_descriptor"
         android:usesCleartextTraffic="true"
-        android:allowClearUserData="false">
+        tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
+        <activity
+            android:name=".view.ResetPassSuccess"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
-
 
         <activity
             android:name=".view.ResetPassWordActivity"
@@ -57,30 +61,30 @@
         <activity
             android:name=".view.RegistroActivity"
             android:exported="false"
-            android:theme="@style/Theme.WitFactory.NoActionBar"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.WitFactory.NoActionBar" />
         <activity
             android:name=".view.HomeActivity"
             android:exported="false"
-            android:theme="@style/Theme.WitFactory.NoActionBar"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.WitFactory.NoActionBar" />
         <activity
             android:name=".view.WitMenu"
             android:exported="false"
             android:label="@string/title_activity_login_menu"
-            android:theme="@style/Theme.WitFactory.NoActionBar"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.WitFactory.NoActionBar" />
         <activity
             android:name=".view.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login_menu"
-            android:theme="@style/Theme.WitFactory.NoActionBar"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.WitFactory.NoActionBar" />
         <activity
             android:name=".view.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.WitFactory.NoActionBar"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.WitFactory.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -88,81 +92,64 @@
             </intent-filter>
         </activity>
 
-
         <service
             android:name=".notificacion.Fcm"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
-
-        <!-- activity esp32 -->
+        </service> <!-- activity esp32 -->
         <activity
             android:name=".esp32.activities.EspMainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".esp32.activities.AddDeviceActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".esp32.activities.BLEProvisionLanding"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
         <activity
             android:name=".esp32.activities.WiFiConfigActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.CreateDeviceActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".esp32.activities.ProvisionLanding"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".esp32.activities.ProvisionActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".esp32.activities.SettingsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".esp32.activities.WiFiScanActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".esp32.activities.ProofOfPossessionActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-
-        <!-- fin activity esp32 -->
-
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

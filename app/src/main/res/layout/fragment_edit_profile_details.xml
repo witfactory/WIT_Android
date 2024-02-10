@@ -11,8 +11,7 @@
         android:layout_height="327dp"
         android:layout_gravity="center"
         android:src="@mipmap/check"
-        android:layout_marginTop="-100dp" /> <!-- Ajusta el valor según tu necesidad -->
-
+        android:layout_marginTop="-100dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

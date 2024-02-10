@@ -15,10 +15,23 @@
             android:orientation="vertical"
             android:padding="@dimen/sp30">
 
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_back"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/spminor90"
+                android:layout_marginStart="@dimen/sp10"/>
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="343dp"
+                android:layout_height="523dp"
                 android:orientation="vertical">
+
+                <android.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -36,7 +49,7 @@
                         android:text="@string/text_spanish"
                         android:textColor="@color/white" />
 
-                    <Space
+                    <android.widget.Space
                         android:layout_width="@dimen/sp5"
                         android:layout_height="wrap_content" />
 
@@ -57,7 +70,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="@dimen/sp150"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/sp150"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_logo" />
@@ -77,6 +90,10 @@
                         android:textColor="@color/background"
                         android:textSize="@dimen/sp20" />
 
+                    <android.widget.Space
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -84,13 +101,14 @@
                         android:orientation="vertical">
 
                         <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            style="@style/AppTheme.TextInputLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/email"
                             android:paddingBottom="@dimen/sp10"
                             android:textColorHint="@color/text_login"
                             app:boxStrokeColor="@color/dark_greenish_blue"
+                            app:endIconDrawable="@drawable/ic_user"
                             app:endIconMode="custom">
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -105,7 +123,7 @@
 
 
                         <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            style="@style/Widget.App.TextInputLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/security_pin"
@@ -138,18 +156,17 @@
                                 android:orientation="horizontal">
 
                                 <com.google.android.material.switchmaterial.SwitchMaterial
-                                    style="@style/SwitchButtonStyle"
                                     android:id="@+id/savesession"
+                                    style="@style/SwitchButtonStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="false" />
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/save_session_data"
                                     android:textColor="@color/background" />
-
-
 
                             </LinearLayout>
 
@@ -185,29 +202,27 @@
                             android:layout_marginTop="@dimen/sp10"
                             android:background="@drawable/ic_btn_inactivo"
                             android:text="@string/txt_Log_in"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:id="@+id/reset_password"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/sp10"
-                            android:text="@string/i_forgot_my_data"
-                            android:textColor="@color/background" />
-
-
+                            android:textAllCaps="false"
+                            android:textColor="@color/white" />
                     </LinearLayout>
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true">
 
-
+                    <TextView
+                        android:id="@+id/reset_password"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/i_forgot_my_data"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/background"/>
+                </LinearLayout>
             </LinearLayout>
-
-
         </RelativeLayout>
-
-
     </RelativeLayout>
-
 </layout>

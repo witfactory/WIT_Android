@@ -30,9 +30,9 @@ import com.cb.witfactory.data.classModel.Utils;
 
 public interface Callfun {
 
-     void onSuccess(String s);
-     void onSuccess(Object o, String s);
-     void onError(String s);
+    void onSuccess(String s);
+    void onSuccess(Object o, String s);
+    void onError(String s);
 
     class Device {
         Boolean state;
@@ -112,7 +112,7 @@ public interface Callfun {
 
             //View v = inflater.inflate(R.layout.persistent_bottom_sheet, container, false);
             View v = inflater.inflate(R.layout.reset_password, container, false);
-            btn_sign_up = (Button)v.findViewById(R.id.btn_sign_up);
+            btn_sign_up = (Button)v.findViewById(R.id.btn_sign_up2);
 
             ed1 = (EditText)v.findViewById(R.id.custom_long_otp_1);
             ed2 = (EditText)v.findViewById(R.id.custom_long_otp_2);
@@ -123,7 +123,22 @@ public interface Callfun {
             new_password = (EditText)v.findViewById(R.id.new_password);
             txt_close = (TextView) v.findViewById(R.id.txt_close);
 
+            new_password.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    validateData();
+                }
+            });
             ed1.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -348,7 +363,7 @@ public interface Callfun {
             if (!otp1.isEmpty() && !otp2.isEmpty() && !otp3.isEmpty() && !otp4.isEmpty() && !otp5.isEmpty() && !otp6.isEmpty() && !password.isEmpty()) {
                 btn_sign_up.setClickable(true);
                 btn_sign_up.setEnabled(true);
-                btn_sign_up.setBackgroundResource(R.drawable.btn_rounded_bacgraund);
+                btn_sign_up.setBackgroundResource(R.drawable.ic_btn_activo);
                 btn_sign_up.setTextColor(Color.WHITE);
 
 
@@ -356,8 +371,8 @@ public interface Callfun {
 
                 btn_sign_up.setBackgroundResource(R.drawable.ic_btn_inactivo);
                 btn_sign_up.setTextColor(Color.BLACK);
-                btn_sign_up.setClickable(false);
-                btn_sign_up.setEnabled(false);
+                btn_sign_up.setClickable(true);
+                btn_sign_up.setEnabled(true);
 
             }
         }
@@ -367,7 +382,7 @@ public interface Callfun {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Utils.goToLogin(getContext());
+                    Utils.goToSuccessReset(getContext());
                 }
             });
         }
