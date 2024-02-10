@@ -123,7 +123,6 @@
     <string name="txt_wifi_password">Wifi Password</string>
 
 
-
     <!--esptouch-->
     <string name="menu_item_about">About App</string>
     <string name="about_app_version">App Version: %s</string>
@@ -381,8 +380,9 @@
     <string name="description_location">Description location</string>
     <string name="device_data">Device data</string>
     <string name="error_register_device">Error registering device</string>
-
-
+    <string name="excellent" translatable="false">¡Excellent!</string>
+    <string name="follow_the_steps_sent_to_your_email_example_mail_com_recover_your_wit_account" translatable="false">Follow the steps sent to your email example@mail.com Recover your WIT account.</string>
+    <string name="accept" translatable="false">Accept</string>
 
 
 </resources>

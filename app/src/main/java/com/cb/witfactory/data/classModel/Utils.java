@@ -11,6 +11,7 @@ import com.cb.witfactory.esp32.activities.EspMainActivity;
 import com.cb.witfactory.view.HomeActivity;
 import com.cb.witfactory.view.LoginActivity;
 import com.cb.witfactory.view.MainActivity;
+import com.cb.witfactory.view.ResetPassSuccess;
 import com.cb.witfactory.view.WitMenu;
 
 import java.util.regex.Matcher;
@@ -148,8 +149,12 @@ public class Utils {
         Intent intent = new Intent(context, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
+    }
 
-
+    public static void goToSuccessReset(Context context) {
+        Intent intent = new Intent(context, ResetPassSuccess.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
     public static void goToLoginRegister(Context context) {
