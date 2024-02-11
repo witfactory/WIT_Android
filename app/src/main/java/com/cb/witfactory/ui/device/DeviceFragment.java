@@ -137,7 +137,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getActivity(),"silence sensor", Toast.LENGTH_LONG).show();
+                    mAdapter.notifyDataSetChanged();
 
                 }
             });
@@ -145,7 +145,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getActivity(),"close valve", Toast.LENGTH_LONG).show();
+                    mAdapter.notifyDataSetChanged();
 
                 }
             });

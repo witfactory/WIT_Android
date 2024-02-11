@@ -117,22 +117,22 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final DeviceResponse device = deviceListFiltered.get(position);
-        holder.txt_title.setText(device.getDevice_name());
+        String titulo = device.getDevice_name();
+        Boolean buzzer = device.getBuzzer();
+        holder.txt_title.setText(titulo);
         holder.txt_sub_title.setText(device.getDevice_location());
 
+      
         String typeDevice = device.getDevice_type();
         if (typeDevice.equals("S")) {
             holder.img_hadeare.setBackgroundResource(R.drawable.hadware_dispositivo);
         } else {
             holder.img_hadeare.setBackgroundResource(R.drawable.img_valvula);
         }
-
-
+        
         if (device.getBuzzer() != null) {
-            if (device.getBuzzer()) {
+            if (buzzer) {
                 holder.check_state.setChecked(true);
-            } else {
-                holder.check_state.setChecked(false);
             }
 
         }
@@ -150,6 +150,21 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.MyViewHold
             public void onClick(View v) {
 
                 String device_type = device.getDevice_type().toString();
+
+
+                int estado = 0;
+                if (device.getBuzzer() != null) {
+                    boolean chect_state =device.getBuzzer();
+                    if (chect_state) {
+                        estado =0;
+                        device.setBuzzer(false);
+                    } else {
+                        device.setBuzzer(true);
+                        estado =1;
+                    }
+
+                }
+                
                 if (device_type.equals("S")) {
 
                     Toast.makeText(context.getApplicationContext(), device.getDevice_id(), Toast.LENGTH_LONG).show();
@@ -163,14 +178,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.MyViewHold
 
                 if (device_type.equals("V")) {
 
-
                     if (device.getBuzzer() != null) {
-                        int estado = 0;
-                        if (device.getBuzzer()) {
-                            estado = 1;
-                        } else {
-                            estado = 0;
-                        }
 
                         Toast.makeText(context.getApplicationContext(), device.getDevice_id(), Toast.LENGTH_LONG).show();
                         String userEmail = PreferencesHelper.getEmail("email", "");
@@ -190,22 +198,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.MyViewHold
                 }
             }
         });
-
-       /* Glide.with(context)
-                .load(device.getImageDevice())
-                .apply(RequestOptions.circleCropTransform())
-                .into(holder.img_hadeare);
-
-        Glide.with(context)
-                .load(device.getImageWifi())
-                .apply(RequestOptions.circleCropTransform())
-                .into(holder.img_wifi);
-
-        if(device.getState()){
-            holder.check_state.setEnabled(true);
-        }else{
-            holder.check_state.setEnabled(false);
-        }*/
+        
     }
 
     @Override

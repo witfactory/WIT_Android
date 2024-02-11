@@ -1,11 +1,18 @@
 package com.cb.witfactory.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -35,6 +42,8 @@ public class CreateDeviceActivity extends AppCompatActivity implements Callfun {
 
     private SweetAlertDialog pDialog;
 
+    double latitude = 0.0;
+    double longitud = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,8 @@ public class CreateDeviceActivity extends AppCompatActivity implements Callfun {
         createDeviceViewModel =
                 new ViewModelProvider(this).get(CreateDeviceViewModel.class);
 
+
+        gps();
 
         amplifyCognito = new AmplifyCognito(getApplicationContext());
         amplifyCognito.setListener(CreateDeviceActivity.this);
@@ -123,7 +134,7 @@ public class CreateDeviceActivity extends AppCompatActivity implements Callfun {
                 String deviceLocation = binding.descriptionLocation.getText().toString();
                 String descriptionLocation = binding.descriptionLocation.getText().toString();
 
-                if(name.isEmpty() || descriptionLocation.isEmpty() || descriptionLocation.isEmpty()){
+                if (name.isEmpty() || descriptionLocation.isEmpty() || descriptionLocation.isEmpty()) {
                     Toast.makeText(getApplicationContext(), R.string.all_fields_are_required, Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -137,7 +148,7 @@ public class CreateDeviceActivity extends AppCompatActivity implements Callfun {
                 String mac = PreferencesHelper.getMac("mac", "");
 
 
-                CreateDevice createDevice = new CreateDevice(name,deviceId,serial,"0.0","0.0",userId,mac,deviceLocation,"V",descriptionLocation,false,true);
+                CreateDevice createDevice = new CreateDevice(name, deviceId, serial, latitude+"", longitud+"", userId, mac, deviceLocation, devicetype, descriptionLocation, false, true);
                 createDeviceViewModel.setListener(CreateDeviceActivity.this);
                 createDeviceViewModel.createDataDevice(createDevice);
 
@@ -146,6 +157,34 @@ public class CreateDeviceActivity extends AppCompatActivity implements Callfun {
         });
 
 
+    }
+
+    private void gps() {
+
+        try {
+            LocationManager locationManager = (LocationManager)
+                    getSystemService(Context.LOCATION_SERVICE);
+            Criteria criteria = new Criteria();
+
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            Location location = locationManager.getLastKnownLocation(locationManager
+                    .getBestProvider(criteria, false));
+            latitude = location.getLatitude();
+            longitud = location.getLongitude();
+       }catch (Exception e){
+
+            latitude = 0.0;
+            longitud = 0.0;
+       }
     }
 
 

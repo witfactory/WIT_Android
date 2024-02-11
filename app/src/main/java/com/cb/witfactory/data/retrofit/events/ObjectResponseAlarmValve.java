@@ -8,7 +8,7 @@ public class ObjectResponseAlarmValve {
     private Integer statusCode;
 
 
-    @SerializedName("body")
+    @SerializedName("message")
     public String message;
 
     public ObjectResponseAlarmValve(){}
