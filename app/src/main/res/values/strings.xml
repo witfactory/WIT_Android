@@ -68,7 +68,7 @@
     <string name="date_birth">Date of birth</string>
     <string name="gender">Gender</string>
     <string name="set_up_your_account"><b>Set up your account</b></string>
-    <string name="email">Email</string>
+    <string name="email">email</string>
     <string name="confirm_email">Confirm Email</string>
     <string name="security_pin">Password</string>
     <string name="current_pin" translatable="false">Current pin</string>
@@ -87,9 +87,9 @@
     <string name="txt_actual_pass" translatable="false">Actual Password</string>
     <string name="txt_indicate_your_new_password" translatable="false">Indicate your new password</string>
     <string name="txt_repeat_your_new_password" translatable="false">Repeat your new password</string>
-    <string name="save_session_data">Save session data</string>
+    <string name="save_session_data">Save data</string>
     <string name="set_face_id">Set FaceID</string>
-    <string name="i_forgot_my_data">I forgot my data</string>
+    <string name="i_forgot_my_data">Forgot my credentials</string>
     <string name="text_register_user">Register User</string>
     <string name="text_spanish">Spanish</string>
     <string name="text_english">English</string>
@@ -110,11 +110,10 @@
     <string name="txtto_finalize">Finalize</string>
     <string name="phone_number">Phone Number</string>
     <string name="txt_validation_mail">We have sent a code to your email n, <b>verify your account</b> and enjoy the benefits of WIT</string>
-    <string name="send_information">Send Information</string>
-    <string name="write_your_email_correctly">Make <b>sure you </b>type your email correctly. We will send the information you need to recover your account</string>
+    <string name="send_information">Submit Information</string>
+    <string name="write_your_email_correctly">Make <b>sure your </b>enter your email correctly. We will send a link to your email for account recovery.</string>
     <string name="connect_dispositive">Connect</string>
     <string name="txt_dispositive">Dispositive</string>
-
     <string name="txt_connect_device">Connect device</string>
     <string name="txt_be_sure_to_keep_your_wi_fi_network_connected" tools:ignore="DuplicateDefinition">Be sure to keep your Wi-Fi network connected and carefully follow the <font color="#23ADC6"> connection instructions.</font></string>
     <string name="txt_Product">Producto</string>
@@ -122,7 +121,6 @@
     <string name="txt_device_name">Device name</string>
     <string name="wifi">wifi</string>
     <string name="txt_wifi_password">Wifi Password</string>
-
 
 
     <!--esptouch-->
@@ -382,8 +380,9 @@
     <string name="description_location">Description location</string>
     <string name="device_data">Device data</string>
     <string name="error_register_device">Error registering device</string>
-
-
+    <string name="excellent" translatable="false">¡Excellent!</string>
+    <string name="follow_the_steps_sent_to_your_email_example_mail_com_recover_your_wit_account" translatable="false">Follow the steps sent to your email example@mail.com Recover your WIT account.</string>
+    <string name="accept" translatable="false">Accept</string>
 
 
 </resources>

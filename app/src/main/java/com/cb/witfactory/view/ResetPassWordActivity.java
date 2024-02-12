@@ -13,13 +13,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.DialogFragment;
 
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.AmplifyCognito;
 import com.cb.witfactory.databinding.ActivityResetPassWordBinding;
-import com.cb.witfactory.databinding.ResetPasswordBinding;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.PreferencesHelper;
 
@@ -36,6 +34,7 @@ public class ResetPassWordActivity extends AppCompatActivity implements Callfun 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_reset_pass_word);
+
 
         amplifyCognito = new AmplifyCognito(getApplicationContext());
         amplifyCognito.setListener(ResetPassWordActivity.this);
@@ -62,21 +61,28 @@ public class ResetPassWordActivity extends AppCompatActivity implements Callfun 
             }
         });
 
-        binding.btnSignUp.setOnClickListener(view -> {
-            if (!Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.getHint().toString()).matches()) {
-                String email  = binding.txtEmail.getText().toString();
-                PreferencesHelper.setEmail("email", email);
-                amplifyCognito.resetPassword(email);
+        binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.getHint().toString()).matches()) {
+                    String email  = binding.txtEmail.getText().toString();
+                    PreferencesHelper.setEmail("email", email);
+                    amplifyCognito.resetPassword(email);
+                }
             }
         });
+
     }
 
     private void validateData() {
+
         if (!Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.getHint().toString()).matches()) {
             binding.btnSignUp.setClickable(true);
             binding.btnSignUp.setEnabled(true);
             binding.btnSignUp.setBackgroundResource(R.drawable.btn_rounded_bacgraund);
             binding.btnSignUp.setTextColor(Color.WHITE);
+
+
         } else {
             binding.btnSignUp.setBackgroundResource(R.drawable.btn_rounded_gray);
             binding.btnSignUp.setTextColor(Color.BLACK);

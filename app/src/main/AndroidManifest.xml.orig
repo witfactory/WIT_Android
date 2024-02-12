@@ -34,10 +34,14 @@
         tools:ignore="CoarseFineLocation" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
 
+
+=======
+>>>>>>> 08924700961f0664be0619baa2ad3d8d178b77c1
     <application
         android:name=".ui.connectDispositive.EspTouchApp"
         android:allowBackup="false"
