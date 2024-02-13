@@ -362,8 +362,8 @@
     <string name="description_location">Description location</string>
     <string name="device_data">Device data</string>
     <string name="error_register_device">Error registering device</string>
-
-
+    <string name="new_code">New code</string>
+    <string name="new_password">New password</string>
 
 
 </resources>

@@ -383,6 +383,10 @@
     <string name="excellent" translatable="false">¡Excellent!</string>
     <string name="follow_the_steps_sent_to_your_email_example_mail_com_recover_your_wit_account" translatable="false">Follow the steps sent to your email example@mail.com Recover your WIT account.</string>
     <string name="accept" translatable="false">Accept</string>
+    <string name="email_verification" translatable="false">Email verification</string>
+    <string name="enter_the_code_we_sent_you_to_the_email">Enter the code we sent you to the email</string>
+    <string name="new_code">New code</string>
+    <string name="new_password">New password</string>
 
 
 </resources>

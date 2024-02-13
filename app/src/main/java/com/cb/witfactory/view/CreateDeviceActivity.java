@@ -178,11 +178,9 @@ public class CreateDeviceActivity extends AppCompatActivity implements Callfun {
 
         hidenDialog();
         //llega  aca
-
         Intent intent = new Intent(getApplicationContext(), WitMenu.class);
         startActivity(intent);
         overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
-
         finish();
     }
 

@@ -101,12 +101,11 @@
                             style="@style/AppTheme.TextInputLayout"                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/email"
-                            android:layoutDirection="rtl"
                             android:paddingBottom="@dimen/sp10"
                             android:textColorHint="@color/text_login"
                             app:boxStrokeColor="@color/dark_greenish_blue"
-                            app:endIconMode="none"
-                            app:startIconDrawable="@drawable/ic_email">
+                            app:endIconMode="custom"
+                            app:endIconDrawable="@drawable/ic_email">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/txt_email"

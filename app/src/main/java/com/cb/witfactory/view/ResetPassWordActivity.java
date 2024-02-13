@@ -72,6 +72,14 @@ public class ResetPassWordActivity extends AppCompatActivity implements Callfun 
             }
         });
 
+        binding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+
     }
 
     private void validateData() {
@@ -79,7 +87,7 @@ public class ResetPassWordActivity extends AppCompatActivity implements Callfun 
         if (!Patterns.EMAIL_ADDRESS.matcher(binding.txtEmail.getHint().toString()).matches()) {
             binding.btnSignUp.setClickable(true);
             binding.btnSignUp.setEnabled(true);
-            binding.btnSignUp.setBackgroundResource(R.drawable.btn_rounded_bacgraund);
+            binding.btnSignUp.setBackgroundResource(R.drawable.ic_btn_activo);
             binding.btnSignUp.setTextColor(Color.WHITE);
 
 
