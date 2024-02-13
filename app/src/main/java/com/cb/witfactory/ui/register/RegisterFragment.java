@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -51,6 +52,15 @@ public class RegisterFragment extends Fragment {
 
         loadPreference();
 
+        binding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity activity = (AppCompatActivity) getActivity();
+                if (activity != null) {
+                    activity.onBackPressed();
+                }
+            }
+        });
 
         binding.txtUser.addTextChangedListener(new TextWatcher() {
             @Override

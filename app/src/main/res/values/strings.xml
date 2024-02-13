@@ -387,6 +387,11 @@
     <string name="enter_the_code_we_sent_you_to_the_email">Enter the code we sent you to the email</string>
     <string name="new_code">New code</string>
     <string name="new_password">New password</string>
+    <string name="username">Username</string>
+    <string name="emailM">Email</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="create_account">Create Account</string>
+    <string name="uregister">Register</string>
 
 
 </resources>

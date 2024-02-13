@@ -15,6 +15,16 @@
             android:orientation="vertical"
             android:padding="@dimen/sp30">
 
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_back"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/spminor70"
+                android:layout_marginStart="@dimen/sp10"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -25,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/sp60"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/sp30"
+                    android:layout_marginTop="@dimen/sp60"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -33,14 +43,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@string/text_register_user"
+                        android:text="@string/uregister"
                         android:textColor="@color/background"
                         android:textSize="@dimen/sp20" />
 
                     <ImageView
-                        android:layout_width="match_parent"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_grupo_one" />
+                        android:layout_marginTop="@dimen/sp10"
+                        android:src="@drawable/pagin1" />
 
                 </LinearLayout>
 
@@ -48,7 +59,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/sp20">
 
 
                     <LinearLayout
@@ -59,10 +71,9 @@
 
 
                         <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
+                            style="@style/AppTheme.TextInputLayout"                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/txt_name_user"
+                            android:hint="@string/username"
                             android:layoutDirection="rtl"
                             android:paddingBottom="@dimen/sp10"
                             android:textColorHint="@color/text_login"
@@ -83,10 +94,10 @@
 
 
                         <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            style="@style/AppTheme.TextInputLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/email"
+                            android:hint="@string/emailM"
                             android:layoutDirection="rtl"
                             android:paddingBottom="@dimen/sp10"
                             android:textColorHint="@color/text_login"
@@ -107,7 +118,7 @@
 
 
                         <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            style="@style/AppTheme.TextInputLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/security_pin"
@@ -129,10 +140,10 @@
 
 
                         <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            style="@style/AppTheme.TextInputLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/confirm_security_pin"
+                            android:hint="@string/repeat_password"
                             android:paddingBottom="@dimen/sp10"
                             android:textColorHint="@color/text_login"
                             app:boxStrokeColor="@color/dark_greenish_blue"
@@ -178,12 +189,12 @@
                             android:id="@+id/btn_sign_up"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/sp10"
+                            android:layout_marginTop="@dimen/sp50"
                             android:background="@drawable/ic_btn_inactivo"
                             android:clickable="false"
-                            android:text="@string/next"
+                            android:text="@string/create_account"
                             android:textColor="@color/white"
-                            android:textStyle="bold" />
+                            android:textAllCaps="false"/>
 
                     </LinearLayout>
                 </LinearLayout>

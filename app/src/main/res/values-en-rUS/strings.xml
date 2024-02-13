@@ -364,6 +364,11 @@
     <string name="error_register_device">Error registering device</string>
     <string name="new_code">New code</string>
     <string name="new_password">New password</string>
+    <string name="username">Username</string>
+    <string name="emailM">Email</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="create_account">Create Account</string>
+    <string name="uregister">Register</string>
 
 
 </resources>
