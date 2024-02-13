@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -55,17 +57,28 @@ public class Register2Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        //return inflater.inflate(R.layout.register2_fragment, container, false);
-
         binding = Register2FragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        //https://stackoverflow.com/questions/53198894/material-design-spinner-using-textinputlayout-outlinedbox-styling
-
         preferencesHelper = new PreferencesHelper(getContext());
         listCountry();
         listCity();
         loadPreference();
+
+        binding.txtCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                binding.txtLayoutCity.setHint("");
+            }
+        });
+
+        binding.txtCity.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus && binding.txtCity.getText().toString().isEmpty()) {
+                    binding.txtLayoutCity.setHint(getString(R.string.ciudad));
+                }
+            }
+        });
 
         binding.txtCountry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -73,7 +86,7 @@ public class Register2Fragment extends Fragment {
                 Toast.makeText(getContext(), listObjCountry.get(i).getName(), Toast.LENGTH_SHORT).show();
                 binding.txtCity.setText("");
                 listCity.clear();
-
+                binding.txtLayoutCountry.setHint("");
                 Integer idCountry = listObjCountry.get(i).getId();
                 for (int j = 0; j < listObjState.size(); j++) {
                     Integer IdCountryState = listObjState.get(j).getIdCountry();
@@ -87,6 +100,15 @@ public class Register2Fragment extends Fragment {
                 binding.txtCity.setAdapter(aCity);
                 aCity.notifyDataSetChanged();
 
+            }
+        });
+
+        binding.txtCity.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus && binding.txtCity.getText().toString().isEmpty()) {
+                    binding.txtLayoutCountry.setHint(getString(R.string.ciudad));
+                }
             }
         });
 
@@ -246,6 +268,15 @@ public class Register2Fragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_registro);
+                navController.navigateUp();
+                navController.navigate(R.id.nenu_register);
+            }
+        });
+
+        binding.btnBack2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 NavController navController = Navigation.findNavController(getActivity(), R.id.nav_registro);
                 navController.navigateUp();
                 navController.navigate(R.id.nenu_register);

@@ -17,6 +17,16 @@
             android:orientation="vertical"
             android:padding="@dimen/sp30">
 
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_back"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/spminor120"
+                android:layout_marginStart="@dimen/sp10"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -27,7 +37,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/sp60"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/sp30"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -35,14 +44,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@string/text_register_user"
+                        android:text="@string/uregister"
                         android:textColor="@color/background"
                         android:textSize="@dimen/sp20" />
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_grupo_three" />
+                        android:src="@drawable/paginate3"
+                        android:layout_marginTop="10dp"/>
 
                 </LinearLayout>
 
@@ -50,7 +60,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/sp40">
 
 
                     <LinearLayout
@@ -87,7 +98,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/text_activate_child_safety"
+                                android:text="@string/parental_control"
                                 android:textColor="@color/background" />
 
                             <com.google.android.material.switchmaterial.SwitchMaterial
@@ -98,7 +109,7 @@
                                 android:checked="false" />
 
                             <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:id="@+id/txt_layout_pin"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/text_asterisks"
@@ -111,6 +122,7 @@
                                     android:id="@+id/txt_pin"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:background="@android:color/transparent"
                                     android:imeOptions="actionDone"
                                     android:inputType="textPassword|number"
                                     android:textColor="@color/dark_greenish_blue"
@@ -130,14 +142,15 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:paddingTop="@dimen/sp5"
-                                android:text="@string/txt_child_insurance"
+                                android:text="@string/note_if_you_have_children_at_home_you_can_activate_child_lock_and_create_a_4_digit_security_pin_for_your_wit_app"
                                 android:textColor="@color/background"
                                 android:textSize="@dimen/sp10" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:layout_marginTop="20dp">
 
                                 <com.google.android.material.checkbox.MaterialCheckBox
                                     android:id="@+id/check_terms"
@@ -148,7 +161,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:paddingTop="@dimen/sp5"
-                                    android:text="@string/txt_terms_and_conditions"
+                                    android:text="@string/i_accept_the_terms_and_conditions_of_use_of_the_wit_application"
                                     android:textColor="@color/background"
                                     android:textSize="@dimen/sp14" />
 
@@ -168,7 +181,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:paddingTop="@dimen/sp5"
-                                    android:text="@string/txt_privacy_policies"
+                                    android:text="@string/i_accept_the_data_privacy_policy_established_by_wit"
                                     android:textColor="@color/background"
                                     android:textSize="@dimen/sp14" />
                             </LinearLayout>
@@ -179,19 +192,20 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:layout_marginTop="40dp">
 
 
                             <androidx.appcompat.widget.AppCompatButton
-                                android:id="@+id/btn_back"
+                                android:id="@+id/btn_back2"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/sp10"
                                 android:layout_weight="1"
-                                android:background="@drawable/ic_btn_activo"
-                                android:text="@string/text_to_return"
-                                android:textColor="@color/white"
-                                android:textStyle="bold" />
+                                android:background="@drawable/background_button_white2"
+                                android:text="@string/back"
+                                android:textColor="#01478D"
+                                android:textAllCaps="false"/>
 
                             <androidx.appcompat.widget.AppCompatButton
                                 android:id="@+id/btn_finish"
@@ -202,7 +216,7 @@
                                 android:background="@drawable/ic_btn_inactivo"
                                 android:text="@string/txtto_finalize"
                                 android:textColor="@color/white"
-                                android:textStyle="bold" />
+                                android:textAllCaps="false"/>
 
                         </LinearLayout>
 

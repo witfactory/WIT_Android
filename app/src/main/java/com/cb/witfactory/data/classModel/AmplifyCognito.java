@@ -83,9 +83,6 @@ public class AmplifyCognito {
 public Boolean sinUp(String email, String user, String first_name, String country, String city,
                          String zip_code, String address, String account_type, String telephone, String password,String device_id) {
 
-
-
-
     List<AuthUserAttribute> userAttributes = new ArrayList<>();
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.email(), user));
             userAttributes.add(new AuthUserAttribute(AuthUserAttributeKey.givenName(), first_name));

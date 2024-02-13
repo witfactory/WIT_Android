@@ -145,11 +145,10 @@ public class RegisterFragment extends Fragment {
 
         binding.btnSignUp.setBackgroundResource(R.drawable.ic_btn_inactivo);
 
-        binding.btnSignUp.setClickable(false);
+        binding.btnSignUp.setClickable(true);
         binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if (!txtUser.isEmpty() && !txtEmail.isEmpty() && !txtPin.isEmpty() && !txtComfirmPin.isEmpty()) {
 
                     if (!Utils.isValidPassword(txtPin)){

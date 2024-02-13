@@ -11,11 +11,13 @@
     <dimen name="sp5">5sp</dimen>
     <dimen name="sp8">8sp</dimen>
     <dimen name="sp10">10sp</dimen>
-    <dimen name="spminor60">-660sp</dimen>
+    <dimen name="spminor60">-60sp</dimen>
     <dimen name="spminor70">-70sp</dimen>
     <dimen name="spminor50">-50sp</dimen>
+    <dimen name="spminor80">-80sp</dimen>
     <dimen name="spminor90">-90sp</dimen>
     <dimen name="spminor100">-100sp</dimen>
+    <dimen name="spminor120">-120sp</dimen>
     <dimen name="sp13">13sp</dimen>
     <dimen name="sp14">14sp</dimen>
     <dimen name="sp16">16sp</dimen>

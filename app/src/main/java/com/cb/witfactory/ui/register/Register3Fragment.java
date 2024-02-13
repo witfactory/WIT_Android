@@ -71,6 +71,16 @@ public class Register3Fragment extends Fragment implements Callfun {
         amplifyCognito = new AmplifyCognito(getContext());
         amplifyCognito.setListener(Register3Fragment.this);
         loadPreference();
+        binding.btnBack2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_registro);
+                navController.navigateUp();
+                navController.navigate(R.id.nenu_register2);
+
+            }
+        });
+
         binding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,6 +91,16 @@ public class Register3Fragment extends Fragment implements Callfun {
             }
         });
 
+        binding.controlParental.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    binding.txtLayoutPin.setVisibility(View.GONE);
+                } else {
+                    binding.txtLayoutPin.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         binding.txtPin.addTextChangedListener(new TextWatcher() {
             @Override
@@ -576,7 +596,6 @@ public class Register3Fragment extends Fragment implements Callfun {
     }
 
     private void modalOtp() {
-        binding.btnBack.setClickable(false);
         binding.btnFinish.setClickable(false);
 
         runOnUiThread(new Runnable() {

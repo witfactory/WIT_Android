@@ -392,6 +392,15 @@
     <string name="repeat_password">Repeat password</string>
     <string name="create_account">Create Account</string>
     <string name="uregister">Register</string>
+    <string name="next2">Next</string>
+    <string name="username2">Username</string>
+    <string name="address">Address</string>
+    <string name="zip_code">Zip Code</string>
+    <string name="state_provience">State / Provience</string>
+    <string name="parental_control">Parental control</string>
+    <string name="note_if_you_have_children_at_home_you_can_activate_child_lock_and_create_a_4_digit_security_pin_for_your_wit_app">NOTE: If you have children at home, you can activate Child Lock and create a 4-digit security pin for your WIT app.</string>
+    <string name="i_accept_the_terms_and_conditions_of_use_of_the_wit_application">I accept the terms and conditions of use of the WIT application.</string>
+    <string name="i_accept_the_data_privacy_policy_established_by_wit">I accept the Data Privacy Policy established by WIT.</string>
 
 
 </resources>
