@@ -1,11 +1,13 @@
 package com.cb.witfactory.data.retrofit.connection;
 
 import com.cb.witfactory.data.retrofit.alarms.Alarm;
+import com.cb.witfactory.data.retrofit.alarms.ClosedOpenValve;
 import com.cb.witfactory.data.retrofit.device.CreateDevice;
 import com.cb.witfactory.data.retrofit.device.CreateDeviceResponse;
 import com.cb.witfactory.data.retrofit.device.ObjectResponseDevice;
 import com.cb.witfactory.data.retrofit.events.EventsRealtime;
 import com.cb.witfactory.data.retrofit.events.ObjectResponseAlarm;
+import com.cb.witfactory.data.retrofit.events.ObjectResponseAlarmValve;
 import com.cb.witfactory.data.retrofit.events.ObjectResponseEvents;
 import com.cb.witfactory.data.retrofit.events.ObjectResponseEventsRealtime;
 import com.cb.witfactory.data.retrofit.user.ObjectResponseUser;
@@ -61,9 +63,9 @@ public interface MyApiService {
     );
 
 
-    @POST("valvula")
-    Call<ObjectResponseAlarm> setValvula(
-            @Body ArrayList<Alarm> alarms
+    @POST("device/manage_valve")
+    Call<ObjectResponseAlarmValve> setValvula(
+            @Body ClosedOpenValve alarmsValve
     );
 
 }

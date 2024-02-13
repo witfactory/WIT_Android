@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.retrofit.alarms.Alarm;
+import com.cb.witfactory.data.retrofit.alarms.ClosedOpenValve;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.model.Callfun;
@@ -29,8 +30,9 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.ArrayList;
 import java.util.List;
-public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHolder>
-        implements Filterable,Callfun {
+
+public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.MyViewHolder>
+        implements Filterable, Callfun {
 
     private Context context;
     private List<DeviceResponse> deviceList;
@@ -41,7 +43,7 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
 
     @Override
     public void onSuccess(String s) {
-        Log.v("success alarm",s);
+        Log.v("success alarm", s);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -57,11 +59,11 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
 
     @Override
     public void onError(String s) {
-        Log.v("error alarm",s);
+        Log.v("error alarm", s);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-               Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+                Toast.makeText(context, s, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -115,27 +117,27 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final DeviceResponse device = deviceListFiltered.get(position);
-        holder.txt_title.setText(device.getDevice_name());
+        String titulo = device.getDevice_name();
+        Boolean buzzer = device.getBuzzer();
+        holder.txt_title.setText(titulo);
         holder.txt_sub_title.setText(device.getDevice_location());
 
+      
         String typeDevice = device.getDevice_type();
-        if(typeDevice.equals("S")){
+        if (typeDevice.equals("S")) {
             holder.img_hadeare.setBackgroundResource(R.drawable.hadware_dispositivo);
-        }else{
+        } else {
             holder.img_hadeare.setBackgroundResource(R.drawable.img_valvula);
         }
-
-
-        if(device.getBuzzer() != null) {
-            if (device.getBuzzer()) {
-                holder.check_state.setChecked(true);
-            } else {
+        
+        if (device.getBuzzer() != null) {
+            if (buzzer) {
                 holder.check_state.setChecked(true);
             }
 
         }
 
-        if(device.getOnline() != null) {
+        if (device.getOnline() != null) {
             if (device.getOnline()) {
                 holder.img_wifi.setBackgroundResource(R.drawable.ic_wifi_on);
             } else {
@@ -147,45 +149,56 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.MyViewHol
             @Override
             public void onClick(View v) {
 
-                if(device.getDevice_type()=="S"){
+                String device_type = device.getDevice_type().toString();
+
+
+                int estado = 0;
+                if (device.getBuzzer() != null) {
+                    boolean chect_state =device.getBuzzer();
+                    if (chect_state) {
+                        estado =0;
+                        device.setBuzzer(false);
+                    } else {
+                        device.setBuzzer(true);
+                        estado =1;
+                    }
+
+                }
+                
+                if (device_type.equals("S")) {
 
                     Toast.makeText(context.getApplicationContext(), device.getDevice_id(), Toast.LENGTH_LONG).show();
                     ArrayList<Alarm> alarms = new ArrayList<>();
                     String userEmail = PreferencesHelper.getEmail("email", "");
-                    Alarm alarm = new Alarm(device.getDevice_id(),userEmail);
+                    Alarm alarm = new Alarm(device.getDevice_id(), userEmail);
                     alarms.add(alarm);
 
                     deviceViewModel.setAlarm(alarms);
                 }
 
-                if(device.getDevice_type()=="V"){
-                    Toast.makeText(context.getApplicationContext(), device.getDevice_id(), Toast.LENGTH_LONG).show();
-                    ArrayList<Alarm> alarms = new ArrayList<>();
-                    String userEmail = PreferencesHelper.getEmail("email", "");
-                    Alarm alarm = new Alarm(device.getDevice_id(),userEmail);
-                    alarms.add(alarm);
+                if (device_type.equals("V")) {
 
-                    deviceViewModel.setValvula(alarms);
+                    if (device.getBuzzer() != null) {
+
+                        Toast.makeText(context.getApplicationContext(), device.getDevice_id(), Toast.LENGTH_LONG).show();
+                        String userEmail = PreferencesHelper.getEmail("email", "");
+                        ClosedOpenValve alarm = new ClosedOpenValve(userEmail, device.getDevice_id(), estado);
+                        deviceViewModel.setValvula(alarm);
+                    }else {
+                        Toast.makeText(context.getApplicationContext(), "Buzzer is not connected", Toast.LENGTH_LONG).show();
+                        holder.check_state.setChecked(false);
+                    }
+
+
+
+
+
+
 
                 }
             }
         });
-
-       /* Glide.with(context)
-                .load(device.getImageDevice())
-                .apply(RequestOptions.circleCropTransform())
-                .into(holder.img_hadeare);
-
-        Glide.with(context)
-                .load(device.getImageWifi())
-                .apply(RequestOptions.circleCropTransform())
-                .into(holder.img_wifi);
-
-        if(device.getState()){
-            holder.check_state.setEnabled(true);
-        }else{
-            holder.check_state.setEnabled(false);
-        }*/
+        
     }
 
     @Override

@@ -110,24 +110,15 @@ public class SupportFragment extends Fragment {
                     }
                 }
 
-
-
-                // Ordenar el ArrayList por fecha
-                Collections.sort(messageList, new Comparator<Message>() {
-                    @Override
-                    public int compare(Message m1, Message m2) {
-                        // Comparar las fechas, si se desea en orden ascendente
-                        return m1.getFecha().compareTo(m2.getFecha());
-                        // Si se desea en orden descendente, puedes cambiarlo a m2.compareTo(m1)
-                    }
-                });
                 messageAdapter = new MessageAdapter(getActivity(),messageList);
                 binding.rvMensajes.setAdapter(messageAdapter);
-            }
+                binding.rvMensajes.getLayoutManager().scrollToPosition(messageList.size()-1);
+               }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Maneja errores aquí
+                Log.v("databaseError",databaseError.getMessage());
             }
         });
 

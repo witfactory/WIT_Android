@@ -267,7 +267,9 @@ public class AddDeviceActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            String deviceType = "softap";
+            //String deviceType = "softap";
+            final String deviceType = sharedPreferences.getString(AppConstants.KEY_DEVICE_TYPES, AppConstants.DEVICE_TYPE_DEFAULT);
+
             if (deviceType.equals(AppConstants.DEVICE_TYPE_BLE) || deviceType.equals(AppConstants.DEVICE_TYPE_BOTH)) {
 
                 final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
@@ -389,9 +391,7 @@ public class AddDeviceActivity extends AppCompatActivity {
     private void scanQrCode() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (ActivityCompat.checkSelfPermission(AddDeviceActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(AddDeviceActivity.this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(AddDeviceActivity.this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(AddDeviceActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 provisionManager.scanQRCode(codeScanner, qrCodeScanListener);
             } else {
                 ActivityCompat.requestPermissions(AddDeviceActivity.this, new
@@ -626,7 +626,9 @@ public class AddDeviceActivity extends AppCompatActivity {
 
     private void startProvisioningFlow() {
 
-        String deviceType = "softap";//sharedPreferences.getString(AppConstants.KEY_DEVICE_TYPES, AppConstants.DEVICE_TYPE_DEFAULT);
+      //  String deviceType = "softap";//sharedPreferences.getString(AppConstants.KEY_DEVICE_TYPES, AppConstants.DEVICE_TYPE_DEFAULT);
+        final String deviceType = sharedPreferences.getString(AppConstants.KEY_DEVICE_TYPES, AppConstants.DEVICE_TYPE_DEFAULT);
+
         final boolean isSecure = sharedPreferences.getBoolean(AppConstants.KEY_SECURITY_TYPE, true);
         Log.d(TAG, "Device Types : " + deviceType);
         int securityType = AppConstants.SEC_TYPE_0;

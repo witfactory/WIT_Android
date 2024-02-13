@@ -34,7 +34,7 @@ public class AppConstants {
     public static final String DEVICE_TYPE_SOFTAP = "softap";
     public static final String DEVICE_TYPE_BLE = "ble";
     public static final String DEVICE_TYPE_BOTH = "both";
-    public static final String DEVICE_TYPE_DEFAULT = DEVICE_TYPE_BOTH;
+    public static final String DEVICE_TYPE_DEFAULT = DEVICE_TYPE_SOFTAP;
 
     public static final int SEC_TYPE_0 = 0;
     public static final int SEC_TYPE_1 = 1;

@@ -8,9 +8,12 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -41,7 +44,7 @@ import java.util.Locale;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdapterListener, ListValueDeviceAdapter.ValueDeviceAdapterListener, Callfun {
+public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdapterListener, ListValueDeviceAdapter.ValueDeviceAdapterListener, Callfun, SwipeRefreshLayout.OnRefreshListener {
 
     private FragmentDeviceBinding binding;
     private DeviceViewModel deviceViewModel;
@@ -52,6 +55,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
     private TextInputEditText txtSearch;
     private ArrayList<DeviceResponse> deviceListAux;
     private ArrayList<Alarm> alarms;
+    String userId = "";
 
     SweetAlertDialog pDialog;
     @Override
@@ -60,14 +64,14 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         View root = binding.getRoot();
         deviceViewModel = new ViewModelProvider(this).get(DeviceViewModel.class);
         deviceList = new ArrayList<>();
-        String userId = UserIdHolder.getInstance().getUserId();
+         userId = UserIdHolder.getInstance().getUserId();
         deviceViewModel.setListener(DeviceFragment.this);
 
         loadAlert();
         deviceViewModel.getDataDevice(userId, "S");
 
         txtSearch = root.findViewById(R.id.txt_search);
-
+        binding.swipe.setOnRefreshListener(this);
         txtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -137,7 +141,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getActivity(),"silence sensor", Toast.LENGTH_LONG).show();
+                    mAdapter.notifyDataSetChanged();
 
                 }
             });
@@ -145,7 +149,7 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getActivity(),"close valve", Toast.LENGTH_LONG).show();
+                    mAdapter.notifyDataSetChanged();
 
                 }
             });
@@ -281,6 +285,18 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
         if(pDialog != null){
             pDialog.dismiss();
         }
+
+    }
+
+    @Override
+    public void onRefresh() {
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                deviceViewModel.getDataDevice(userId, "S");
+                binding.swipe.setRefreshing(false);
+            }
+        }, 3000);
 
     }
 }
