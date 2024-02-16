@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment implements Callfun {
         deviceViewModel.setListener(HomeFragment.this);
 
 
-        loadAlert();
+     //   loadAlert();
 
         validateInternet();
 
@@ -168,5 +168,12 @@ public class HomeFragment extends Fragment implements Callfun {
             pDialog.dismiss();
         }
 
+    }
+
+    @Override
+    public void onDestroy() {
+
+        hidenLoadAlert();
+        super.onDestroy();
     }
 }
