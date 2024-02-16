@@ -138,9 +138,9 @@ public class HomeFragment extends Fragment implements Callfun {
                   navController.navigateUp();
                   navController.navigate(R.id.menu_device);
             }
-            hidenLoadAlert();
-        }
 
+        }
+        hidenLoadAlert();
     }
 
     @Override
