@@ -8,7 +8,7 @@ public class ObjectResponseVincularValvula {
     private Integer statusCode;
 
 
-    @SerializedName("message")
+    @SerializedName("body")
     public String message;
 
     public ObjectResponseVincularValvula(){}

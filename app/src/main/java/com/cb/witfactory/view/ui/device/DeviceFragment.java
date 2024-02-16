@@ -209,16 +209,22 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
                         .filter(elemento -> elemento != null)
                         .toArray(String[]::new);
 
+                String correoUser = PreferencesHelper.getEmail("email", "");
+
                 if(typeDevice.toString().equals("V") && arraySinNull.length > 0 ){
                     //endpoint
-                    VincularDeviceSensor vincularDeviceSensor = new VincularDeviceSensor(typeDeviceId,arraySinNull);
+                    VincularDeviceSensor vincularDeviceSensor = new VincularDeviceSensor(typeDeviceId,correoUser,arraySinNull);
                     deviceViewModel.vincularValvulasSensor(vincularDeviceSensor);
+                    PreferencesHelper.setTipoDevice("typeDevice","" );
+
                 }
                 else if(typeDevice.toString().equals("S") && !exitDeveiceV.equals("")){
                     //endpoint
-                    VincularDeviceSensor vincularDeviceSensor = new VincularDeviceSensor(exitDeveiceV,arraySinNull);
+                    VincularDeviceSensor vincularDeviceSensor = new VincularDeviceSensor(exitDeveiceV,correoUser,arraySinNull);
                     deviceViewModel.vincularValvulasSensor(vincularDeviceSensor);
+                    PreferencesHelper.setTipoDevice("typeDevice","" );
                 }
+
 
 
             } else {

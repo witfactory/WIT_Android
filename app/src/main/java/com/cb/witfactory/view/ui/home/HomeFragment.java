@@ -126,9 +126,17 @@ public class HomeFragment extends Fragment implements Callfun {
 
             List<DeviceResponse> deviceList = (List<DeviceResponse>) o;
             if (deviceList.size() > 0) {
-                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_login_menu);
-                navController.navigateUp();
-                navController.navigate(R.id.menu_device);
+              //  NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_login_menu);
+                ///navController.navigateUp();
+                ///navController.navigate(R.id.menu_device);
+            }
+
+         String typeDevice=  PreferencesHelper.getTipoDevice("typeDevice","" );
+
+            if (!typeDevice.toString().equals("")) {
+                  NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_login_menu);
+                  navController.navigateUp();
+                  navController.navigate(R.id.menu_device);
             }
             hidenLoadAlert();
         }

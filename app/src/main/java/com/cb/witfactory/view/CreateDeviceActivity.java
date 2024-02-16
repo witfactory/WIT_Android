@@ -230,7 +230,7 @@ public class CreateDeviceActivity extends AppCompatActivity implements Callfun {
         String deviceId = PreferencesHelper.getDeviceId("deviceId", "");
 
 
-        PreferencesHelper.getTipoDevice("typeDevice", deviceId.toString());
+        PreferencesHelper.setTipoDevice("typeDevice", deviceId.toString());
 
         Intent intent = new Intent(getApplicationContext(), WitMenu.class);
         startActivity(intent);
