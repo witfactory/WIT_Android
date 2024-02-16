@@ -259,4 +259,14 @@ public class PreferencesHelper {
         prefsEditor.putString(key, value);
         prefsEditor.apply();
     }
+
+
+    public static String getTipoDevice(String key, String defValue) {
+        return mSharedPref.getString(key, defValue);
+    }
+    public static void setTipoDevice(String key, String value) {
+        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        prefsEditor.putString(key, value);
+        prefsEditor.apply();
+    }
 }

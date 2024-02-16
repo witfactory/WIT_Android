@@ -22,6 +22,8 @@
     <color name="btn_color">#00478c</color>
     <color name="txt_color">#4D6677</color>
     <color name="transparente">#00000000</color>
+    <color name="check_on">#78DE9E</color>
+    <color name="check_off">#849FC4</color>
 
 
     <color name="colorPrimary">#5330b9</color>

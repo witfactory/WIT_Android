@@ -7,20 +7,20 @@
 
     <fragment
         android:id="@+id/menu_home"
-        android:name="com.cb.witfactory.ui.home.HomeFragment"
+        android:name="com.cb.witfactory.view.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
 
     <fragment
         android:id="@+id/menu_device"
-        android:name="com.cb.witfactory.ui.device.DeviceFragment"
+        android:name="com.cb.witfactory.view.ui.device.DeviceFragment"
         android:label="@string/txt_dispositive"
         tools:layout="@layout/fragment_device" />
 
     <fragment
         android:id="@+id/menu_profile"
-        android:name="com.cb.witfactory.ui.perfil.PerfilFragment"
+        android:name="com.cb.witfactory.view.ui.perfil.PerfilFragment"
         android:label="@string/menu_perfil"
         tools:layout="@layout/fragment_perfil" />
 
@@ -32,98 +32,98 @@
 
     <fragment
         android:id="@+id/menu_glosario"
-        android:name="com.cb.witfactory.ui.glosario.GlosarioFragment"
+        android:name="com.cb.witfactory.view.ui.glosario.GlosarioFragment"
         android:label="@string/menu_glosario"
         tools:layout="@layout/fragment_glosario" />
 
     <fragment
         android:id="@+id/menu_ayuda"
-        android:name="com.cb.witfactory.ui.slideshow.SlideshowFragment"
+        android:name="com.cb.witfactory.view.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 
 
     <fragment
         android:id="@+id/menu_politicas"
-        android:name="com.cb.witfactory.ui.glosario.GlosarioFragment"
+        android:name="com.cb.witfactory.view.ui.glosario.GlosarioFragment"
         android:label="@string/menu_soporte"
         tools:layout="@layout/fragment_glosario" />
 
 
     <fragment
         android:id="@+id/nenu_login"
-        android:name="com.cb.witfactory.ui.activity.ActivityFragment"
+        android:name="com.cb.witfactory.view.ui.activity.ActivityFragment"
         android:label="@string/menu_login"
         tools:layout="@layout/activity_login" />
 
     <fragment
         android:id="@+id/nenu_register"
-        android:name="com.cb.witfactory.ui.register.RegisterFragment"
+        android:name="com.cb.witfactory.view.ui.register.RegisterFragment"
         android:label="@string/register"
         tools:layout="@layout/register_fragment" />
 
 
     <fragment
         android:id="@+id/nenu_register2"
-        android:name="com.cb.witfactory.ui.register.Register2Fragment"
+        android:name="com.cb.witfactory.view.ui.register.Register2Fragment"
         android:label="@string/register"
         tools:layout="@layout/register2_fragment" />
 
 
     <fragment
         android:id="@+id/nenu_register3"
-        android:name="com.cb.witfactory.ui.register.Register3Fragment"
+        android:name="com.cb.witfactory.view.ui.register.Register3Fragment"
         android:label="@string/register"
         tools:layout="@layout/register3_fragment" />
 
 
     <fragment
         android:id="@+id/menu_soporte"
-        android:name="com.cb.witfactory.ui.support.SupportFragment"
+        android:name="com.cb.witfactory.view.ui.support.SupportFragment"
         android:label="@string/text_soporte"
         tools:layout="@layout/fragment_support" />
 
 
     <fragment
         android:id="@+id/edit_profile"
-        android:name="com.cb.witfactory.ui.perfil.EditProfileFragment"
+        android:name="com.cb.witfactory.view.ui.perfil.EditProfileFragment"
         android:label="@string/menu_perfil"
         tools:layout="@layout/fragment_edit_profile" >
     </fragment>
 
     <fragment
         android:id="@+id/terms_conditions"
-        android:name="com.cb.witfactory.ui.termsConditions.TermsConditionsFragment"
+        android:name="com.cb.witfactory.view.ui.termsConditions.TermsConditionsFragment"
         android:label="@string/menu_perfil"
         tools:layout="@layout/fragment_terms_conditions" />
 
     <fragment
         android:id="@+id/menu_activity"
-        android:name="com.cb.witfactory.ui.activity.ActivityFragment"
+        android:name="com.cb.witfactory.view.ui.activity.ActivityFragment"
         android:label="@string/menu_perfil"
         tools:layout="@layout/fragment_activity" />
 
     <fragment
         android:id="@+id/device_detail"
-        android:name="com.cb.witfactory.ui.device.DetailDevice"
+        android:name="com.cb.witfactory.view.ui.device.DetailDevice"
         android:label="@string/txt_dispositive"
         tools:layout="@layout/fragment_detail_device" />
 
     <fragment
         android:id="@+id/fragment_edit_profile_detail"
-        android:name="com.cb.witfactory.ui.perfil.EditProfileDetailsFragment"
+        android:name="com.cb.witfactory.view.ui.perfil.EditProfileDetailsFragment"
         android:label="@string/txt_dispositive"
         tools:layout="@layout/fragment_edit_profile_details" />
 
     <fragment
         android:id="@+id/fragment_ping"
-        android:name="com.cb.witfactory.ui.perfil.PinFragment"
+        android:name="com.cb.witfactory.view.ui.perfil.PinFragment"
         android:label="@string/txt_dispositive"
         tools:layout="@layout/fragment_pin" />
 
     <fragment
         android:id="@+id/fragment_pass"
-        android:name="com.cb.witfactory.ui.perfil.PasswordFragment"
+        android:name="com.cb.witfactory.view.ui.perfil.PasswordFragment"
         android:label="@string/txt_dispositive"
         tools:layout="@layout/fragment_password" />
 </navigation>
