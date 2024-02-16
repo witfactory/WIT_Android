@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notificacion.NotificscionFragment">
+    tools:context=".view.ui.notificacion.NotificscionFragment">
 
     <TextView
         android:layout_width="match_parent"

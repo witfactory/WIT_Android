@@ -78,7 +78,8 @@ public class EspMainActivity extends AppCompatActivity {
             editor.apply();
         }
 
-        deviceType = sharedPreferences.getString(AppConstants.KEY_DEVICE_TYPES, AppConstants.DEVICE_TYPE_DEFAULT);
+
+
         if (deviceType.equals(AppConstants.DEVICE_TYPE_BLE)) {
             ivEsp.setImageResource(R.drawable.ic_esp_ble);
         } else if (deviceType.equals(AppConstants.DEVICE_TYPE_SOFTAP)) {

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Criteria;
@@ -17,7 +18,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -26,10 +26,9 @@ import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.AmplifyCognito;
 import com.cb.witfactory.data.retrofit.device.CreateDevice;
 import com.cb.witfactory.databinding.ActivityCreateDeviceBinding;
+import com.cb.witfactory.esp32.AppConstants;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.PreferencesHelper;
-import com.cb.witfactory.ui.home.HomeFragment;
-import com.cb.witfactory.ui.home.HomeViewModel;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -44,6 +43,7 @@ public class CreateDeviceActivity extends AppCompatActivity implements Callfun {
 
     double latitude = 0.0;
     double longitud = 0.0;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,8 @@ public class CreateDeviceActivity extends AppCompatActivity implements Callfun {
 
         createDeviceViewModel =
                 new ViewModelProvider(this).get(CreateDeviceViewModel.class);
+
+        sharedPreferences = getSharedPreferences(AppConstants.ESP_PREFERENCES, Context.MODE_PRIVATE);
 
 
         gps();
@@ -222,6 +224,13 @@ public class CreateDeviceActivity extends AppCompatActivity implements Callfun {
 
         hidenDialog();
         //llega  aca
+
+        String devicetype = PreferencesHelper.getdevicetype("devicetype", "");
+
+        String deviceId = PreferencesHelper.getDeviceId("deviceId", "");
+
+
+        PreferencesHelper.setTipoDevice("typeDevice", deviceId.toString());
 
         Intent intent = new Intent(getApplicationContext(), WitMenu.class);
         startActivity(intent);

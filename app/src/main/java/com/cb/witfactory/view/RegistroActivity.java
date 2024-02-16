@@ -16,6 +16,7 @@ public class RegistroActivity extends AppCompatActivity {
     private ActivityRegistroBinding binding;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

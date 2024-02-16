@@ -39,7 +39,7 @@
         tools:ignore="ProtectedPermissions" />
 
     <application
-        android:name=".ui.connectDispositive.EspTouchApp"
+        android:name=".view.ui.connectDispositive.EspTouchApp"
         android:allowBackup="false"
         android:allowClearUserData="false"
         android:fullBackupContent="@xml/backup_descriptor"
