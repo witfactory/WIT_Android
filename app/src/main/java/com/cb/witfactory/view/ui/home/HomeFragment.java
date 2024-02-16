@@ -1,5 +1,6 @@
 package com.cb.witfactory.view.ui.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,10 +18,15 @@ import com.amplifyframework.auth.cognito.AWSCognitoAuthSession;
 import com.cb.witfactory.R;
 import com.cb.witfactory.data.classModel.AmplifyCognito;
 import com.cb.witfactory.data.classModel.Utils;
+import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.cb.witfactory.data.retrofit.user.ObjectResponseUser;
 import com.cb.witfactory.databinding.FragmentHomeBinding;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.PreferencesHelper;
+import com.cb.witfactory.view.ui.device.DeviceFragment;
+import com.cb.witfactory.view.ui.device.DeviceViewModel;
+
+import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -31,13 +37,12 @@ public class HomeFragment extends Fragment implements Callfun {
     private PreferencesHelper preferencesHelper;
     final String TAG = "HomeFragment";
     private HomeViewModel homeViewModel;
+    private DeviceViewModel deviceViewModel;
     SweetAlertDialog pDialog;
+    String userId = "";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-         homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -47,7 +52,19 @@ public class HomeFragment extends Fragment implements Callfun {
         amplifyCognito.setListener(HomeFragment.this);
 
 
+        homeViewModel =
+                new ViewModelProvider(this).get(HomeViewModel.class);
+
+        deviceViewModel = new ViewModelProvider(this).get(DeviceViewModel.class);
+        deviceViewModel.setListener(HomeFragment.this);
+
+
+        loadAlert();
+
         validateInternet();
+
+        userId = UserIdHolder.getInstance().getUserId();
+
 
 
         binding.txtUser.setOnClickListener(new View.OnClickListener() {
@@ -100,8 +117,21 @@ public class HomeFragment extends Fragment implements Callfun {
             String dataUser = arrOfStr[0];
 
             binding.txtUser.setText(getString(R.string.text_welcome_user) + "\n" + dataUser);
+
+            deviceViewModel.getDataDevice(userId, "");
         }
 
+        if (options.equals("getdevice")) {
+            String devicetype = PreferencesHelper.getdevicetype("typeDevice", "");
+
+            List<DeviceResponse> deviceList = (List<DeviceResponse>) o;
+            if (deviceList.size() > 0) {
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_login_menu);
+                navController.navigateUp();
+                navController.navigate(R.id.menu_device);
+            }
+            hidenLoadAlert();
+        }
 
     }
 
@@ -113,5 +143,22 @@ public class HomeFragment extends Fragment implements Callfun {
         String user_aws = PreferencesHelper.getUserAws("user_aws","").toString();
         homeViewModel.setListener(HomeFragment.this);
         homeViewModel.getDataUSer(user_aws);
+    }
+
+
+
+    public void loadAlert(){
+        pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();
+    }
+
+    public void hidenLoadAlert(){
+        if(pDialog != null){
+            pDialog.dismiss();
+        }
+
     }
 }

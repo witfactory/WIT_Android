@@ -214,13 +214,13 @@ public class DeviceViewModel extends ViewModel {
 
                 @Override
                 public void onResponse(Call<ObjectResponseVincularValvula> call, Response<ObjectResponseVincularValvula> response) {
-                    listener.onSuccess("alarmaokV");
+                    listener.onSuccess("vincularvalvula");
 
                 }
 
                 @Override
                 public void onFailure(Call<ObjectResponseVincularValvula> call, Throwable t) {
-                    listener.onError("alarmaerror");
+                    listener.onError("vincularvalvulaError");
                 }
             });
 
