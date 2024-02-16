@@ -2,6 +2,7 @@ package com.cb.witfactory.data.retrofit.connection;
 
 import com.cb.witfactory.data.retrofit.alarms.Alarm;
 import com.cb.witfactory.data.retrofit.alarms.ClosedOpenValve;
+import com.cb.witfactory.data.retrofit.alarms.VincularDeviceSensor;
 import com.cb.witfactory.data.retrofit.device.CreateDevice;
 import com.cb.witfactory.data.retrofit.device.CreateDeviceResponse;
 import com.cb.witfactory.data.retrofit.device.ObjectResponseDevice;
@@ -10,6 +11,7 @@ import com.cb.witfactory.data.retrofit.events.ObjectResponseAlarm;
 import com.cb.witfactory.data.retrofit.events.ObjectResponseAlarmValve;
 import com.cb.witfactory.data.retrofit.events.ObjectResponseEvents;
 import com.cb.witfactory.data.retrofit.events.ObjectResponseEventsRealtime;
+import com.cb.witfactory.data.retrofit.events.ObjectResponseVincularValvula;
 import com.cb.witfactory.data.retrofit.user.ObjectResponseUser;
 import com.cb.witfactory.data.retrofit.user.UpdateUserResponse;
 
@@ -66,6 +68,11 @@ public interface MyApiService {
     @POST("device/manage_valve")
     Call<ObjectResponseAlarmValve> setValvula(
             @Body ClosedOpenValve alarmsValve
+    );
+
+    @POST("device/sensor_valve")
+    Call<ObjectResponseVincularValvula> vincularValvulaSensor(
+            @Body VincularDeviceSensor vincularDeviceSensor
     );
 
 }

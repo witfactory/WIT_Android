@@ -26,6 +26,7 @@ import com.cb.witfactory.adapter.DeviceAdapter;
 import com.cb.witfactory.adapter.ListValueDeviceAdapter;
 import com.cb.witfactory.data.classModel.MyDividerItemDecoration;
 import com.cb.witfactory.data.retrofit.alarms.Alarm;
+import com.cb.witfactory.data.retrofit.alarms.VincularDeviceSensor;
 import com.cb.witfactory.data.retrofit.device.DeviceResponse;
 import com.cb.witfactory.data.retrofit.events.Metric;
 import com.cb.witfactory.databinding.FragmentDeviceBinding;
@@ -35,6 +36,7 @@ import com.cb.witfactory.view.ui.home.UserIdHolder;
 import com.google.android.material.textfield.TextInputEditText;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -195,7 +197,6 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
                     if(deviceList.get(i).getDevice_type().toString().equals("V")){
                         exitDeveiceV = deviceList.get(i).getDevice_id();
                     }
-
                     if(devicetype.toString().equals(deviceList.get(i).getDevice_id().toString())){
                         typeDeviceId =deviceList.get(i).getDevice_id();
                         typeDevice = deviceList.get(i).getDevice_type();
@@ -203,11 +204,20 @@ public class DeviceFragment extends Fragment implements DeviceAdapter.DeviceAdap
                 }
                 getMetrics(deviceList);
 
-                if(typeDevice.toString().equals("V") && miArray.length > 0 ){
+                // Filtrar elementos nulos y crear un nuevo array sin ellos
+                String[] arraySinNull = Arrays.stream(miArray)
+                        .filter(elemento -> elemento != null)
+                        .toArray(String[]::new);
+
+                if(typeDevice.toString().equals("V") && arraySinNull.length > 0 ){
                     //endpoint
+                    VincularDeviceSensor vincularDeviceSensor = new VincularDeviceSensor(typeDeviceId,arraySinNull);
+                    deviceViewModel.vincularValvulasSensor(vincularDeviceSensor);
                 }
-                if(typeDevice.toString().equals("S") && !exitDeveiceV.equals("")){
+                else if(typeDevice.toString().equals("S") && !exitDeveiceV.equals("")){
                     //endpoint
+                    VincularDeviceSensor vincularDeviceSensor = new VincularDeviceSensor(exitDeveiceV,arraySinNull);
+                    deviceViewModel.vincularValvulasSensor(vincularDeviceSensor);
                 }
 
 
