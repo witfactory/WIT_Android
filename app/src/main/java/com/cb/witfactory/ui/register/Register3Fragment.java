@@ -631,7 +631,6 @@ public class Register3Fragment extends Fragment implements Callfun {
     }
 
     public void loadPreference(){
-
         Boolean politica = PreferencesHelper.getPolitica("politica", false);
         Boolean terminos = PreferencesHelper.getTerminos("terminos", false);
         String txtPin = PreferencesHelper.getUser("txtPin", "");
