@@ -23,6 +23,7 @@ import com.cb.witfactory.data.classModel.Utils;
 import com.cb.witfactory.databinding.ActivityMainBinding;
 import com.cb.witfactory.model.Callfun;
 import com.cb.witfactory.model.LocaleHelper;
+import com.cb.witfactory.model.PreferencesHelper;
 
 public class MainActivity extends Activity implements Callfun {
 
@@ -34,6 +35,7 @@ public class MainActivity extends Activity implements Callfun {
     Resources resources;
     String locale = "";
     AmplifyCognito amplifyCognito = null;
+    private PreferencesHelper preferencesHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,9 @@ public class MainActivity extends Activity implements Callfun {
 
         amplifyCognito = new AmplifyCognito(getApplicationContext());
         amplifyCognito.setListener(MainActivity.this);
+        preferencesHelper = new PreferencesHelper(getApplicationContext());
+
+        preferencesHelper.setTipoDevice("typeDevice", "");
 
         //lenguage
         if (locale.equals(null) || locale.equals("")) {

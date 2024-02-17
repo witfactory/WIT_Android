@@ -1,7 +1,6 @@
 package com.cb.witfactory.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +12,10 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cb.witfactory.R;
-import com.cb.witfactory.data.retrofit.events.Metric;
-import com.cb.witfactory.ui.activity.ActivityFragment;
-import com.cb.witfactory.ui.activity.BottomSheetFragment;
+import com.cb.witfactory.view.ui.activity.ActivityFragment;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
